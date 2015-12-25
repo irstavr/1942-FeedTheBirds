@@ -1,0 +1,76 @@
+## OUR API DESIGN ##
+
+Animation
+  Animation
+  AnimationHolder
+  AnimationFilm
+  AnimationFilmHolder
+  BitmapLoader
+  Sprite
+  
+Animator
+  Animator
+  AnimatorHolder
+  TimerTickAnimator
+  MovingAnimator
+  RotationAnimator
+  ScalingAnimator
+  ScrollingAnimator
+  ExplosionAnimator
+  StartScreenAnimator
+  CharactersAnimators
+    LittleBirdsAnimator
+    MediumBirdsAnimator
+    GigasBirdsAnimator
+    SuperAceAnimator
+    (+)FisherManAnimator
+  ItemsAnimators
+    BirdDroppingAnimator
+    FishAnimator
+    PowerUpAnimator
+    RiverAnimator
+    IslandAnimator
+  
+Characters : Sprites
+    LittleBird
+    MediumBird
+    GigasBird
+    SuperAce
+    (+)FisherMan
+
+Items : Sprites
+    BirdDropping
+    Fish
+    PowerUp
+    River
+    Island
+
+Logic
+  GameState
+  PlayerProfile
+
+GameAction : Logic
+  AI
+  Collision
+  CollisionChecker
+  InputManager
+  SoundAPI
+  StageManager
+  
+Terrain
+  Terrain
+  TerrainStartScreen
+  TerrainUtils
+  
+Configs
+  Parser
+  *(~BackgroundConfig)
+
+Sounds
+
+Bitmaps
+
+Logs
+
+
+1942main.cpp
