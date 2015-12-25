@@ -13,6 +13,8 @@ int main(int argc, char **argv)
 	display = al_create_display(640, 480);
 	if (!display) {
 		fprintf(stderr, "failed to create display!\n");
+		fprintf(stderr, "failed to create display!\n");
+
 		return -1;
 	}
 
