@@ -1,0 +1,30 @@
+Need to have:
+allegro-5.0.10
+Microsoft Visual Studio 2015 (free version)
+
+Installing Allegro 5:
+
+1. Download 
+Download the latest version of Allegro 5 from Allegro.cc's download page (http://www.allegro.cc/files/).
+Be sure to select the BINARY VERSION that corresponds with your version of MSVC !
+
+2. Install Allegro 5 headers and libraries:
+
+Open the downloaded allegro zip file and extract folders: include, lib, bin to C:\allegro
+(In order to not change the properties of the project, please don't change the path)
+
+You have to add this path to your systems PATH environment variable.
+
+3. Setup Project For Allegro 5
+
+Right click your project under Solution Explorer on the right. Select Properties.
+    Under Configuration Properties->C/C++->General, enter c:\allegro\include in Additional Include Directories. 
+    Under Configuration Properties->Linker->General, enter c:\allegro\lib in Additional Library Directories. 
+    Under Configuration Properties->Linker->Input, append allegro-5.0.x-monolith-md-debug.lib to Additional Dependencies. 
+    Under Configuration Properties->Debugging, enter PATH=c:\allegro\bin;%PATH% in Environment. 
+    Click Apply. 
+
+Visual C++ can now link your project with the Allegro 5 library.
+You should now select the "Release" configuration (upper left corner) and repeat the steps with one minor change: 
+use the non-debug library allegro-5.0.x-monolith-md.lib.
+The monolith dll has the main Allegro module and all addons bundled into one file.
