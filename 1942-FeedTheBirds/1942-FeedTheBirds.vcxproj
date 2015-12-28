@@ -126,7 +126,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
+    <ClInclude Include="Comets.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objects.h" />
