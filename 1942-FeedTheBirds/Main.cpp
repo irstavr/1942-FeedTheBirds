@@ -16,6 +16,7 @@ struct Background
 	int dirX;
 	int dirY;
 
+
 	int width;
 	int height;
 
