@@ -126,10 +126,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animator.h" />
     <ClInclude Include="Comets.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objects.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Bitmaps\1942_sprite_sheet.png" />
+    <Image Include="Bitmaps\1945_sprite_sheet.bmp" />
+    <Image Include="Bitmaps\sample_terrain.bmp" />
+    <Image Include="sample_terrain.bmp.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="1942Main.cpp" />
+    <ClCompile Include="AI.cpp" />
+    <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="CollisionChecker.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PlayerProfile.cpp" />
+    <ClCompile Include="SoundAPI.cpp" />
+    <ClCompile Include="StageManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="arial.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
