@@ -1,11 +1,8 @@
-#include <stdio.h>
-#include <allegro5/allegro.h>
 #include "../../include/GameAction/GamePlay.h"
-
 
 GamePlay::GamePlay() :
 	title("anti1942 - StopWars"),
-	windowHeight(1460), windowWidth(669),
+	windowHeight(SCREEN_WINDOW_HEIGHT), windowWidth(SCREEN_WINDOW_WIDTH),
 	gameState(GAME_STATE_INTRO) 
 {
 	//time(-1), startTime(0), status(1),
@@ -41,12 +38,139 @@ void GamePlay::start() {
 }
 
 void GamePlay::gamePlayInit() {
-	// test for failure
-	if (0 != al_init()) { 
-		fprintf(stderr, "%s", al_error); 
-		exit(1); 
+	
+	if (!initAllegro()) {
+		return;
 	}
-	al_install_keyboard();
+
+	//Main loop 
+	runMainLoop();
+
+	//Cleaning
+	cleanAllegro();
+}
+
+void GamePlay::runMainLoop() {
+	/*
+	1. init game engine
+	2. input handling
+	3. game play
+	4. check if game ends
+	while (running) {
+		processInput();
+		updateGameState();
+		drawScreen();
+	}	
+	*/
+	while (gameState == GAME_STATE_MAINGAME) {
+		al_wait_for_event(eventQueue, &alEvent);
+		switch (alEvent.type) {
+		case ALLEGRO_EVENT_DISPLAY_CLOSE:
+			gameState = GAME_STATE_FINISHED;
+			break;
+		case ALLEGRO_EVENT_TIMER:
+			if (alEvent.timer.source == lpsTimer) {
+				fprintf(stdout, "Logic updated\n");
+			}
+			else if (alEvent.timer.source == fpsTimer) {
+				al_clear_to_color(al_map_rgb(50, 123, 1));
+				al_flip_display();
+				fprintf(stdout, "Display updated\n");
+			}
+			break;
+		}
+		fprintf(stdout, "Limitless update\n");
+	}
+
+}
+
+
+void GamePlay::cleanAllegro() {
+	al_destroy_timer(lpsTimer);
+	al_destroy_timer(fpsTimer);
+	al_destroy_display(display);
+	al_destroy_event_queue(eventQueue);
+}
+
+bool GamePlay::initAllegro() {
+	
+	// test for failure
+	if (!al_init()) {
+		al_show_native_message_box(NULL, "Error", NULL, "Failed to initialize allegro!\n", NULL, NULL);
+		return false;
+	}
+
+	if (!al_init_image_addon())
+	{
+		al_show_native_message_box(NULL, "Error!", "Image addon has failed to initialize.", 0, 0, ALLEGRO_MESSAGEBOX_ERROR);
+		return -1;
+	}
+
+	if (!al_install_keyboard()) ///setup the keyboard
+	{
+		al_show_native_message_box(NULL, "Error!", "Failed to install keyboard.", 0, 0, ALLEGRO_MESSAGEBOX_ERROR);
+		return -1;
+	}
+
+	fpsTimer = al_create_timer(1.0 / FPS);
+	if (!fpsTimer) {
+		al_show_native_message_box(NULL, "Error", NULL, "failed to create fpstimer!\n", NULL, NULL);
+		return false;
+	}
+
+	lpsTimer = al_create_timer(1.0 / LPS);
+	if (!lpsTimer) {
+		al_show_native_message_box(NULL, "Error", NULL, "failed to create lpstimer!\n", NULL, NULL);
+		return false;
+	}
+
+	if (!al_install_audio()) {
+		al_show_native_message_box(NULL, "Error", NULL, "failed to initialize audio!\n", NULL, NULL);
+		al_destroy_display(display);
+		al_destroy_timer(fpsTimer);
+		al_destroy_timer(lpsTimer);
+		return false;
+	}
+
+	if (!al_init_acodec_addon()) {
+		al_show_native_message_box(NULL, "Error", NULL, "failed to initialize audio codecs!\n", NULL, NULL);
+		al_destroy_display(display);
+		al_destroy_timer(fpsTimer);
+		al_destroy_timer(lpsTimer);
+		return false;
+	}
+
+	display = al_create_display(SCREEN_WINDOW_WIDTH, SCREEN_WINDOW_HEIGHT);
+	if (!display) {
+		al_show_native_message_box(NULL, "Error", NULL, "failed to create display!\n", NULL, NULL);
+		al_destroy_timer(fpsTimer);
+		al_destroy_timer(lpsTimer);
+		return false;
+	}
+	al_set_window_position(display, 0, 0);
+
+	eventQueue = al_create_event_queue();
+	if (!eventQueue) {
+		al_show_native_message_box(NULL, "Error", NULL, "failed to create event_queue!\n", NULL, NULL);
+		al_destroy_display(display);
+		al_destroy_timer(fpsTimer);
+		al_destroy_timer(lpsTimer);
+		return false;
+	}
+
+	//Tie events to queue
+	al_register_event_source(eventQueue, al_get_display_event_source(display));
+	al_register_event_source(eventQueue, al_get_timer_event_source(fpsTimer));
+	al_register_event_source(eventQueue, al_get_timer_event_source(lpsTimer));
+
+	al_clear_to_color(al_map_rgb(0,0,0));
+	al_flip_display();
+
+	//Start timers 
+	al_start_timer(lpsTimer); 
+	al_start_timer(fpsTimer);
+	
+	return true;
 }
 
 void GamePlay::reset() {

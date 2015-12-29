@@ -3,12 +3,23 @@
 
 #include "../GameLogic/GameLogic.h"
 
+#include <stdio.h>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_native_dialog.h> 
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
+#include <allegro5/allegro_image.h>
 
+#define SCREEN_WINDOW_WIDTH  1460 
+#define SCREEN_WINDOW_HEIGHT 669
 #define GAME_STATE_INTRO 0
 #define GAME_STATE_MAINGAME 1
 #define GAME_STATE_PAUSED 2
 #define GAME_STATE_GAMEOVER 3
 #define GAME_STATE_FINISHED 4
+
+#define FPS 4
+#define LPS 1
 
 class GamePlay {
 	std::string title;
@@ -17,6 +28,20 @@ class GamePlay {
 
 	const int windowHeight;
 	const int windowWidth;
+
+	/* Allegro initialization*/
+	ALLEGRO_DISPLAY *display = NULL;
+	ALLEGRO_EVENT_QUEUE *eventQueue = NULL;
+	ALLEGRO_EVENT alEvent;
+	ALLEGRO_BITMAP *background = NULL;
+	ALLEGRO_TIMER *fpsTimer = NULL, *lpsTimer = NULL;
+
+	/* initialization */
+	bool initAllegro();
+	/* clear allegro */
+	void cleanAllegro();
+
+	void runMainLoop();
 
 	/*create the signal pressed by user*/
 	bool getSignal();
