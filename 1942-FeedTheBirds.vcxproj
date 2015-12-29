@@ -87,21 +87,6 @@
       <AdditionalLibraryDirectories>C:\allegro\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-<<<<<<< HEAD:1942-FeedTheBirds.vcxproj
-=======
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\allegro\include</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;allegro_monolith-debug.lib;%</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\allegro\lib</AdditionalLibraryDirectories>
-    </Link>
-  </ItemDefinitionGroup>
->>>>>>> 086992228f6da290bc86f33da110a93d2511234a:1942-FeedTheBirds/1942-FeedTheBirds.vcxproj
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -120,7 +105,6 @@
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;allegro_monolith.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-<<<<<<< HEAD:1942-FeedTheBirds.vcxproj
   <ItemGroup>
     <ClCompile Include="1942-FeedTheBirds\src\Animator\Animator.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\GameAction\AI.cpp" />
@@ -145,52 +129,6 @@
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\GamePlay.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameLogic\GameLogic.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Sprites\PlaneSprite.h" />
-=======
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\allegro\include</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;allegro_monolith.lib;%</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\allegro\lib</AdditionalLibraryDirectories>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="Animator.h" />
-    <ClInclude Include="Comets.h" />
->>>>>>> 086992228f6da290bc86f33da110a93d2511234a:1942-FeedTheBirds/1942-FeedTheBirds.vcxproj
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="objects.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Bitmaps\1942_sprite_sheet.png" />
-    <Image Include="Bitmaps\1945_sprite_sheet.bmp" />
-    <Image Include="Bitmaps\sample_terrain.bmp" />
-    <Image Include="sample_terrain.bmp.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="1942Main.cpp" />
-    <ClCompile Include="AI.cpp" />
-    <ClCompile Include="Animator.cpp" />
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="CollisionChecker.cpp" />
-    <ClCompile Include="GameState.cpp" />
-    <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="PlayerProfile.cpp" />
-    <ClCompile Include="SoundAPI.cpp" />
-    <ClCompile Include="StageManager.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="arial.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
