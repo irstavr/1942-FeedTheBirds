@@ -2,11 +2,12 @@
 #include <allegro5/allegro.h>
 #include "../../include/GameAction/GamePlay.h"
 
-bool GamePlay::replay = true;
 
 GamePlay::GamePlay() :
-	title("1942 - Feed the birds!"),
-	windowHeight(800), windowWidth(600) {
+	title("anti1942 - StopWars"),
+	windowHeight(1460), windowWidth(669),
+	gameState(GAME_STATE_INTRO) 
+{
 	//time(-1), startTime(0), status(1),
 	//musicOn(false), pauseTime(-1.5), colorB(false) {
 }
@@ -40,25 +41,25 @@ void GamePlay::start() {
 }
 
 void GamePlay::gamePlayInit() {
-
+	
 }
 
 void GamePlay::reset() {
-
+	//TODO next version
 }
 
 void GamePlay::save() {
-
+	//TODO next version
 }
 
 void GamePlay::saveRep() {
-
+	//TODO next version
 }
 
 void GamePlay::load() {
-
+	//TODO next version
 }
 
 void GamePlay::loadRep() {
-
+	//TODO next version
 }

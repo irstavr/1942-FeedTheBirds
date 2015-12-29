@@ -3,10 +3,16 @@
 
 #include "../GameLogic/GameLogic.h"
 
+
+#define GAME_STATE_INTRO 0
+#define GAME_STATE_MAINGAME 1
+#define GAME_STATE_PAUSED 2
+#define GAME_STATE_GAMEOVER 3
+#define GAME_STATE_FINISHED 4
+
 class GamePlay {
 	std::string title;
 	GameLogic *currentGame;
-
 	float time, startTime, gamingTime, pauseTime;
 
 	const int windowHeight;
@@ -34,7 +40,8 @@ class GamePlay {
 	GamePlay();
 
 public:
-	static bool replay;
+
+	int gameState;
 	/*return the instance of the class*/
 	static GamePlay *instance(bool newOne = false);
 	/*start the window*/
