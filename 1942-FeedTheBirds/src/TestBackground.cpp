@@ -4,6 +4,10 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
 
+
+
+#if 0
+
 const int WIDTH = 1460;
 const int HEIGHT = 669;
 
@@ -60,7 +64,7 @@ int main(void)
 	al_init_ttf_addon();
 	al_init_primitives_addon();
 
-	bgImage = al_load_bitmap("sample_terrain.bmp.jpg");
+	bgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\sample_terrain.bmp");
 	assert(bgImage && "no bgimage");
 	//mgImage = al_load_bitmap("sample_terrain.bmp");
 	//fgImage = al_load_bitmap("starFG.png");
@@ -144,16 +148,21 @@ void InitBackground(Background &back, float x, float y, float velx, float vely, 
 	back.dirY = dirY;
 	back.image = image;
 }
+
 void UpdateBackground(Background &back)
 {
 	back.x += back.velX * back.dirX;
 	if (back.x + back.width <= 0)
 		back.x = 0;
 }
+
 void DrawBackground(Background &back)
 {
-	al_draw_scaled_bitmap(back.image,0,0, back.width, back.height, back.x, back.y, back.width*3, back.height * 3, 0);
+	al_draw_scaled_bitmap(back.image, 0, 0, back.width, back.height, back.x, back.y, back.width * 3, back.height * 3, 0);
 
 	//if (back.x + back.width < WIDTH)
-		al_draw_bitmap(back.image, back.x + back.width, back.y, 0);
+	al_draw_bitmap(back.image, back.x + back.width, back.y, 0);
 }
+
+
+#endif

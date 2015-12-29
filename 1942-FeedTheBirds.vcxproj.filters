@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Animator">
+      <UniqueIdentifier>{c7fa8078-7ea2-48c0-923c-52a567cb2cd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animation">
+      <UniqueIdentifier>{b13c2ce1-28bd-436e-9e34-bb1db6f27c10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Characters">
+      <UniqueIdentifier>{2455a10c-01ff-4d9c-90ab-695a7fdaa2b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Items">
+      <UniqueIdentifier>{9af0b4a2-1349-449a-a0e0-4b3a541615e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameLogic">
+      <UniqueIdentifier>{f32cdd53-f91f-4ed4-9599-91d1784614ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameAction">
+      <UniqueIdentifier>{10e211d8-bdd2-4148-b735-1e67fc904e42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Terrain">
+      <UniqueIdentifier>{4207b5a9-908e-443c-8ef8-2016b56b3856}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Bitmaps">
+      <UniqueIdentifier>{67d60ba3-0183-415a-bece-86238319bacb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Sounds">
+      <UniqueIdentifier>{fb61baae-bd75-41ca-af03-c923497881f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Configs">
+      <UniqueIdentifier>{c885cd70-9cc8-4568-ad1f-5f2cc13a4b53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Animator">
+      <UniqueIdentifier>{166a689c-f418-48ef-9d6b-91e680c364f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Animation">
+      <UniqueIdentifier>{58f7122e-e459-43ca-877f-b703ebf34a12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Characters">
+      <UniqueIdentifier>{db1f2ebf-e81b-4351-9f67-4a891ed1783a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Items">
+      <UniqueIdentifier>{ea1db47f-0b99-4d5b-8fcf-276085c86a1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameLogic">
+      <UniqueIdentifier>{3229bfab-cf08-48a7-8611-4b66db1d8eaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameAction">
+      <UniqueIdentifier>{78978243-f11a-483d-be61-834a0790f84c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Terrain">
+      <UniqueIdentifier>{ff36eff2-61fe-4216-80a9-18944c800049}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Sprites">
+      <UniqueIdentifier>{d0eaeac8-3ed2-4d61-8d2d-7978c7ec2b60}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="1942-FeedTheBirds\src\Animator\Animator.cpp">
+      <Filter>Source Files\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\GameLogic\PlayerProfile.cpp">
+      <Filter>Source Files\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\GameAction\AI.cpp">
+      <Filter>Source Files\GameAction</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\GameAction\Collision.cpp">
+      <Filter>Source Files\GameAction</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\GameAction\CollisionChecker.cpp">
+      <Filter>Source Files\GameAction</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\GameAction\InputManager.cpp">
+      <Filter>Source Files\GameAction</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\GameAction\SoundAPI.cpp">
+      <Filter>Source Files\GameAction</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\GameAction\StageManager.cpp">
+      <Filter>Source Files\GameAction</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-feedthebirds\src\1942-FeedTheBirdsMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\TestBackground.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\GameLogic\GameLogic.cpp">
+      <Filter>Source Files\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\GameAction\GamePlay.cpp">
+      <Filter>Source Files\GameAction</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\1942_sprite_sheet.png">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\1945_sprite_sheet.bmp">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\sample_terrain.bmp">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="1942-FeedTheBirds\include\Animator\Animator.h">
+      <Filter>Header Files\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\Sprites\PlaneSprite.h">
+      <Filter>Header Files\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\GameLogic\GameLogic.h">
+      <Filter>Header Files\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\GameAction\GamePlay.h">
+      <Filter>Header Files\GameAction</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -6,8 +6,15 @@ Animation
   AnimationFilm
   AnimationFilmHolder
   BitmapLoader
-  Sprite
-  
+
+Sprite
+  PlaneSprite
+  	SuperAceSprite
+  	BirdSprite  
+  BulletSprite
+	FishSprite
+	BirdShitSprite
+
 Animator
   Animator
   AnimatorHolder
@@ -19,37 +26,41 @@ Animator
   ExplosionAnimator
   StartScreenAnimator
   CharactersAnimators
-    LittleBirdsAnimator
-    MediumBirdsAnimator
-    GigasBirdsAnimator
+    BirdsAnimator
+    	LittleBirdsAnimator
+    	MediumBirdsAnimator
+    	GigasBirdsAnimator
     SuperAceAnimator
     (+)FisherManAnimator
   ItemsAnimators
-    BirdDroppingAnimator
+    BirdShitsAnimator
     FishAnimator
     PowerUpAnimator
     RiverAnimator
     IslandAnimator
   
-Characters : Sprites
-    LittleBird
-    MediumBird
-    GigasBird
+Characters (only logic - keep their coords, size, speed)
+    Birds
+    	LittleBird
+    	MediumBird
+    	GigasBird
     SuperAce
     (+)FisherMan
 
-Items : Sprites
-    BirdDropping
-    Fish
+Items (only logic - keep their coords, speed, direction)
+    Bullets
+    	BirdShits
+    	Fish
     PowerUp
     River
     Island
 
 Logic
-  GameState
+  GameLogic
   PlayerProfile
 
 GameAction : Logic
+  GamePlay
   AI
   Collision
   CollisionChecker
@@ -62,6 +73,9 @@ Terrain
   TerrainStartScreen
   TerrainUtils
   
+
++
+
 Configs
   Parser
   *(~BackgroundConfig)
@@ -70,7 +84,3 @@ Sounds
 
 Bitmaps
 
-Logs
-
-
-1942main.cpp
