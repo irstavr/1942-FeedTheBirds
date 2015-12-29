@@ -13,7 +13,7 @@
 int main()
 {
 	GamePlay *game = GamePlay::instance();
-	while (game->replay) {
+	while (game) {
 		game->start();
 		delete game;
 		game = GamePlay::instance(game->replay);

@@ -40,7 +40,12 @@ void GamePlay::start() {
 }
 
 void GamePlay::gamePlayInit() {
-
+	// test for failure
+	if (0 != al_init()) { 
+		fprintf(stderr, "%s", al_error); 
+		exit(1); 
+	}
+	al_install_keyboard();
 }
 
 void GamePlay::reset() {
