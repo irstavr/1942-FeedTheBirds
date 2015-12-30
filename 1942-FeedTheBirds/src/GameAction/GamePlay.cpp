@@ -62,27 +62,47 @@ void GamePlay::runMainLoop() {
 		drawScreen();
 	}	
 	*/
+
+	float pos_x = SCREEN_WINDOW_WIDTH / 2;
+	float pos_y = SCREEN_WINDOW_HEIGHT / 2;
 	while (gameState == GAME_STATE_INTRO) {
 		al_wait_for_event(eventQueue, &alEvent);
 		switch (alEvent.type) {
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
 			gameState = GAME_STATE_FINISHED;
 			break;
-		case ALLEGRO_EVENT_TIMER:
-			if (alEvent.timer.source == lpsTimer) {
-				fprintf(stdout, "Logic updated\n");
-			}
-			else if (alEvent.timer.source == fpsTimer) {
-				al_clear_to_color(al_map_rgb(255, 255, 100));
-				al_flip_display();
-				fprintf(stdout, "Display updated\n");
-			}
-			break;
 		case ALLEGRO_EVENT_KEY_UP:
 			if (alEvent.keyboard.keycode == ALLEGRO_KEY_ESCAPE) {
 				gameState = GAME_STATE_FINISHED;
 				break;
 			}
+		case ALLEGRO_EVENT_KEY_DOWN:
+			switch (alEvent.keyboard.keycode)
+			{
+			case ALLEGRO_KEY_UP:
+				pos_y -= 10;
+				break;
+			case ALLEGRO_KEY_DOWN:
+				pos_y += 10;
+				break;
+			case ALLEGRO_KEY_RIGHT:
+				pos_x += 10;
+				break;
+			case ALLEGRO_KEY_LEFT:
+				pos_x -= 10;
+				break;
+			}
+		case ALLEGRO_EVENT_TIMER:
+			if (alEvent.timer.source == lpsTimer) {
+				fprintf(stdout, "Logic updated\n");
+			}
+			else if (alEvent.timer.source == fpsTimer) {
+				al_draw_filled_rectangle(pos_x, pos_y, pos_x + 30, pos_y + 30, al_map_rgb(255, 0, 255));
+				al_flip_display();
+				al_clear_to_color(al_map_rgb(0, 0, 0));
+				//fprintf(stdout, "Display updated\n");
+			}
+			break;
 		}
 		fprintf(stdout, "Limitless update\n");
 	}
@@ -162,8 +182,19 @@ bool GamePlay::initAllegro() {
 		return false;
 	}
 
+	if (!al_init_primitives_addon()) {
+		al_show_native_message_box(NULL, "Error", NULL, "failed to initialize primitives addon!\n", NULL, NULL);
+		al_destroy_display(display);
+		al_destroy_timer(fpsTimer);
+		al_destroy_timer(lpsTimer);
+		return false;
+	}
+
+	
+
 	//Tie events to queue
 	al_register_event_source(eventQueue, al_get_display_event_source(display));
+	al_register_event_source(eventQueue, al_get_keyboard_event_source());
 	al_register_event_source(eventQueue, al_get_timer_event_source(fpsTimer));
 	al_register_event_source(eventQueue, al_get_timer_event_source(lpsTimer));
 

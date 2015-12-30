@@ -130,5 +130,8 @@
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\GamePlay.h">
       <Filter>Header Files\GameAction</Filter>
     </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\GameAction\InputManager.h">
+      <Filter>Header Files\GameAction</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
