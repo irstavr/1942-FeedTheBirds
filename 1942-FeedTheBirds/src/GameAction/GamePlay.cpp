@@ -62,7 +62,7 @@ void GamePlay::runMainLoop() {
 		drawScreen();
 	}	
 	*/
-	while (gameState == GAME_STATE_MAINGAME) {
+	while (gameState == GAME_STATE_INTRO) {
 		al_wait_for_event(eventQueue, &alEvent);
 		switch (alEvent.type) {
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -73,15 +73,19 @@ void GamePlay::runMainLoop() {
 				fprintf(stdout, "Logic updated\n");
 			}
 			else if (alEvent.timer.source == fpsTimer) {
-				al_clear_to_color(al_map_rgb(50, 123, 1));
+				al_clear_to_color(al_map_rgb(255, 255, 100));
 				al_flip_display();
 				fprintf(stdout, "Display updated\n");
 			}
 			break;
+		case ALLEGRO_EVENT_KEY_UP:
+			if (alEvent.keyboard.keycode == ALLEGRO_KEY_ESCAPE) {
+				gameState = GAME_STATE_FINISHED;
+				break;
+			}
 		}
 		fprintf(stdout, "Limitless update\n");
 	}
-
 }
 
 
