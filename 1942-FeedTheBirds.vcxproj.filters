@@ -67,6 +67,9 @@
     <Filter Include="Header Files\Sprites">
       <UniqueIdentifier>{d0eaeac8-3ed2-4d61-8d2d-7978c7ec2b60}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Fonts">
+      <UniqueIdentifier>{81eb7ea1-bc84-4d0e-8c58-c8d764a92517}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="1942-FeedTheBirds\src\Animator\Animator.cpp">
@@ -130,5 +133,13 @@
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\GamePlay.h">
       <Filter>Header Files\GameAction</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="1942-FeedTheBirds\data\Fonts\arial.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
+    <Font Include="1942-FeedTheBirds\data\Fonts\karmatic_arcade_font.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>

@@ -130,6 +130,10 @@
     <ClInclude Include="1942-FeedTheBirds\include\GameLogic\GameLogic.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Sprites\PlaneSprite.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="1942-FeedTheBirds\data\Fonts\arial.ttf" />
+    <Font Include="1942-FeedTheBirds\data\Fonts\karmatic_arcade_font.ttf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

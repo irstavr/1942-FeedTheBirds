@@ -2,16 +2,18 @@
 #define GP_H
 
 #include "../GameLogic/GameLogic.h"
-
 #include <stdio.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h> 
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 
 #define SCREEN_WINDOW_WIDTH  1460 
 #define SCREEN_WINDOW_HEIGHT 669
+
 #define GAME_STATE_INTRO 0
 #define GAME_STATE_MAINGAME 1
 #define GAME_STATE_PAUSED 2
@@ -35,12 +37,16 @@ class GamePlay {
 	ALLEGRO_EVENT alEvent;
 	ALLEGRO_BITMAP *background = NULL;
 	ALLEGRO_TIMER *fpsTimer = NULL, *lpsTimer = NULL;
+	ALLEGRO_FONT *font1, *font2;
+	ALLEGRO_COLOR bright_green;
+
+	const char* font_file = "karmatic_arcade_font.ttf";
 
 	/* initialization */
 	bool initAllegro();
 	/* clear allegro */
 	void cleanAllegro();
-
+	/* runs the game loop*/
 	void runMainLoop();
 
 	/*create the signal pressed by user*/

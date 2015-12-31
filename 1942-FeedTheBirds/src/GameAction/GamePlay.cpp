@@ -10,7 +10,7 @@ GamePlay::GamePlay() :
 }
 
 GamePlay *GamePlay::instance(bool newOne) {
-	static GamePlay* gamegui = 0;
+	static GamePlay* gamegui = nullptr;
 	if (!gamegui || newOne)
 		gamegui = new GamePlay();
 	return gamegui;
@@ -42,11 +42,9 @@ void GamePlay::gamePlayInit() {
 	if (!initAllegro()) {
 		return;
 	}
-
-	//Main loop 
+	// Main loop 
 	runMainLoop();
-
-	//Cleaning
+	// Cleaning
 	cleanAllegro();
 }
 
@@ -56,11 +54,12 @@ void GamePlay::runMainLoop() {
 	2. input handling
 	3. game play
 	4. check if game ends
+
 	while (running) {
 		processInput();
 		updateGameState();
 		drawScreen();
-	}	
+	}
 	*/
 	while (gameState == GAME_STATE_INTRO) {
 		al_wait_for_event(eventQueue, &alEvent);
@@ -68,23 +67,24 @@ void GamePlay::runMainLoop() {
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
 			gameState = GAME_STATE_FINISHED;
 			break;
-		case ALLEGRO_EVENT_TIMER:
-			if (alEvent.timer.source == lpsTimer) {
-				fprintf(stdout, "Logic updated\n");
-			}
-			else if (alEvent.timer.source == fpsTimer) {
-				al_clear_to_color(al_map_rgb(255, 255, 100));
-				al_flip_display();
-				fprintf(stdout, "Display updated\n");
-			}
-			break;
 		case ALLEGRO_EVENT_KEY_UP:
 			if (alEvent.keyboard.keycode == ALLEGRO_KEY_ESCAPE) {
 				gameState = GAME_STATE_FINISHED;
 				break;
 			}
+		case ALLEGRO_EVENT_TIMER:
+			if (alEvent.timer.source == lpsTimer) {
+				fprintf(stderr, "Logic updated\n");
+			}
+			else if (alEvent.timer.source == fpsTimer) {
+				al_clear_to_color(al_map_rgb(255, 255, 100));
+				al_flip_display();
+				fprintf(stderr, "Display updated\n");
+			}
+			break;
+		
 		}
-		fprintf(stdout, "Limitless update\n");
+		fprintf(stderr, "Limitless update\n");
 	}
 }
 
@@ -162,12 +162,29 @@ bool GamePlay::initAllegro() {
 		return false;
 	}
 
+	al_init_font_addon();
+	al_init_ttf_addon();
+	font1 = al_load_ttf_font("karmatic_arcade_font.ttf", 48, 0);
+	font2 = al_load_ttf_font("karmatic_arcade_font.ttf", -48, 0);
+	if (!font1 || !font2) {
+		al_show_native_message_box(NULL, "Error", NULL, "failed to load font file!\n", NULL, NULL);
+		return false;
+	}
+
+	bright_green = al_map_rgba_f(0.5, 1.0, 0.5, 1.0);
+
+	al_set_blender(ALLEGRO_ADD, ALLEGRO_ALPHA, ALLEGRO_INVERSE_ALPHA);
+
 	//Tie events to queue
 	al_register_event_source(eventQueue, al_get_display_event_source(display));
+	al_register_event_source(eventQueue, al_get_keyboard_event_source());
 	al_register_event_source(eventQueue, al_get_timer_event_source(fpsTimer));
 	al_register_event_source(eventQueue, al_get_timer_event_source(lpsTimer));
 
 	al_clear_to_color(al_map_rgb(0,0,0));
+
+	al_draw_text(font1, bright_green, 10, 10, ALLEGRO_ALIGN_LEFT, "Allegro 5 Rocks!");
+	al_draw_text(font2, bright_green, 10, 60, ALLEGRO_ALIGN_LEFT, "Allegro 5 Rocks!");
 	al_flip_display();
 
 	//Start timers 
