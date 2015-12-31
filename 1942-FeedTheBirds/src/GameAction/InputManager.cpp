@@ -1,2 +1,3 @@
-#include <stdio.h>
-#include <allegro5/allegro.h>
+#include "../../include/GameAction/InputManager.h"
+
+

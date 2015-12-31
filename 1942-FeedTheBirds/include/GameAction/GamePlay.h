@@ -10,6 +10,7 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
+#include <allegro5/allegro_primitives.h>
 
 #define SCREEN_WINDOW_WIDTH  1460 
 #define SCREEN_WINDOW_HEIGHT 669
@@ -20,8 +21,8 @@
 #define GAME_STATE_GAMEOVER 3
 #define GAME_STATE_FINISHED 4
 
-#define FPS 4
-#define LPS 1
+#define FPS 20
+#define LPS 10
 
 class GamePlay {
 	std::string title;

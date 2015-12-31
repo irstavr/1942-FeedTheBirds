@@ -61,6 +61,9 @@ void GamePlay::runMainLoop() {
 		drawScreen();
 	}
 	*/
+
+	float pos_x = SCREEN_WINDOW_WIDTH / 2;
+	float pos_y = SCREEN_WINDOW_HEIGHT / 2;
 	while (gameState == GAME_STATE_INTRO) {
 		al_wait_for_event(eventQueue, &alEvent);
 		switch (alEvent.type) {
@@ -72,17 +75,33 @@ void GamePlay::runMainLoop() {
 				gameState = GAME_STATE_FINISHED;
 				break;
 			}
+		case ALLEGRO_EVENT_KEY_DOWN:
+			switch (alEvent.keyboard.keycode)
+			{
+			case ALLEGRO_KEY_UP:
+				pos_y -= 10;
+				break;
+			case ALLEGRO_KEY_DOWN:
+				pos_y += 10;
+				break;
+			case ALLEGRO_KEY_RIGHT:
+				pos_x += 10;
+				break;
+			case ALLEGRO_KEY_LEFT:
+				pos_x -= 10;
+				break;
+			}
 		case ALLEGRO_EVENT_TIMER:
 			if (alEvent.timer.source == lpsTimer) {
 				fprintf(stderr, "Logic updated\n");
 			}
 			else if (alEvent.timer.source == fpsTimer) {
-				al_clear_to_color(al_map_rgb(255, 255, 100));
+				al_draw_filled_rectangle(pos_x, pos_y, pos_x + 30, pos_y + 30, al_map_rgb(255, 0, 255));
 				al_flip_display();
-				fprintf(stderr, "Display updated\n");
+				al_clear_to_color(al_map_rgb(0, 0, 0));
+				//fprintf(stdout, "Display updated\n");
 			}
 			break;
-		
 		}
 		fprintf(stderr, "Limitless update\n");
 	}
@@ -174,6 +193,14 @@ bool GamePlay::initAllegro() {
 	bright_green = al_map_rgba_f(0.5, 1.0, 0.5, 1.0);
 
 	al_set_blender(ALLEGRO_ADD, ALLEGRO_ALPHA, ALLEGRO_INVERSE_ALPHA);
+
+	if (!al_init_primitives_addon()) {
+		al_show_native_message_box(NULL, "Error", NULL, "failed to initialize primitives addon!\n", NULL, NULL);
+		al_destroy_display(display);
+		al_destroy_timer(fpsTimer);
+		al_destroy_timer(lpsTimer);
+		return false;
+	}
 
 	//Tie events to queue
 	al_register_event_source(eventQueue, al_get_display_event_source(display));

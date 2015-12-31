@@ -127,6 +127,7 @@
   <ItemGroup>
     <ClInclude Include="1942-FeedTheBirds\include\Animator\Animator.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\GamePlay.h" />
+    <ClInclude Include="1942-FeedTheBirds\include\GameAction\InputManager.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameLogic\GameLogic.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Sprites\PlaneSprite.h" />
   </ItemGroup>
