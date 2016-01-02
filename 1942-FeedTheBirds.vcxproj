@@ -117,6 +117,9 @@
     <ClCompile Include="1942-FeedTheBirds\src\GameLogic\GameLogic.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\GameLogic\PlayerProfile.cpp" />
     <ClCompile Include="1942-feedthebirds\src\1942-FeedTheBirdsMain.cpp" />
+    <ClCompile Include="1942-FeedTheBirds\src\Objects\Object.cpp" />
+    <ClCompile Include="1942-FeedTheBirds\src\Terrain\Terrain.cpp" />
+    <ClCompile Include="1942-FeedTheBirds\src\Terrain\TerrainStartScreen.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\TestBackground.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -129,7 +132,11 @@
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\GamePlay.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\InputManager.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameLogic\GameLogic.h" />
+    <ClInclude Include="1942-FeedTheBirds\include\Objects\Object.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Sprites\PlaneSprite.h" />
+    <ClInclude Include="1942-FeedTheBirds\include\Sprites\Sprite.h" />
+    <ClInclude Include="1942-FeedTheBirds\include\Terrain\Terrain.h" />
+    <ClInclude Include="1942-FeedTheBirds\include\Terrain\TerrainStartScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="1942-FeedTheBirds\data\Fonts\arial.ttf" />

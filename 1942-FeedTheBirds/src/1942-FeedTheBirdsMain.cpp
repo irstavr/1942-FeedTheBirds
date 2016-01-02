@@ -7,8 +7,8 @@
 *      Author: 
 */
 #include <stdio.h>
-#include "../include/GameAction/GamePlay.h"
 #include <cstdlib>
+#include "../include/GameAction/GamePlay.h"
 
 int main()
 {

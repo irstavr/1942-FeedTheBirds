@@ -2,7 +2,10 @@
 #define GP_H
 
 #include "../GameLogic/GameLogic.h"
+#include "../Terrain/TerrainStartScreen.h"
+#include <windows.h>
 #include <stdio.h>
+#include <time.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h> 
 #include <allegro5/allegro_audio.h>
@@ -25,23 +28,30 @@
 #define LPS 10
 
 class GamePlay {
+	GamePlay();
+
 	std::string title;
-	GameLogic *currentGame;
-	float time, startTime, gamingTime, pauseTime;
+	static GameLogic *currentGame;
+	static float time, startTime, gamingTime, pauseTime;
+	unsigned long currTime;
 
 	const int windowHeight;
 	const int windowWidth;
 
 	/* Allegro initialization*/
-	ALLEGRO_DISPLAY *display = NULL;
-	ALLEGRO_EVENT_QUEUE *eventQueue = NULL;
+	ALLEGRO_DISPLAY *display;
+	ALLEGRO_EVENT_QUEUE *eventQueue;
 	ALLEGRO_EVENT alEvent;
-	ALLEGRO_BITMAP *background = NULL;
-	ALLEGRO_TIMER *fpsTimer = NULL, *lpsTimer = NULL;
+
+	ALLEGRO_KEYBOARD_STATE keyboardState;
+
+	ALLEGRO_BITMAP *background ;
+	ALLEGRO_TIMER *fpsTimer, *lpsTimer;
 	ALLEGRO_FONT *font1, *font2;
 	ALLEGRO_COLOR bright_green;
+	const char* font_file = "\\data\\Fonts\\karmatic_arcade_font.ttf";
 
-	const char* font_file = "karmatic_arcade_font.ttf";
+	clock_t wait;
 
 	/* initialization */
 	bool initAllegro();
@@ -49,15 +59,20 @@ class GamePlay {
 	void cleanAllegro();
 	/* runs the game loop*/
 	void runMainLoop();
-
-	/*create the signal pressed by user*/
-	bool getSignal();
+	/* clear all */
+	void cleanGamePlay();
+	/* inits engine of game - all classes instances */
+	void initGameEngine();
+	/* read from local input event queue */
+	void inputManagement(ALLEGRO_EVENT);
 	/*move in every frame*/
-	static bool FrameFunc();
+	bool frameFunc();
+	/* game loop logic */
+	void updateGameState();
 	/*rander in every frame*/
-	static bool RenderFunc();
+	bool render(unsigned long timestamp);
 	/*init all*/
-	void gamePlayInit();
+	void initGamePlay();
 	/*renew all stuff*/
 	void reset();
 	/*save*/
@@ -68,13 +83,18 @@ class GamePlay {
 	void saveRep();
 	/*load replay*/
 	void loadRep();
+	/* get system current time */
+	unsigned int getCurrTime();
 
-	GamePlay();
+	void displayStartScreen(unsigned long now);
+	/* updates game state and starts music */
+	void gameStarting();
 
 public:
 
+	/* holds state of game (if in intro, game, gameover, exit) */
 	int gameState;
-	/*return the instance of the class*/
+	/* return the instance of the class*/
 	static GamePlay *instance(bool newOne = false);
 	/*start the window*/
 	void start();

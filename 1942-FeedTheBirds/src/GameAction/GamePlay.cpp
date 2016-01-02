@@ -1,9 +1,12 @@
 #include "../../include/GameAction/GamePlay.h"
+#include "../../include/Terrain/Terrain.h"
+#include "../../include/Terrain/TerrainStartScreen.h"
+
 
 GamePlay::GamePlay() :
 	title("anti1942 - StopWars"),
-	windowHeight(SCREEN_WINDOW_HEIGHT), windowWidth(SCREEN_WINDOW_WIDTH),
-	gameState(GAME_STATE_INTRO) 
+	gameState(GAME_STATE_INTRO),
+	windowHeight(SCREEN_WINDOW_HEIGHT), windowWidth(SCREEN_WINDOW_WIDTH)
 {
 	//time(-1), startTime(0), status(1),
 	//musicOn(false), pauseTime(-1.5), colorB(false) {
@@ -20,104 +23,25 @@ GamePlay::~GamePlay() {
 
 }
 
-bool GamePlay::getSignal() {
-	return true;
-}
-
-bool GamePlay::FrameFunc() {
-	return true;
-}
-
-bool GamePlay::RenderFunc()
-{
-	return true;
-}
-
 void GamePlay::start() {
-	gamePlayInit();
+	initGamePlay();
 }
 
-void GamePlay::gamePlayInit() {
-	
+void GamePlay::initGamePlay() {
+	// init allegro
 	if (!initAllegro()) {
 		return;
 	}
+	// init game engine
+	initGameEngine();
 	// Main loop 
 	runMainLoop();
 	// Cleaning
-	cleanAllegro();
-}
-
-void GamePlay::runMainLoop() {
-	/*
-	1. init game engine
-	2. input handling
-	3. game play
-	4. check if game ends
-
-	while (running) {
-		processInput();
-		updateGameState();
-		drawScreen();
-	}
-	*/
-
-	float pos_x = SCREEN_WINDOW_WIDTH / 2;
-	float pos_y = SCREEN_WINDOW_HEIGHT / 2;
-	while (gameState == GAME_STATE_INTRO) {
-		al_wait_for_event(eventQueue, &alEvent);
-		switch (alEvent.type) {
-		case ALLEGRO_EVENT_DISPLAY_CLOSE:
-			gameState = GAME_STATE_FINISHED;
-			break;
-		case ALLEGRO_EVENT_KEY_UP:
-			if (alEvent.keyboard.keycode == ALLEGRO_KEY_ESCAPE) {
-				gameState = GAME_STATE_FINISHED;
-				break;
-			}
-		case ALLEGRO_EVENT_KEY_DOWN:
-			switch (alEvent.keyboard.keycode)
-			{
-			case ALLEGRO_KEY_UP:
-				pos_y -= 10;
-				break;
-			case ALLEGRO_KEY_DOWN:
-				pos_y += 10;
-				break;
-			case ALLEGRO_KEY_RIGHT:
-				pos_x += 10;
-				break;
-			case ALLEGRO_KEY_LEFT:
-				pos_x -= 10;
-				break;
-			}
-		case ALLEGRO_EVENT_TIMER:
-			if (alEvent.timer.source == lpsTimer) {
-				fprintf(stderr, "Logic updated\n");
-			}
-			else if (alEvent.timer.source == fpsTimer) {
-				al_draw_filled_rectangle(pos_x, pos_y, pos_x + 30, pos_y + 30, al_map_rgb(255, 0, 255));
-				al_flip_display();
-				al_clear_to_color(al_map_rgb(0, 0, 0));
-				//fprintf(stdout, "Display updated\n");
-			}
-			break;
-		}
-		fprintf(stderr, "Limitless update\n");
-	}
-}
-
-
-void GamePlay::cleanAllegro() {
-	al_destroy_timer(lpsTimer);
-	al_destroy_timer(fpsTimer);
-	al_destroy_display(display);
-	al_destroy_event_queue(eventQueue);
+	cleanGamePlay();
 }
 
 bool GamePlay::initAllegro() {
-	
-	// test for failure
+
 	if (!al_init()) {
 		al_show_native_message_box(NULL, "Error", NULL, "Failed to initialize allegro!\n", NULL, NULL);
 		return false;
@@ -183,12 +107,12 @@ bool GamePlay::initAllegro() {
 
 	al_init_font_addon();
 	al_init_ttf_addon();
-	font1 = al_load_ttf_font("karmatic_arcade_font.ttf", 48, 0);
-	font2 = al_load_ttf_font("karmatic_arcade_font.ttf", -48, 0);
-	if (!font1 || !font2) {
-		al_show_native_message_box(NULL, "Error", NULL, "failed to load font file!\n", NULL, NULL);
-		return false;
-	}
+	//font1 = al_load_ttf_font(font_file, 48, 0);
+	//font2 = al_load_ttf_font(font_file, -48, 0);
+	//if (!font1 || !font2) {
+	//al_show_native_message_box(NULL, "Error", NULL, "failed to load font file!\n", NULL, NULL);
+	//return false;
+	//}
 
 	bright_green = al_map_rgba_f(0.5, 1.0, 0.5, 1.0);
 
@@ -208,17 +132,201 @@ bool GamePlay::initAllegro() {
 	al_register_event_source(eventQueue, al_get_timer_event_source(fpsTimer));
 	al_register_event_source(eventQueue, al_get_timer_event_source(lpsTimer));
 
-	al_clear_to_color(al_map_rgb(0,0,0));
+	al_clear_to_color(al_map_rgb(0, 0, 0));
 
-	al_draw_text(font1, bright_green, 10, 10, ALLEGRO_ALIGN_LEFT, "Allegro 5 Rocks!");
-	al_draw_text(font2, bright_green, 10, 60, ALLEGRO_ALIGN_LEFT, "Allegro 5 Rocks!");
+	//	al_draw_text(font1, bright_green, 10, 10, ALLEGRO_ALIGN_LEFT, "Allegro 5 Rocks!");
+	//	al_draw_text(font2, bright_green, 10, 60, ALLEGRO_ALIGN_LEFT, "Allegro 5 Rocks!");
 	al_flip_display();
 
 	//Start timers 
-	al_start_timer(lpsTimer); 
+	al_start_timer(lpsTimer);
 	al_start_timer(fpsTimer);
-	
+
 	return true;
+}
+
+void GamePlay::initGameEngine() {
+	// TODO
+	// init all instances of these classes:
+	// Logic
+	// collisionChecker
+	// AnimationFilmHolder
+	// Background
+	// etc.
+
+	currTime = getCurrTime();
+
+	Terrain::create();
+	TerrainStartScreen::getInstance().create();// getTerrainStartScreen();
+
+	gameState = GAME_STATE_INTRO;
+
+
+}
+
+void GamePlay::runMainLoop() {
+	/*
+	Technique:
+
+	while (running) {
+		processInput();
+		updateGameState();
+		drawScreen();
+	}
+	*/
+	while (gameState != GAME_STATE_FINISHED) {
+		currTime = getCurrTime();
+		al_wait_for_event(eventQueue, &alEvent);
+		
+		/* draw screen */
+		render(currTime);
+		/* read from local input event queue */
+		inputManagement(alEvent);
+		/* game loop logic */
+		updateGameState();
+	}
+}
+
+/* read from local input event queue */
+void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
+	// TODO
+	// we should call inputManagement class here
+	// and call its methods ! ! !
+	//
+
+	float pos_x = SCREEN_WINDOW_WIDTH / 2;
+	float pos_y = SCREEN_WINDOW_HEIGHT / 2;
+	
+	switch (alEvent.type) {
+	case ALLEGRO_EVENT_DISPLAY_CLOSE:
+		gameState = GAME_STATE_FINISHED;
+		break;
+	case ALLEGRO_EVENT_KEY_UP:
+		if (alEvent.keyboard.keycode == ALLEGRO_KEY_ESCAPE) {
+			gameState = GAME_STATE_FINISHED;
+			break;
+		}
+	case ALLEGRO_EVENT_KEY_DOWN:
+		switch (alEvent.keyboard.keycode)
+		{
+		case ALLEGRO_KEY_UP:
+			pos_y -= 10;
+			break;
+		case ALLEGRO_KEY_DOWN:
+			pos_y += 10;
+			break;
+		case ALLEGRO_KEY_RIGHT:
+			pos_x += 10;
+			break;
+		case ALLEGRO_KEY_LEFT:
+			pos_x -= 10;
+			break;
+		}
+	case ALLEGRO_EVENT_TIMER:
+		if (alEvent.timer.source == lpsTimer) {
+			fprintf(stderr, "Logic updated\n");
+		}
+		else if (alEvent.timer.source == fpsTimer) {
+			al_draw_filled_rectangle(pos_x, pos_y, pos_x + 30, pos_y + 30, al_map_rgb(255, 0, 255));
+			al_flip_display();
+			al_clear_to_color(al_map_rgb(0, 0, 0));
+		}
+		break;
+	}
+	fprintf(stderr, "Limitless update\n");
+}
+
+/* game loop logic */
+void GamePlay::updateGameState() {
+	if (gameState == GAME_STATE_MAINGAME) {
+		// TODO
+		// initialize:
+		// AI
+		// CollisionChecking
+		// Animation progress
+		// check if win
+		// update scores/lives/etc on the display
+		// etc 
+	}
+}
+
+bool GamePlay::render(unsigned long timestamp)
+{
+	if (!al_is_event_queue_empty(eventQueue))
+		return false;
+
+	//al_clear_to_color(al_map_rgba(0, 0, 0, 0));
+
+	/* display the first screen for the game */
+	displayStartScreen(timestamp);
+
+	if (gameState == GAME_STATE_MAINGAME) {
+		//TODO
+		// display game terrain
+	}
+
+	if (gameState == GAME_STATE_PAUSED) {
+		//TODO
+		// display start screen ? or game screen paused ?
+	}
+
+	if (gameState == GAME_STATE_GAMEOVER) {
+		//TODO
+		// clear previous game
+		// display start screen
+	}
+
+	// DO WE NEED THIS ? oeo ?
+	if (gameState == GAME_STATE_FINISHED) {
+		exit(0);
+	}
+
+	//al_flip_display();
+
+	return true;
+}
+
+void GamePlay::displayStartScreen(unsigned long now) {
+	/* show first window with start screen */
+	//TerrainStartScreen::getInstance().displayTerrain(al_get_backbuffer(display), now);
+
+	/* if press ENTER => show first game screen */
+	if ((al_key_down(&keyboardState, ALLEGRO_KEY_ENTER)) &&  gameState == GAME_STATE_INTRO) {
+
+		//TerrainStartScreen::getInstance().displayTerrain(al_get_backbuffer(display), now);
+
+		//al_flip_display();
+		wait = clock();
+		while (clock() != wait + 3000);
+		gameStarting();
+	}
+}
+
+void GamePlay::gameStarting() {
+	gameState = GAME_STATE_MAINGAME;
+	// TODO: play music ?
+}
+
+unsigned int GamePlay::getCurrTime() {
+	SYSTEMTIME st;
+	GetSystemTime(&st);
+	return st.wMilliseconds + st.wSecond * 1000 +
+		st.wMinute * 60 * 1000 +
+		st.wHour * 3600 * 1000 +
+		st.wDay * 24 * 3600 * 1000;
+}
+
+void GamePlay::cleanGamePlay() {
+	cleanAllegro();
+	// TODO: clean all instances of all the classes!
+	//
+}
+
+void GamePlay::cleanAllegro() {
+	al_destroy_timer(lpsTimer);
+	al_destroy_timer(fpsTimer);
+	al_destroy_display(display);
+	al_destroy_event_queue(eventQueue);
 }
 
 void GamePlay::reset() {
