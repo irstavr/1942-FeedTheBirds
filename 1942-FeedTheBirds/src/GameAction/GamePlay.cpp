@@ -189,51 +189,56 @@ void GamePlay::runMainLoop() {
 
 /* read from local input event queue */
 void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
-	// TODO
-	// we should call inputManagement class here
-	// and call its methods ! ! !
-	//
 
-	float pos_x = SCREEN_WINDOW_WIDTH / 2;
-	float pos_y = SCREEN_WINDOW_HEIGHT / 2;
-	
-	switch (alEvent.type) {
-	case ALLEGRO_EVENT_DISPLAY_CLOSE:
-		gameState = GAME_STATE_FINISHED;
-		break;
-	case ALLEGRO_EVENT_KEY_UP:
-		if (alEvent.keyboard.keycode == ALLEGRO_KEY_ESCAPE) {
+	if (gameState != GAME_STATE_PAUSED) {
+		//float pos_x = SCREEN_WINDOW_WIDTH / 2;
+		//float pos_y = SCREEN_WINDOW_HEIGHT / 2;
+
+		switch (alEvent.type) {
+		case ALLEGRO_EVENT_DISPLAY_CLOSE:
 			gameState = GAME_STATE_FINISHED;
 			break;
-		}
-	case ALLEGRO_EVENT_KEY_DOWN:
-		switch (alEvent.keyboard.keycode)
-		{
-		case ALLEGRO_KEY_UP:
-			pos_y -= 10;
+		case ALLEGRO_EVENT_KEY_UP:
+			if (alEvent.keyboard.keycode == ALLEGRO_KEY_ESCAPE) {
+				gameState = GAME_STATE_FINISHED;
+				break;
+			}
+		case ALLEGRO_EVENT_KEY_DOWN:
+			switch (alEvent.keyboard.keycode) {
+				case ALLEGRO_KEY_UP:
+					//pos_y -= 10;
+					InputManager::moveUp();
+					break;
+				case ALLEGRO_KEY_DOWN:
+					//pos_y += 10;
+					InputManager::moveDown();
+					break;
+				case ALLEGRO_KEY_RIGHT:
+					//pos_x += 10;
+					InputManager::moveRight();
+					break;
+				case ALLEGRO_KEY_LEFT:
+					//pos_x -= 10;
+					InputManager::moveLeft();
+					break;
+				// TODO:
+				// ADD ALSO THE OTHER EVENT KEYS FOR OUR GAME !
+			}
+		/*
+		case ALLEGRO_EVENT_TIMER:
+			if (alEvent.timer.source == lpsTimer) {
+				fprintf(stderr, "Logic updated\n");
+			}
+			else if (alEvent.timer.source == fpsTimer) {
+				al_draw_filled_rectangle(pos_x, pos_y, pos_x + 30, pos_y + 30, al_map_rgb(255, 0, 255));
+				al_flip_display();
+				al_clear_to_color(al_map_rgb(0, 0, 0));
+			}
 			break;
-		case ALLEGRO_KEY_DOWN:
-			pos_y += 10;
-			break;
-		case ALLEGRO_KEY_RIGHT:
-			pos_x += 10;
-			break;
-		case ALLEGRO_KEY_LEFT:
-			pos_x -= 10;
-			break;
+
+		*/
 		}
-	case ALLEGRO_EVENT_TIMER:
-		if (alEvent.timer.source == lpsTimer) {
-			fprintf(stderr, "Logic updated\n");
-		}
-		else if (alEvent.timer.source == fpsTimer) {
-			al_draw_filled_rectangle(pos_x, pos_y, pos_x + 30, pos_y + 30, al_map_rgb(255, 0, 255));
-			al_flip_display();
-			al_clear_to_color(al_map_rgb(0, 0, 0));
-		}
-		break;
 	}
-	fprintf(stderr, "Limitless update\n");
 }
 
 /* game loop logic */
@@ -250,10 +255,10 @@ void GamePlay::updateGameState() {
 	}
 }
 
-bool GamePlay::render(unsigned long timestamp)
+void GamePlay::render(unsigned long timestamp)
 {
 	if (!al_is_event_queue_empty(eventQueue))
-		return false;
+		return;
 
 	//al_clear_to_color(al_map_rgba(0, 0, 0, 0));
 
@@ -276,30 +281,23 @@ bool GamePlay::render(unsigned long timestamp)
 		// display start screen
 	}
 
-	// DO WE NEED THIS ? oeo ?
-	if (gameState == GAME_STATE_FINISHED) {
-		exit(0);
-	}
-
 	//al_flip_display();
-
-	return true;
 }
 
 void GamePlay::displayStartScreen(unsigned long now) {
 	/* show first window with start screen */
-	//TerrainStartScreen::getInstance().displayTerrain(al_get_backbuffer(display), now);
+	TerrainStartScreen::getInstance().displayTerrain(al_get_backbuffer(display), now);
 
 	/* if press ENTER => show first game screen */
-	if ((al_key_down(&keyboardState, ALLEGRO_KEY_ENTER)) &&  gameState == GAME_STATE_INTRO) {
+	//if ((al_key_down(&keyboardState, ALLEGRO_KEY_ENTER)) &&  gameState == GAME_STATE_INTRO) {
 
 		//TerrainStartScreen::getInstance().displayTerrain(al_get_backbuffer(display), now);
 
 		//al_flip_display();
-		wait = clock();
-		while (clock() != wait + 3000);
-		gameStarting();
-	}
+		//wait = clock();
+		//while (clock() != wait + 3000);
+		//gameStarting();
+	//}
 }
 
 void GamePlay::gameStarting() {

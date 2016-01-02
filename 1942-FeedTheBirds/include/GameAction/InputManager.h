@@ -1,6 +1,7 @@
-class InputManager {
-	float current_pos;
-	enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE, F1, A };
+#ifndef INPUTMANAGER_H
+#define INPUTMANAGER_H
+
+namespace InputManager {
 
 	// kinds of input
 	void moveUp();
@@ -13,4 +14,6 @@ class InputManager {
 	void twist();
 	void pause();
 
-};
+}
+
+#endif

@@ -1,8 +1,10 @@
 #ifndef GP_H
 #define GP_H
 
+#include "InputManager.h"
 #include "../GameLogic/GameLogic.h"
 #include "../Terrain/TerrainStartScreen.h"
+
 #include <windows.h>
 #include <stdio.h>
 #include <time.h>
@@ -70,7 +72,7 @@ class GamePlay {
 	/* game loop logic */
 	void updateGameState();
 	/*rander in every frame*/
-	bool render(unsigned long timestamp);
+	void render(unsigned long timestamp);
 	/*init all*/
 	void initGamePlay();
 	/*renew all stuff*/
