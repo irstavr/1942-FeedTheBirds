@@ -114,9 +114,9 @@ bool GamePlay::initAllegro() {
 	//return false;
 	//}
 
-	bright_green = al_map_rgba_f(0.5, 1.0, 0.5, 1.0);
+	//bright_green = al_map_rgba_f(0.5, 1.0, 0.5, 1.0);
 
-	al_set_blender(ALLEGRO_ADD, ALLEGRO_ALPHA, ALLEGRO_INVERSE_ALPHA);
+	//al_set_blender(ALLEGRO_ADD, ALLEGRO_ALPHA, ALLEGRO_INVERSE_ALPHA);
 
 	if (!al_init_primitives_addon()) {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to initialize primitives addon!\n", NULL, NULL);
@@ -136,6 +136,7 @@ bool GamePlay::initAllegro() {
 
 	//	al_draw_text(font1, bright_green, 10, 10, ALLEGRO_ALIGN_LEFT, "Allegro 5 Rocks!");
 	//	al_draw_text(font2, bright_green, 10, 60, ALLEGRO_ALIGN_LEFT, "Allegro 5 Rocks!");
+	
 	al_flip_display();
 
 	//Start timers 
@@ -260,7 +261,7 @@ void GamePlay::render(unsigned long timestamp)
 	if (!al_is_event_queue_empty(eventQueue))
 		return;
 
-	//al_clear_to_color(al_map_rgba(0, 0, 0, 0));
+	al_clear_to_color(al_map_rgba(0, 0, 0, 0));
 
 	/* display the first screen for the game */
 	displayStartScreen(timestamp);
@@ -281,7 +282,7 @@ void GamePlay::render(unsigned long timestamp)
 		// display start screen
 	}
 
-	//al_flip_display();
+	al_flip_display();
 }
 
 void GamePlay::displayStartScreen(unsigned long now) {
