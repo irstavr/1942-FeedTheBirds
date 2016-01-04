@@ -17,9 +17,13 @@
 
 #define PIXEL_SCROLL_PER_CYCLE 5
 
+
 class TerrainStartScreen {
 
 public:
+
+
+
 	void create();
 
 	static TerrainStartScreen& getInstance();
@@ -31,9 +35,7 @@ public:
 	TerrainStartScreen(TerrainStartScreen const&) = delete;
 	void operator=(TerrainStartScreen const&) = delete;
 	
-	void initBackground(ALLEGRO_BITMAP* back, float x, float y, float velx, float vely, int width, int height, int dirX, int dirY);
-	void updateBackground(ALLEGRO_BITMAP* back);
-	void drawBackground(ALLEGRO_BITMAP* back);
+	
 private:
 	TerrainStartScreen();
 	~TerrainStartScreen();

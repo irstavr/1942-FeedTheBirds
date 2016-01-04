@@ -29,30 +29,3 @@ void TerrainStartScreen::scrollBackground() {
 	offsetBg += PIXEL_SCROLL_PER_CYCLE;
 }
 
-void TerrainStartScreen::initBackground(ALLEGRO_BITMAP *image, float x, float y, float velx, float vely, int width, int height, int dirX, int dirY)
-{
-	this->x = x;
-	this->y = y;
-	this->velX = velx;
-	this->velY = vely;
-	this->width = width;
-	this->height = height;
-	this->dirX = dirX;
-	this->dirY = dirY;
-	this->image = image;
-}
-
-void TerrainStartScreen::updateBackground(ALLEGRO_BITMAP *image)
-{
-	this->x += this->velX * this->dirX;
-	if (this->x + this->width <= 0)
-		this->x = 0;
-}
-
-void TerrainStartScreen::drawBackground(ALLEGRO_BITMAP *image)
-{
-	al_draw_bitmap(this->image, this->x, this->y, 0);
-
-	if (this->x + this->width < SCREEN_WINDOW_WIDTH)
-		al_draw_bitmap(this->image, this->x + this->width, this->y, 0);
-}

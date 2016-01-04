@@ -1,6 +1,4 @@
 #include "../../include/GameAction/GamePlay.h"
-#include "../../include/Terrain/Terrain.h"
-#include "../../include/Terrain/TerrainStartScreen.h"
 
 
 GamePlay::GamePlay() :
@@ -127,7 +125,7 @@ bool GamePlay::initAllegro() {
 	}
 	font_file = "1942-FeedTheBirds\\data\\Fonts\\karmatic_arcade_font.ttf";
 
-	bgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\sample_terrain.bmp");
+	bgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\forest.png");
 	fgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\sea2.png");
 	mgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\birdshit.png");
 
@@ -138,12 +136,12 @@ bool GamePlay::initAllegro() {
 	al_register_event_source(eventQueue, al_get_timer_event_source(fpsTimer));
 	al_register_event_source(eventQueue, al_get_timer_event_source(lpsTimer));
 
-	al_clear_to_color(al_map_rgb(0, 0, 0));
+	//al_clear_to_color(al_map_rgb(0, 0, 0));
 
 	//	al_draw_text(font1, bright_green, 10, 10, ALLEGRO_ALIGN_LEFT, "Allegro 5 Rocks!");
 	//	al_draw_text(font2, bright_green, 10, 60, ALLEGRO_ALIGN_LEFT, "Allegro 5 Rocks!");
 	
-	al_flip_display();
+	//al_flip_display();
 
 	//Start timers 
 	al_start_timer(lpsTimer);
@@ -162,10 +160,9 @@ void GamePlay::initGameEngine() {
 	// etc.
 
 	currTime = getCurrTime();
-
-	Terrain::create();
-	TerrainStartScreen::getInstance().create();// getTerrainStartScreen();
-	TerrainStartScreen::getInstance().initBackground(bgImage, 0, 0, 1, 0, 9270, 423, -1, 1);
+	//Terrain::create();
+	//TerrainStartScreen::getInstance().create();// getTerrainStartScreen();
+	initBackground(bgImage, 0, 0, 1, 0, 240, 240, -1, 1, BG);
 	//TerrainStartScreen::getInstance().initBackground(mgImage, 0, 0, 3, 0, 1600, 600, -1, 1);
 	//TerrainStartScreen::getInstance().initBackground(fgImage, 0, 0, 5, 0, 800, 600, -1, 1);
 
@@ -245,7 +242,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 			}
 			break;
 			*/
-			TerrainStartScreen::getInstance().updateBackground(bgImage);
+			updateBackground(BG);
 			//TerrainStartScreen::getInstance().updateBackground(mgImage);
 			//TerrainStartScreen::getInstance().updateBackground(fgImage);
 			renderF = true;	
@@ -254,12 +251,12 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 		if (renderF && al_is_event_queue_empty(eventQueue)) {
 			renderF = false;
 
-			TerrainStartScreen::getInstance().drawBackground(bgImage);
+			drawBackground(BG);
 			//TerrainStartScreen::getInstance().drawBackground(mgImage);
 			//TerrainStartScreen::getInstance().drawBackground(fgImage);
 
 			al_flip_display();
-			//al_clear_to_color(al_map_rgb(0, 0, 0));
+			al_clear_to_color(al_map_rgb(0, 0, 0));
 		}
 	}
 }
@@ -283,7 +280,7 @@ void GamePlay::render(unsigned long timestamp)
 	if (!al_is_event_queue_empty(eventQueue))
 		return;
 
-	al_clear_to_color(al_map_rgba(0, 0, 0, 0));
+	//al_clear_to_color(al_map_rgba(0, 0, 0, 0));
 
 	/* display the first screen for the game */
 	displayStartScreen(timestamp);
@@ -304,12 +301,12 @@ void GamePlay::render(unsigned long timestamp)
 		// display start screen
 	}
 
-	al_flip_display();
+	//al_flip_display();
 }
 
 void GamePlay::displayStartScreen(unsigned long now) {
 	/* show first window with start screen */
-	TerrainStartScreen::getInstance().displayTerrain(al_get_backbuffer(display), now);
+	//TerrainStartScreen::getInstance().displayTerrain(al_get_backbuffer(display), now);
 
 	/* if press ENTER => show first game screen */
 	//if ((al_key_down(&keyboardState, ALLEGRO_KEY_ENTER)) &&  gameState == GAME_STATE_INTRO) {
@@ -327,6 +324,7 @@ void GamePlay::gameStarting() {
 	gameState = GAME_STATE_MAINGAME;
 	// TODO: play music ?
 }
+
 
 unsigned int GamePlay::getCurrTime() {
 	SYSTEMTIME st;
@@ -368,4 +366,32 @@ void GamePlay::load() {
 
 void GamePlay::loadRep() {
 	//TODO next version
+}
+
+void GamePlay::initBackground(ALLEGRO_BITMAP *image, float x, float y, float velx, float vely, int width, int height, int dirX, int dirY, BackgroundStrct &bg)
+{
+	bg.x = x;
+	bg.y = y;
+	bg.velX = velx;
+	bg.velY = vely;
+	bg.width = width;
+	bg.height = height;
+	bg.dirX = dirX;
+	bg.dirY = dirY;
+	bg.image = image;
+}
+
+void GamePlay::updateBackground(BackgroundStrct &image)
+{
+	image.x += image.velX * image.dirX;
+	if (image.x + image.width <= 0)
+		image.x = 0;
+}
+
+void GamePlay::drawBackground(BackgroundStrct &image)
+{
+	al_draw_bitmap(image.image, image.x, image.y, 0);
+	//al_draw_scaled_bitmap(image.image, 0, 0, image.width, image.height, image.x, image.y, image.width * 2, image.height * 2, 0);
+	if (image.x + image.width < SCREEN_WINDOW_WIDTH)
+		al_draw_bitmap(image.image, image.x + image.width, image.y, 0);
 }

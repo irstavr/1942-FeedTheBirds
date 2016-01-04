@@ -4,6 +4,7 @@
 #include "InputManager.h"
 #include "../GameLogic/GameLogic.h"
 #include "../Terrain/TerrainStartScreen.h"
+#include "../Terrain/Terrain.h"
 
 #include <windows.h>
 #include <stdio.h>
@@ -17,8 +18,8 @@
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_primitives.h>
 
-#define SCREEN_WINDOW_WIDTH  1460 
-#define SCREEN_WINDOW_HEIGHT 669
+#define SCREEN_WINDOW_WIDTH  240 
+#define SCREEN_WINDOW_HEIGHT 240
 
 #define GAME_STATE_INTRO 0
 #define GAME_STATE_MAINGAME 1
@@ -26,11 +27,28 @@
 #define GAME_STATE_GAMEOVER 3
 #define GAME_STATE_FINISHED 4
 
-#define FPS 50
-#define LPS 10
+#define FPS 1
+#define LPS 180
 
 class GamePlay {
 	GamePlay();
+
+
+
+	typedef struct BackgroundStrct
+	{
+		float x;
+		float y;
+		float velX;
+		float velY;
+		int dirX;
+		int dirY;
+		int width;
+		int height;
+
+		ALLEGRO_BITMAP *image;
+	}BackgroundStrct;
+
 
 	std::string title;
 	static GameLogic *currentGame;
@@ -54,10 +72,12 @@ class GamePlay {
 	const char* font_file;
 
 	/* PARALLAX BG - MEIK GEIG*/
-	//ALLEGRO_PATH *path = 
 	ALLEGRO_BITMAP *bgImage = NULL;
 	ALLEGRO_BITMAP *mgImage;
 	ALLEGRO_BITMAP *fgImage;
+
+	BackgroundStrct BG;
+
 
 	clock_t wait;
 
@@ -97,6 +117,10 @@ class GamePlay {
 	void displayStartScreen(unsigned long now);
 	/* updates game state and starts music */
 	void gameStarting();
+
+	void initBackground(ALLEGRO_BITMAP* back, float x, float y, float velx, float vely, int width, int height, int dirX, int dirY, BackgroundStrct &bg);
+	void updateBackground(BackgroundStrct &back);
+	void drawBackground(BackgroundStrct &back);
 
 public:
 
