@@ -128,8 +128,8 @@ bool GamePlay::initAllegro() {
 	font_file = "1942-FeedTheBirds\\data\\Fonts\\karmatic_arcade_font.ttf";
 
 	bgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\sample_terrain.bmp");
-	mgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\sea2.png");
-	fgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\birdshit.png");
+	fgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\sea2.png");
+	mgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\birdshit.png");
 
 
 	//Tie events to queue
@@ -165,9 +165,9 @@ void GamePlay::initGameEngine() {
 
 	Terrain::create();
 	TerrainStartScreen::getInstance().create();// getTerrainStartScreen();
-	TerrainStartScreen::getInstance().initBackground(bgImage, 0, 0, 1, 0, 800, 600, -1, 1);
-	TerrainStartScreen::getInstance().initBackground(mgImage, 0, 0, 3, 0, 1600, 600, -1, 1);
-	TerrainStartScreen::getInstance().initBackground(fgImage, 0, 0, 5, 0, 800, 600, -1, 1);
+	TerrainStartScreen::getInstance().initBackground(bgImage, 0, 0, 1, 0, 9270, 423, -1, 1);
+	//TerrainStartScreen::getInstance().initBackground(mgImage, 0, 0, 3, 0, 1600, 600, -1, 1);
+	//TerrainStartScreen::getInstance().initBackground(fgImage, 0, 0, 5, 0, 800, 600, -1, 1);
 
 }
 
@@ -199,8 +199,6 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 	bool renderF = false;
 
 	if (gameState != GAME_STATE_PAUSED) {
-		float pos_x = SCREEN_WINDOW_WIDTH / 2;
-		float pos_y = SCREEN_WINDOW_HEIGHT / 2;
 
 		switch (alEvent.type) {
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -214,19 +212,15 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 		case ALLEGRO_EVENT_KEY_DOWN:
 			switch (alEvent.keyboard.keycode) {
 				case ALLEGRO_KEY_UP:
-					pos_y -= 10;
 					InputManager::moveUp();
 					break;
 				case ALLEGRO_KEY_DOWN:
-					pos_y += 10;
 					InputManager::moveDown();
 					break;
 				case ALLEGRO_KEY_RIGHT:
-					pos_x += 10;
 					InputManager::moveRight();
 					break;
 				case ALLEGRO_KEY_LEFT:
-					pos_x -= 10;
 					InputManager::moveLeft();
 					break;
 				case ALLEGRO_KEY_SPACE:
@@ -252,8 +246,8 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 			break;
 			*/
 			TerrainStartScreen::getInstance().updateBackground(bgImage);
-			TerrainStartScreen::getInstance().updateBackground(mgImage);
-			TerrainStartScreen::getInstance().updateBackground(fgImage);
+			//TerrainStartScreen::getInstance().updateBackground(mgImage);
+			//TerrainStartScreen::getInstance().updateBackground(fgImage);
 			renderF = true;	
 		}
 
@@ -261,11 +255,11 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 			renderF = false;
 
 			TerrainStartScreen::getInstance().drawBackground(bgImage);
-			TerrainStartScreen::getInstance().drawBackground(mgImage);
-			TerrainStartScreen::getInstance().drawBackground(fgImage);
+			//TerrainStartScreen::getInstance().drawBackground(mgImage);
+			//TerrainStartScreen::getInstance().drawBackground(fgImage);
 
 			al_flip_display();
-			al_clear_to_color(al_map_rgb(0, 0, 0));
+			//al_clear_to_color(al_map_rgb(0, 0, 0));
 		}
 	}
 }

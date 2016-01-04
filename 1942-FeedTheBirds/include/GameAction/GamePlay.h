@@ -26,7 +26,7 @@
 #define GAME_STATE_GAMEOVER 3
 #define GAME_STATE_FINISHED 4
 
-#define FPS 20
+#define FPS 50
 #define LPS 10
 
 class GamePlay {
@@ -51,13 +51,13 @@ class GamePlay {
 	ALLEGRO_TIMER *fpsTimer, *lpsTimer;
 	ALLEGRO_FONT *font1, *font2;
 	ALLEGRO_COLOR bright_green;
-	const char* font_file;// = "1942-FeedTheBirds\\data\\Fonts\\karmatic_arcade_font.ttf";
+	const char* font_file;
 
 	/* PARALLAX BG - MEIK GEIG*/
 	//ALLEGRO_PATH *path = 
 	ALLEGRO_BITMAP *bgImage = NULL;
-	ALLEGRO_BITMAP *mgImage;// = al_load_bitmap("C:\\Users\\Helen\\Source\\Repos\\1942-FeedTheBirds\\1942-FeedTheBirds\\1942-FeedTheBirds\\data\\Bitmaps\\terrain\\sea2.png");
-	ALLEGRO_BITMAP *fgImage;// = al_load_bitmap("C:\\Users\\Helen\\Source\\Repos\\1942-FeedTheBirds\\1942-FeedTheBirds\\1942-FeedTheBirds\\data\\Bitmaps\\birdshit.png");
+	ALLEGRO_BITMAP *mgImage;
+	ALLEGRO_BITMAP *fgImage;
 
 	clock_t wait;
 
