@@ -223,8 +223,15 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 					//pos_x -= 10;
 					InputManager::moveLeft();
 					break;
-				// TODO:
-				// ADD ALSO THE OTHER EVENT KEYS FOR OUR GAME !
+				case ALLEGRO_KEY_SPACE:
+					InputManager::shoot();
+					break;
+				case ALLEGRO_KEY_A:
+					InputManager::twist();
+					break;
+				case ALLEGRO_KEY_P:
+					InputManager::pause();
+					break;
 			}
 		
 		case ALLEGRO_EVENT_TIMER:
