@@ -125,6 +125,12 @@ bool GamePlay::initAllegro() {
 		al_destroy_timer(lpsTimer);
 		return false;
 	}
+	font_file = "1942-FeedTheBirds\\data\\Fonts\\karmatic_arcade_font.ttf";
+
+	bgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\sample_terrain.bmp");
+	mgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\sea2.png");
+	fgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\birdshit.png");
+
 
 	//Tie events to queue
 	al_register_event_source(eventQueue, al_get_display_event_source(display));
@@ -193,8 +199,8 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 	bool renderF = false;
 
 	if (gameState != GAME_STATE_PAUSED) {
-		//float pos_x = SCREEN_WINDOW_WIDTH / 2;
-		//float pos_y = SCREEN_WINDOW_HEIGHT / 2;
+		float pos_x = SCREEN_WINDOW_WIDTH / 2;
+		float pos_y = SCREEN_WINDOW_HEIGHT / 2;
 
 		switch (alEvent.type) {
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -208,19 +214,19 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 		case ALLEGRO_EVENT_KEY_DOWN:
 			switch (alEvent.keyboard.keycode) {
 				case ALLEGRO_KEY_UP:
-					//pos_y -= 10;
+					pos_y -= 10;
 					InputManager::moveUp();
 					break;
 				case ALLEGRO_KEY_DOWN:
-					//pos_y += 10;
+					pos_y += 10;
 					InputManager::moveDown();
 					break;
 				case ALLEGRO_KEY_RIGHT:
-					//pos_x += 10;
+					pos_x += 10;
 					InputManager::moveRight();
 					break;
 				case ALLEGRO_KEY_LEFT:
-					//pos_x -= 10;
+					pos_x -= 10;
 					InputManager::moveLeft();
 					break;
 				case ALLEGRO_KEY_SPACE:
