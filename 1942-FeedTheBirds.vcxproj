@@ -125,7 +125,30 @@
   <ItemGroup>
     <Image Include="1942-FeedTheBirds\data\Bitmaps\1942_sprite_sheet.png" />
     <Image Include="1942-FeedTheBirds\data\Bitmaps\1945_sprite_sheet.bmp" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\bigexplosion.bmp" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\birdshit.png" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\bonusshot.bmp" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\bullets.bmp" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\explosion.bmp" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\p38.bmp" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\progress.bmp" />
     <Image Include="1942-FeedTheBirds\data\Bitmaps\sample_terrain.bmp" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\mq1.jpg" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\playgamesnotwar.jpg" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\stopwar.jpg" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\stopwarIII.gif" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\tumblr_naalh2N9wP1s335jfo1_r2_500.gif" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\desert.png" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\forest.png" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\lava1.png" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\lava2.png" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\ocean.bmp" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\road.png" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\sample_terrain.bmp" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\sea1.png" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\sea2.png" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\space2.png" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\terrainObjects.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="1942-FeedTheBirds\include\Animator\Animator.h" />

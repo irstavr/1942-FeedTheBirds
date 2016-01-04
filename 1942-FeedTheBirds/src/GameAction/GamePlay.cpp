@@ -159,9 +159,9 @@ void GamePlay::initGameEngine() {
 
 	Terrain::create();
 	TerrainStartScreen::getInstance().create();// getTerrainStartScreen();
-
-	gameState = GAME_STATE_INTRO;
-
+	TerrainStartScreen::getInstance().initBackground(bgImage, 0, 0, 1, 0, 800, 600, -1, 1);
+	TerrainStartScreen::getInstance().initBackground(mgImage, 0, 0, 3, 0, 1600, 600, -1, 1);
+	TerrainStartScreen::getInstance().initBackground(fgImage, 0, 0, 5, 0, 800, 600, -1, 1);
 
 }
 
@@ -190,6 +190,7 @@ void GamePlay::runMainLoop() {
 
 /* read from local input event queue */
 void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
+	bool renderF = false;
 
 	if (gameState != GAME_STATE_PAUSED) {
 		//float pos_x = SCREEN_WINDOW_WIDTH / 2;
@@ -225,9 +226,9 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				// TODO:
 				// ADD ALSO THE OTHER EVENT KEYS FOR OUR GAME !
 			}
-		/*
+		
 		case ALLEGRO_EVENT_TIMER:
-			if (alEvent.timer.source == lpsTimer) {
+			/*if (alEvent.timer.source == lpsTimer) {
 				fprintf(stderr, "Logic updated\n");
 			}
 			else if (alEvent.timer.source == fpsTimer) {
@@ -236,8 +237,22 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				al_clear_to_color(al_map_rgb(0, 0, 0));
 			}
 			break;
+			*/
+			TerrainStartScreen::getInstance().updateBackground(bgImage);
+			TerrainStartScreen::getInstance().updateBackground(mgImage);
+			TerrainStartScreen::getInstance().updateBackground(fgImage);
+			renderF = true;	
+		}
 
-		*/
+		if (renderF && al_is_event_queue_empty(eventQueue)) {
+			renderF = false;
+
+			TerrainStartScreen::getInstance().drawBackground(bgImage);
+			TerrainStartScreen::getInstance().drawBackground(mgImage);
+			TerrainStartScreen::getInstance().drawBackground(fgImage);
+
+			al_flip_display();
+			al_clear_to_color(al_map_rgb(0, 0, 0));
 		}
 	}
 }

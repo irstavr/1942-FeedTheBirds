@@ -76,6 +76,12 @@
     <Filter Include="Header Files\Objects\Items">
       <UniqueIdentifier>{6ef5d6cc-5b6f-476e-b6b7-afd7a666354d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Bitmaps\Terrain">
+      <UniqueIdentifier>{5e1777e5-b9bf-4b5d-8a33-129b855a4d53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Bitmaps\startscreen">
+      <UniqueIdentifier>{146cef15-50b5-4b47-98d5-8a46ea425eba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="1942-FeedTheBirds\src\Animator\Animator.cpp">
@@ -133,6 +139,75 @@
     </Image>
     <Image Include="1942-FeedTheBirds\data\Bitmaps\sample_terrain.bmp">
       <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\bigexplosion.bmp">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\birdshit.png">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\bonusshot.bmp">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\bullets.bmp">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\explosion.bmp">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\p38.bmp">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\progress.bmp">
+      <Filter>Resource Files\Bitmaps</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\desert.png">
+      <Filter>Resource Files\Bitmaps\Terrain</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\forest.png">
+      <Filter>Resource Files\Bitmaps\Terrain</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\lava1.png">
+      <Filter>Resource Files\Bitmaps\Terrain</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\lava2.png">
+      <Filter>Resource Files\Bitmaps\Terrain</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\ocean.bmp">
+      <Filter>Resource Files\Bitmaps\Terrain</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\road.png">
+      <Filter>Resource Files\Bitmaps\Terrain</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\sample_terrain.bmp">
+      <Filter>Resource Files\Bitmaps\Terrain</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\sea1.png">
+      <Filter>Resource Files\Bitmaps\Terrain</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\sea2.png">
+      <Filter>Resource Files\Bitmaps\Terrain</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\space2.png">
+      <Filter>Resource Files\Bitmaps\Terrain</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\terrainObjects.bmp">
+      <Filter>Resource Files\Bitmaps\Terrain</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\mq1.jpg">
+      <Filter>Resource Files\Bitmaps\startscreen</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\playgamesnotwar.jpg">
+      <Filter>Resource Files\Bitmaps\startscreen</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\stopwar.jpg">
+      <Filter>Resource Files\Bitmaps\startscreen</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\stopwarIII.gif">
+      <Filter>Resource Files\Bitmaps\startscreen</Filter>
+    </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\tumblr_naalh2N9wP1s335jfo1_r2_500.gif">
+      <Filter>Resource Files\Bitmaps\startscreen</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

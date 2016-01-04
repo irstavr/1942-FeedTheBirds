@@ -51,7 +51,12 @@ class GamePlay {
 	ALLEGRO_TIMER *fpsTimer, *lpsTimer;
 	ALLEGRO_FONT *font1, *font2;
 	ALLEGRO_COLOR bright_green;
-	const char* font_file = "\\data\\Fonts\\karmatic_arcade_font.ttf";
+	const char* font_file = "..\\..\\data\\fonts\\karmatic_arcade_font.ttf";
+
+	/* PARALLAX BG - MEIK GEIG*/
+	ALLEGRO_BITMAP *bgImage = al_load_bitmap("..\\..\\data\\Bitmaps\\terrain\\sea1.png");
+	ALLEGRO_BITMAP *mgImage = al_load_bitmap("..\\..\\data\\Bitmaps\\terrain\\sea2.png");
+	ALLEGRO_BITMAP *fgImage = al_load_bitmap("..\\..\\data\\Bitmaps\\birdshit.png");
 
 	clock_t wait;
 

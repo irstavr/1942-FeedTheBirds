@@ -30,7 +30,10 @@ public:
 	// in order to be sure we dont get copies of the singleton
 	TerrainStartScreen(TerrainStartScreen const&) = delete;
 	void operator=(TerrainStartScreen const&) = delete;
-
+	
+	void initBackground(ALLEGRO_BITMAP* back, float x, float y, float velx, float vely, int width, int height, int dirX, int dirY);
+	void updateBackground(ALLEGRO_BITMAP* back);
+	void drawBackground(ALLEGRO_BITMAP* back);
 private:
 	TerrainStartScreen();
 	~TerrainStartScreen();
@@ -47,10 +50,9 @@ private:
 	int textAlign;
 	bool textVisible;
 
-	void drawBackground(ALLEGRO_BITMAP* dest);
+//	void drawBackground(ALLEGRO_BITMAP* dest);
 	void scrollBackground();
-
-
+	
 	/* mike geig - parallax bg */
 	float x;
 	float y;
@@ -61,15 +63,7 @@ private:
 
 	int width;
 	int height;
-
-	ALLEGRO_BITMAP *bgImage = NULL;
-	ALLEGRO_BITMAP *mgImage = NULL;
-	ALLEGRO_BITMAP *fgImage = NULL;
-
-	void initBackground(TerrainStartScreen back, float x, float y, float velx, float vely, int width, int height, int dirX, int dirY, ALLEGRO_BITMAP *image);
-	void updateBackground(TerrainStartScreen back);
-	void drawBackground(TerrainStartScreen back);
-
+	
 };
 
 #endif
