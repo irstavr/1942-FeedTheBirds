@@ -12,6 +12,7 @@ class Terrain {
 private:
 	Terrain();
 	~Terrain();
+
 	static Terrain* terrain; //sigleton
 
 	/* discriminate background from terrain objects */

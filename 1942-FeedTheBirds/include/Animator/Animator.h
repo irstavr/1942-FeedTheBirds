@@ -1,6 +1,7 @@
-#ifndef AN_H
-#define AN_H
+#ifndef ANIMATOR_H
+#define ANIMATOR_H
 
+#include "allegro5\allegro.h"
 #include <cstdio>
 #include <functional>
 
@@ -14,6 +15,7 @@ class Animator
 {
 public:
 	Animator();
+	//virtual ~Animator();
 
 	typedef void(*ProgressCallback) (Animator*, void*);
 
@@ -24,12 +26,15 @@ public:
 	virtual void timeShift(unsigned long offset);
 	virtual void progress(unsigned long currTime) = 0;
 
+	virtual void display(ALLEGRO_BITMAP* at) = 0;
+
+	//virtual enum animatorType_t getAnimatorType(void);
+
 protected:
 	unsigned long lastTime;
 	animatorstate_t	state;
 	ProgressCallback onProgress;
 	void* progressClosure;
-
 	void notifyProgressed(void);
 
 public:

@@ -153,7 +153,9 @@
   <ItemGroup>
     <ClInclude Include="1942-FeedTheBirds\include\Animation\Animation.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Animation\AnimationFilm.h" />
+    <ClInclude Include="1942-FeedTheBirds\include\Animation\AnimationFilmHolder.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Animator\Animator.h" />
+    <ClInclude Include="1942-FeedTheBirds\include\Animator\AnimatorHolder.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\GamePlay.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\InputManager.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameLogic\GameLogic.h" />

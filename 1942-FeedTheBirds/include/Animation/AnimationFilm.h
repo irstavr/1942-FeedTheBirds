@@ -11,11 +11,13 @@ class AnimationFilm {
 	std::vector<Rect> boxes;
 	ALLEGRO_BITMAP *bitmap;
 	std::string	id;
-public:
 
+public:
 	AnimationFilm();
 	AnimationFilm(ALLEGRO_BITMAP *, const std::vector<Rect>, const std::string&);
-	
+
+	~AnimationFilm();
+
 	byte getTotalFrames(void) 	const;
 	ALLEGRO_BITMAP *getBitmap(void) const;
 	const std::string getId(void) const;
