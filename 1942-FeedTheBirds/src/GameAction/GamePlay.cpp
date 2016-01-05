@@ -171,6 +171,7 @@ void GamePlay::runMainLoop() {
 	while (gameState != GAME_STATE_FINISHED) {
 		currTime = getCurrTime();
 		al_wait_for_event(eventQueue, &alEvent);
+
 		
 		/* draw screen */
 		render(currTime);
@@ -183,7 +184,6 @@ void GamePlay::runMainLoop() {
 
 /* read from local input event queue */
 void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
-	bool renderF = false;
 
 	if (gameState != GAME_STATE_PAUSED) {
 
@@ -221,7 +221,9 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 					break;
 				case ALLEGRO_KEY_S:
 					if (gameState == GAME_STATE_INTRO) {
+						al_clear_to_color(al_map_rgba(0, 0, 0, 0));
 						gameState = GAME_STATE_MAINGAME;
+						al_flip_display();
 					}
 					break;
 				case ALLEGRO_KEY_ENTER:
@@ -236,24 +238,10 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 					break;
 			}
 		
-		case ALLEGRO_EVENT_TIMER:
-			if (gameState == GAME_STATE_INTRO) {
-				TerrainStartScreen::getInstance().updateBackground(bgImage);
-			}
-			renderF = true;
+		//case ALLEGRO_EVENT_TIMER:
 		}
 
-		if (renderF && al_is_event_queue_empty(eventQueue)) {
-			renderF = false;
-			if (gameState == GAME_STATE_INTRO) {
-				TerrainStartScreen::getInstance().drawBackground(bgImage);
-				al_draw_text(font1, bright_green, 310, 90, ALLEGRO_ALIGN_CENTER, "STOP WARS!");
-				al_draw_text(font2, bright_green, 310, 20, ALLEGRO_ALIGN_CENTER, "1942");
-				al_draw_bitmap(stopWarsImage, 180, 150, 0);
-				al_flip_display();
-				al_clear_to_color(al_map_rgb(0, 0, 0));
-			}
-		}
+	
 	}
 }
 
@@ -278,8 +266,14 @@ void GamePlay::render(unsigned long timestamp)
 
 	al_clear_to_color(al_map_rgba(0, 0, 0, 0));
 
+	
+	renderF = true;
 	/* display the first screen for the game */
-	displayStartScreen(timestamp);
+	
+	if (gameState == GAME_STATE_INTRO) {
+		displayStartScreen(timestamp);
+		TerrainStartScreen::getInstance().updateBackground(bgImage);
+	}
 
 	if (gameState == GAME_STATE_MAINGAME) {
 		//TODO
@@ -297,13 +291,24 @@ void GamePlay::render(unsigned long timestamp)
 		// display start screen
 	}
 
-	al_flip_display();
+	//al_flip_display();
 }
 
 void GamePlay::displayStartScreen(unsigned long now) {
-	/* show first window with start screen */
-	TerrainStartScreen::getInstance().displayTerrain(al_get_backbuffer(display), now);
+	if (renderF ){//&& al_is_event_queue_empty(eventQueue)) {
+		renderF = false;
 
+		/* show first window with start screen */
+		TerrainStartScreen::getInstance().displayTerrain(al_get_backbuffer(display), now);
+		if ((al_key_down(&keyboardState, ALLEGRO_KEY_ENTER)) && gameState == GAME_STATE_INTRO) {
+			TerrainStartScreen::getInstance().drawBackground(bgImage);
+			al_draw_text(font1, bright_green, 310, 90, ALLEGRO_ALIGN_CENTER, "STOP WARS!");
+			al_draw_text(font2, bright_green, 310, 20, ALLEGRO_ALIGN_CENTER, "1942");
+			al_draw_bitmap(stopWarsImage, 180, 150, 0);
+			al_flip_display();
+			al_clear_to_color(al_map_rgb(0, 0, 0));
+		}
+	}
 	/* if press ENTER => show first game screen */
 	//if ((al_key_down(&keyboardState, ALLEGRO_KEY_ENTER)) &&  gameState == GAME_STATE_INTRO) {
 
