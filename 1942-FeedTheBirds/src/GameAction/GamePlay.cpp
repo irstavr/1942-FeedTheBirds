@@ -161,7 +161,7 @@ void GamePlay::initGameEngine() {
 	currTime = getCurrTime();
 	Terrain::create();
 	TerrainStartScreen::getInstance().create();// getTerrainStartScreen();
-	TerrainStartScreen::getInstance().initBackground(bgImage, 0, 0, 3, 0, 9270, 223, -1, 1);
+	TerrainStartScreen::getInstance().initBackground(bgImage, 0, 0, 3, 0, 240, 240, -1, 1);
 	//TerrainStartScreen::getInstance().initBackground(mgImage, 0, 0, 3, 0, 1600, 600, -1, 1);
 	//TerrainStartScreen::getInstance().initBackground(fgImage, 0, 0, 5, 0, 800, 600, -1, 1);
 
