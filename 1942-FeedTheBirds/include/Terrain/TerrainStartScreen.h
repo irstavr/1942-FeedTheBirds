@@ -21,13 +21,12 @@
 class TerrainStartScreen {
 
 public:
-	void create();
 
 	static TerrainStartScreen& getInstance();
 
 	void displayTerrain(ALLEGRO_BITMAP *, unsigned long) {}
 
-	void initBackground(ALLEGRO_BITMAP* back, float x, float y, float velx, float vely, int width, int height, int dirX, int dirY);
+	void create(ALLEGRO_BITMAP* back, float x, float y, float velx, float vely, int width, int height, int dirX, int dirY);
 	void updateBackground(ALLEGRO_BITMAP* back);
 	void drawBackground(ALLEGRO_BITMAP* back);
 
@@ -52,9 +51,6 @@ private:
 
 	int textAlign;
 	bool textVisible;
-
-//	void drawBackground(ALLEGRO_BITMAP* dest);
-	void scrollBackground();
 	
 	/* mike geig - parallax bg */
 	float x;

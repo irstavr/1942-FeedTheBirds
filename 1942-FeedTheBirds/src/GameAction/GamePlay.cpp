@@ -136,12 +136,8 @@ bool GamePlay::initAllegro() {
 	al_register_event_source(eventQueue, al_get_timer_event_source(fpsTimer));
 	al_register_event_source(eventQueue, al_get_timer_event_source(lpsTimer));
 
-	//al_clear_to_color(al_map_rgb(0, 0, 0));
-
 	//	al_draw_text(font1, bright_green, 10, 10, ALLEGRO_ALIGN_LEFT, "Allegro 5 Rocks!");
 	//	al_draw_text(font2, bright_green, 10, 60, ALLEGRO_ALIGN_LEFT, "Allegro 5 Rocks!");
-	
-	//al_flip_display();
 
 	//Start timers 
 	al_start_timer(lpsTimer);
@@ -160,10 +156,7 @@ void GamePlay::initGameEngine() {
 	// etc.
 	currTime = getCurrTime();
 	Terrain::create();
-	TerrainStartScreen::getInstance().create();// getTerrainStartScreen();
-	TerrainStartScreen::getInstance().initBackground(bgImage, 0, 0, 3, 0, 240, 240, -1, 1);
-	//TerrainStartScreen::getInstance().initBackground(mgImage, 0, 0, 3, 0, 1600, 600, -1, 1);
-	//TerrainStartScreen::getInstance().initBackground(fgImage, 0, 0, 5, 0, 800, 600, -1, 1);
+	TerrainStartScreen::getInstance().create(bgImage, 0, 0, 0, 3, 240, 240, 1, -1);
 
 }
 
@@ -231,19 +224,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 			}
 		
 		case ALLEGRO_EVENT_TIMER:
-			/*if (alEvent.timer.source == lpsTimer) {
-				fprintf(stderr, "Logic updated\n");
-			}
-			else if (alEvent.timer.source == fpsTimer) {
-				al_draw_filled_rectangle(pos_x, pos_y, pos_x + 30, pos_y + 30, al_map_rgb(255, 0, 255));
-				al_flip_display();
-				al_clear_to_color(al_map_rgb(0, 0, 0));
-			}
-			break;
-			*/
 			TerrainStartScreen::getInstance().updateBackground(bgImage);
-			//TerrainStartScreen::getInstance().updateBackground(mgImage);
-			//TerrainStartScreen::getInstance().updateBackground(fgImage);
 			renderF = true;	
 		}
 
@@ -251,8 +232,6 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 			renderF = false;
 
 			TerrainStartScreen::getInstance().drawBackground(bgImage);
-			//TerrainStartScreen::getInstance().drawBackground(mgImage);
-			//TerrainStartScreen::getInstance().drawBackground(fgImage);
 
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -279,7 +258,7 @@ void GamePlay::render(unsigned long timestamp)
 	if (!al_is_event_queue_empty(eventQueue))
 		return;
 
-	//al_clear_to_color(al_map_rgba(0, 0, 0, 0));
+	al_clear_to_color(al_map_rgba(0, 0, 0, 0));
 
 	/* display the first screen for the game */
 	displayStartScreen(timestamp);
@@ -300,12 +279,12 @@ void GamePlay::render(unsigned long timestamp)
 		// display start screen
 	}
 
-	//al_flip_display();
+	al_flip_display();
 }
 
 void GamePlay::displayStartScreen(unsigned long now) {
 	/* show first window with start screen */
-	//TerrainStartScreen::getInstance().displayTerrain(al_get_backbuffer(display), now);
+	TerrainStartScreen::getInstance().displayTerrain(al_get_backbuffer(display), now);
 
 	/* if press ENTER => show first game screen */
 	//if ((al_key_down(&keyboardState, ALLEGRO_KEY_ENTER)) &&  gameState == GAME_STATE_INTRO) {
