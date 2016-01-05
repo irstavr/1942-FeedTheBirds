@@ -15,7 +15,7 @@ class Animator
 {
 public:
 	Animator();
-	//virtual ~Animator();
+	virtual ~Animator();
 
 	typedef void(*ProgressCallback) (Animator*, void*);
 

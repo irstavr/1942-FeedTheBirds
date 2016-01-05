@@ -6,6 +6,10 @@ Animator::Animator(void) :
 	progressClosure((void*)0) {
 }
 
+Animator::~Animator() {
+
+}
+
 bool Animator::hasFinished(void) const {
 	return state != ANIMATOR_RUNNING;
 }
