@@ -151,6 +151,8 @@
     <Image Include="1942-FeedTheBirds\data\Bitmaps\terrain\terrainObjects.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="1942-FeedTheBirds\include\Animation\Animation.h" />
+    <ClInclude Include="1942-FeedTheBirds\include\Animation\AnimationFilm.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Animator\Animator.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\GamePlay.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\InputManager.h" />

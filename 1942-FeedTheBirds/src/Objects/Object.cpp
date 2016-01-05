@@ -1,6 +1,6 @@
 #include "..\..\include\Objects\object.h"
 
-Object::Object(const std::string& imgPath) {
+//Object::Object(const std::string& imgPath) {
 	//nullify();
 
 	//if (Filesystem::hasExtension(fn, "ini")) // load as properties
@@ -31,10 +31,9 @@ Object::Object(const std::string& imgPath) {
 	//updateSprite();
 	//callbackOnMove(std::bind(&Object::updateSprite, this));
 	//dtor.resolve();
-}
+//}
 
-Object :: ~Object()
-{
-
-}
+//Object :: ~Object()
+//{
+//}
 

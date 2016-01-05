@@ -1,29 +1,38 @@
 #ifndef AN_H
 #define AN_H
 
+#include <cstdio>
+#include <functional>
+
+enum animatorstate_t{
+	ANIMATOR_FINISHED = 0,
+	ANIMATOR_RUNNING = 1,
+	ANIMATOR_STOPPED = 2,
+};
 
 class Animator
 {
 public:
 	Animator();
-	~Animator(); 
-		
-	//using OnProgress = std::function<void(Animator*)>;
 
-private:
-	//OnProgress onProgress;
-	void* progressClosure;
+	typedef void(*ProgressCallback) (Animator*, void*);
+
+	template <typename Tfunc>
+	void setOnProgress(const Tfunc& f);
+	void stop(void);
+	bool hasFinished(void) const;
+	virtual void timeShift(unsigned long offset);
+	virtual void progress(unsigned long currTime) = 0;
 
 protected:
-	void notifyProgressed(void) {
-	//	if (onProgress)(*onProgress)(this, progressClosure);
-	}
+	unsigned long lastTime;
+	animatorstate_t	state;
+	ProgressCallback onProgress;
+	void* progressClosure;
+
+	void notifyProgressed(void);
 
 public:
-	template <typename Tfunc>
-	void setOnProgress(const Tfunc& f) {
-		onProgress = f;
-	}
 
 
 

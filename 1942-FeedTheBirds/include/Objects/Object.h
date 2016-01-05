@@ -5,43 +5,26 @@
 #include <memory>
 #include "..\Sprites\Sprite.h"
 
-class Object {
-	Object(const std::string& name);
-	virtual ~Object();
-};
-#if 0
-//Our Player
-struct SpaceShip
-{
-	int ID;
-	int x;
-	int y;
-	int lives;
-	int speed;
-	int boundx;
-	int boundy;
-	int score;
+class Rect {
+public:
+	int x, y, w, h;
+	Rect(int _x, int _y, int _w, int _h) : x(_x), y(_y), w(_w), h(_h) {};
+	Rect() :x(0), y(0), w(0), h(0) {};
+
+	bool Rect::operator==(const Rect &other) const {
+		if ((this->x == other.x) && (this->y == other.y) && (this->w == other.w) && (this->h == other.h))
+			return true;
+
+		return false;
+	}
 };
 
-struct Bullet
-{
-	int ID;
-	int x;
-	int y;
-	bool live;
-	int speed;
+class Point {
+public:
+	int x, y;
+	void setPoint(int _x, int _y) { x = _x; y = _y; };
+	Point(int _x, int _y) : x(_x), y(_y) {};
+	Point() : x(0), y(0) {};
 };
- 
-struct Comet
-{
-	int ID;
-	int x;
-	int y;
-	bool live;
-	int speed;
-	int boundx;
-	int boundy;
-};
-#endif
 
 #endif
