@@ -1,4 +1,4 @@
-#include "../../include/GameAction/GamePlay.h"
+#include "..\..\include\GameAction\GamePlay.h"
 
 
 GamePlay::GamePlay() :
@@ -158,11 +158,10 @@ void GamePlay::initGameEngine() {
 	// AnimationFilmHolder
 	// Background
 	// etc.
-
 	currTime = getCurrTime();
-	//Terrain::create();
-	//TerrainStartScreen::getInstance().create();// getTerrainStartScreen();
-	initBackground(bgImage, 0, 0, 1, 0, 240, 240, -1, 1, BG);
+	Terrain::create();
+	TerrainStartScreen::getInstance().create();// getTerrainStartScreen();
+	TerrainStartScreen::getInstance().initBackground(bgImage, 0, 0, 3, 0, 9270, 223, -1, 1);
 	//TerrainStartScreen::getInstance().initBackground(mgImage, 0, 0, 3, 0, 1600, 600, -1, 1);
 	//TerrainStartScreen::getInstance().initBackground(fgImage, 0, 0, 5, 0, 800, 600, -1, 1);
 
@@ -242,7 +241,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 			}
 			break;
 			*/
-			updateBackground(BG);
+			TerrainStartScreen::getInstance().updateBackground(bgImage);
 			//TerrainStartScreen::getInstance().updateBackground(mgImage);
 			//TerrainStartScreen::getInstance().updateBackground(fgImage);
 			renderF = true;	
@@ -251,7 +250,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 		if (renderF && al_is_event_queue_empty(eventQueue)) {
 			renderF = false;
 
-			drawBackground(BG);
+			TerrainStartScreen::getInstance().drawBackground(bgImage);
 			//TerrainStartScreen::getInstance().drawBackground(mgImage);
 			//TerrainStartScreen::getInstance().drawBackground(fgImage);
 
@@ -366,32 +365,4 @@ void GamePlay::load() {
 
 void GamePlay::loadRep() {
 	//TODO next version
-}
-
-void GamePlay::initBackground(ALLEGRO_BITMAP *image, float x, float y, float velx, float vely, int width, int height, int dirX, int dirY, BackgroundStrct &bg)
-{
-	bg.x = x;
-	bg.y = y;
-	bg.velX = velx;
-	bg.velY = vely;
-	bg.width = width;
-	bg.height = height;
-	bg.dirX = dirX;
-	bg.dirY = dirY;
-	bg.image = image;
-}
-
-void GamePlay::updateBackground(BackgroundStrct &image)
-{
-	image.x += image.velX * image.dirX;
-	if (image.x + image.width <= 0)
-		image.x = 0;
-}
-
-void GamePlay::drawBackground(BackgroundStrct &image)
-{
-	al_draw_bitmap(image.image, image.x, image.y, 0);
-	//al_draw_scaled_bitmap(image.image, 0, 0, image.width, image.height, image.x, image.y, image.width * 2, image.height * 2, 0);
-	if (image.x + image.width < SCREEN_WINDOW_WIDTH)
-		al_draw_bitmap(image.image, image.x + image.width, image.y, 0);
 }

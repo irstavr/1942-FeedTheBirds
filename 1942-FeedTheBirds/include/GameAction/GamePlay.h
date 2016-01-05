@@ -34,22 +34,6 @@ class GamePlay {
 	GamePlay();
 
 
-
-	typedef struct BackgroundStrct
-	{
-		float x;
-		float y;
-		float velX;
-		float velY;
-		int dirX;
-		int dirY;
-		int width;
-		int height;
-
-		ALLEGRO_BITMAP *image;
-	}BackgroundStrct;
-
-
 	std::string title;
 	static GameLogic *currentGame;
 	static float time, startTime, gamingTime, pauseTime;
@@ -75,8 +59,6 @@ class GamePlay {
 	ALLEGRO_BITMAP *bgImage = NULL;
 	ALLEGRO_BITMAP *mgImage;
 	ALLEGRO_BITMAP *fgImage;
-
-	BackgroundStrct BG;
 
 
 	clock_t wait;
@@ -117,10 +99,6 @@ class GamePlay {
 	void displayStartScreen(unsigned long now);
 	/* updates game state and starts music */
 	void gameStarting();
-
-	void initBackground(ALLEGRO_BITMAP* back, float x, float y, float velx, float vely, int width, int height, int dirX, int dirY, BackgroundStrct &bg);
-	void updateBackground(BackgroundStrct &back);
-	void drawBackground(BackgroundStrct &back);
 
 public:
 

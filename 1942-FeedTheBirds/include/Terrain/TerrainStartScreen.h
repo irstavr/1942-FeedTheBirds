@@ -21,14 +21,15 @@
 class TerrainStartScreen {
 
 public:
-
-
-
 	void create();
 
 	static TerrainStartScreen& getInstance();
 
 	void displayTerrain(ALLEGRO_BITMAP *, unsigned long) {}
+
+	void initBackground(ALLEGRO_BITMAP* back, float x, float y, float velx, float vely, int width, int height, int dirX, int dirY);
+	void updateBackground(ALLEGRO_BITMAP* back);
+	void drawBackground(ALLEGRO_BITMAP* back);
 
 	// deleted function to make sure they are unacceptable
 	// in order to be sure we dont get copies of the singleton
