@@ -103,19 +103,6 @@ bool GamePlay::initAllegro() {
 		return false;
 	}
 
-	al_init_font_addon();
-	al_init_ttf_addon();
-	//font1 = al_load_ttf_font(font_file, 48, 0);
-	//font2 = al_load_ttf_font(font_file, -48, 0);
-	//if (!font1 || !font2) {
-	//al_show_native_message_box(NULL, "Error", NULL, "failed to load font file!\n", NULL, NULL);
-	//return false;
-	//}
-
-	//bright_green = al_map_rgba_f(0.5, 1.0, 0.5, 1.0);
-
-	//al_set_blender(ALLEGRO_ADD, ALLEGRO_ALPHA, ALLEGRO_INVERSE_ALPHA);
-
 	if (!al_init_primitives_addon()) {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to initialize primitives addon!\n", NULL, NULL);
 		al_destroy_display(display);
@@ -123,11 +110,25 @@ bool GamePlay::initAllegro() {
 		al_destroy_timer(lpsTimer);
 		return false;
 	}
+
+	al_init_font_addon();
+	al_init_ttf_addon();
+
 	font_file = "1942-FeedTheBirds\\data\\Fonts\\karmatic_arcade_font.ttf";
+	
+	font1 = al_load_ttf_font(font_file, 48, 0);
+	font2 = al_load_ttf_font(font_file, -48, 0);
+	if (!font1 || !font2) {
+	al_show_native_message_box(NULL, "Error", NULL, "failed to load font file!\n", NULL, NULL);
+	return false;
+	}
+
+	bright_green = al_map_rgba_f(0.5, 1.0, 0.5, 1.0);
+
+	al_set_blender(ALLEGRO_ADD, ALLEGRO_ALPHA, ALLEGRO_INVERSE_ALPHA);
 
 	bgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\forest.png");
-	fgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\sea2.png");
-	mgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\birdshit.png");
+	stopWarsImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\startscreen\\stopWarsImage.png");
 
 
 	//Tie events to queue
@@ -135,9 +136,6 @@ bool GamePlay::initAllegro() {
 	al_register_event_source(eventQueue, al_get_keyboard_event_source());
 	al_register_event_source(eventQueue, al_get_timer_event_source(fpsTimer));
 	al_register_event_source(eventQueue, al_get_timer_event_source(lpsTimer));
-
-	//	al_draw_text(font1, bright_green, 10, 10, ALLEGRO_ALIGN_LEFT, "Allegro 5 Rocks!");
-	//	al_draw_text(font2, bright_green, 10, 60, ALLEGRO_ALIGN_LEFT, "Allegro 5 Rocks!");
 
 	//Start timers 
 	al_start_timer(lpsTimer);
@@ -156,7 +154,7 @@ void GamePlay::initGameEngine() {
 	// etc.
 	currTime = getCurrTime();
 	Terrain::create();
-	TerrainStartScreen::getInstance().create(bgImage, 0, 0, 0, 3, 240, 240, 1, -1);
+	TerrainStartScreen::getInstance().create(bgImage, 0, 0, 0, 3, 640, 480, 1, -1);
 
 }
 
@@ -221,20 +219,40 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				case ALLEGRO_KEY_P:
 					InputManager::pause();
 					break;
+				case ALLEGRO_KEY_S:
+					if (gameState == GAME_STATE_INTRO) {
+						gameState = GAME_STATE_MAINGAME;
+					}
+					break;
+				case ALLEGRO_KEY_ENTER:
+					if (gameState == GAME_STATE_GAMEOVER) {
+						gameState = GAME_STATE_INTRO;
+					}
+					break;
+				case ALLEGRO_KEY_O:
+					if (gameState == GAME_STATE_MAINGAME) {
+						gameState = GAME_STATE_GAMEOVER;
+					}
+					break;
 			}
 		
 		case ALLEGRO_EVENT_TIMER:
-			TerrainStartScreen::getInstance().updateBackground(bgImage);
-			renderF = true;	
+			if (gameState == GAME_STATE_INTRO) {
+				TerrainStartScreen::getInstance().updateBackground(bgImage);
+			}
+			renderF = true;
 		}
 
 		if (renderF && al_is_event_queue_empty(eventQueue)) {
 			renderF = false;
-
-			TerrainStartScreen::getInstance().drawBackground(bgImage);
-
-			al_flip_display();
-			al_clear_to_color(al_map_rgb(0, 0, 0));
+			if (gameState == GAME_STATE_INTRO) {
+				TerrainStartScreen::getInstance().drawBackground(bgImage);
+				al_draw_text(font1, bright_green, 310, 90, ALLEGRO_ALIGN_CENTER, "STOP WARS!");
+				al_draw_text(font2, bright_green, 310, 20, ALLEGRO_ALIGN_CENTER, "1942");
+				al_draw_bitmap(stopWarsImage, 180, 150, 0);
+				al_flip_display();
+				al_clear_to_color(al_map_rgb(0, 0, 0));
+			}
 		}
 	}
 }

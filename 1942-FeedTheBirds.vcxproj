@@ -135,6 +135,7 @@
     <Image Include="1942-FeedTheBirds\data\Bitmaps\sample_terrain.bmp" />
     <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\mq1.jpg" />
     <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\playgamesnotwar.jpg" />
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\stock-vector--play-games-not-war-isolated-vector-136695062.png" />
     <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\stopwar.jpg" />
     <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\stopwarIII.gif" />
     <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\tumblr_naalh2N9wP1s335jfo1_r2_500.gif" />

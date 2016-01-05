@@ -2,6 +2,7 @@
 
 void InputManager::moveUp()
 {
+	
 }
 
 void InputManager::moveDown()

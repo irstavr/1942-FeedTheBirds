@@ -209,6 +209,9 @@
     <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\tumblr_naalh2N9wP1s335jfo1_r2_500.gif">
       <Filter>Resource Files\Bitmaps\startscreen</Filter>
     </Image>
+    <Image Include="1942-FeedTheBirds\data\Bitmaps\startscreen\stock-vector--play-games-not-war-isolated-vector-136695062.png">
+      <Filter>Resource Files\Bitmaps\startscreen</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="1942-FeedTheBirds\include\Animator\Animator.h">

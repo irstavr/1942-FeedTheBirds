@@ -1,6 +1,8 @@
 #ifndef INPUTMANAGER_H
 #define INPUTMANAGER_H
 
+
+
 namespace InputManager {
 
 	// kinds of input

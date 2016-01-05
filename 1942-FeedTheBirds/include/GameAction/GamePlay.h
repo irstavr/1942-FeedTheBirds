@@ -18,8 +18,8 @@
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_primitives.h>
 
-#define SCREEN_WINDOW_WIDTH  240 
-#define SCREEN_WINDOW_HEIGHT 240
+#define SCREEN_WINDOW_WIDTH  640
+#define SCREEN_WINDOW_HEIGHT 480
 
 #define GAME_STATE_INTRO 0
 #define GAME_STATE_MAINGAME 1
@@ -28,7 +28,7 @@
 #define GAME_STATE_FINISHED 4
 
 #define FPS 1
-#define LPS 180
+#define LPS 120
 
 class GamePlay {
 	GamePlay();
@@ -49,16 +49,13 @@ class GamePlay {
 
 	ALLEGRO_KEYBOARD_STATE keyboardState;
 
-	ALLEGRO_BITMAP *background ;
+	ALLEGRO_BITMAP *stopWarsImage ;
 	ALLEGRO_TIMER *fpsTimer, *lpsTimer;
 	ALLEGRO_FONT *font1, *font2;
 	ALLEGRO_COLOR bright_green;
 	const char* font_file;
 
-	/* PARALLAX BG - MEIK GEIG*/
 	ALLEGRO_BITMAP *bgImage = NULL;
-	ALLEGRO_BITMAP *mgImage;
-	ALLEGRO_BITMAP *fgImage;
 
 
 	clock_t wait;
