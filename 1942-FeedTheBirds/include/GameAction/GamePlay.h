@@ -57,7 +57,7 @@ class GamePlay {
 
 	ALLEGRO_BITMAP *bgImage = NULL;
 
-	bool renderF = false;
+	//bool renderF = false;
 
 	clock_t wait;
 
