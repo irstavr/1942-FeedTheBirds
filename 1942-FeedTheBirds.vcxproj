@@ -120,7 +120,6 @@
     <ClCompile Include="1942-FeedTheBirds\src\Objects\Object.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Terrain\Terrain.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Terrain\TerrainStartScreen.cpp" />
-    <ClCompile Include="1942-FeedTheBirds\src\TestBackground.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="1942-FeedTheBirds\data\Bitmaps\1942_sprite_sheet.png" />

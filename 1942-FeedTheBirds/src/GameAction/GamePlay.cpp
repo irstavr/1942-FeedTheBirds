@@ -113,23 +113,8 @@ bool GamePlay::initAllegro() {
 
 	al_init_font_addon();
 	al_init_ttf_addon();
-
-	font_file = "1942-FeedTheBirds\\data\\Fonts\\karmatic_arcade_font.ttf";
 	
-	font1 = al_load_ttf_font(font_file, 48, 0);
-	font2 = al_load_ttf_font(font_file, -48, 0);
-	if (!font1 || !font2) {
-	al_show_native_message_box(NULL, "Error", NULL, "failed to load font file!\n", NULL, NULL);
-	return false;
-	}
-
-	bright_green = al_map_rgba_f(0.5, 1.0, 0.5, 1.0);
-
 	al_set_blender(ALLEGRO_ADD, ALLEGRO_ALPHA, ALLEGRO_INVERSE_ALPHA);
-
-	bgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\forest.png");
-	stopWarsImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\startscreen\\stopWarsImage.png");
-
 
 	//Tie events to queue
 	al_register_event_source(eventQueue, al_get_display_event_source(display));
@@ -153,8 +138,8 @@ void GamePlay::initGameEngine() {
 	// Background
 	// etc.
 	currTime = getCurrTime();
-	Terrain::create();
-	TerrainStartScreen::getInstance().create(bgImage, 0, 0, 0, 3, 640, 480, 1, -1);
+	Terrain::getInstance().create(0, 0, 0, 3, 9270, 223, 1, -1);
+	TerrainStartScreen::getInstance().create(0, 0, 0, 3, 640, 480, 1, -1);
 
 }
 
@@ -270,6 +255,7 @@ void GamePlay::render(unsigned long timestamp)
 	if (gameState == GAME_STATE_MAINGAME) {
 		//TODO
 		// display game terrain
+		displayMainScreen(timestamp);
 	}
 
 	if (gameState == GAME_STATE_PAUSED) {
@@ -286,23 +272,21 @@ void GamePlay::render(unsigned long timestamp)
 	//al_flip_display();
 }
 
+/* show first window with start screen */
+void GamePlay::displayMainScreen(unsigned long now) {
+	Terrain::getInstance().drawBackground(SCREEN_WINDOW_HEIGHT);
+}
+
+/* show first window with start screen */
 void GamePlay::displayStartScreen(unsigned long now) {
-	/* show first window with start screen */
-	TerrainStartScreen::getInstance().displayTerrain(al_get_backbuffer(display), now);
 		
 	/* show game screen if ENTER*/
 	if (al_key_down(&keyboardState, ALLEGRO_KEY_ENTER)) {
-		TerrainStartScreen::getInstance().drawBackground(bgImage);
-			
-		al_draw_text(font1, bright_green, 310, 90, ALLEGRO_ALIGN_CENTER, "STOP WARS!");
-		al_draw_text(font2, bright_green, 310, 20, ALLEGRO_ALIGN_CENTER, "1942");
-		al_draw_bitmap(stopWarsImage, 180, 150, 0);
-
-		al_flip_display();
-		al_clear_to_color(al_map_rgb(0, 0, 0));
+		TerrainStartScreen::getInstance().drawBackground(SCREEN_WINDOW_HEIGHT);
+		//TerrainStartScreen::getInstance().displayTerrain(al_get_backbuffer(display), now);
 	}
 
-	TerrainStartScreen::getInstance().updateBackground(bgImage);
+	TerrainStartScreen::getInstance().updateBackground();
 
 }
 

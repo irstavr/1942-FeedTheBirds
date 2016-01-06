@@ -2,13 +2,14 @@
 #define GP_H
 
 #include "InputManager.h"
-#include "../GameLogic/GameLogic.h"
-#include "../Terrain/TerrainStartScreen.h"
-#include "../Terrain/Terrain.h"
+#include "..\GameLogic\GameLogic.h"
+#include "..\Terrain\TerrainStartScreen.h"
+#include "..\Terrain\Terrain.h"
 
 #include <windows.h>
 #include <stdio.h>
 #include <time.h>
+
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h> 
 #include <allegro5/allegro_audio.h>
@@ -33,7 +34,6 @@
 class GamePlay {
 	GamePlay();
 
-
 	std::string title;
 	static GameLogic *currentGame;
 	static float time, startTime, gamingTime, pauseTime;
@@ -49,15 +49,7 @@ class GamePlay {
 
 	ALLEGRO_KEYBOARD_STATE keyboardState;
 
-	ALLEGRO_BITMAP *stopWarsImage ;
 	ALLEGRO_TIMER *fpsTimer, *lpsTimer;
-	ALLEGRO_FONT *font1, *font2;
-	ALLEGRO_COLOR bright_green;
-	const char* font_file;
-
-	ALLEGRO_BITMAP *bgImage = NULL;
-
-	//bool renderF = false;
 
 	clock_t wait;
 
@@ -95,6 +87,8 @@ class GamePlay {
 	unsigned int getCurrTime();
 
 	void displayStartScreen(unsigned long now);
+	void displayMainScreen(unsigned long now);
+
 	/* updates game state and starts music */
 	void gameStarting();
 

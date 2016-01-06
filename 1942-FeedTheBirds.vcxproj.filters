@@ -111,9 +111,6 @@
     <ClCompile Include="1942-feedthebirds\src\1942-FeedTheBirdsMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="1942-FeedTheBirds\src\TestBackground.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="1942-FeedTheBirds\src\GameLogic\GameLogic.cpp">
       <Filter>Source Files\GameLogic</Filter>
     </ClCompile>

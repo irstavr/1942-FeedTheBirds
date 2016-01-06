@@ -13,55 +13,25 @@
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_primitives.h>
 
-#include "..\..\include\GameAction\GamePlay.h"
+#include "Terrain.h"
 
 #define PIXEL_SCROLL_PER_CYCLE 5
 
-
-class TerrainStartScreen {
+class TerrainStartScreen : public Terrain {
 
 public:
-
 	static TerrainStartScreen& getInstance();
-
-	void displayTerrain(ALLEGRO_BITMAP *, unsigned long) {}
-
-	void create(ALLEGRO_BITMAP* back, float x, float y, float velx, float vely, int width, int height, int dirX, int dirY);
-	void updateBackground(ALLEGRO_BITMAP* back);
-	void drawBackground(ALLEGRO_BITMAP* back);
 
 	// deleted function to make sure they are unacceptable
 	// in order to be sure we dont get copies of the singleton
 	TerrainStartScreen(TerrainStartScreen const&) = delete;
 	void operator=(TerrainStartScreen const&) = delete;
-	
-	
+	void TerrainStartScreen::drawBackground(float SCREEN_WINDOW_HEIGHT);
+
 private:
 	TerrainStartScreen();
 	~TerrainStartScreen();
-
-	// bg image is scrollable
-	int offsetBg;
-	ALLEGRO_BITMAP* image = NULL;
-	ALLEGRO_BITMAP* stopWarsImg = NULL;
-
-	ALLEGRO_FONT titleFont;
-	std::string titleText;
-	ALLEGRO_COLOR titleColor;
-
-	int textAlign;
-	bool textVisible;
-	
-	/* mike geig - parallax bg */
-	float x;
-	float y;
-	float velX;
-	float velY;
-	int dirX;
-	int dirY;
-
-	int width;
-	int height;
+	ALLEGRO_BITMAP* stopWarsImage = NULL;
 	
 };
 
