@@ -161,7 +161,6 @@
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\InputManager.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameLogic\GameLogic.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Objects\Object.h" />
-    <ClInclude Include="1942-FeedTheBirds\include\Sprites\PlaneSprite.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Sprites\Sprite.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Terrain\Terrain.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Terrain\TerrainStartScreen.h" />

@@ -2,7 +2,7 @@
 #define GAME_LOGIC_H
 
 #include <vector>
-#include "..\Sprites\PlaneSprite.h"
+#include "..\Sprites\Sprite.h"
 
 //typedef vector<BirdSprite*> BIRDS;
 

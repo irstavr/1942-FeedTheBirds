@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <memory>
-#include "..\Sprites\Sprite.h"
 
 class Rect {
 public:
@@ -20,7 +19,7 @@ public:
 };
 
 class Point {
-public:
+public:	
 	int x, y;
 	void setPoint(int _x, int _y) { x = _x; y = _y; };
 	Point(int _x, int _y) : x(_x), y(_y) {};
