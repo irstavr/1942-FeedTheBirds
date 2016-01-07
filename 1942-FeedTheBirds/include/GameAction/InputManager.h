@@ -16,7 +16,7 @@ namespace InputManager {
 	/* called if press key A */
 	void twist();
 	/* called if press P */
-	void pause();
+	void pause(int&);
 
 	void onKeyEnter(int&,ALLEGRO_DISPLAY*&);
 	void onKeyS(int&, ALLEGRO_DISPLAY*&);

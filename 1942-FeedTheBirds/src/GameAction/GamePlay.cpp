@@ -191,7 +191,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 					InputManager::twist();
 					break;
 				case ALLEGRO_KEY_P:
-					gameState = GAME_STATE_PAUSED;
+					InputManager::pause(gameState);
 					break;
 				case ALLEGRO_KEY_S:
 					InputManager::onKeyS(gameState, display);
