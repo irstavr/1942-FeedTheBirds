@@ -2,9 +2,9 @@
 
 Terrain::Terrain() :
 	font_file("1942-FeedTheBirds\\data\\Fonts\\karmatic_arcade_font.ttf"),
-	width(SCREEN_WINDOW_WIDTH),
-	height(SCREEN_WINDOW_HEIGHT),
-	x(0), y(0), velX(0), velY(3), dirX(1), dirY(-1)
+	width(TERRAIN_IMAGE_WIDTH),
+	height(TERRAIN_IMAGE_HEIGHT),
+	x(0), y(0), velX(3), velY(0), dirX(-1), dirY(1)
 {
 	bgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\sample_terrain.bmp");
 
@@ -32,8 +32,8 @@ void Terrain::updateBackground() {
 }
 
 void Terrain::drawBackground() {
-	al_draw_scaled_bitmap(bgImage, 0, 0, width, height, x, y, width * 3, height * 3, 0);
 
-	if (this->x + this->width < SCREEN_WINDOW_WIDTH)
-		al_draw_bitmap(this->bgImage, this->x + this->width, this->y, 0);
+	//if (this->x + this->width < SCREEN_WINDOW_WIDTH)
+		al_draw_scaled_bitmap(bgImage, 0, 0, width, height, x, y, width * 3, height * 3, 0);
+		//al_draw_bitmap(this->bgImage, this->x + this->width, this->y, 0);
 }

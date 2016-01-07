@@ -1,10 +1,15 @@
 #include "..\..\include\Terrain\TerrainStartScreen.h"
 
-TerrainStartScreen::TerrainStartScreen() {
+TerrainStartScreen::TerrainStartScreen()
+{
 	bgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\forest.png");
 	stopWarsImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\startscreen\\stopWarsImage.png");
 	width = START_SCREEN_WINDOW_WIDTH;
 	height = START_SCREEN_WINDOW_HEIGHT;
+	velX = 0;
+	velY = 3;
+	dirX = 1;
+	dirY = -1;
 }
 
 TerrainStartScreen::~TerrainStartScreen() {
