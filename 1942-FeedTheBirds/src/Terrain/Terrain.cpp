@@ -1,4 +1,3 @@
-
 #include "..\..\include\Terrain\Terrain.h"
 
 Terrain::Terrain() :
@@ -38,5 +37,3 @@ void Terrain::drawBackground() {
 	if (this->x + this->width < SCREEN_WINDOW_WIDTH)
 		al_draw_bitmap(this->bgImage, this->x + this->width, this->y, 0);
 }
-
-
