@@ -61,18 +61,19 @@ bool GamePlay::initAllegro() {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to create fpstimer!\n", NULL, NULL);
 		return false;
 	}
-
+	/*
 	lpsTimer = al_create_timer(1.0 / LPS);
 	if (!lpsTimer) {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to create lpstimer!\n", NULL, NULL);
 		return false;
 	}
+	*/
 
 	if (!al_install_audio()) {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to initialize audio!\n", NULL, NULL);
 		al_destroy_display(display);
 		al_destroy_timer(fpsTimer);
-		al_destroy_timer(lpsTimer);
+		//al_destroy_timer(lpsTimer);
 		return false;
 	}
 
@@ -80,7 +81,7 @@ bool GamePlay::initAllegro() {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to initialize audio codecs!\n", NULL, NULL);
 		al_destroy_display(display);
 		al_destroy_timer(fpsTimer);
-		al_destroy_timer(lpsTimer);
+		//al_destroy_timer(lpsTimer);
 		return false;
 	}
 
@@ -88,7 +89,7 @@ bool GamePlay::initAllegro() {
 	if (!display) {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to create display!\n", NULL, NULL);
 		al_destroy_timer(fpsTimer);
-		al_destroy_timer(lpsTimer);
+		//al_destroy_timer(lpsTimer);
 		return false;
 	}
 	al_set_new_window_position(0, 0);
@@ -98,7 +99,7 @@ bool GamePlay::initAllegro() {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to create event_queue!\n", NULL, NULL);
 		al_destroy_display(display);
 		al_destroy_timer(fpsTimer);
-		al_destroy_timer(lpsTimer);
+		//al_destroy_timer(lpsTimer);
 		return false;
 	}
 
@@ -106,7 +107,7 @@ bool GamePlay::initAllegro() {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to initialize primitives addon!\n", NULL, NULL);
 		al_destroy_display(display);
 		al_destroy_timer(fpsTimer);
-		al_destroy_timer(lpsTimer);
+		//al_destroy_timer(lpsTimer);
 		return false;
 	}
 
@@ -119,10 +120,10 @@ bool GamePlay::initAllegro() {
 	al_register_event_source(eventQueue, al_get_display_event_source(display));
 	al_register_event_source(eventQueue, al_get_keyboard_event_source());
 	al_register_event_source(eventQueue, al_get_timer_event_source(fpsTimer));
-	al_register_event_source(eventQueue, al_get_timer_event_source(lpsTimer));
+	//al_register_event_source(eventQueue, al_get_timer_event_source(lpsTimer));
 
 	//Start timers 
-	al_start_timer(lpsTimer);
+	//al_start_timer(lpsTimer);
 	al_start_timer(fpsTimer);
 
 	return true;
@@ -147,10 +148,10 @@ void GamePlay::runMainLoop() {
 		currTime = getCurrTime();
 		al_wait_for_event(eventQueue, &alEvent);
 
-		/* read from local input event queue */
-		inputManagement(alEvent);
 		/* draw screen */
 		render(currTime);
+		/* read from local input event queue */
+		inputManagement(alEvent);
 		/* game loop logic */
 		updateGameState();
 	}
@@ -162,6 +163,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 	if (gameState != GAME_STATE_PAUSED) {
 
 		switch (alEvent.type) {
+
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
 			gameState = GAME_STATE_FINISHED;
 			break;
@@ -256,10 +258,12 @@ void GamePlay::render(unsigned long timestamp)
 
 /* show first window with start screen */
 void GamePlay::displayMainScreen(unsigned long now) {
-	Terrain::getInstance().drawBackground();
-	al_flip_display();
-	al_clear_to_color(al_map_rgb(0, 0, 0));
-	Terrain::getInstance().updateBackground();
+	if (gameState == GAME_STATE_MAINGAME) {
+		Terrain::getInstance().drawBackground();
+		al_flip_display();
+		al_clear_to_color(al_map_rgb(0, 0, 0));
+		Terrain::getInstance().updateBackground();
+	}
 }
 
 /* show first window with start screen */
@@ -282,7 +286,7 @@ void GamePlay::cleanGamePlay() {
 }
 
 void GamePlay::cleanAllegro() {
-	al_destroy_timer(lpsTimer);
+//	al_destroy_timer(lpsTimer);
 	al_destroy_timer(fpsTimer);
 	al_destroy_display(display);
 	al_destroy_event_queue(eventQueue);

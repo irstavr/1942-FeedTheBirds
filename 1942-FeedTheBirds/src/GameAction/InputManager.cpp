@@ -24,22 +24,18 @@ void InputManager::pause(int &gameState) {
 }
 
 void InputManager::onKeyS(int &gameState, ALLEGRO_DISPLAY* &display) {
-
 	if (gameState == GAME_STATE_INTRO) {
 		// destroy start screen and create a new one with new dimensions
-		al_destroy_display(display);
-		display = al_create_display(SCREEN_WINDOW_WIDTH, SCREEN_WINDOW_HEIGHT);
-		al_set_window_position(display, 0, 0);
+		al_resize_display(display, SCREEN_WINDOW_WIDTH, SCREEN_WINDOW_HEIGHT);
+		al_set_new_window_position( 0, 0);
 		gameState = GAME_STATE_MAINGAME;
 	}
 }
 
 void InputManager::onKeyEnter(int &gameState, ALLEGRO_DISPLAY* &display) {
 	if (gameState == GAME_STATE_GAMEOVER) {
-		// destroy screen and create a new one with new dimensions
-		al_destroy_display(display);
-		display = al_create_display(START_SCREEN_WINDOW_WIDTH, START_SCREEN_WINDOW_HEIGHT);
-		al_set_window_position(display, 0, 0);
+		al_resize_display(display, START_SCREEN_WINDOW_WIDTH, START_SCREEN_WINDOW_HEIGHT);
+		al_set_new_window_position(0, 0);
 		gameState = GAME_STATE_INTRO;
 	}
 }

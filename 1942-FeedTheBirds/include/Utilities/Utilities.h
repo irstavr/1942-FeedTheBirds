@@ -28,7 +28,7 @@
 #define GAME_STATE_GAMEOVER 3
 #define GAME_STATE_FINISHED 4
 
-#define FPS 1
+#define FPS 120
 #define LPS 120
 
 /* get system current time */
