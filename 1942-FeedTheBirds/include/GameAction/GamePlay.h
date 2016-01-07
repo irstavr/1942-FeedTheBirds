@@ -7,15 +7,6 @@
 #include "..\Terrain\Terrain.h"
 #include "..\Utilities\Utilities.h"
 
-#define GAME_STATE_INTRO 0
-#define GAME_STATE_MAINGAME 1
-#define GAME_STATE_PAUSED 2
-#define GAME_STATE_GAMEOVER 3
-#define GAME_STATE_FINISHED 4
-
-#define FPS 1
-#define LPS 120
-
 class GamePlay {
 	GamePlay();
 

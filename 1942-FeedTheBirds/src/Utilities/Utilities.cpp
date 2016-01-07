@@ -1,6 +1,7 @@
 #include "..\..\include\Utilities\Utilities.h"
 
-unsigned int Utilities::getCurrTime() {
+
+unsigned int getCurrTime() {
 	SYSTEMTIME st;
 	GetSystemTime(&st);
 	return st.wMilliseconds + st.wSecond * 1000 +

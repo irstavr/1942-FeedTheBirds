@@ -144,7 +144,7 @@ void GamePlay::initGameEngine() {
 void GamePlay::runMainLoop() {
 	/* finish == exit of game */
 	while (gameState != GAME_STATE_FINISHED) {
-		currTime = Utilities::getCurrTime();
+		currTime = getCurrTime();
 		al_wait_for_event(eventQueue, &alEvent);
 
 		/* read from local input event queue */
@@ -191,28 +191,13 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 					InputManager::twist();
 					break;
 				case ALLEGRO_KEY_P:
-					InputManager::pause();
+					gameState = GAME_STATE_PAUSED;
 					break;
 				case ALLEGRO_KEY_S:
-					if (gameState == GAME_STATE_INTRO) {
-						
-						// destroy start screen and create a new one with new dimensions
-						al_destroy_display(display);
-						display = al_create_display(SCREEN_WINDOW_WIDTH, SCREEN_WINDOW_HEIGHT);
-						al_set_window_position(display, 0, 0);
-
-						gameState = GAME_STATE_MAINGAME;
-					}
+					InputManager::onKeyS(gameState, display);
 					break;
 				case ALLEGRO_KEY_ENTER:
-					if (gameState == GAME_STATE_GAMEOVER) {
-						// destroy screen and create a new one with new dimensions
-						al_destroy_display(display);
-						display = al_create_display(START_SCREEN_WINDOW_WIDTH, START_SCREEN_WINDOW_HEIGHT);
-						al_set_window_position(display, 0, 0);
-				
-						gameState = GAME_STATE_INTRO;
-					}
+					InputManager::onKeyEnter(gameState, display);
 					break;
 				/* O:  Just for our debugging*/
 				case ALLEGRO_KEY_O:
@@ -222,6 +207,9 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 					break;
 			}
 		}	
+	} 
+	if (gameState == GAME_STATE_PAUSED && alEvent.keyboard.keycode == ALLEGRO_KEY_P) {
+		gameState = GAME_STATE_MAINGAME;
 	}
 
 }

@@ -8,7 +8,8 @@
 */
 #include <stdio.h>
 #include <cstdlib>
-#include "../include/GameAction/GamePlay.h"
+#include "..\include\GameAction\GamePlay.h"
+#include "..\include\Utilities\Utilities.h"
 
 int main()
 {

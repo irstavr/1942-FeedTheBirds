@@ -22,13 +22,17 @@
 #define SCREEN_WINDOW_WIDTH  1300
 #define SCREEN_WINDOW_HEIGHT 669
 
-namespace Utilities {
+#define GAME_STATE_INTRO 0
+#define GAME_STATE_MAINGAME 1
+#define GAME_STATE_PAUSED 2
+#define GAME_STATE_GAMEOVER 3
+#define GAME_STATE_FINISHED 4
 
-	/* get system current time */
-	unsigned int getCurrTime();
+#define FPS 1
+#define LPS 120
 
-};
-
+/* get system current time */
+extern unsigned int getCurrTime(void);
 
 
 #endif
