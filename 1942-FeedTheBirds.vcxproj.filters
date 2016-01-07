@@ -82,6 +82,12 @@
     <Filter Include="Resource Files\Bitmaps\startscreen">
       <UniqueIdentifier>{146cef15-50b5-4b47-98d5-8a46ea425eba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{b2306ff6-fdd2-4695-b1b9-564a4d612d9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utilities">
+      <UniqueIdentifier>{2be421cc-e759-4a70-9bdb-e6c457a6857a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="1942-FeedTheBirds\src\Animator\Animator.cpp">
@@ -125,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="1942-FeedTheBirds\src\Objects\Object.cpp">
       <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\Utilities\Utilities.cpp">
+      <Filter>Source Files\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +258,9 @@
     </ClInclude>
     <ClInclude Include="1942-FeedTheBirds\include\Animator\AnimatorHolder.h">
       <Filter>Header Files\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\Utilities\Utilities.h">
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

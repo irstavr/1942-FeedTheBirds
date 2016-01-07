@@ -1,23 +1,10 @@
 #ifndef _TERRAIN_H_
 #define _TERRAIN_H_
 
-#include <windows.h>
-#include <stdio.h>
-#include <time.h>
-#include <assert.h>
-#include <list>
-#include <allegro5\allegro.h>
-#include <allegro5\allegro_native_dialog.h> 
-#include <allegro5\allegro_audio.h>
-#include <allegro5\allegro_acodec.h>
-#include <allegro5\allegro_image.h>
-#include <allegro5\allegro_font.h>
-#include <allegro5\allegro_ttf.h>
-#include <allegro5\allegro_primitives.h>
-
 #include "..\Objects\Object.h"
 #include "..\Animator\Animator.h"
 #include "..\Sprites\Sprite.h"
+#include "..\Utilities\Utilities.h"
 
 class Terrain {
 private:
@@ -54,23 +41,23 @@ public:
 	float velY;
 	int dirX;
 	int dirY;
-
 	int width;
 	int height;
 
 	ALLEGRO_BITMAP* bgImage = NULL;
 	ALLEGRO_FONT *font1, *font2;
 	ALLEGRO_COLOR bright_green;
-
 	const char* font_file;
 
 	static void cleanUp() {}
 	static Terrain& getInstance();
-
-	void create(float x, float y, float velx, float vely, int width, int height, int dirX, int dirY);
 	void updateBackground();
-	void drawBackground(float SCREEN_WINDOW_HEIGHT);
-
+	void drawBackground();
+	
+	// deleted function to make sure they are unacceptable
+	// in order to be sure we dont get copies of the singleton
+	Terrain(Terrain const&) = delete;
+	void operator=(Terrain const&) = delete;
 };
 
 #endif

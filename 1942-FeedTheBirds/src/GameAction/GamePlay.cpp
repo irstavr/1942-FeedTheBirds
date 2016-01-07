@@ -1,12 +1,11 @@
 #include "..\..\include\GameAction\GamePlay.h"
 
-
 GamePlay::GamePlay() :
 	title("anti1942 - StopWars"),
 	gameState(GAME_STATE_INTRO),
-	windowHeight(SCREEN_WINDOW_HEIGHT), windowWidth(SCREEN_WINDOW_WIDTH)
+	windowHeight(START_SCREEN_WINDOW_HEIGHT), windowWidth(START_SCREEN_WINDOW_WIDTH)
 {
-	//time(-1), startTime(0), status(1),
+	//time(-1), startTime(0),
 	//musicOn(false), pauseTime(-1.5), colorB(false) {
 }
 
@@ -85,14 +84,14 @@ bool GamePlay::initAllegro() {
 		return false;
 	}
 
-	display = al_create_display(SCREEN_WINDOW_WIDTH, SCREEN_WINDOW_HEIGHT);
+	display = al_create_display(START_SCREEN_WINDOW_WIDTH, START_SCREEN_WINDOW_HEIGHT);
 	if (!display) {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to create display!\n", NULL, NULL);
 		al_destroy_timer(fpsTimer);
 		al_destroy_timer(lpsTimer);
 		return false;
 	}
-	al_set_window_position(display, 0, 0);
+	al_set_new_window_position(0, 0);
 
 	eventQueue = al_create_event_queue();
 	if (!eventQueue) {
@@ -137,31 +136,21 @@ void GamePlay::initGameEngine() {
 	// AnimationFilmHolder
 	// Background
 	// etc.
-	currTime = getCurrTime();
-	Terrain::getInstance().create(0, 0, 0, 3, 9270, 223, 1, -1);
-	TerrainStartScreen::getInstance().create(0, 0, 0, 3, 640, 480, 1, -1);
+	Terrain::getInstance();
+	TerrainStartScreen::getInstance();
 
 }
 
 void GamePlay::runMainLoop() {
-	/*
-	Technique:
-
-	while (running) {
-		processInput();
-		updateGameState();
-		drawScreen();
-	}
-	*/
+	/* finish == exit of game */
 	while (gameState != GAME_STATE_FINISHED) {
-		currTime = getCurrTime();
+		currTime = Utilities::getCurrTime();
 		al_wait_for_event(eventQueue, &alEvent);
 
-		
-		/* draw screen */
-		render(currTime);
 		/* read from local input event queue */
 		inputManagement(alEvent);
+		/* draw screen */
+		render(currTime);
 		/* game loop logic */
 		updateGameState();
 	}
@@ -206,16 +195,26 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 					break;
 				case ALLEGRO_KEY_S:
 					if (gameState == GAME_STATE_INTRO) {
-						al_clear_to_color(al_map_rgba(0, 0, 0, 0));
+						
+						// destroy start screen and create a new one with new dimensions
+						al_destroy_display(display);
+						display = al_create_display(SCREEN_WINDOW_WIDTH, SCREEN_WINDOW_HEIGHT);
+						al_set_window_position(display, 0, 0);
+
 						gameState = GAME_STATE_MAINGAME;
-						al_flip_display();
 					}
 					break;
 				case ALLEGRO_KEY_ENTER:
 					if (gameState == GAME_STATE_GAMEOVER) {
+						// destroy screen and create a new one with new dimensions
+						al_destroy_display(display);
+						display = al_create_display(START_SCREEN_WINDOW_WIDTH, START_SCREEN_WINDOW_HEIGHT);
+						al_set_window_position(display, 0, 0);
+				
 						gameState = GAME_STATE_INTRO;
 					}
 					break;
+				/* O:  Just for our debugging*/
 				case ALLEGRO_KEY_O:
 					if (gameState == GAME_STATE_MAINGAME) {
 						gameState = GAME_STATE_GAMEOVER;
@@ -253,20 +252,15 @@ void GamePlay::render(unsigned long timestamp)
 	}
 
 	if (gameState == GAME_STATE_MAINGAME) {
-		//TODO
-		// display game terrain
 		displayMainScreen(timestamp);
 	}
 
 	if (gameState == GAME_STATE_PAUSED) {
-		//TODO
-		// display start screen ? or game screen paused ?
+		//TODO: display message with GAME PAUSED
 	}
 
 	if (gameState == GAME_STATE_GAMEOVER) {
-		//TODO
-		// clear previous game
-		// display start screen
+		//TODO: display message with GAME OVER
 	}
 
 	//al_flip_display();
@@ -274,35 +268,23 @@ void GamePlay::render(unsigned long timestamp)
 
 /* show first window with start screen */
 void GamePlay::displayMainScreen(unsigned long now) {
-	Terrain::getInstance().drawBackground(SCREEN_WINDOW_HEIGHT);
+	Terrain::getInstance().drawBackground();
+	al_flip_display();
+	al_clear_to_color(al_map_rgb(0, 0, 0));
+	Terrain::getInstance().updateBackground();
 }
 
 /* show first window with start screen */
-void GamePlay::displayStartScreen(unsigned long now) {
-		
-	/* show game screen if ENTER*/
-	if (al_key_down(&keyboardState, ALLEGRO_KEY_ENTER)) {
-		TerrainStartScreen::getInstance().drawBackground(SCREEN_WINDOW_HEIGHT);
-		//TerrainStartScreen::getInstance().displayTerrain(al_get_backbuffer(display), now);
-	}
-
+void GamePlay::displayStartScreen(unsigned long now) {		
+	TerrainStartScreen::getInstance().drawBackground();
+	al_flip_display();
+	al_clear_to_color(al_map_rgb(0, 0, 0));
 	TerrainStartScreen::getInstance().updateBackground();
-
 }
 
 void GamePlay::gameStarting() {
 	gameState = GAME_STATE_MAINGAME;
 	// TODO: play music ?
-}
-
-
-unsigned int GamePlay::getCurrTime() {
-	SYSTEMTIME st;
-	GetSystemTime(&st);
-	return st.wMilliseconds + st.wSecond * 1000 +
-		st.wMinute * 60 * 1000 +
-		st.wHour * 3600 * 1000 +
-		st.wDay * 24 * 3600 * 1000;
 }
 
 void GamePlay::cleanGamePlay() {

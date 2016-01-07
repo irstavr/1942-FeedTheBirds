@@ -5,22 +5,7 @@
 #include "..\GameLogic\GameLogic.h"
 #include "..\Terrain\TerrainStartScreen.h"
 #include "..\Terrain\Terrain.h"
-
-#include <windows.h>
-#include <stdio.h>
-#include <time.h>
-
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_native_dialog.h> 
-#include <allegro5/allegro_audio.h>
-#include <allegro5/allegro_acodec.h>
-#include <allegro5/allegro_image.h>
-#include <allegro5/allegro_font.h>
-#include <allegro5/allegro_ttf.h>
-#include <allegro5/allegro_primitives.h>
-
-#define SCREEN_WINDOW_WIDTH  640
-#define SCREEN_WINDOW_HEIGHT 480
+#include "..\Utilities\Utilities.h"
 
 #define GAME_STATE_INTRO 0
 #define GAME_STATE_MAINGAME 1
@@ -83,8 +68,6 @@ class GamePlay {
 	void saveRep();
 	/*load replay*/
 	void loadRep();
-	/* get system current time */
-	unsigned int getCurrTime();
 
 	void displayStartScreen(unsigned long now);
 	void displayMainScreen(unsigned long now);
