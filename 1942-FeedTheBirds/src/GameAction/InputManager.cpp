@@ -20,7 +20,7 @@ void InputManager::twist() {
 }
 
 void InputManager::pause(int &gameState) {
-	gameState = GAME_STATE_PAUSED;
+	if(gameState == GAME_STATE_MAINGAME) gameState = GAME_STATE_PAUSED;
 }
 
 void InputManager::onKeyS(int &gameState, ALLEGRO_DISPLAY* &display) {

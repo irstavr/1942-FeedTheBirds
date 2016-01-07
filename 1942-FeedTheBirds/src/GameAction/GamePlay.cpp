@@ -205,12 +205,12 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				case ALLEGRO_KEY_O:
 					if (gameState == GAME_STATE_MAINGAME) {
 						gameState = GAME_STATE_GAMEOVER;
+						break;
 					}
-					break;
 			}
 		}	
 	} 
-	if (gameState == GAME_STATE_PAUSED && alEvent.keyboard.keycode == ALLEGRO_KEY_P) {
+	if (gameState == GAME_STATE_PAUSED && alEvent.keyboard.keycode == ALLEGRO_KEY_R) {
 		gameState = GAME_STATE_MAINGAME;
 	}
 
