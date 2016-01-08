@@ -310,6 +310,9 @@
     <ClInclude Include="1942-FeedTheBirds\include\Animation\BitmapLoader.h">
       <Filter>Header Files\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\GameAction\CollisionChecker.h">
+      <Filter>Header Files\GameAction</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="1942-FeedTheBirds\data\Fonts\arial.ttf">

@@ -37,10 +37,6 @@ protected:
 	void* progressClosure;
 	void notifyProgressed(void);
 
-public:
-
-
-
 };
 
 #endif
