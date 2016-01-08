@@ -162,6 +162,9 @@
     <ClCompile Include="1942-FeedTheBirds\src\Objects\Items\FishAnimator.cpp">
       <Filter>Source Files\Objects\Items</Filter>
     </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\Objects\Items\PowerUpAnimator.cpp">
+      <Filter>Source Files\Objects\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="1942-FeedTheBirds\data\Bitmaps\1942_sprite_sheet.png">
@@ -296,6 +299,9 @@
       <Filter>Header Files\Objects\Items</Filter>
     </ClInclude>
     <ClInclude Include="1942-FeedTheBirds\include\Objects\Items\FishAnimator.h">
+      <Filter>Header Files\Objects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\Objects\Items\PowerUpAnimator.h">
       <Filter>Header Files\Objects\Items</Filter>
     </ClInclude>
   </ItemGroup>
