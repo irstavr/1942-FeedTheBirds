@@ -6,12 +6,16 @@
 #include <string>
 #include <cassert>
 #include <vector>
+#include <iostream>
+#include <fstream>
 
 #include "AnimationFilm.h"
+#include "BitmapLoader.h"
 
 class AnimationFilmHolder {
 private:
-	std::map<std::string, AnimationFilm*> filmMap;
+	typedef std::map<std::string, AnimationFilm*> FilmMap;
+	FilmMap filmMap;
 	static AnimationFilmHolder *animationFH; //singleton instance
 
 	static std::vector<AnimationFilm> filmMem; //films allocated as array

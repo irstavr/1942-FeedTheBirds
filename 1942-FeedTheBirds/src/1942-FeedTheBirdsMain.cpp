@@ -13,6 +13,7 @@
 
 int main()
 {
+	fprintf(stderr, "lalala\n");
 	GamePlay *game = GamePlay::instance();
 	while (game->gameState != GAME_STATE_FINISHED) {
 		game->start();
