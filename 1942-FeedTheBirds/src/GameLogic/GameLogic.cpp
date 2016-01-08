@@ -1,6 +1,5 @@
 #include "..\..\include\GameLogic\GameLogic.h"
 
-
 GameLogic::GameLogic (SuperAceAnimator *superAce, BIRDS &birds, int height, int width) :
 	superAce(superAce), birds(birds),
 	height(height), width(width),

@@ -2,6 +2,7 @@
 #define GP_H
 
 #include "InputManager.h"
+#include "CollisionChecker.h"
 #include "..\GameLogic\GameLogic.h"
 #include "..\Terrain\TerrainStartScreen.h"
 #include "..\Terrain\Terrain.h"

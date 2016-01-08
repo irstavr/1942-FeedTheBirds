@@ -69,6 +69,15 @@ bool GamePlay::initAllegro() {
 	}
 	*/
 
+	display = al_create_display(START_SCREEN_WINDOW_WIDTH, START_SCREEN_WINDOW_HEIGHT);
+	if (!display) {
+		al_show_native_message_box(NULL, "Error", NULL, "failed to create display!\n", NULL, NULL);
+		al_destroy_timer(fpsTimer);
+		//al_destroy_timer(lpsTimer);
+		return false;
+	}
+	al_set_new_window_position(0, 0);
+
 	if (!al_install_audio()) {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to initialize audio!\n", NULL, NULL);
 		al_destroy_display(display);
@@ -84,15 +93,6 @@ bool GamePlay::initAllegro() {
 		//al_destroy_timer(lpsTimer);
 		return false;
 	}
-
-	display = al_create_display(START_SCREEN_WINDOW_WIDTH, START_SCREEN_WINDOW_HEIGHT);
-	if (!display) {
-		al_show_native_message_box(NULL, "Error", NULL, "failed to create display!\n", NULL, NULL);
-		al_destroy_timer(fpsTimer);
-		//al_destroy_timer(lpsTimer);
-		return false;
-	}
-	al_set_new_window_position(0, 0);
 
 	eventQueue = al_create_event_queue();
 	if (!eventQueue) {
@@ -140,6 +140,7 @@ void GamePlay::initGameEngine() {
 	Terrain::getInstance();
 	TerrainStartScreen::getInstance();
 	AnimationFilmHolder::initialize("");
+	CollisionChecker::getInstance()->initialize();
 }
 
 void GamePlay::runMainLoop() {
@@ -222,11 +223,12 @@ void GamePlay::updateGameState() {
 		// TODO
 		// initialize:
 		// AI
-		// CollisionChecking
 		// Animation progress
 		// check if win
 		// update scores/lives/etc on the display
 		// etc 
+
+		CollisionChecker::getInstance()->check();
 	}
 }
 
