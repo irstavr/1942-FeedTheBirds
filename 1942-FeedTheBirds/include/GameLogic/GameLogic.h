@@ -3,18 +3,20 @@
 
 #include <vector>
 #include "..\Sprites\Sprite.h"
+#include "..\Objects\Characters\SuperAceAnimator.h"
+#include "..\Objects\Characters\BirdAnimator.h"
 
-typedef vector<BirdAnimation*> BIRDS;
+typedef vector<BirdAnimator*> BIRDS;
 
 class GameLogic {
-	SuperAceAnimation *myPlane;
+	SuperAceAnimator *myPlane;
 	BIRDS &birds;
 	int height, width, planeKilled;
 	bool gameRunning;
 	float calcDis(COORDS a, COORDS b);
 
 public:
-	GameLogic(SuperAceAnimation *superAce, BIRDS &birds, int height, int width);
+	GameLogic(SuperAceAnimator *superAce, BIRDS &birds, int height, int width);
 	/*solve all the outrange stuff*/
 	void solveOutRange();
 	/*solve all the collision stuff*/

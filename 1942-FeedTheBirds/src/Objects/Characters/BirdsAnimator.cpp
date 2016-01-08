@@ -1,3 +1,3 @@
-#include "..\..\..\include\Objects\Characters\BirdsAnimator.h"
+#include "..\..\..\include\Objects\Characters\BirdAnimator.h"
 
 

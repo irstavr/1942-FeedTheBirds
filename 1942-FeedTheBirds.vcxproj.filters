@@ -150,16 +150,16 @@
     <ClCompile Include="1942-FeedTheBirds\src\Animation\AnimationFilmHolder.cpp">
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\FishAnimation.cpp">
-      <Filter>Source Files\Objects\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\SuperAceAnimation.cpp">
-      <Filter>Source Files\Objects\Characters</Filter>
-    </ClCompile>
     <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\BirdDroppingAnimator.cpp">
       <Filter>Source Files\Objects\Characters</Filter>
     </ClCompile>
     <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\BirdsAnimator.cpp">
+      <Filter>Source Files\Objects\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\FishAnimator.cpp">
+      <Filter>Source Files\Objects\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\SuperAceAnimator.cpp">
       <Filter>Source Files\Objects\Characters</Filter>
     </ClCompile>
   </ItemGroup>
