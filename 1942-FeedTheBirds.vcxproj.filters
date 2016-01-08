@@ -150,6 +150,18 @@
     <ClCompile Include="1942-FeedTheBirds\src\Animation\AnimationFilmHolder.cpp">
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\FishAnimation.cpp">
+      <Filter>Source Files\Objects\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\SuperAceAnimation.cpp">
+      <Filter>Source Files\Objects\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\BirdDroppingAnimator.cpp">
+      <Filter>Source Files\Objects\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\BirdsAnimator.cpp">
+      <Filter>Source Files\Objects\Characters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="1942-FeedTheBirds\data\Bitmaps\1942_sprite_sheet.png">
@@ -273,6 +285,18 @@
     </ClInclude>
     <ClInclude Include="1942-FeedTheBirds\include\Utilities\Utilities.h">
       <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\BirdAnimator.h">
+      <Filter>Header Files\Objects\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\BirdDroppingAnimator.h">
+      <Filter>Header Files\Objects\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\FishAnimator.h">
+      <Filter>Header Files\Objects\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\SuperAceAnimator.h">
+      <Filter>Header Files\Objects\Characters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,17 +4,17 @@
 #include <vector>
 #include "..\Sprites\Sprite.h"
 
-//typedef vector<BirdSprite*> BIRDS;
+typedef vector<BirdAnimation*> BIRDS;
 
 class GameLogic {
-	//SuperAceSprite *myPlane;
-	//BIRDS &birds;
+	SuperAceAnimation *myPlane;
+	BIRDS &birds;
 	int height, width, planeKilled;
 	bool gameRunning;
-	//float calcDis(COORDS a, COORDS b);
+	float calcDis(COORDS a, COORDS b);
 
 public:
-	//GameLogic(SuperAceSprite *ac, BIRDS &ep, int h, int w);
+	GameLogic(SuperAceAnimation *superAce, BIRDS &birds, int height, int width);
 	/*solve all the outrange stuff*/
 	void solveOutRange();
 	/*solve all the collision stuff*/
