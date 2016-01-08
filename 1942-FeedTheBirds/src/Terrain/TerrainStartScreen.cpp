@@ -4,6 +4,8 @@ TerrainStartScreen::TerrainStartScreen()
 {
 	bgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\forest.png");
 	stopWarsImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\startscreen\\stopWarsImage.png");
+	font1 = al_load_ttf_font(font_file, 48, 0);
+	font2 = al_load_ttf_font(font_file, -48, 0);
 	width = START_SCREEN_WINDOW_WIDTH;
 	height = START_SCREEN_WINDOW_HEIGHT;
 	velX = 0;

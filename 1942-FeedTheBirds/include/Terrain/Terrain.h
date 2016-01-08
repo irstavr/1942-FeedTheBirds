@@ -45,6 +45,8 @@ public:
 	int height;
 
 	ALLEGRO_BITMAP* bgImage = NULL;
+	ALLEGRO_BITMAP* remainingLivesImage = NULL;
+	ALLEGRO_BITMAP* remainingLoopsImage = NULL;
 	ALLEGRO_FONT *font1, *font2;
 	ALLEGRO_COLOR bright_green;
 	const char* font_file;

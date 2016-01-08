@@ -6,6 +6,7 @@
 #include "..\Terrain\TerrainStartScreen.h"
 #include "..\Terrain\Terrain.h"
 #include "..\Utilities\Utilities.h"
+#include "..\Animation\AnimationFilmHolder.h"
 
 class GamePlay {
 	GamePlay();

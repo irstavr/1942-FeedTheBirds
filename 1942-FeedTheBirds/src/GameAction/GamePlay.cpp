@@ -139,7 +139,7 @@ void GamePlay::initGameEngine() {
 	// etc.
 	Terrain::getInstance();
 	TerrainStartScreen::getInstance();
-
+	AnimationFilmHolder::initialize("");
 }
 
 void GamePlay::runMainLoop() {

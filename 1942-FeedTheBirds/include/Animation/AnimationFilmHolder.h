@@ -19,6 +19,7 @@ private:
 	static AnimationFilmHolder *animationFH; //singleton instance
 
 	static std::vector<AnimationFilm> filmMem; //films allocated as array
+	std::vector<Rect> read_bboxes(const char* path, int framesNo);
 	
 protected:
 	AnimationFilmHolder(const char* path); // Decoder constructor.
