@@ -120,10 +120,10 @@
     <ClCompile Include="1942-FeedTheBirds\src\GameLogic\GameLogic.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\GameLogic\PlayerProfile.cpp" />
     <ClCompile Include="1942-feedthebirds\src\1942-FeedTheBirdsMain.cpp" />
-    <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\BirdDroppingAnimator.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\BirdsAnimator.cpp" />
-    <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\FishAnimator.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\SuperAceAnimator.cpp" />
+    <ClCompile Include="1942-FeedTheBirds\src\Objects\Items\BirdDroppingAnimator.cpp" />
+    <ClCompile Include="1942-FeedTheBirds\src\Objects\Items\FishAnimator.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Objects\Object.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Sprites\Sprite.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Terrain\Terrain.cpp" />
@@ -169,9 +169,9 @@
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\InputManager.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameLogic\GameLogic.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\BirdAnimator.h" />
-    <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\BirdDroppingAnimator.h" />
-    <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\FishAnimator.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\SuperAceAnimator.h" />
+    <ClInclude Include="1942-FeedTheBirds\include\Objects\Items\BirdDroppingAnimator.h" />
+    <ClInclude Include="1942-FeedTheBirds\include\Objects\Items\FishAnimator.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Objects\Object.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Sprites\Sprite.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Terrain\Terrain.h" />

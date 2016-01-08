@@ -9,7 +9,7 @@
 typedef vector<BirdAnimator*> BIRDS;
 
 class GameLogic {
-	SuperAceAnimator *myPlane;
+	SuperAceAnimator *superAce;
 	BIRDS &birds;
 	int height, width, planeKilled;
 	bool gameRunning;

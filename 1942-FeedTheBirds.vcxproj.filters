@@ -150,17 +150,17 @@
     <ClCompile Include="1942-FeedTheBirds\src\Animation\AnimationFilmHolder.cpp">
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\BirdDroppingAnimator.cpp">
-      <Filter>Source Files\Objects\Characters</Filter>
-    </ClCompile>
     <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\BirdsAnimator.cpp">
-      <Filter>Source Files\Objects\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\FishAnimator.cpp">
       <Filter>Source Files\Objects\Characters</Filter>
     </ClCompile>
     <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\SuperAceAnimator.cpp">
       <Filter>Source Files\Objects\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\Objects\Items\BirdDroppingAnimator.cpp">
+      <Filter>Source Files\Objects\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\Objects\Items\FishAnimator.cpp">
+      <Filter>Source Files\Objects\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -289,14 +289,14 @@
     <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\BirdAnimator.h">
       <Filter>Header Files\Objects\Characters</Filter>
     </ClInclude>
-    <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\BirdDroppingAnimator.h">
-      <Filter>Header Files\Objects\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\FishAnimator.h">
-      <Filter>Header Files\Objects\Characters</Filter>
-    </ClInclude>
     <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\SuperAceAnimator.h">
       <Filter>Header Files\Objects\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\Objects\Items\BirdDroppingAnimator.h">
+      <Filter>Header Files\Objects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\Objects\Items\FishAnimator.h">
+      <Filter>Header Files\Objects\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
