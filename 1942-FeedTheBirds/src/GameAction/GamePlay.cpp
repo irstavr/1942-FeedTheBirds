@@ -223,11 +223,12 @@ void GamePlay::updateGameState() {
 		// TODO
 		// initialize:
 		// AI
-		// CollisionChecking
 		// Animation progress
 		// check if win
 		// update scores/lives/etc on the display
 		// etc 
+
+		CollisionChecker::getInstance()->check();
 	}
 }
 
