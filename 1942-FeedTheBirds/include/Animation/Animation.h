@@ -1,6 +1,8 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
+#include "allegro5\allegro.h"
+
 typedef signed char	offset_t;
 typedef unsigned short delay_t;
 typedef unsigned short animid_t;

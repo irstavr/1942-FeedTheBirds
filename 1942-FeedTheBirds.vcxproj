@@ -106,6 +106,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="1942-FeedTheBirds\src\Animation\Animation.cpp" />
+    <ClCompile Include="1942-FeedTheBirds\src\Animation\AnimationFilm.cpp" />
+    <ClCompile Include="1942-FeedTheBirds\src\Animation\AnimationFilmHolder.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Animator\Animator.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\GameAction\AI.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\GameAction\Collision.cpp" />
@@ -118,6 +121,7 @@
     <ClCompile Include="1942-FeedTheBirds\src\GameLogic\PlayerProfile.cpp" />
     <ClCompile Include="1942-feedthebirds\src\1942-FeedTheBirdsMain.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Objects\Object.cpp" />
+    <ClCompile Include="1942-FeedTheBirds\src\Sprites\Sprite.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Terrain\Terrain.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Terrain\TerrainStartScreen.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Utilities\Utilities.cpp" />

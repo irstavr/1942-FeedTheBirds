@@ -46,7 +46,7 @@ public:
 	bool collisionCheck(Sprite* s);
 	virtual void collisionAction(Sprite* s) {};
 	void display(const Rect& da);
-	virtual void move(int x, int y);
+	//virtual void move(int x, int y);
 
 	void enableMovement(void) { canMove = true; };
 	void disableMovement(void) { canMove = false; };
