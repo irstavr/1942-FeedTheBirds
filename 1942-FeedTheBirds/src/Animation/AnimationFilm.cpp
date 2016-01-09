@@ -1,18 +1,25 @@
 #include "../../include/Animation/AnimationFilm.h"
 
-AnimationFilm::AnimationFilm(ALLEGRO_BITMAP *b, const std::vector<Rect> bx, const std::string& _id) :
-	bitmap(b), boxes(bx), id(_id) {}
+AnimationFilm::AnimationFilm(ALLEGRO_BITMAP *b, 
+							const std::vector<Rect> bx, 
+							const std::string& _id) :
+								bitmap(b), boxes(bx), id(_id) {
+}
 
-byte AnimationFilm::getTotalFrames(void) const { return boxes.size(); }
+byte AnimationFilm::getTotalFrames(void) const { 
+	return boxes.size(); 
+}
 
-ALLEGRO_BITMAP* AnimationFilm::getBitmap(void) const { return bitmap; }
+ALLEGRO_BITMAP* AnimationFilm::getBitmap(void) const { 
+	return bitmap; 
+}
 
-const std::string AnimationFilm::getId(void) const { return id; }
+const std::string AnimationFilm::getId(void) const { 
+	return id; 
+}
 
 const Rect AnimationFilm::getFrameBox(byte frameNo) const {
-	//assert(boxes.size() > frameNo); 
-	//bug here!! some times frames are out of bounds... :S don't know why
-	//lame fix
+	assert(boxes.size() > frameNo);
 	if (boxes.size() <= frameNo) frameNo = 0; //reset
 	return boxes[frameNo];
 }

@@ -14,8 +14,16 @@
 using namespace std;
 
 class AnimatorHolder {
+private:
 	static std::vector<Animator*> running, suspended, paused;
 	static unsigned long pauseTime;
+
+	class ProgressFunctor : public std::unary_function<Animator*, void> {
+		unsigned long t;
+	public:
+		void operator()(Animator* a) const { a->progress(t); }
+		ProgressFunctor(unsigned long _t) : t(_t) {}
+	};
 
 public:
 	static void animRegister(Animator* a);

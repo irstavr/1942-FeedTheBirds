@@ -27,7 +27,6 @@ AnimationFilmHolder::AnimationFilmHolder(const char* path) {
 	cfg.close();*/
 	AnimationFilm* anim_f = new AnimationFilm(bitmapLoader.load("1942-FeedTheBirds\\data\\Bitmaps\\superAce.png"), read_bboxes(bboxes, frames), "superAceAF");
 	filmMap["superAceAF"] = anim_f;
-
 }
 
 AnimationFilmHolder::~AnimationFilmHolder() {

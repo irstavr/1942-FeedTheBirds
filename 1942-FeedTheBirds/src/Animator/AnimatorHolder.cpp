@@ -1,5 +1,10 @@
 #include "../../include/Animator/AnimatorHolder.h"
 
+
+std::vector<Animator*> AnimatorHolder::running, AnimatorHolder::suspended;
+std::vector<Animator*> AnimatorHolder::paused;
+unsigned long AnimatorHolder::pauseTime;
+
 void AnimatorHolder::animRegister(Animator* a) {
 	assert(a);
 	suspended.push_back(a);
