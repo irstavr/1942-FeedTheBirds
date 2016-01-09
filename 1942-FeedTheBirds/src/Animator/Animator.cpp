@@ -7,7 +7,6 @@ Animator::Animator(void) :
 }
 
 Animator::~Animator() {
-
 }
 
 bool Animator::hasFinished(void) const {
@@ -31,4 +30,11 @@ void Animator::notifyProgressed(void) {
 		(*onProgress)(this, progressClosure);
 }
 
-void Animator::timeShift(unsigned long offset) { lastTime += offset; }
+void Animator::timeShift(unsigned long offset) { 
+	lastTime += offset; 
+}
+
+void Animator::setOnProgress(ProgressCallback f, void* c) {
+	onProgress = f;
+	progressClosure = c;
+}

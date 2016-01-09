@@ -11,6 +11,7 @@ enum animatorstate_t{
 	ANIMATOR_STOPPED = 2,
 };
 
+
 class Animator
 {
 public:
@@ -19,8 +20,7 @@ public:
 
 	typedef void(*ProgressCallback) (Animator*, void*);
 
-	template <typename Tfunc>
-	void setOnProgress(const Tfunc& f);
+	void setOnProgress(ProgressCallback f, void* c);
 	void stop(void);
 	bool hasFinished(void) const;
 	virtual void timeShift(unsigned long offset);
@@ -35,7 +35,7 @@ protected:
 	animatorstate_t	state;
 	ProgressCallback onProgress;
 	void* progressClosure;
-	void notifyProgressed(void);
+	void  notifyProgressed(void);
 
 };
 
