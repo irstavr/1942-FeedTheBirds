@@ -48,11 +48,11 @@ public:
 	
 	virtual void collisionAction(Sprite* s) {};
 	
-	void display(const Rect& da);
-	//virtual void move(int x, int y);
-
 	void enableMovement(void);
 	void disableMovement(void);
+
+	virtual void move(int x, int y);
+	void display(ALLEGRO_BITMAP* image);
 };
 
 
