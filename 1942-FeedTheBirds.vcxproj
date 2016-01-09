@@ -111,6 +111,7 @@
     <ClCompile Include="1942-FeedTheBirds\src\Animation\AnimationFilmHolder.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Animation\BitmapLoader.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Animation\MovingAnimation.cpp" />
+    <ClCompile Include="1942-FeedTheBirds\src\Animation\TickAnimation.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Animator\Animator.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Animator\AnimatorHolder.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\GameAction\AI.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="1942-FeedTheBirds\include\Animation\AnimationFilmHolder.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Animation\BitmapLoader.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Animation\MovingAnimation.h" />
+    <ClInclude Include="1942-FeedTheBirds\include\Animation\TickAnimation.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Animator\Animator.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Animator\AnimatorHolder.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\CollisionChecker.h" />

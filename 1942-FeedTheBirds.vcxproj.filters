@@ -171,6 +171,9 @@
     <ClCompile Include="1942-FeedTheBirds\src\Animation\MovingAnimation.cpp">
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\Animation\TickAnimation.cpp">
+      <Filter>Source Files\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="1942-FeedTheBirds\data\Bitmaps\1942_sprite_sheet.png">
@@ -317,6 +320,9 @@
       <Filter>Header Files\Objects\Items</Filter>
     </ClInclude>
     <ClInclude Include="1942-FeedTheBirds\include\Animation\MovingAnimation.h">
+      <Filter>Header Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\Animation\TickAnimation.h">
       <Filter>Header Files\Animation</Filter>
     </ClInclude>
   </ItemGroup>
