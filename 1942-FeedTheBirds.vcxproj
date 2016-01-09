@@ -115,6 +115,7 @@
     <ClCompile Include="1942-FeedTheBirds\src\Animator\Animator.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Animator\AnimatorHolder.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Animator\MovingAnimator.cpp" />
+    <ClCompile Include="1942-FeedTheBirds\src\Animator\TimerTickAnimator.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\GameAction\AI.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\GameAction\CollisionChecker.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\GameAction\GamePlay.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="1942-FeedTheBirds\include\Animator\Animator.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Animator\AnimatorHolder.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Animator\MovingAnimator.h" />
+    <ClInclude Include="1942-FeedTheBirds\include\Animator\TimerTickAnimator.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\CollisionChecker.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\GamePlay.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\InputManager.h" />
