@@ -8,13 +8,13 @@ AnimationFilmHolder::AnimationFilmHolder(const char* path) {
 	char buff[512], ch = ' ', bitmap[50], bboxes[50], id[50];
 	int frames = 1;
 	BitmapLoader bitmapLoader;
-	/*ifstream cfg(path);
+	ifstream cfg(path);
 	while (!cfg.eof()) {
 		ch = cfg.peek();
 		if (ch != '#' && ch != '\n') {
 			cfg.getline(buff, 512);
 			sscanf(buff, "bitmap=%s id=%s frames=%d bboxes=%s", bitmap, id, &frames, bboxes);
-			//fprintf(stderr, "%s %d %d %s\n",  bitmap, id, frames, bboxes);
+			fprintf(stderr, "%s %d %d %s\n",  bitmap, id, frames, bboxes);
 			AnimationFilm* anim_f = new AnimationFilm(bitmapLoader.load(bitmap), read_bboxes(bboxes, frames), id);
 			filmMap[id] = anim_f;
 		}
@@ -24,9 +24,9 @@ AnimationFilmHolder::AnimationFilmHolder(const char* path) {
 		ch = cfg.peek();
 		if (ch == ' ') break;
 	}
-	cfg.close();*/
-	AnimationFilm* anim_f = new AnimationFilm(bitmapLoader.load("1942-FeedTheBirds\\data\\Bitmaps\\superAce.png"), read_bboxes(bboxes, frames), "superAceAF");
-	filmMap["superAceAF"] = anim_f;
+	cfg.close();
+	//AnimationFilm* anim_f = new AnimationFilm(bitmapLoader.load("1942-FeedTheBirds\\data\\Bitmaps\\superAce.png"), read_bboxes(bboxes, frames), "superAceAF");
+	//filmMap["superAceAF"] = anim_f;
 }
 
 AnimationFilmHolder::~AnimationFilmHolder() {
@@ -40,14 +40,14 @@ vector<Rect> AnimationFilmHolder::read_bboxes(const char* path, int framesNo) {
 	vector<Rect> vect;
 	Rect bbox(0, 0, 80, 80);
 	vect.push_back(bbox);
-	/*ifstream cfg(path);
+	ifstream cfg(path);
 	for (int i = 0; i < framesNo; i++) {
 		cfg.getline(buff, 512);
 		sscanf(buff, "x=%d y=%d w=%d h=%d", &x, &y, &w, &h);
 		Rect bbox(x, y, w, h);
 		vect.push_back(bbox);
 	}
-	cfg.close();*/
+	cfg.close();
 	return vect;
 }
 

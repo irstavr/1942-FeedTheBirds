@@ -180,6 +180,15 @@
     <ClCompile Include="1942-FeedTheBirds\src\Animator\TimerTickAnimator.cpp">
       <Filter>Source Files\Animator</Filter>
     </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\Objects\Items\Button.cpp">
+      <Filter>Source Files\Objects\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\Animation\FlashingAnimation.cpp">
+      <Filter>Source Files\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\Animator\FlashingAnimator.cpp">
+      <Filter>Source Files\Animator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="1942-FeedTheBirds\data\Bitmaps\1942_sprite_sheet.png">
@@ -337,6 +346,15 @@
     <ClInclude Include="1942-FeedTheBirds\include\Animator\TimerTickAnimator.h">
       <Filter>Header Files\Animator</Filter>
     </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\Objects\Items\Button.h">
+      <Filter>Header Files\Objects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\Animation\FlashingAnimation.h">
+      <Filter>Header Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\Animator\FlashingAnimator.h">
+      <Filter>Header Files\Animator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="1942-FeedTheBirds\data\Fonts\arial.ttf">
@@ -345,5 +363,10 @@
     <Font Include="1942-FeedTheBirds\data\Fonts\karmatic_arcade_font.ttf">
       <Filter>Resource Files\Fonts</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="1942-FeedTheBirds\data\films.ini">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

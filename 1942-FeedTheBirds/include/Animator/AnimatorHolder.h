@@ -2,29 +2,29 @@
 #define ANIMATORHOLDER_H
 
 #include "Animator.h"
-
 #include "allegro5\allegro.h"
-
 #include <list>
 #include <vector>
 #include <algorithm>
 #include <assert.h>
-#include <iostream>
-
-using namespace std;
 
 class AnimatorHolder {
 private:
-	static std::vector<Animator*> running, suspended, paused;
+	static std::vector<Animator*> running;
+	static std::vector<Animator*> suspended;
+	static std::vector<Animator*> paused;
 	static unsigned long pauseTime;
 
 	class ProgressFunctor : public std::unary_function<Animator*, void> {
 		unsigned long t;
 	public:
-		void operator()(Animator* a) const { a->progress(t); }
-		ProgressFunctor(unsigned long _t) : t(_t) {}
+		ProgressFunctor(unsigned long _t) : 
+				t(_t) {
+		}
+		void operator()(Animator* a) const { 
+			a->progress(t); 
+		}
 	};
-
 public:
 	static void animRegister(Animator* a);
 	static void cancel(Animator* a);

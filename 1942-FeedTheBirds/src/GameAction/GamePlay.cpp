@@ -139,8 +139,23 @@ void GamePlay::initGameEngine() {
 	// etc.
 	Terrain::getInstance();
 	TerrainStartScreen::getInstance();
-	AnimationFilmHolder::initialize("");
+	AnimationFilmHolder::initialize("1942-FeedTheBirds\\data\\films.ini");
+	AnimationFilmHolder *animFH = AnimationFilmHolder::getSingleton();
+
 	CollisionChecker::getInstance()->initialize();
+
+	// Add start game button
+	FlashingAnimation *flashAnimation = new FlashingAnimation(1, 250, 600, 0);
+	FlashingAnimator *flashAnimator = new FlashingAnimator();
+	startButton = new Button(0, 
+							 0, 
+							(AnimationFilm *) 
+								AnimationFilmHolder::getSingleton()->
+								getFilm("StartButton"),
+							flashAnimation,
+							flashAnimator);
+	AnimatorHolder::animRegister(flashAnimator);
+
 }
 
 void GamePlay::runMainLoop() {

@@ -8,6 +8,10 @@
 #include "..\Terrain\Terrain.h"
 #include "..\Utilities\Utilities.h"
 #include "..\Animation\AnimationFilmHolder.h"
+#include "..\Objects\Items\Button.h"
+#include "..\Animation\FlashingAnimation.h"
+#include "..\Animator\FlashingAnimator.h"
+#include "..\Animator\AnimatorHolder.h"
 
 class GamePlay {
 	GamePlay();
@@ -24,12 +28,14 @@ class GamePlay {
 	ALLEGRO_DISPLAY *display;
 	ALLEGRO_EVENT_QUEUE *eventQueue;
 	ALLEGRO_EVENT alEvent;
-
 	ALLEGRO_KEYBOARD_STATE keyboardState;
-
 	ALLEGRO_TIMER *fpsTimer, *lpsTimer;
 
 	clock_t wait;
+
+	/* for graphics */
+	Button *startButton, *pauseButton, *winButton, *gameOverButton;
+
 
 	/* initialization */
 	bool initAllegro();
