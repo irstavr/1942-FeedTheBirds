@@ -38,8 +38,8 @@ vector<Rect> AnimationFilmHolder::read_bboxes(const char* path, int framesNo) {
 	char buff[512], ch = ' ';
 	int x, y, w, h;
 	vector<Rect> vect;
-	Rect bbox(0, 0, 80, 80);
-	vect.push_back(bbox);
+	//Rect bbox(0, 0, 80, 80);
+	//vect.push_back(bbox);
 	ifstream cfg(path);
 	for (int i = 0; i < framesNo; i++) {
 		cfg.getline(buff, 512);
