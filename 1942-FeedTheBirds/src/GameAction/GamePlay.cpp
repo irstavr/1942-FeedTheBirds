@@ -160,11 +160,6 @@ void GamePlay::initGameEngine() {
 
 void GamePlay::runMainLoop() {
 
-	startButton->startFlashing();
-
-	startButton->setX(100);
-	startButton->setY(100);
-	startButton->setVisibility(true);
 	
 	/* finish == exit of game */
 	while (gameState != GAME_STATE_FINISHED) {
@@ -184,7 +179,6 @@ void GamePlay::runMainLoop() {
 void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 
 	if (gameState != GAME_STATE_PAUSED) {
-
 		switch (alEvent.type) {
 
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -219,7 +213,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 					InputManager::pause(gameState);
 					break;
 				case ALLEGRO_KEY_S:
-					InputManager::onKeyS(gameState, display);
+					InputManager::onKeyS(gameState, display, startButton);
 					break;
 				case ALLEGRO_KEY_ENTER:
 					InputManager::onKeyEnter(gameState, display);
@@ -262,15 +256,12 @@ void GamePlay::render(unsigned long timestamp)
 	if (gameState == GAME_STATE_INTRO) {
 		displayStartScreen(timestamp);
 	}
-
 	if (gameState == GAME_STATE_MAINGAME) {
 		displayMainScreen(timestamp);
 	}
-
 	if (gameState == GAME_STATE_PAUSED) {
 		//TODO: display message with GAME PAUSED
 	}
-
 	if (gameState == GAME_STATE_GAMEOVER) {
 		//TODO: display message with GAME OVER
 	}
@@ -279,8 +270,6 @@ void GamePlay::render(unsigned long timestamp)
 /* show first window with start screen */
 void GamePlay::displayMainScreen(unsigned long now) {
 	if (gameState == GAME_STATE_MAINGAME) {
-		startButton->stopFlashing();
-
 		Terrain::getInstance().drawBackground();
 		al_flip_display();
 		al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -291,8 +280,13 @@ void GamePlay::displayMainScreen(unsigned long now) {
 /* show first window with start screen */
 void GamePlay::displayStartScreen(unsigned long now) {
 
-	//if (startButton->isSpriteVisible())
-		startButton->display(Rect(0, 0, 0, 0));
+	startButton->startFlashing();
+
+	startButton->setX(100);
+	startButton->setY(100);
+	startButton->setVisibility(true);
+	startButton->display(Rect(0, 0, 0, 0));
+	
 	TerrainStartScreen::getInstance().drawBackground();
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));

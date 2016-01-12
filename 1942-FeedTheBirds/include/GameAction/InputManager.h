@@ -3,6 +3,7 @@
 
 #include "allegro5\allegro.h"
 #include "..\GameAction\GamePlay.h"
+#include "..\Objects\Items\Button.h"
 
 namespace InputManager {
 
@@ -19,7 +20,7 @@ namespace InputManager {
 	void pause(int&);
 
 	void onKeyEnter(int&,ALLEGRO_DISPLAY*&);
-	void onKeyS(int&, ALLEGRO_DISPLAY*&);
+	void onKeyS(int &gameState, ALLEGRO_DISPLAY* &display, Button* &startButton);
 }
 
 #endif
