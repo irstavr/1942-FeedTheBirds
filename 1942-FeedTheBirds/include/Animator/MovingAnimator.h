@@ -18,7 +18,7 @@ public:
 	Sprite* getSprite(void);
 	void progress(unsigned long currTime);
 	void start(Sprite* s, MovingAnimation* a, unsigned long t);
-	void display(ALLEGRO_BITMAP* at);
+	void display(Rect at);
 };
 
 #endif

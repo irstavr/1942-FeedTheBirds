@@ -5,7 +5,7 @@ Animation::Animation(animid_t _id) :
 	/*LatelyDestroyable(),*/ 
 	id(_id) 
 {
-	assert(_id>0);
+	assert(_id>=0);
 }
 
 animid_t Animation::getId(void) {

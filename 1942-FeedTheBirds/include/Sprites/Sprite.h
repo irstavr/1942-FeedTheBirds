@@ -52,7 +52,7 @@ public:
 	void disableMovement(void);
 
 	virtual void move(int x, int y);
-	void display(ALLEGRO_BITMAP* image);
+	void display(Rect image);
 };
 
 

@@ -159,6 +159,13 @@ void GamePlay::initGameEngine() {
 }
 
 void GamePlay::runMainLoop() {
+
+	startButton->startFlashing();
+
+	startButton->setX(100);
+	startButton->setY(100);
+	startButton->setVisibility(true);
+	
 	/* finish == exit of game */
 	while (gameState != GAME_STATE_FINISHED) {
 		currTime = getCurrTime();
@@ -251,8 +258,6 @@ void GamePlay::render(unsigned long timestamp)
 {
 	if (!al_is_event_queue_empty(eventQueue))
 		return;
-
-	//al_clear_to_color(al_map_rgba(0, 0, 0, 0));
 		
 	if (gameState == GAME_STATE_INTRO) {
 		displayStartScreen(timestamp);
@@ -269,13 +274,13 @@ void GamePlay::render(unsigned long timestamp)
 	if (gameState == GAME_STATE_GAMEOVER) {
 		//TODO: display message with GAME OVER
 	}
-
-	//al_flip_display();
 }
 
 /* show first window with start screen */
 void GamePlay::displayMainScreen(unsigned long now) {
 	if (gameState == GAME_STATE_MAINGAME) {
+		startButton->stopFlashing();
+
 		Terrain::getInstance().drawBackground();
 		al_flip_display();
 		al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -284,7 +289,10 @@ void GamePlay::displayMainScreen(unsigned long now) {
 }
 
 /* show first window with start screen */
-void GamePlay::displayStartScreen(unsigned long now) {		
+void GamePlay::displayStartScreen(unsigned long now) {
+
+	//if (startButton->isSpriteVisible())
+		startButton->display(Rect(0, 0, 0, 0));
 	TerrainStartScreen::getInstance().drawBackground();
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));

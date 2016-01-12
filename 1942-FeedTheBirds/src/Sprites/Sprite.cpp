@@ -88,7 +88,7 @@ bool Sprite::collisionCheck(Sprite* s) {
 
 // TODO: check if correct!
 // image arg is not used!!!
-void Sprite::display(ALLEGRO_BITMAP* image) {
+void Sprite::display(Rect image) {
 	currFilm->displayFrame(Point(x, y), frameNo, flip_h, flip_v);
 	//al_draw_bitmap_region(currFilm->GetBitmap(), frameBox.x, frameBox.y, frameBox.w, frameBox.h, da.x, da.y, 0);
 }

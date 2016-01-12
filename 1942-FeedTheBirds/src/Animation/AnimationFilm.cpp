@@ -19,7 +19,7 @@ const std::string AnimationFilm::getId(void) const {
 }
 
 const Rect AnimationFilm::getFrameBox(byte frameNo) const {
-	assert(boxes.size() > frameNo);
+//	assert(boxes.size() > frameNo);
 	if (boxes.size() <= frameNo) frameNo = 0; //reset
 	return boxes[frameNo];
 }
