@@ -10,9 +10,9 @@
 
 class AnimatorHolder {
 private:
-	static std::vector<Animator*> running;
-	static std::vector<Animator*> suspended;
-	static std::vector<Animator*> paused;
+	static std::list<Animator*> running;
+	static std::list<Animator*> suspended;
+	static std::list<Animator*> paused;
 	static unsigned long pauseTime;
 
 	class ProgressFunctor : public std::unary_function<Animator*, void> {
@@ -34,7 +34,7 @@ public:
 	static void progress(unsigned long currTime);
 	static void pause(void);
 	static void resume(void);
-	static void display(ALLEGRO_BITMAP* at);
+	//static void display(ALLEGRO_BITMAP* at);
 
 
 };

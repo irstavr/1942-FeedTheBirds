@@ -30,14 +30,18 @@ void InputManager::onKeyS(int &gameState, ALLEGRO_DISPLAY* &display, Button* &st
 		al_set_new_window_position( 0, 0);
 	
 		startButton->stopFlashing();
+		startButton->setVisibility(false);
 		gameState = GAME_STATE_MAINGAME;
 	}
 }
 
-void InputManager::onKeyEnter(int &gameState, ALLEGRO_DISPLAY* &display) {
+void InputManager::onKeyEnter(int &gameState, ALLEGRO_DISPLAY* &display, Button* &startButton) {
 	if (gameState == GAME_STATE_GAMEOVER) {
 		al_resize_display(display, START_SCREEN_WINDOW_WIDTH, START_SCREEN_WINDOW_HEIGHT);
 		al_set_new_window_position(0, 0);
 		gameState = GAME_STATE_INTRO;
+
+		startButton->startFlashing();
+		startButton->setVisibility(true);
 	}
 }

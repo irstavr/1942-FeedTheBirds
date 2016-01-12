@@ -147,11 +147,11 @@ void GamePlay::initGameEngine() {
 	// Add start game button
 	FlashingAnimation *flashAnimation = new FlashingAnimation(1, 250, 600, 0);
 	FlashingAnimator *flashAnimator = new FlashingAnimator();
-	startButton = new Button(0, 
-							 0, 
+	startButton = new Button(150, 
+							 420, 
 							(AnimationFilm *) 
 								AnimationFilmHolder::getSingleton()->
-								getFilm("StartButton"),
+									getFilm("StartButton"),
 							flashAnimation,
 							flashAnimator);
 	AnimatorHolder::animRegister(flashAnimator);
@@ -160,7 +160,9 @@ void GamePlay::initGameEngine() {
 
 void GamePlay::runMainLoop() {
 
-	
+	startButton->setVisibility(true);
+	startButton->startFlashing();
+
 	/* finish == exit of game */
 	while (gameState != GAME_STATE_FINISHED) {
 		currTime = getCurrTime();
@@ -216,7 +218,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 					InputManager::onKeyS(gameState, display, startButton);
 					break;
 				case ALLEGRO_KEY_ENTER:
-					InputManager::onKeyEnter(gameState, display);
+					InputManager::onKeyEnter(gameState, display, startButton);
 					break;
 				/* O:  Just for our debugging*/
 				case ALLEGRO_KEY_O:
@@ -248,8 +250,7 @@ void GamePlay::updateGameState() {
 	}
 }
 
-void GamePlay::render(unsigned long timestamp)
-{
+void GamePlay::render(unsigned long timestamp) {
 	if (!al_is_event_queue_empty(eventQueue))
 		return;
 		
@@ -280,17 +281,16 @@ void GamePlay::displayMainScreen(unsigned long now) {
 /* show first window with start screen */
 void GamePlay::displayStartScreen(unsigned long now) {
 
-	startButton->startFlashing();
-
-	startButton->setX(100);
-	startButton->setY(100);
-	startButton->setVisibility(true);
-	startButton->display(Rect(0, 0, 0, 0));
-	
 	TerrainStartScreen::getInstance().drawBackground();
+
+	startButton->display(Rect(0,0,0,0));
+
+	TerrainStartScreen::getInstance().updateBackground();
+
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));
-	TerrainStartScreen::getInstance().updateBackground();
+
+
 }
 
 void GamePlay::gameStarting() {

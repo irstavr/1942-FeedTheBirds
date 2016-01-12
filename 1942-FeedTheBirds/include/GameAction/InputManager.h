@@ -19,7 +19,7 @@ namespace InputManager {
 	/* called if press P */
 	void pause(int&);
 
-	void onKeyEnter(int&,ALLEGRO_DISPLAY*&);
+	void onKeyEnter(int&,ALLEGRO_DISPLAY*&, Button* &startButton);
 	void onKeyS(int &gameState, ALLEGRO_DISPLAY* &display, Button* &startButton);
 }
 
