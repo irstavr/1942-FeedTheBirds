@@ -11,7 +11,6 @@ enum animatorstate_t{
 	ANIMATOR_STOPPED = 2,
 };
 
-
 class Animator
 {
 public:

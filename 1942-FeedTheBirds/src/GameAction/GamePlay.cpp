@@ -168,12 +168,12 @@ void GamePlay::runMainLoop() {
 		currTime = getCurrTime();
 		al_wait_for_event(eventQueue, &alEvent);
 
-		/* draw screen */
-		render(currTime);
 		/* read from local input event queue */
 		inputManagement(alEvent);
 		/* game loop logic */
 		updateGameState();
+		/* draw screen */
+		render(currTime);
 	}
 }
 
@@ -237,6 +237,9 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 
 /* game loop logic */
 void GamePlay::updateGameState() {
+
+	AnimatorHolder::progress(getCurrTime());
+
 	if (gameState == GAME_STATE_MAINGAME) {
 		// TODO
 		// initialize:
