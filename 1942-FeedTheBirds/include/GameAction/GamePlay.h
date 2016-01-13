@@ -36,6 +36,7 @@ class GamePlay {
 	/* for graphics */
 	Button *startButton, *pauseButton, *winButton, *gameOverButton;
 
+	SuperAce *superAce;
 
 	/* initialization */
 	bool initAllegro();

@@ -42,7 +42,7 @@ void AnimatorHolder::markAsSuspended(Animator* a) {
 
 void AnimatorHolder::progress(unsigned long currTime) {
 	//assert(currTime >= 0);
-	assert(!running.empty());
+	//assert(!running.empty());
 
 	//fprintf(stdout, "progress \n");
 	std::for_each(running.begin(), running.end(), ProgressFunctor(currTime));
