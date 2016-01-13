@@ -164,7 +164,7 @@ void GamePlay::initGameEngine() {
 	MovingAnimator *deathAnimator = new MovingAnimator();
 
 
-	superAce = new SuperAce(200, 400, (AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("StartButton"),
+	superAce = new SuperAce(200, 300, (AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("superAce"),
 		takeOffAnimation, takeOffAnimator, 
 		landingAnimation, landingAnimator,
 		deathAnimation, deathAnimator);
@@ -289,6 +289,8 @@ void GamePlay::render(unsigned long timestamp) {
 void GamePlay::displayMainScreen(unsigned long now) {
 	if (gameState == GAME_STATE_MAINGAME) {
 		Terrain::getInstance().drawBackground();
+
+		superAce->display(Rect(0, 0, 0, 0));
 		al_flip_display();
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 		Terrain::getInstance().updateBackground();

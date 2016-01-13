@@ -6,7 +6,7 @@
 #include "../../Animator/TimerTickAnimator.h"
 #include "../../Animator/FlashingAnimator.h"
 
-class SuperAce : Sprite {
+class SuperAce : public Sprite {
 public:
 	SuperAce::SuperAce(Dim _x, Dim _y, AnimationFilm* film,
 		MovingAnimation *_takeOffAnimation, MovingAnimator *_takeOffAnimator,
