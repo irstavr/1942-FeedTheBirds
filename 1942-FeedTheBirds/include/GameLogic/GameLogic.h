@@ -2,6 +2,7 @@
 #define GAME_LOGIC_H
 
 #include <vector>
+#include "PlayerProfile.h"
 #include "..\Sprites\Sprite.h"
 #include "..\Objects\Characters\SuperAce.h"
 #include "..\Objects\Characters\Bird.h"
@@ -11,9 +12,14 @@ typedef vector<Bird*> BIRDS;
 class GameLogic {
 	SuperAce *superAce;
 	BIRDS &birds;
-	int height, width, planeKilled;
+
+	static PlayerProfile* profile;
+
+	int height, width, superAceKilled;
 	bool gameRunning;
-	float calcDis(COORDS a, COORDS b);
+	
+	static Points highScore;
+
 
 public:
 	GameLogic(SuperAce *superAce, BIRDS &birds, int height, int width);
@@ -22,7 +28,7 @@ public:
 	/*solve all the collision stuff*/
 	int solveCollision(int &p, int status);
 	/*decide if add bird*/
-	bool addBird(float &t, int p);
+	//MOVE TO AI -- bool addBird(float &t, int p);
 	/*return if the game is still running*/
 	bool isRunning() const;
 };

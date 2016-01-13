@@ -5,12 +5,9 @@
 #include <utility>
 
 #include "..\Animation\AnimationFilm.h"
-
+#include "..\Utilities\Utilities.h"
 using namespace std;
 
-typedef int Dim;
-typedef unsigned char byte;
-typedef pair<float, float> COORDS;
 
 class Sprite {
 	AnimationFilm* currFilm;

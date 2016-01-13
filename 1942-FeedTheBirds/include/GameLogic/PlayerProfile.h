@@ -4,11 +4,10 @@
 #include "../../include/Utilities/Utilities.h"
 #include <map>
 
-typedef unsigned int Lifes;
-typedef int Points;
-
 #define _STARTING_LIFES 5
 
+typedef int Points;
+typedef unsigned int Lifes;
 typedef std::pair<bool, bool> PowerUpPair_t;
 typedef std::pair<bool, PowerUpPair_t> BlastAnimationMapKey_t;
 typedef std::map<BlastAnimationMapKey_t, std::string> BlastAnimationMap_t;
@@ -16,16 +15,20 @@ typedef std::map<BlastAnimationMapKey_t, std::string> BlastAnimationMap_t;
 class PlayerProfile {
 
 public:
-	PlayerProfile(Lifes startLifes, Coordinates xy);
+	PlayerProfile(Lifes startLifes, COORDS xy);
 	PlayerProfile();
 	~PlayerProfile();
 
 private:
 	BlastAnimationMap_t blastAnimationMap;
-	Coordinates startXY;
+	COORDS startXY;
 	Points score;
 	Lifes lifes;
+	bool isAlive;
 	unsigned int birdsFeeded;
+	
+	bool isDead();
+
 	bool hasBonus; //TODO: add every bonus separately !!!
 	bool eatenYellowPOW;	//TODO: add every POW here
 	bool eatenBlueSPOW;

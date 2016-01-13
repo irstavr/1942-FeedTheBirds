@@ -9,8 +9,3 @@ GameLogic::GameLogic (SuperAce  *superAce, BIRDS &birds, int height, int width) 
 bool GameLogic::isRunning() const {
 	return gameRunning;
 }
-
-bool GameLogic::addBird(float &t, int p) {
-	// TODO
-	return false;
-}	

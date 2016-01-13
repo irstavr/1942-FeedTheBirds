@@ -6,7 +6,6 @@
 #include <time.h>
 #include <assert.h>
 #include <list>
-
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h> 
 #include <allegro5/allegro_audio.h>
@@ -32,8 +31,9 @@
 #define FPS 120
 #define LPS 120
 
-
-typedef std::pair<int, int> Coordinates;
+typedef int Dim;
+typedef unsigned char byte;
+typedef std::pair<float, float> COORDS;
 
 /* get system current time */
 extern unsigned int getCurrTime(void);

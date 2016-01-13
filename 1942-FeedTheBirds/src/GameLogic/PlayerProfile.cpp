@@ -4,7 +4,7 @@
 #include "../../include/GameLogic/PlayerProfile.h"
 
 // constructors
-PlayerProfile::PlayerProfile(Lifes startLifes, Coordinates xy) {
+PlayerProfile::PlayerProfile(Lifes startLifes, COORDS xy) {
 	score = -1;
 	startXY = xy;
 	lifes = startLifes;
@@ -40,7 +40,6 @@ int PlayerProfile::getStartX(void) {
 int PlayerProfile::getStartY(void) {
 	return startXY.second; 
 }
-
 
 // score
 void PlayerProfile::incrScore(Points addedPoints) {
