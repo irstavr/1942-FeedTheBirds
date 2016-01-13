@@ -145,7 +145,7 @@ void GamePlay::initGameEngine() {
 	CollisionChecker::getInstance()->initialize();
 
 	// Add start game button
-	FlashingAnimation *flashAnimation = new FlashingAnimation(1, 250, 600, 0);
+	FlashingAnimation *flashAnimation = new FlashingAnimation(1, 500, 500, 0);
 	FlashingAnimator *flashAnimator = new FlashingAnimator();
 	startButton = new Button(150, 
 							 420, 
@@ -285,13 +285,13 @@ void GamePlay::displayMainScreen(unsigned long now) {
 void GamePlay::displayStartScreen(unsigned long now) {
 
 	TerrainStartScreen::getInstance().drawBackground();
-
-	startButton->display(Rect(0,0,0,0));
-
-	TerrainStartScreen::getInstance().updateBackground();
+	if (startButton->isSpriteVisible()) {
+		startButton->display(Rect(0, 0, 0, 0));
+	}
 
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));
+	TerrainStartScreen::getInstance().updateBackground();
 
 
 }
