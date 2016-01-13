@@ -32,6 +32,9 @@
 #define FPS 120
 #define LPS 120
 
+
+typedef std::pair<int, int> Coordinates;
+
 /* get system current time */
 extern unsigned int getCurrTime(void);
 

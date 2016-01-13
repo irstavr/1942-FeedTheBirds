@@ -186,6 +186,7 @@
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\GamePlay.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\InputManager.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameLogic\GameLogic.h" />
+    <ClInclude Include="1942-FeedTheBirds\include\GameLogic\PlayerProfile.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\Bird.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\SuperAce.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Objects\Items\BirdDropping.h" />
