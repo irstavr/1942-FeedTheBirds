@@ -156,6 +156,19 @@ void GamePlay::initGameEngine() {
 							flashAnimator);
 	AnimatorHolder::animRegister(flashAnimator);
 
+	MovingAnimation *landingAnimation = new MovingAnimation(0, 0, 50, false, 0);
+	MovingAnimator *landingAnimator = new MovingAnimator();
+	MovingAnimation *takeOffAnimation = new MovingAnimation(0, 0, 50, false, 0);
+	MovingAnimator *takeOffAnimator = new MovingAnimator();
+	MovingAnimation *deathAnimation = new MovingAnimation(0, 0, 50, false, 0);
+	MovingAnimator *deathAnimator = new MovingAnimator();
+
+
+	superAce = new SuperAce(200, 400, (AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("StartButton"),
+		takeOffAnimation, takeOffAnimator, 
+		landingAnimation, landingAnimator,
+		deathAnimation, deathAnimator);
+
 }
 
 void GamePlay::runMainLoop() {

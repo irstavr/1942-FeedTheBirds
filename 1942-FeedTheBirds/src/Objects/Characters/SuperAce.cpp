@@ -1,6 +1,7 @@
 #include "..\..\..\include\Objects\Characters\SuperAce.h"
 
 SuperAce::SuperAce(Dim _x, Dim _y, AnimationFilm* film,
+	MovingAnimation *_takeOffAnimation, MovingAnimator *_takeOffAnimator,
 	MovingAnimation *_landAnimation, MovingAnimator *_landAnimator,
 	MovingAnimation *_deathAnimation, MovingAnimator *_deathAnimator) :
 	Sprite(_x, _y, film),

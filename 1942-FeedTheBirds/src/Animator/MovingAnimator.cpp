@@ -50,6 +50,6 @@ void MovingAnimator::start(Sprite* s, MovingAnimation* a, unsigned long t) {
 	state = ANIMATOR_RUNNING;
 }
 
-void MovingAnimator::display(Rect at) {
+/*void MovingAnimator::display(Rect at) {
 	sprite->display(at);
-}
+}*/
