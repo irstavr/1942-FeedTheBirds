@@ -17,6 +17,7 @@ Terrain::Terrain() :
 		return;
 	}
 	bright_green = al_map_rgba_f(0.5, 1.0, 0.5, 1.0);
+	grey = al_map_rgba_f(0.7, 0.7, 0.7, 1.0);
 }
 
 Terrain::~Terrain() {
