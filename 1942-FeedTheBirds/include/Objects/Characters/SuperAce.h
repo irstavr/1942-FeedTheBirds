@@ -5,13 +5,14 @@
 #include "../../Animator/MovingAnimator.h"
 #include "../../Animator/TimerTickAnimator.h"
 #include "../../Animator/FlashingAnimator.h"
+#include "../../Animator/FrameRangeAnimator.h"
 
 class SuperAce : public Sprite {
 public:
 	SuperAce::SuperAce(Dim _x, Dim _y, AnimationFilm* film,
-		MovingAnimation *_takeOffAnimation, MovingAnimator *_takeOffAnimator,
-		MovingAnimation *_landAnimation, MovingAnimator *_landAnimator,
-		MovingAnimation *_deathAnimation, MovingAnimator *_deathAnimator);
+		FrameRangeAnimation *_takeOffAnimation, FrameRangeAnimator *_takeOffAnimator,
+		FrameRangeAnimation *_landAnimation, FrameRangeAnimator *_landAnimator,
+		FrameRangeAnimation *_deathAnimation, FrameRangeAnimator *_deathAnimator);
 	~SuperAce(void);
 
 	void moveUp();
@@ -33,8 +34,8 @@ public:
 	void setInvinsibility(bool _inv) { isInvisible = _inv; };
 
 private:
-	MovingAnimation *landAnimation, *deathAnimation;
-	MovingAnimator *landAnimator, *deathAnimator;
+	FrameRangeAnimation *takeOffAnimation, *landAnimation, *deathAnimation;
+	FrameRangeAnimator *takeOffAnimator, *landAnimator, *deathAnimator;
 	FlashingAnimation *flashAnimation;
 	FlashingAnimator *flashAnimator;
 	TickAnimation *tickAnimation;

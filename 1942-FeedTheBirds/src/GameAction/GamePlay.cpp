@@ -156,12 +156,14 @@ void GamePlay::initGameEngine() {
 							flashAnimator);
 	AnimatorHolder::animRegister(flashAnimator);
 
-	MovingAnimation *landingAnimation = new MovingAnimation(0, 0, 50, false, 0);
-	MovingAnimator *landingAnimator = new MovingAnimator();
-	MovingAnimation *takeOffAnimation = new MovingAnimation(0, 0, 50, false, 0);
-	MovingAnimator *takeOffAnimator = new MovingAnimator();
-	MovingAnimation *deathAnimation = new MovingAnimation(0, 0, 50, false, 0);
-	MovingAnimator *deathAnimator = new MovingAnimator();
+	// add take off, landing, explosion(?) bbs
+	//int total_frames = AnimationFilmHolder::getSingleton()->getFilm("landingFilm")->getTotalFrames();
+	FrameRangeAnimation *landingAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 1);
+	FrameRangeAnimator *landingAnimator = new FrameRangeAnimator();
+	FrameRangeAnimation *takeOffAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 2);
+	FrameRangeAnimator *takeOffAnimator = new FrameRangeAnimator();
+	FrameRangeAnimation *deathAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 3);
+	FrameRangeAnimator *deathAnimator = new FrameRangeAnimator();
 
 
 	superAce = new SuperAce(200, 300, (AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("superAce"),

@@ -10,6 +10,7 @@
 #include "..\Animation\AnimationFilmHolder.h"
 #include "..\Objects\Items\Button.h"
 #include "..\Animation\FlashingAnimation.h"
+#include "..\Animator\FrameRangeAnimator.h"
 #include "..\Animator\FlashingAnimator.h"
 #include "..\Animator\AnimatorHolder.h"
 
