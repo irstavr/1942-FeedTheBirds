@@ -156,22 +156,37 @@ void GamePlay::initGameEngine() {
 							flashAnimator);
 	AnimatorHolder::animRegister(flashAnimator);
 
+	// Characters - Items:
+
+	// SuperAce
 	// add take off, landing, explosion(?) bbs
 	//int total_frames = AnimationFilmHolder::getSingleton()->getFilm("landingFilm")->getTotalFrames();
-	FrameRangeAnimation *landingAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 1);
+	FrameRangeAnimation *landingAnimation = 
+								new FrameRangeAnimation(1, 3, 0, 0, 200, false, 1);
 	FrameRangeAnimator *landingAnimator = new FrameRangeAnimator();
-	FrameRangeAnimation *takeOffAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 2);
+	FrameRangeAnimation *takeOffAnimation = 
+								new FrameRangeAnimation(1, 3, 0, 0, 200, false, 2);
 	FrameRangeAnimator *takeOffAnimator = new FrameRangeAnimator();
-	FrameRangeAnimation *deathAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 3);
+	FrameRangeAnimation *deathAnimation = 
+								new FrameRangeAnimation(1, 3, 0, 0, 200, false, 3);
 	FrameRangeAnimator *deathAnimator = new FrameRangeAnimator();
+	
+	superAce = new SuperAce(200, 
+							300, 
+							(AnimationFilm*)
+								AnimationFilmHolder::getSingleton()->
+											getFilm("superAce"),
+							takeOffAnimation, 
+							takeOffAnimator, 
+							landingAnimation, 
+							landingAnimator,
+							deathAnimation, 
+							deathAnimator);
 
-
-	superAce = new SuperAce(200, 300, (AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("superAce"),
-		takeOffAnimation, takeOffAnimator, 
-		landingAnimation, landingAnimator,
-		deathAnimation, deathAnimator);
-
+	// Fish (aka. bullets)
+	fish = new Fish();
 }
+
 
 void GamePlay::runMainLoop() {
 
@@ -246,7 +261,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 		}	
 	} 
 	if (gameState == GAME_STATE_PAUSED && alEvent.keyboard.keycode == ALLEGRO_KEY_R) {
-		gameState = GAME_STATE_MAINGAME;
+		resumeGame();
 	}
 
 }
@@ -280,10 +295,10 @@ void GamePlay::render(unsigned long timestamp) {
 		displayMainScreen(timestamp);
 	}
 	if (gameState == GAME_STATE_PAUSED) {
-		//TODO: display message with GAME PAUSED
+		pauseGame(timestamp);
 	}
 	if (gameState == GAME_STATE_GAMEOVER) {
-		//TODO: display message with GAME OVER
+		gameOver(timestamp);
 	}
 }
 
@@ -310,11 +325,29 @@ void GamePlay::displayStartScreen(unsigned long now) {
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 	TerrainStartScreen::getInstance().updateBackground();
-
-
 }
 
-void GamePlay::gameStarting() {
+void GamePlay::pauseGame(unsigned long now) {
+	//TODO: display message with GAME PAUSED
+	gameState == GAME_STATE_PAUSED;
+	AnimatorHolder::pause();
+	//pauseButton_s->startFlashing();
+	//pauseButton_s->setVisibility(true);
+}
+
+void GamePlay::resumeGame(void) {
+	gameState == GAME_STATE_MAINGAME;
+	AnimatorHolder::resume();
+	//pauseButton_s->stopFlashing();
+	//pauseButton_s->setVisibility(false);
+}
+
+void GamePlay::gameOver(unsigned long now) {
+	//TODO: display message with GAME OVER
+	//TODO: display message to play again
+}
+
+void GamePlay::startGame() {
 	gameState = GAME_STATE_MAINGAME;
 	// TODO: play music ?
 }

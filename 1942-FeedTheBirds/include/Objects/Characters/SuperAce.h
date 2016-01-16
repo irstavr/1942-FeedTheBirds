@@ -34,17 +34,20 @@ public:
 	void setInvinsibility(bool _inv) { isInvisible = _inv; };
 
 private:
+	float dx, dy;
+	float speedx, speedy;
+
+	bool isInvisible;
+	bool isShooting;
+	bool hasSideFighter;
+	//bool hasQuadGun;
+
 	FrameRangeAnimation *takeOffAnimation, *landAnimation, *deathAnimation;
 	FrameRangeAnimator *takeOffAnimator, *landAnimator, *deathAnimator;
 	FlashingAnimation *flashAnimation;
 	FlashingAnimator *flashAnimator;
 	TickAnimation *tickAnimation;
 	TimerTickAnimator *timerTick;
-
-	bool isInvisible;
-	bool isShooting;
-	bool hasSideFighter;
-	//bool hasQuadGun;
 
 	static void shootingCompleted(Animator*, void *closure);
 	static void invinsibilityEnded(Animator *, void *closure);
