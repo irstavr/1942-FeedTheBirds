@@ -6,6 +6,7 @@
 #include "..\Sprites\Sprite.h"
 #include "..\Objects\Characters\SuperAce.h"
 #include "..\Objects\Characters\Bird.h"
+#include "..\Objects\Items\Fish.h"
 
 typedef vector<Bird*> BIRDS;
 

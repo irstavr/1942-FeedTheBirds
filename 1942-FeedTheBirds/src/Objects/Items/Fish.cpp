@@ -1,8 +1,8 @@
 #include "..\..\..\include\Objects\Items\Fish.h"
 
-
+/*
 Fish::Fish(int d, int t) : direction(d) {
-	/*set speed according to type*/
+	//set speed according to type
 	switch (t) {
 		case 1:
 			speedX = 1;
@@ -18,8 +18,10 @@ Fish::Fish(int d, int t) : direction(d) {
 			break;
 	}
 }
+*/
 
-
+// TODO: if bonuses change bullets
+// add another field for advancing speed
 Fish::Fish(Dim _x, Dim _y, AnimationFilm* film,
 	FrameRangeAnimation *_flyAnimation, FrameRangeAnimator *_flyAnimator,
 	FlashingAnimation *_flashAnimation, FlashingAnimator *_flashingAnimator) :
