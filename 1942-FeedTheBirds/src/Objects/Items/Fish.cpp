@@ -23,13 +23,10 @@ Fish::Fish(int d, int t) : direction(d) {
 // TODO: if bonuses change bullets
 // add another field for advancing speed
 Fish::Fish(Dim _x, Dim _y, AnimationFilm* film,
-	MovingAnimation *_flyAnimation, MovingAnimator *_flyAnimator,
-	FlashingAnimation *_flashAnimation, FlashingAnimator *_flashingAnimator) :
+	MovingAnimation *_flyAnimation, MovingAnimator *_flyAnimator) :
 	Sprite(_x, _y, film),
 	flyAnimation(_flyAnimation),
-	flyAnimator(_flyAnimator),
-	flashAnimation(_flashAnimation),
-	flashAnimator(_flashingAnimator) {
+	flyAnimator(_flyAnimator) {
 	isInvisible = false;
 	isMetWithBird = false;
 }
@@ -39,7 +36,11 @@ bool Fish::inRange(float x, float y, float num) {
 }
 
 void Fish::move(float dt, float &x, float&y) {
-	y += direction * speedY * dt;
-	x += direction * speedX * dt;
+	x += speedX;// *dt;
 }
 
+void Fish::startMoving(void) {
+	fprintf(stdout, "startMoving -> Fish.cpp\n");
+	flyAnimator->start(this, flyAnimation, getCurrTime());
+	AnimatorHolder::markAsRunning(flyAnimator);
+}
