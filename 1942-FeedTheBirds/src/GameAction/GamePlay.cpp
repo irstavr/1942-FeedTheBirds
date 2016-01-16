@@ -190,13 +190,13 @@ void GamePlay::initGameEngine() {
 								new FrameRangeAnimation(1, 3, 0, 0, 200, false, 3);
 	FrameRangeAnimator *deathAnimator = new FrameRangeAnimator();
 
-	MovingAnimation *bulletAnimation = new MovingAnimation(0, 0, 20, true, 4);
-	MovingAnimator *bulletAnimator = new MovingAnimator();
+	//bulletAnimation = new MovingAnimation(0, 0, 20, true, 4);
+	//bulletAnimator = new MovingAnimator();
 
 	AnimatorHolder::animRegister(landingAnimator);
 	AnimatorHolder::animRegister(deathAnimator);
 	AnimatorHolder::animRegister(takeOffAnimator);
-	AnimatorHolder::animRegister(bulletAnimator);
+	//AnimatorHolder::animRegister(bulletAnimator);
 
 	superAce = new SuperAce(200, 
 							300, 
@@ -210,17 +210,8 @@ void GamePlay::initGameEngine() {
 							deathAnimation, 
 							deathAnimator);
 
-	// Fish (aka. bullets)
-	Fish* fish = new Fish(230, 300,
-						(AnimationFilm*)
-							AnimationFilmHolder::getSingleton()->
-								getFilm("doubleFish"),
-						bulletAnimation,
-						bulletAnimator);
-	fishes.push_back(fish);
-
 	//birds = new std::vector<Bird*>();
-	currentGame = new GameLogic(superAce, birds, fishes, 0, 0);
+	currentGame = new GameLogic(superAce, birds, 0, 0);
 
 }
 
@@ -288,7 +279,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				keys[LEFT] = true;
 				break;
 			case ALLEGRO_KEY_SPACE:
-				InputManager::shoot(currentGame->fishes[0]);
+				InputManager::shoot(superAce);
 				break;
 			case ALLEGRO_KEY_A:
 				InputManager::twist();
@@ -298,7 +289,6 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				break;
 			case ALLEGRO_KEY_S:
 				InputManager::onKeyS(gameState, display, startButton);
-				currentGame->fishes[0]->startMoving();
 				break;
 			case ALLEGRO_KEY_ENTER:
 				InputManager::onKeyEnter(gameState, display, startButton, gameOverButton);
@@ -362,8 +352,7 @@ void GamePlay::displayMainScreen(unsigned long now) {
 	if (gameState == GAME_STATE_MAINGAME) {
 		Terrain::getInstance().drawBackground();
 
-		currentGame->superAce->display(Rect(0, 0, 0, 0));
-		currentGame->fishes[0]->display(Rect(0, 0, 0, 0));
+		currentGame->superAce->displayAll();
 		al_flip_display();
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 		Terrain::getInstance().updateBackground();

@@ -39,8 +39,6 @@ class GamePlay {
 	/* for graphics */
 	Button *startButton, *pauseButton, *winButton, *gameOverButton;
 
-	SuperAce *superAce;
-	vector<Fish*> fishes;
 	vector<Bird*> birds;
 
 	/* initialization */
@@ -88,6 +86,9 @@ public:
 	 GameLogic *currentGame;
 	/* holds state of game (if in intro, game, gameover, exit) */
 	int gameState;
+	MovingAnimation *bulletAnimation;
+	MovingAnimator *bulletAnimator;
+	SuperAce *superAce;
 
 	bool keys[4] = { false, false, false, false };
 	/* return the instance of the class*/

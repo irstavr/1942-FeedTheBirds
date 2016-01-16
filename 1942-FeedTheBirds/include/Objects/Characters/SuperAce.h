@@ -6,6 +6,10 @@
 #include "../../Animator/TimerTickAnimator.h"
 #include "../../Animator/FlashingAnimator.h"
 #include "../../Animator/FrameRangeAnimator.h"
+#include "../../Animation/AnimationFilmHolder.h"
+#include "../Items/Fish.h"
+
+typedef vector<Fish*> FISHES;
 
 class SuperAce : public Sprite {
 public:
@@ -32,10 +36,12 @@ public:
 	void playDeathAnimation();
 	void gotHit();
 	void setInvinsibility(bool _inv) { isInvisible = _inv; };
-
+	void shoot();
+	void displayAll();
 private:
 	float dx, dy;
 	float speedx, speedy;
+	FISHES *fishes;
 
 	bool isInvisible;
 	bool isShooting;

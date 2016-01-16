@@ -1,8 +1,8 @@
 #include "..\..\include\GameLogic\GameLogic.h"
 
-GameLogic::GameLogic (SuperAce  *superAce, BIRDS &birds, FISHES &fishes, 
+GameLogic::GameLogic (SuperAce  *superAce, BIRDS &birds, 
 						int height, int width) :
-		superAce(superAce), birds(birds), fishes(fishes),
+		superAce(superAce), birds(birds),
 		height(height), width(width),
 		gameRunning(true) {
 	profile = new PlayerProfile(std::make_pair(5,5));

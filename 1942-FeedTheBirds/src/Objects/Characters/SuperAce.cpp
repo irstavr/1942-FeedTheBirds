@@ -16,6 +16,7 @@ SuperAce::SuperAce(Dim _x, Dim _y, AnimationFilm* film,
 	deathAnimator(_deathAnimator) {
 	isInvisible = false;
 	isShooting = false;
+	fishes = new vector<Fish*>();
 }
 
 SuperAce::~SuperAce(void) {
@@ -25,39 +26,52 @@ SuperAce::~SuperAce(void) {
 }
 
 void SuperAce::moveUp() {
-	//cout << "moveUp\n";
 	if (y>10) {
-		y -= 10;
+		y -= 2;
 	}
-	//cout << "y " << y << "\n";
-	//cout << "x " << x << "\n";
 }
 
 void SuperAce::moveDown() {
-	//cout << "movedown\n";
 	if (y < SCREEN_WINDOW_HEIGHT - 120) {
-		y += 10;
+		y += 2;
 	}
-	//cout << "y " << y << "\n";
-	//cout << "x " << x << "\n";
 }
 
 void SuperAce::moveLeft() {
-	//cout << "moveleft\n";
 	if (x > 10) {
-		x -= 10;
+		x -= 2;
 	}
-	//cout << "y " << y << "\n";
-	///cout << "x " << x << "\n";
 }
 
 void SuperAce::moveRight() {
-	//cout << "moveright\n";
 	if (x < SCREEN_WINDOW_WIDTH/2) {
-		x += 10;
+		x += 2;
 	}
-	//cout << "y " << y << "\n";
-	//cout << "x " << x << "\n";
+}
+
+void SuperAce::shoot() {
+	// Fish (aka. bullets)
+	MovingAnimation* bulletAnimation = new MovingAnimation(0, 0, 20, true, 4);
+	MovingAnimator* bulletAnimator = new MovingAnimator();
+
+	AnimatorHolder::animRegister(bulletAnimator);
+	Fish* fish = new Fish(x+110, y+30,
+		(AnimationFilm*)
+		AnimationFilmHolder::getSingleton()->
+		getFilm("doubleFish"),
+		bulletAnimation,
+		bulletAnimator);
+	fishes->push_back(fish);
+	fish->startMoving();
+	
+}
+
+void SuperAce::displayAll() {
+	this->display(Rect(0, 0, 0, 0));
+	for (int i = 0; i < fishes->size(); i++) {
+		Fish* fish = fishes->at(i);
+		fish->display(Rect(0, 0, 0, 0));
+	}
 }
 
 void SuperAce::die() {

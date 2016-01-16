@@ -34,19 +34,9 @@ void InputManager::move(bool up, bool down, bool left, bool right, SuperAce* &su
 	}
 }
 
-void InputManager::shoot(Fish* &fish) {
-	/*MovingAnimation *bulletAnimation = new MovingAnimation(0, 0, 20, true, 4);
-	MovingAnimator *bulletAnimator = new MovingAnimator();
-
-	AnimatorHolder::animRegister(bulletAnimator);
-
-	fish = new Fish(230, 300,
-		(AnimationFilm*)
-		AnimationFilmHolder::getSingleton()->
-		getFilm("doubleFish"),
-		bulletAnimation,
-		bulletAnimator
-		);*/
+void InputManager::shoot(SuperAce* superAce) 
+{
+	superAce->shoot();
 }
 
 void InputManager::twist() {

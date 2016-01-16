@@ -6,6 +6,7 @@
 #include "..\Objects\Items\Button.h"
 #include "..\Objects\Characters\SuperAce.h"
 #include "..\Objects\Items\Fish.h"
+
 namespace InputManager {
 
 	void moveUp(SuperAce* &superAce);
@@ -17,7 +18,8 @@ namespace InputManager {
 	void move(bool, bool, bool, bool, SuperAce* &superAce);
 
 	/* called if press space bar */
-	void shoot(Fish* &fish);
+	void shoot(SuperAce* superAce);
+
 	/* called if press key A */
 	void twist();
 	/* called if press P */
