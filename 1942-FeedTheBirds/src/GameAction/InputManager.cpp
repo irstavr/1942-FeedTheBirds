@@ -1,16 +1,37 @@
 #include "../../include/GameAction/InputManager.h"
 
-void InputManager::moveUp() {
-	
+void InputManager::moveUp(SuperAce* &superAce) {
+	superAce->moveUp();
 }
 
-void InputManager::moveDown() {
+void InputManager::moveDown(SuperAce* &superAce) {
+	superAce->moveDown();
 }
 
-void InputManager::moveLeft() {
+void InputManager::moveLeft(SuperAce* &superAce) {
+	superAce->moveLeft();
 }
 
-void InputManager::moveRight() {
+void InputManager::moveRight(SuperAce* &superAce) {
+	superAce->moveRight();
+}
+
+
+void InputManager::move(bool up, bool down, bool left, bool right, SuperAce* &superAce) {
+
+	cout << "up=" << up << " down=" << down<< " left=" << left<< " right= " << right << "\n";
+	if (up) {
+		moveUp(superAce);
+	}
+	if (down) {
+		moveDown(superAce);
+	}
+	if (left) {
+		moveLeft(superAce);
+	}
+	if (right) {
+		moveRight(superAce);
+	}
 }
 
 void InputManager::shoot() {

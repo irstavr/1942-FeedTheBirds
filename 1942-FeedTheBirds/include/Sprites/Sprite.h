@@ -11,7 +11,6 @@ using namespace std;
 
 class Sprite {
 	AnimationFilm* currFilm;
-	Dim x, y;
 	byte frameNo;
 	Rect frameBox;
 	bool flip_h, flip_v;
@@ -21,6 +20,8 @@ class Sprite {
 
 public:
 	Sprite(Dim _x, Dim _y, AnimationFilm* film);
+	
+	Dim x, y;
 
 	void setFrame(byte i);
 	byte getFrame(void) const;

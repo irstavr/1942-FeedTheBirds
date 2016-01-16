@@ -41,6 +41,7 @@ private:
 	TickAnimation *tickAnimation;
 	TimerTickAnimator *timerTick;
 
+
 	bool isInvisible;
 	bool isShooting;
 	bool hasSideFighter;

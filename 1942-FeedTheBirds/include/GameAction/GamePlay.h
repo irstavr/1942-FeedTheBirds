@@ -13,6 +13,9 @@
 #include "..\Animator\FrameRangeAnimator.h"
 #include "..\Animator\FlashingAnimator.h"
 #include "..\Animator\AnimatorHolder.h"
+#include "..\Objects\Characters\SuperAce.h"
+
+enum KEYS { UP, DOWN, LEFT, RIGHT };
 
 class GamePlay {
 	GamePlay();
@@ -80,6 +83,8 @@ public:
 
 	/* holds state of game (if in intro, game, gameover, exit) */
 	int gameState;
+
+	bool keys[4] = { false, false, false, false };
 	/* return the instance of the class*/
 	static GamePlay *instance(bool newOne = false);
 	/*start the window*/

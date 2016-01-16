@@ -13,21 +13,32 @@ SuperAce::SuperAce(Dim _x, Dim _y, AnimationFilm* film,
 }
 
 SuperAce::~SuperAce(void) {
-
 }
 
 void SuperAce::moveUp() {
-
+	//cout << "moveUp\n";
+	y -= 10;
+	//cout << "y " << y << "\n";
+	//cout << "x " << x << "\n";
 }
 
 void SuperAce::moveDown() {
-
+	//cout << "movedown\n";
+	y += 10;
+	//cout << "y " << y << "\n";
+	//cout << "x " << x << "\n";
 }
 
 void SuperAce::moveLeft() {
-
+	//cout << "moveleft\n";
+	x -= 10;
+	//cout << "y " << y << "\n";
+	///cout << "x " << x << "\n";
 }
 
 void SuperAce::moveRight() {
-
+	//cout << "moveright\n";
+	x += 10;
+	//cout << "y " << y << "\n";
+	//cout << "x " << x << "\n";
 }

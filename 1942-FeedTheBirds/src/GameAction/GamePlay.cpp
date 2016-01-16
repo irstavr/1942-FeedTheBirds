@@ -185,6 +185,7 @@ void GamePlay::runMainLoop() {
 
 		/* read from local input event queue */
 		inputManagement(alEvent);
+		InputManager::move(keys[UP], keys[DOWN], keys[LEFT], keys[RIGHT], superAce);
 		/* game loop logic */
 		updateGameState();
 		/* draw screen */
@@ -201,49 +202,71 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
 			gameState = GAME_STATE_FINISHED;
 			break;
+		
 		case ALLEGRO_EVENT_KEY_UP:
-			if (alEvent.keyboard.keycode == ALLEGRO_KEY_ESCAPE) {
+			switch (alEvent.keyboard.keycode)
+			{
+			case ALLEGRO_KEY_UP:
+				keys[UP] = false;
+				break;
+			case ALLEGRO_KEY_DOWN:
+				keys[DOWN] = false;
+				break;
+			case ALLEGRO_KEY_RIGHT:
+				keys[RIGHT] = false;
+				break;
+			case ALLEGRO_KEY_LEFT:
+				keys[LEFT] = false;
+				break;
+			case ALLEGRO_KEY_ESCAPE:
 				gameState = GAME_STATE_FINISHED;
 				break;
 			}
+			break;
 		case ALLEGRO_EVENT_KEY_DOWN:
-			switch (alEvent.keyboard.keycode) {
-				case ALLEGRO_KEY_UP:
-					InputManager::moveUp();
-					break;
-				case ALLEGRO_KEY_DOWN:
-					InputManager::moveDown();
-					break;
-				case ALLEGRO_KEY_RIGHT:
-					InputManager::moveRight();
-					break;
-				case ALLEGRO_KEY_LEFT:
-					InputManager::moveLeft();
-					break;
-				case ALLEGRO_KEY_SPACE:
-					InputManager::shoot();
-					break;
-				case ALLEGRO_KEY_A:
-					InputManager::twist();
-					break;
-				case ALLEGRO_KEY_P:
-					InputManager::pause(gameState);
-					AnimatorHolder::pause();
-					break;
-				case ALLEGRO_KEY_S:
-					InputManager::onKeyS(gameState, display, startButton);
-					break;
-				case ALLEGRO_KEY_ENTER:
-					InputManager::onKeyEnter(gameState, display, startButton);
-					break;
+			switch (alEvent.keyboard.keycode) 
+			{
+			case ALLEGRO_KEY_UP:
+				keys[UP] = true;
+				//InputManager::moveUp(superAce);
+				break;
+			case ALLEGRO_KEY_DOWN:
+				keys[DOWN] = true;
+				//InputManager::moveDown(superAce);
+				break;
+			case ALLEGRO_KEY_RIGHT:
+				keys[RIGHT] = true;
+				//InputManager::moveRight(superAce);
+				break;
+			case ALLEGRO_KEY_LEFT:
+				keys[LEFT] = true;
+				//InputManager::moveLeft(superAce);
+				break;
+			case ALLEGRO_KEY_SPACE:
+				InputManager::shoot();
+				break;
+			case ALLEGRO_KEY_A:
+				InputManager::twist();
+				break;
+			case ALLEGRO_KEY_P:
+				InputManager::pause(gameState);
+				AnimatorHolder::pause();
+				break;
+			case ALLEGRO_KEY_S:
+				InputManager::onKeyS(gameState, display, startButton);
+				break;
+			case ALLEGRO_KEY_ENTER:
+				InputManager::onKeyEnter(gameState, display, startButton);
+				break;
 				/* O:  Just for our debugging*/
-				case ALLEGRO_KEY_O:
-					if (gameState == GAME_STATE_MAINGAME) {
-						gameState = GAME_STATE_GAMEOVER;
-						break;
-					}
+			case ALLEGRO_KEY_O:
+				if (gameState == GAME_STATE_MAINGAME) {
+					gameState = GAME_STATE_GAMEOVER;
+					break;
+				}
 			}
-		}	
+		
+		}
 	} 
 	if (gameState == GAME_STATE_PAUSED && alEvent.keyboard.keycode == ALLEGRO_KEY_R) {
 		gameState = GAME_STATE_MAINGAME;
