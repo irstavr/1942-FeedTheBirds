@@ -26,28 +26,36 @@ SuperAce::~SuperAce(void) {
 
 void SuperAce::moveUp() {
 	//cout << "moveUp\n";
-	y -= 10;
+	if (y>10) {
+		y -= 10;
+	}
 	//cout << "y " << y << "\n";
 	//cout << "x " << x << "\n";
 }
 
 void SuperAce::moveDown() {
 	//cout << "movedown\n";
-	y += 10;
+	if (y < SCREEN_WINDOW_HEIGHT - 120) {
+		y += 10;
+	}
 	//cout << "y " << y << "\n";
 	//cout << "x " << x << "\n";
 }
 
 void SuperAce::moveLeft() {
 	//cout << "moveleft\n";
-	x -= 10;
+	if (x > 10) {
+		x -= 10;
+	}
 	//cout << "y " << y << "\n";
 	///cout << "x " << x << "\n";
 }
 
 void SuperAce::moveRight() {
 	//cout << "moveright\n";
-	x += 10;
+	if (x < SCREEN_WINDOW_WIDTH/2) {
+		x += 10;
+	}
 	//cout << "y " << y << "\n";
 	//cout << "x " << x << "\n";
 }
