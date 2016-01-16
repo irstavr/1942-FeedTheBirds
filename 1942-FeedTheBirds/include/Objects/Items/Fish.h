@@ -11,7 +11,6 @@
 
 using namespace std;
 
-typedef pair<float, float> COORDS;
 typedef vector<COORDS> DOTS;
 
 class Fish :public Sprite {

@@ -1,9 +1,11 @@
 #include "..\..\include\GameLogic\GameLogic.h"
 
-GameLogic::GameLogic (SuperAce  *superAce, BIRDS &birds, FISHES &fishes, int height, int width) :
-	superAce(superAce), birds(birds), fishes(fishes),
-	height(height), width(width),
-	gameRunning(true) {
+GameLogic::GameLogic (SuperAce  *superAce, BIRDS &birds, FISHES &fishes, 
+						int height, int width) :
+		superAce(superAce), birds(birds), fishes(fishes),
+		height(height), width(width),
+		gameRunning(true) {
+	profile = new PlayerProfile(std::make_pair(5,5));
 }
 
 bool GameLogic::isRunning() const {
@@ -11,7 +13,7 @@ bool GameLogic::isRunning() const {
 }
 
 void GameLogic::clearUp() {
-	profile->~PlayerProfile();
+	//profile->~PlayerProfile();
 	//superAce->die();
 	//birds->
 }

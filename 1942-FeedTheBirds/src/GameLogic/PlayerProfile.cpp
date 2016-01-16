@@ -4,10 +4,10 @@
 #include "../../include/GameLogic/PlayerProfile.h"
 
 // constructors
-PlayerProfile::PlayerProfile(Lifes startLifes, COORDS xy) {
+PlayerProfile::PlayerProfile(COORDS xy) {
 	score = -1;
 	startXY = xy;
-	lifes = startLifes;
+	lifes = _STARTING_LIFES;
 	birdsFeeded = 0;
 	hasBonus = false;
 	eatenYellowPOW = false;

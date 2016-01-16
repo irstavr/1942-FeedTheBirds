@@ -18,7 +18,7 @@ public:
 	BIRDS &birds;
 	FISHES &fishes;
 
-	static PlayerProfile* profile;
+	PlayerProfile* profile;
 
 	int height, width, superAceKilled;
 	bool gameRunning;

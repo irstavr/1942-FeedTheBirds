@@ -198,7 +198,7 @@ void GamePlay::initGameEngine() {
 	AnimatorHolder::animRegister(takeOffAnimator);
 	AnimatorHolder::animRegister(bulletAnimator);
 
-	currentGame->superAce = new SuperAce(200, 
+	superAce = new SuperAce(200, 
 							300, 
 							(AnimationFilm*)
 								AnimationFilmHolder::getSingleton()->
@@ -211,17 +211,20 @@ void GamePlay::initGameEngine() {
 							deathAnimator);
 
 	// Fish (aka. bullets)
-	currentGame->fishes.push_back(new Fish(230,300,
+	fishes.push_back(new Fish(230,300,
 					(AnimationFilm*)
 						AnimationFilmHolder::getSingleton()->
 						getFilm("doubleFish"),
 					bulletAnimation,
 					bulletAnimator));
+
+	//birds = new std::vector<Bird*>();
+	currentGame = new GameLogic(superAce, birds, fishes, 0, 0);
+
 }
 
 
 void GamePlay::runMainLoop() {
-
 	startButton->setVisibility(true);
 	startButton->startFlashing();
 
