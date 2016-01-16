@@ -28,11 +28,12 @@ void MovingAnimator::progress(unsigned long currTime) {
 			//fprintf(stdout, "Moving ANIMATOR_FINISHED\n");
 			state = ANIMATOR_FINISHED;
 			notifyProgressed();
+			sprite->~Sprite();
 			return;
 		}
 		else {
 			lastTime += anim->getDelay();
-			sprite->move(10, 0);
+			sprite->move(5, 0);
 			progress(currTime);  // Recursion (make it a loop)
 		}
 	}

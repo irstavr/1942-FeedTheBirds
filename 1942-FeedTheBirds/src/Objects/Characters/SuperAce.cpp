@@ -68,7 +68,7 @@ void SuperAce::shoot() {
 
 void SuperAce::displayAll() {
 	this->display(Rect(0, 0, 0, 0));
-	for (int i = 0; i < fishes->size(); i++) {
+	for (unsigned int i = 0; i < fishes->size(); i++) {
 		Fish* fish = fishes->at(i);
 		fish->display(Rect(0, 0, 0, 0));
 	}

@@ -19,7 +19,8 @@ class Sprite {
 
 public:
 	Sprite(Dim _x, Dim _y, AnimationFilm* film);
-	
+	~Sprite();
+
 	Dim x, y;
 
 	void setFrame(byte i);

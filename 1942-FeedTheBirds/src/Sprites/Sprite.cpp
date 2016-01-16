@@ -9,6 +9,12 @@ Sprite::Sprite(Dim _x, Dim _y, AnimationFilm* film) :
 	setFrame(0);
 }
 
+Sprite::~Sprite() {
+	currFilm = nullptr;
+	frameNo = 0;
+	isVisible = false;
+}
+
 void Sprite::setFrame(byte i) {
 	//TODO
 }
