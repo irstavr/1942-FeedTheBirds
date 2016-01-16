@@ -13,7 +13,6 @@
 #include "..\Animator\FrameRangeAnimator.h"
 #include "..\Animator\FlashingAnimator.h"
 #include "..\Animator\AnimatorHolder.h"
-#include "..\Objects\Characters\SuperAce.h"
 
 enum KEYS { UP, DOWN, LEFT, RIGHT };
 
@@ -39,9 +38,6 @@ class GamePlay {
 
 	/* for graphics */
 	Button *startButton, *pauseButton, *winButton, *gameOverButton;
-
-	SuperAce *superAce;
-	Fish* fish;
 
 	/* initialization */
 	bool initAllegro();
@@ -96,7 +92,5 @@ public:
 
 	~GamePlay();
 };
-
-
 
 #endif

@@ -32,7 +32,6 @@ PlayerProfile::~PlayerProfile() {
 	eatenYellowPOW = false;
 }
 
-
 int PlayerProfile::getStartX(void) {
 	return startXY.first; 
 }

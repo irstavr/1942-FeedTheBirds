@@ -19,6 +19,9 @@ SuperAce::SuperAce(Dim _x, Dim _y, AnimationFilm* film,
 }
 
 SuperAce::~SuperAce(void) {
+	isInvisible = true;
+	isShooting = false;
+
 }
 
 void SuperAce::moveUp() {

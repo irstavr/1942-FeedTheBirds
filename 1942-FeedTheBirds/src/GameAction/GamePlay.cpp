@@ -35,6 +35,8 @@ void GamePlay::initGamePlay() {
 	runMainLoop();
 	// Cleaning
 	cleanGamePlay();
+	cleanAllegro();
+
 }
 
 bool GamePlay::initAllegro() {
@@ -147,14 +149,31 @@ void GamePlay::initGameEngine() {
 	// Add start game button
 	FlashingAnimation *flashAnimation = new FlashingAnimation(1, 500, 500, 0);
 	FlashingAnimator *flashAnimator = new FlashingAnimator();
-	startButton = new Button(150, 
+	AnimatorHolder::animRegister(flashAnimator); 
+	
+	startButton = new Button(150,
 							 420, 
 							(AnimationFilm *) 
 								AnimationFilmHolder::getSingleton()->
 									getFilm("StartButton"),
 							flashAnimation,
 							flashAnimator);
-	AnimatorHolder::animRegister(flashAnimator);
+
+	pauseButton = new Button(200,
+							420,
+							(AnimationFilm *)
+								AnimationFilmHolder::getSingleton()->
+								getFilm("PauseButton"),
+							flashAnimation,
+							flashAnimator);
+
+	gameOverButton = new Button(200, 
+								420, 
+									(AnimationFilm *)
+										AnimationFilmHolder::getSingleton()->
+											getFilm("GameOverButton"),
+								flashAnimation, 
+								flashAnimator);
 
 	// Characters - Items:
 
@@ -179,7 +198,7 @@ void GamePlay::initGameEngine() {
 	AnimatorHolder::animRegister(takeOffAnimator);
 	AnimatorHolder::animRegister(bulletAnimator);
 
-	superAce = new SuperAce(200, 
+	currentGame->superAce = new SuperAce(200, 
 							300, 
 							(AnimationFilm*)
 								AnimationFilmHolder::getSingleton()->
@@ -192,14 +211,12 @@ void GamePlay::initGameEngine() {
 							deathAnimator);
 
 	// Fish (aka. bullets)
-	fish = new Fish(230,300,
+	currentGame->fishes.push_back(new Fish(230,300,
 					(AnimationFilm*)
 						AnimationFilmHolder::getSingleton()->
 						getFilm("doubleFish"),
 					bulletAnimation,
-					bulletAnimator
-		);
-
+					bulletAnimator));
 }
 
 
@@ -215,7 +232,6 @@ void GamePlay::runMainLoop() {
 
 		/* read from local input event queue */
 		inputManagement(alEvent);
-		InputManager::move(keys[UP], keys[DOWN], keys[LEFT], keys[RIGHT], superAce);
 		/* game loop logic */
 		updateGameState();
 		/* draw screen */
@@ -273,21 +289,20 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				//InputManager::moveLeft(superAce);
 				break;
 			case ALLEGRO_KEY_SPACE:
-				InputManager::shoot(fish);
+				InputManager::shoot(currentGame->fishes[0]);
 				break;
 			case ALLEGRO_KEY_A:
 				InputManager::twist();
 				break;
 			case ALLEGRO_KEY_P:
 				InputManager::pause(gameState);
-				AnimatorHolder::pause();
 				break;
 			case ALLEGRO_KEY_S:
 				InputManager::onKeyS(gameState, display, startButton);
-				fish->startMoving();
+				currentGame->fishes[0]->startMoving();
 				break;
 			case ALLEGRO_KEY_ENTER:
-				InputManager::onKeyEnter(gameState, display, startButton);
+				InputManager::onKeyEnter(gameState, display, startButton, gameOverButton);
 				break;
 				/* O:  Just for our debugging*/
 			case ALLEGRO_KEY_O:
@@ -295,9 +310,9 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 					gameState = GAME_STATE_GAMEOVER;
 					break;
 				}
-			}
-		
+			}		
 		}
+		InputManager::move(keys[UP], keys[DOWN], keys[LEFT], keys[RIGHT], currentGame->superAce);
 	} 
 	if (gameState == GAME_STATE_PAUSED && alEvent.keyboard.keycode == ALLEGRO_KEY_R) {
 		resumeGame();
@@ -346,9 +361,8 @@ void GamePlay::displayMainScreen(unsigned long now) {
 	if (gameState == GAME_STATE_MAINGAME) {
 		Terrain::getInstance().drawBackground();
 
-		superAce->display(Rect(0, 0, 0, 0));
-		fish->display(Rect(0, 0, 0, 0));
-
+		currentGame->superAce->display(Rect(0, 0, 0, 0));
+		currentGame->fishes[0]->display(Rect(0, 0, 0, 0));
 		al_flip_display();
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 		Terrain::getInstance().updateBackground();
@@ -370,22 +384,34 @@ void GamePlay::displayStartScreen(unsigned long now) {
 
 void GamePlay::pauseGame(unsigned long now) {
 	//TODO: display message with GAME PAUSED
-	gameState == GAME_STATE_PAUSED;
+	gameState = GAME_STATE_PAUSED;
 	AnimatorHolder::pause();
-	//pauseButton_s->startFlashing();
-	//pauseButton_s->setVisibility(true);
+	pauseButton->startFlashing();
+	pauseButton->setVisibility(true);
 }
 
 void GamePlay::resumeGame(void) {
-	gameState == GAME_STATE_MAINGAME;
+	gameState = GAME_STATE_MAINGAME;
 	AnimatorHolder::resume();
-	//pauseButton_s->stopFlashing();
-	//pauseButton_s->setVisibility(false);
+	pauseButton->stopFlashing();
+	pauseButton->setVisibility(false);
 }
 
 void GamePlay::gameOver(unsigned long now) {
-	//TODO: display message with GAME OVER
 	//TODO: display message to play again
+	cout << "GAME OVER FILARAKI";
+	Terrain::getInstance().drawBackground();
+	gameOverButton->setVisibility(true);
+
+	gameOverButton->startFlashing();
+	gameOverButton->display(Rect(0, 0, 0, 0));
+	
+	al_flip_display();
+	al_clear_to_color(al_map_rgb(0, 0, 0));
+
+	Terrain::getInstance().updateBackground();
+
+	this->cleanGamePlay();
 }
 
 void GamePlay::startGame() {
@@ -394,9 +420,9 @@ void GamePlay::startGame() {
 }
 
 void GamePlay::cleanGamePlay() {
-	cleanAllegro();
 	// TODO: clean all instances of all the classes!
 	//
+	this->currentGame->clearUp();
 }
 
 void GamePlay::cleanAllegro() {
