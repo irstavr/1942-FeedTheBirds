@@ -228,7 +228,6 @@ void GamePlay::initGameEngine() {
 void GamePlay::runMainLoop() {
 	startButton->setVisibility(true);
 	startButton->startFlashing();
-
 	/* finish == exit of game */
 	while (gameState != GAME_STATE_FINISHED) {
 		currTime = getCurrTime();
@@ -308,6 +307,8 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 			case ALLEGRO_KEY_O:
 				if (gameState == GAME_STATE_MAINGAME) {
 					gameState = GAME_STATE_GAMEOVER;
+					gameOverButton->setVisibility(true);
+					gameOverButton->startFlashing();
 					break;
 				}
 			}		
@@ -401,10 +402,12 @@ void GamePlay::gameOver(unsigned long now) {
 	//TODO: display message to play again
 	cout << "GAME OVER FILARAKI";
 	Terrain::getInstance().drawBackground();
-	gameOverButton->setVisibility(true);
+	//->setVisibility(true);
 
-	gameOverButton->startFlashing();
-	gameOverButton->display(Rect(0, 0, 0, 0));
+	//gameOverButton->startFlashing();
+	if (gameOverButton->isSpriteVisible()) {
+		gameOverButton->display(Rect(0, 0, 0, 0));
+	}
 	
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));
