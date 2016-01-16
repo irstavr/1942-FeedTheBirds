@@ -15,7 +15,6 @@ class Sprite {
 	Rect frameBox;
 	bool flip_h, flip_v;
 	bool isVisible;
-
 	bool canMove;
 
 public:
@@ -52,7 +51,5 @@ public:
 	virtual void move(int x, int y);
 	void display(Rect image);
 };
-
-
 
 #endif

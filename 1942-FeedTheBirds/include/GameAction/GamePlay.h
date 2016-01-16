@@ -41,6 +41,7 @@ class GamePlay {
 	Button *startButton, *pauseButton, *winButton, *gameOverButton;
 
 	SuperAce *superAce;
+	Fish* fish;
 
 	/* initialization */
 	bool initAllegro();
@@ -75,9 +76,12 @@ class GamePlay {
 
 	void displayStartScreen(unsigned long now);
 	void displayMainScreen(unsigned long now);
+	void pauseGame(unsigned long now);
+	void gameOver(unsigned long now);
+	void resumeGame(void);
 
 	/* updates game state and starts music */
-	void gameStarting();
+	void startGame();
 
 public:
 

@@ -2,7 +2,8 @@
 
 FrameRangeAnimator::FrameRangeAnimator (void): 
 	 	sprite((Sprite*) 0), 
-		anim((FrameRangeAnimation*) 0), currFrame(0xFF) {}
+		anim((FrameRangeAnimation*) 0), currFrame(0xFF) {
+}
 
 void FrameRangeAnimator::start(Sprite* s, FrameRangeAnimation* a, unsigned long t) {
 	sprite = s;
