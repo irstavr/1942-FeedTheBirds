@@ -33,7 +33,7 @@
 
 typedef int Dim;
 typedef unsigned char byte;
-typedef std::pair<float, float> COORDS;
+typedef std::pair<int, int> COORDS;
 
 /* get system current time */
 extern unsigned int getCurrTime(void);

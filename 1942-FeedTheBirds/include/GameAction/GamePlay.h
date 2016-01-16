@@ -13,6 +13,7 @@
 #include "..\Animator\FrameRangeAnimator.h"
 #include "..\Animator\FlashingAnimator.h"
 #include "..\Animator\AnimatorHolder.h"
+#include "..\Objects\Characters\SuperAce.h"
 
 enum KEYS { UP, DOWN, LEFT, RIGHT };
 
@@ -20,7 +21,6 @@ class GamePlay {
 	GamePlay();
 
 	std::string title;
-	static GameLogic *currentGame;
 	static float time, startTime, gamingTime, pauseTime;
 	unsigned long currTime;
 
@@ -38,6 +38,10 @@ class GamePlay {
 
 	/* for graphics */
 	Button *startButton, *pauseButton, *winButton, *gameOverButton;
+
+	SuperAce *superAce;
+	vector<Fish*> fishes;
+	vector<Bird*> birds;
 
 	/* initialization */
 	bool initAllegro();
@@ -81,6 +85,7 @@ class GamePlay {
 
 public:
 
+	 GameLogic *currentGame;
 	/* holds state of game (if in intro, game, gameover, exit) */
 	int gameState;
 

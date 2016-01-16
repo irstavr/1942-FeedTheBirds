@@ -198,7 +198,7 @@ void GamePlay::initGameEngine() {
 	AnimatorHolder::animRegister(takeOffAnimator);
 	AnimatorHolder::animRegister(bulletAnimator);
 
-	currentGame->superAce = new SuperAce(200, 
+	superAce = new SuperAce(200, 
 							300, 
 							(AnimationFilm*)
 								AnimationFilmHolder::getSingleton()->
@@ -211,7 +211,7 @@ void GamePlay::initGameEngine() {
 							deathAnimator);
 
 	// Fish (aka. bullets)
-	currentGame->fishes.push_back(new Fish(230,300,
+	fishes.push_back(new Fish(230,300,
 					(AnimationFilm*)
 						AnimationFilmHolder::getSingleton()->
 						getFilm("doubleFish"),
@@ -220,11 +220,14 @@ void GamePlay::initGameEngine() {
 					flashAnimation,
 					flashAnimator
 		));
+
+	//birds = new std::vector<Bird*>();
+	currentGame = new GameLogic(superAce, birds, fishes, 0, 0);
+
 }
 
 
 void GamePlay::runMainLoop() {
-
 	startButton->setVisibility(true);
 	startButton->startFlashing();
 
@@ -386,14 +389,14 @@ void GamePlay::displayStartScreen(unsigned long now) {
 
 void GamePlay::pauseGame(unsigned long now) {
 	//TODO: display message with GAME PAUSED
-	gameState == GAME_STATE_PAUSED;
+	gameState = GAME_STATE_PAUSED;
 	AnimatorHolder::pause();
 	pauseButton->startFlashing();
 	pauseButton->setVisibility(true);
 }
 
 void GamePlay::resumeGame(void) {
-	gameState == GAME_STATE_MAINGAME;
+	gameState = GAME_STATE_MAINGAME;
 	AnimatorHolder::resume();
 	pauseButton->stopFlashing();
 	pauseButton->setVisibility(false);

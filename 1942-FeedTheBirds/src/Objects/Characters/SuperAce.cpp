@@ -51,3 +51,7 @@ void SuperAce::moveRight() {
 	//cout << "y " << y << "\n";
 	//cout << "x " << x << "\n";
 }
+
+void SuperAce::die() {
+
+}

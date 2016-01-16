@@ -15,7 +15,7 @@ typedef std::map<BlastAnimationMapKey_t, std::string> BlastAnimationMap_t;
 class PlayerProfile {
 
 public:
-	PlayerProfile(Lifes startLifes, COORDS xy);
+	PlayerProfile(COORDS xy);
 	PlayerProfile();
 	~PlayerProfile();
 
@@ -48,8 +48,6 @@ private:
 	void setNumBirdsFeeded(unsigned int birdsNum);
 	void incrNumBirdsFeeded(void);
 	unsigned int getNumBirdsFeeded(void);
-
-
 
 };
 
