@@ -49,12 +49,6 @@ private:
 	TickAnimation *tickAnimation;
 	TimerTickAnimator *timerTick;
 
-
-	bool isInvisible;
-	bool isShooting;
-	bool hasSideFighter;
-	//bool hasQuadGun;
-
 	static void shootingCompleted(Animator*, void *closure);
 	static void invinsibilityEnded(Animator *, void *closure);
 
