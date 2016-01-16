@@ -23,7 +23,7 @@ Fish::Fish(int d, int t) : direction(d) {
 // TODO: if bonuses change bullets
 // add another field for advancing speed
 Fish::Fish(Dim _x, Dim _y, AnimationFilm* film,
-	FrameRangeAnimation *_flyAnimation, FrameRangeAnimator *_flyAnimator,
+	MovingAnimation *_flyAnimation, MovingAnimator *_flyAnimator,
 	FlashingAnimation *_flashAnimation, FlashingAnimator *_flashingAnimator) :
 	Sprite(_x, _y, film),
 	flyAnimation(_flyAnimation),

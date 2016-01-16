@@ -19,8 +19,8 @@ class Fish :public Sprite {
 private:
 	int speedY, direction, speedX;
 
-	FrameRangeAnimation *flyAnimation;
-	FrameRangeAnimator *flyAnimator;
+	MovingAnimation *flyAnimation;
+	MovingAnimator *flyAnimator;
 	FlashingAnimation *flashAnimation;
 	FlashingAnimator *flashAnimator;
 	TickAnimation *tickAnimation;
@@ -33,7 +33,7 @@ public:
 	Fish(int d, int t);
 
 	Fish::Fish(Dim _x, Dim _y, AnimationFilm* film,
-		FrameRangeAnimation *_flyAnimation, FrameRangeAnimator *_flyAnimator,
+		MovingAnimation *_flyAnimation, MovingAnimator *_flyAnimator,
 		FlashingAnimation *_flashAnimation, FlashingAnimator *_flashingAnimator);
 	~Fish(void);
 
