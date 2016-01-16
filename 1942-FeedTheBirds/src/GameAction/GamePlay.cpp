@@ -211,12 +211,13 @@ void GamePlay::initGameEngine() {
 							deathAnimator);
 
 	// Fish (aka. bullets)
-	fishes.push_back(new Fish(230,300,
-					(AnimationFilm*)
-						AnimationFilmHolder::getSingleton()->
-						getFilm("doubleFish"),
-					bulletAnimation,
-					bulletAnimator));
+	Fish* fish = new Fish(230, 300,
+						(AnimationFilm*)
+							AnimationFilmHolder::getSingleton()->
+								getFilm("doubleFish"),
+						bulletAnimation,
+						bulletAnimator);
+	fishes.push_back(fish);
 
 	//birds = new std::vector<Bird*>();
 	currentGame = new GameLogic(superAce, birds, fishes, 0, 0);
@@ -277,19 +278,15 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 			{
 			case ALLEGRO_KEY_UP:
 				keys[UP] = true;
-				//InputManager::moveUp(superAce);
 				break;
 			case ALLEGRO_KEY_DOWN:
 				keys[DOWN] = true;
-				//InputManager::moveDown(superAce);
 				break;
 			case ALLEGRO_KEY_RIGHT:
 				keys[RIGHT] = true;
-				//InputManager::moveRight(superAce);
 				break;
 			case ALLEGRO_KEY_LEFT:
 				keys[LEFT] = true;
-				//InputManager::moveLeft(superAce);
 				break;
 			case ALLEGRO_KEY_SPACE:
 				InputManager::shoot(currentGame->fishes[0]);
