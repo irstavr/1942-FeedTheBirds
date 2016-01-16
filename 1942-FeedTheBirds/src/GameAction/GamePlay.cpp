@@ -171,13 +171,13 @@ void GamePlay::initGameEngine() {
 								new FrameRangeAnimation(1, 3, 0, 0, 200, false, 3);
 	FrameRangeAnimator *deathAnimator = new FrameRangeAnimator();
 
-	//MovingAnimation *bulletAnimation = new MovingAnimation(0, 0, 20, true, 4);
-	//MovingAnimator *bulletAnimator = new MovingAnimator();
+	MovingAnimation *bulletAnimation = new MovingAnimation(0, 0, 20, true, 4);
+	MovingAnimator *bulletAnimator = new MovingAnimator();
 
 	AnimatorHolder::animRegister(landingAnimator);
 	AnimatorHolder::animRegister(deathAnimator);
 	AnimatorHolder::animRegister(takeOffAnimator);
-	//AnimatorHolder::animRegister(bulletAnimator);
+	AnimatorHolder::animRegister(bulletAnimator);
 
 	superAce = new SuperAce(200, 
 							300, 
@@ -192,15 +192,13 @@ void GamePlay::initGameEngine() {
 							deathAnimator);
 
 	// Fish (aka. bullets)
-	/*fish = new Fish(230,300,
+	fish = new Fish(230,300,
 					(AnimationFilm*)
 						AnimationFilmHolder::getSingleton()->
 						getFilm("doubleFish"),
 					bulletAnimation,
-					bulletAnimator,
-					flashAnimation,
-					flashAnimator
-		);*/
+					bulletAnimator
+		);
 
 }
 
