@@ -139,7 +139,6 @@ void GamePlay::initGameEngine() {
 	// AnimationFilmHolder
 	// Background
 	// etc.
-	Terrain::getInstance();
 	TerrainStartScreen::getInstance();
 	AnimationFilmHolder::initialize("1942-FeedTheBirds\\data\\films.ini");
 	AnimationFilmHolder *animFH = AnimationFilmHolder::getSingleton();
@@ -167,28 +166,28 @@ void GamePlay::initGameEngine() {
 							flashAnimation,
 							flashAnimator);
 
-	gameOverButton = new Button(200, 
-								420, 
-									(AnimationFilm *)
-										AnimationFilmHolder::getSingleton()->
-											getFilm("GameOverButton"),
+	gameOverButton = new Button(500, 
+								380, 
+								(AnimationFilm *)
+									AnimationFilmHolder::getSingleton()->
+										getFilm("GameOverButton"),
 								flashAnimation, 
 								flashAnimator);
+
+	// replay button ?
+
 
 	// Characters - Items:
 
 	// SuperAce
 	// add take off, landing, explosion(?) bbs
 	//int total_frames = AnimationFilmHolder::getSingleton()->getFilm("landingFilm")->getTotalFrames();
-	FrameRangeAnimation *landingAnimation = 
-								new FrameRangeAnimation(1, 3, 0, 0, 200, false, 1);
-	FrameRangeAnimator *landingAnimator = new FrameRangeAnimator();
-	FrameRangeAnimation *takeOffAnimation = 
-								new FrameRangeAnimation(1, 3, 0, 0, 200, false, 2);
-	FrameRangeAnimator *takeOffAnimator = new FrameRangeAnimator();
-	FrameRangeAnimation *deathAnimation = 
-								new FrameRangeAnimation(1, 3, 0, 0, 200, false, 3);
-	FrameRangeAnimator *deathAnimator = new FrameRangeAnimator();
+	landingAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 1);
+	landingAnimator = new FrameRangeAnimator();
+	takeOffAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 2);
+	takeOffAnimator = new FrameRangeAnimator();
+	deathAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 3);
+	deathAnimator = new FrameRangeAnimator();
 
 	//bulletAnimation = new MovingAnimation(0, 0, 20, true, 4);
 	//bulletAnimator = new MovingAnimator();
@@ -198,20 +197,8 @@ void GamePlay::initGameEngine() {
 	AnimatorHolder::animRegister(takeOffAnimator);
 	//AnimatorHolder::animRegister(bulletAnimator);
 
-	superAce = new SuperAce(200, 
-							300, 
-							(AnimationFilm*)
-								AnimationFilmHolder::getSingleton()->
-											getFilm("superAce"),
-							takeOffAnimation, 
-							takeOffAnimator, 
-							landingAnimation, 
-							landingAnimator,
-							deathAnimation, 
-							deathAnimator);
 
 	//birds = new std::vector<Bird*>();
-	currentGame = new GameLogic(superAce, birds, 0, 0);
 
 }
 
@@ -279,7 +266,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				keys[LEFT] = true;
 				break;
 			case ALLEGRO_KEY_SPACE:
-				InputManager::shoot(superAce);
+				InputManager::shoot(currentGame->superAce);
 				break;
 			case ALLEGRO_KEY_A:
 				InputManager::twist();
@@ -289,9 +276,11 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				break;
 			case ALLEGRO_KEY_S:
 				InputManager::onKeyS(gameState, display, startButton);
+				startNewGame();
 				break;
 			case ALLEGRO_KEY_ENTER:
 				InputManager::onKeyEnter(gameState, display, startButton, gameOverButton);
+				cleanGamePlay();
 				break;
 				/* O:  Just for our debugging*/
 			case ALLEGRO_KEY_O:
@@ -402,19 +391,37 @@ void GamePlay::gameOver(unsigned long now) {
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
 	Terrain::getInstance().updateBackground();
-
-	this->cleanGamePlay();
 }
 
-void GamePlay::startGame() {
+void GamePlay::startNewGame() {
 	gameState = GAME_STATE_MAINGAME;
 	// TODO: play music ?
+
+	currentGame = new GameLogic(takeOffAnimation,
+								takeOffAnimator,
+								landingAnimation,
+								landingAnimator,
+								deathAnimation,
+								deathAnimator);
+
+	al_flip_display();
+	al_clear_to_color(al_map_rgb(0, 0, 0));
+	Terrain::getInstance();
 }
 
 void GamePlay::cleanGamePlay() {
 	// TODO: clean all instances of all the classes!
 	//
-	this->currentGame->clearUp();
+	delete currentGame;
+
+	Terrain::cleanUp();
+	//BitmapLoader::~BitmapLoader();
+
+	//CollisionChecker::cleanUp();
+	//AnimationFilmHolder::destroy();
+
+	//cleanAllegro();
+
 }
 
 void GamePlay::cleanAllegro() {

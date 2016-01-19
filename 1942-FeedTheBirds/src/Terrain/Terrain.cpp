@@ -1,5 +1,7 @@
 #include "..\..\include\Terrain\Terrain.h"
 
+Terrain* Terrain::terrain;
+
 Terrain::Terrain() :
 	font_file("1942-FeedTheBirds\\data\\Fonts\\karmatic_arcade_font.ttf"),
 	width(TERRAIN_IMAGE_WIDTH),
@@ -21,6 +23,10 @@ Terrain::Terrain() :
 }
 
 Terrain::~Terrain() {
+}
+
+void Terrain::cleanUp() {
+	delete terrain;
 }
 
 Terrain& Terrain::getInstance() {

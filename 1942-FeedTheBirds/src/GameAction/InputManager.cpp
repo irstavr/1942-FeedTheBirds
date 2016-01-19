@@ -42,8 +42,10 @@ void InputManager::shoot(SuperAce* superAce)
 void InputManager::twist() {
 }
 
-void InputManager::pause(int &gameState) {
-	if(gameState == GAME_STATE_MAINGAME) gameState = GAME_STATE_PAUSED;
+void InputManager::pause(int &gameState) 
+{
+	if(gameState == GAME_STATE_MAINGAME) 
+		gameState = GAME_STATE_PAUSED;
 }
 
 void InputManager::onKeyS(int &gameState, ALLEGRO_DISPLAY* &display, Button* &startButton) {

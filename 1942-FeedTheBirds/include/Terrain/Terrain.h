@@ -8,7 +8,6 @@
 
 class Terrain {
 private:
-	static Terrain* terrain; //sigleton
 
 	// bg image is scrollable
 	int offsetBg;
@@ -34,6 +33,8 @@ public:
 	Terrain();
 	~Terrain();
 
+	static Terrain* terrain; //sigleton
+
 	/* mike geig - parallax bg */
 	float x;
 	float y;
@@ -52,7 +53,7 @@ public:
 	ALLEGRO_COLOR grey;
 	const char* font_file;
 
-	static void cleanUp() {}
+	static void cleanUp();
 	static Terrain& getInstance();
 	void updateBackground();
 	void drawBackground();

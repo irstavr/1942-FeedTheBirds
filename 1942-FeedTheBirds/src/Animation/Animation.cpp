@@ -13,6 +13,6 @@ animid_t Animation::getId(void) {
 	return id;
 }
 
-Animation :: ~Animation() {
+Animation::~Animation() {
 	id = -1;
 }

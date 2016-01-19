@@ -13,17 +13,24 @@ typedef vector<Bird*> BIRDS;
 class GameLogic {
 
 public:
+	GameLogic(FrameRangeAnimation *takeOffAnimation,
+				FrameRangeAnimator *takeOffAnimator,
+				FrameRangeAnimation *landingAnimation,
+				FrameRangeAnimator *landingAnimator,
+				FrameRangeAnimation *deathAnimation,
+				FrameRangeAnimator *deathAnimator);
+	~GameLogic();
+
 	SuperAce *superAce;
-	BIRDS &birds;
+	BIRDS *birds;
 
 	PlayerProfile* profile;
 
 	int height, width, superAceKilled;
 	bool gameRunning;
 	
-	static Points highScore;
+	Points highScore;
 
-	GameLogic(SuperAce *superAce, BIRDS &birds, int height, int width);
 	/*solve all the outrange stuff*/
 	void solveOutRange();
 	/*solve all the collision stuff*/

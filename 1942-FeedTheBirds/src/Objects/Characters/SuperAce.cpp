@@ -19,10 +19,11 @@ SuperAce::SuperAce(Dim _x, Dim _y, AnimationFilm* film,
 	fishes = new vector<Fish*>();
 }
 
-SuperAce::~SuperAce(void) {
+SuperAce::~SuperAce(void) 
+{
+	delete fishes;
 	isInvisible = true;
 	isShooting = false;
-
 }
 
 void SuperAce::moveUp() {

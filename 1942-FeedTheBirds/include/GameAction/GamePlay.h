@@ -18,7 +18,24 @@
 enum KEYS { UP, DOWN, LEFT, RIGHT };
 
 class GamePlay {
+
+public:
 	GamePlay();
+	~GamePlay();
+
+	GameLogic *currentGame;
+
+	/* holds state of game (if in intro, game, gameover, exit) */
+	int gameState;
+	MovingAnimation *bulletAnimation;
+	MovingAnimator *bulletAnimator;
+
+	/* return the instance of the class*/
+	static GamePlay *instance(bool newOne = false);
+	/*start the window*/
+	void start();
+
+private:
 
 	std::string title;
 	static float time, startTime, gamingTime, pauseTime;
@@ -39,7 +56,14 @@ class GamePlay {
 	/* for graphics */
 	Button *startButton, *pauseButton, *winButton, *gameOverButton;
 
-	vector<Bird*> birds;
+	bool keys[4] = { false, false, false, false };
+
+	FrameRangeAnimation *takeOffAnimation;
+	FrameRangeAnimator *takeOffAnimator;
+	FrameRangeAnimation *landingAnimation;
+	FrameRangeAnimator *landingAnimator;
+	FrameRangeAnimation *deathAnimation;
+	FrameRangeAnimator *deathAnimator;
 
 	/* initialization */
 	bool initAllegro();
@@ -53,8 +77,9 @@ class GamePlay {
 	void initGameEngine();
 	/* read from local input event queue */
 	void inputManagement(ALLEGRO_EVENT);
-	/*move in every frame*/
-	bool frameFunc();
+
+	/* updates game state and starts music */
+	void startNewGame();
 	/* game loop logic */
 	void updateGameState();
 	/*rander in every frame*/
@@ -78,25 +103,6 @@ class GamePlay {
 	void gameOver(unsigned long now);
 	void resumeGame(void);
 
-	/* updates game state and starts music */
-	void startGame();
-
-public:
-
-	 GameLogic *currentGame;
-	/* holds state of game (if in intro, game, gameover, exit) */
-	int gameState;
-	MovingAnimation *bulletAnimation;
-	MovingAnimator *bulletAnimator;
-	SuperAce *superAce;
-
-	bool keys[4] = { false, false, false, false };
-	/* return the instance of the class*/
-	static GamePlay *instance(bool newOne = false);
-	/*start the window*/
-	void start();
-
-	~GamePlay();
 };
 
 #endif
