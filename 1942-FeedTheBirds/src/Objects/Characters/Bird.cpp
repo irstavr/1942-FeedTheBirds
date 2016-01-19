@@ -16,11 +16,11 @@ Bird::~Bird(void)
 }
 
 void Bird::shoot() {
-	MovingAnimation* bulletAnimation = new MovingAnimation(0, 0, 20, true, 4);
+	MovingAnimation* bulletAnimation = new MovingAnimation(-5, 0, 20, true, 4);
 	MovingAnimator* bulletAnimator = new MovingAnimator();
 
 	AnimatorHolder::animRegister(bulletAnimator);
-	BirdDropping* dropping = new BirdDropping(x + 110, y + 30,
+	BirdDropping* dropping = new BirdDropping(x - 70, y - 30,
 		(AnimationFilm*)
 		AnimationFilmHolder::getSingleton()->
 		getFilm("doubleFish"),
@@ -36,6 +36,12 @@ void Bird::displayAll() {
 		BirdDropping* dropping = droppings->at(i);
 		dropping->display(Rect(0, 0, 0, 0));
 	}
+}
+
+void Bird::startMoving(void) {
+	fprintf(stdout, "startMoving -> ButtonBird.cpp\n");
+	flyAnimator->start(this, flyAnimation, getCurrTime());
+	AnimatorHolder::markAsRunning(flyAnimator);
 }
 
 void Bird::removeLife() {

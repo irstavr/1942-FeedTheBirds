@@ -18,11 +18,14 @@ public:
 				FrameRangeAnimation *landingAnimation,
 				FrameRangeAnimator *landingAnimator,
 				FrameRangeAnimation *deathAnimation,
-				FrameRangeAnimator *deathAnimator);
+				FrameRangeAnimator *deathAnimator,
+				FrameRangeAnimation *flyAnimation,
+				FrameRangeAnimator *flyAnimator);
 	~GameLogic();
 
 	SuperAce *superAce;
 	BIRDS *birds;
+
 
 	PlayerProfile* profile;
 

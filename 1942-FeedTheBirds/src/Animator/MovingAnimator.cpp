@@ -23,7 +23,7 @@ void MovingAnimator::progress(unsigned long currTime) {
 	assert(lastTime <= currTime);
 
 	while (currTime > lastTime && currTime - lastTime >= anim->getDelay()) {
-		sprite->move(anim->getDx(), anim->getDy(), 0);
+		//sprite->move(anim->getDx(), anim->getDy());
 		if (!anim->getContinuous()|| sprite->x > SCREEN_WINDOW_WIDTH-50) {
 			//fprintf(stdout, "Moving ANIMATOR_FINISHED\n");
 			state = ANIMATOR_FINISHED;
@@ -33,7 +33,7 @@ void MovingAnimator::progress(unsigned long currTime) {
 		}
 		else {
 			lastTime += anim->getDelay();
-			sprite->move(5, 0, 0);
+			sprite->move(anim->getDx(), anim->getDy());
 			progress(currTime);  // Recursion (make it a loop)
 		}
 	}

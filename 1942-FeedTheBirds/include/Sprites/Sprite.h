@@ -15,7 +15,6 @@ class Sprite {
 	bool flip_h, flip_v;
 	bool isVisible;
 	bool canMove;
-	bool leftDirection;
 
 public:
 	Sprite(Dim _x, Dim _y, AnimationFilm* film);
@@ -49,7 +48,7 @@ public:
 	void enableMovement(void);
 	void disableMovement(void);
 
-	virtual void move(int x, int y, int leftDirection);
+	virtual void move(int x, int y);
 	void display(Rect image);
 };
 

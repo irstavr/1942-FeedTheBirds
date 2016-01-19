@@ -1,4 +1,5 @@
 ﻿#include "../../include/Animator/FrameRangeAnimator.h"
+#include <iostream>
 
 FrameRangeAnimator::FrameRangeAnimator (void): 
 	 	sprite((Sprite*) 0), 
@@ -20,8 +21,8 @@ void FrameRangeAnimator::progress (unsigned long currTime) {
 			currFrame = anim->getStartFrame();
 	    else
 			++currFrame;
-
-	    sprite->move(anim->getDx(), anim->getDy(), 0);
+		cout << currFrame << "\n"; 
+	   sprite->move(anim->getDx(), anim->getDy());
 	    sprite->setFrame(currFrame);
 	    lastTime += anim->getDelay();
 

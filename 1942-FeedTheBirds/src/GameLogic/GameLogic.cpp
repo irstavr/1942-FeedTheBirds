@@ -5,7 +5,9 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 					  FrameRangeAnimation *landingAnimation,
 					  FrameRangeAnimator *landingAnimator,
 					  FrameRangeAnimation *deathAnimation,
-					  FrameRangeAnimator *deathAnimator) :
+					  FrameRangeAnimator *deathAnimator,
+					FrameRangeAnimation *flyAnimation,
+					FrameRangeAnimator *flyAnimator) :
 		gameRunning(true),
 		highScore(0) {
 	profile = new PlayerProfile(std::make_pair(5,5));
@@ -20,7 +22,16 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 							landingAnimator,
 							deathAnimation,
 							deathAnimator);
-	//birds = 
+
+	Bird *bird = new Bird(1000, 500,
+		(AnimationFilm*)
+		AnimationFilmHolder::getSingleton()->
+		getFilm("bonusBird"),
+		flyAnimation,
+		flyAnimator);
+
+	birds = new vector<Bird*>();
+	birds->push_back(bird);
 }
 
 GameLogic::~GameLogic()

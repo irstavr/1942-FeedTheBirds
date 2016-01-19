@@ -5,21 +5,23 @@ using namespace std;
 AnimationFilmHolder *AnimationFilmHolder::animationFH = NULL;
 
 AnimationFilmHolder::AnimationFilmHolder(const char* path) {
-	char buff[512], ch = ' ', bitmap[50], bboxes[50], id[50];
-	int frames = 1;
+	char buff[1412], ch = ' ', bitmap[50], bboxes[50], id[50];
+	int frames;
 	BitmapLoader bitmapLoader;
 	ifstream cfg(path);
 	while (!cfg.eof()) {
 		ch = cfg.peek();
 		if (ch != '#' && ch != '\n') {
-			cfg.getline(buff, 512);
+			cfg.getline(buff, 1412);
 			sscanf(buff, "bitmap=%s id=%s frames=%d bboxes=%s", bitmap, id, &frames, bboxes);
-			fprintf(stderr, "%s %d %d %s\n",  bitmap, id, frames, bboxes);
+			fprintf(stderr, "%s %d %d %s\n", bitmap, id, frames, bboxes);
 			AnimationFilm* anim_f = new AnimationFilm(bitmapLoader.load(bitmap), read_bboxes(bboxes, frames), id);
 			filmMap[id] = anim_f;
+			cout << "bitmap=" << bitmap << " id= " << id << " frames=" << frames
+				 << " bboxes=" << bboxes << "\n";
 		}
 		else {
-			cfg.ignore(512, '\n');
+			cfg.ignore(1412, '\n');
 		}
 		ch = cfg.peek();
 		if (ch == ' ') break;

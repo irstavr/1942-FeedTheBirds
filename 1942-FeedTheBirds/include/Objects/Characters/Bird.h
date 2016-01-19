@@ -1,9 +1,9 @@
 #ifndef _BIRD_H
 #define _BIRD_H
 
-#include "../Items/BirdDropping.h"
-#include "../../Animator/FrameRangeAnimator.h"
-#include "../../Animation/AnimationFilmHolder.h"
+#include "..\Items\BirdDropping.h"
+#include "..\..\Animator\FrameRangeAnimator.h"
+#include "..\..\Animation\AnimationFilmHolder.h"
 
 typedef vector<BirdDropping*> DROPPINGS;
 
@@ -18,6 +18,7 @@ public:
 	void displayAll();
 	void removeLife(void);
 	void leaveScreen(void);
+	void startMoving(void);
 
 private:
 	int birdLives;

@@ -65,6 +65,9 @@ private:
 	FrameRangeAnimation *deathAnimation;
 	FrameRangeAnimator *deathAnimator;
 
+	FrameRangeAnimation *flyAnimation;
+	FrameRangeAnimator *flyAnimator;
+
 	/* initialization */
 	bool initAllegro();
 	/* clear allegro */

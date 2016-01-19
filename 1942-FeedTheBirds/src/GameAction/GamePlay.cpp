@@ -181,13 +181,15 @@ void GamePlay::initGameEngine() {
 
 	// SuperAce
 	// add take off, landing, explosion(?) bbs
-	//int total_frames = AnimationFilmHolder::getSingleton()->getFilm("landingFilm")->getTotalFrames();
+	int total_frames = AnimationFilmHolder::getSingleton()->getFilm("bonusBird")->getTotalFrames();
 	landingAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 1);
 	landingAnimator = new FrameRangeAnimator();
 	takeOffAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 2);
 	takeOffAnimator = new FrameRangeAnimator();
 	deathAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 3);
 	deathAnimator = new FrameRangeAnimator();
+	flyAnimation = new FrameRangeAnimation(1, 3, -5, -5, 200, false, 3);
+	flyAnimator = new FrameRangeAnimator();
 
 	//bulletAnimation = new MovingAnimation(0, 0, 20, true, 4);
 	//bulletAnimator = new MovingAnimator();
@@ -195,7 +197,7 @@ void GamePlay::initGameEngine() {
 	AnimatorHolder::animRegister(landingAnimator);
 	AnimatorHolder::animRegister(deathAnimator);
 	AnimatorHolder::animRegister(takeOffAnimator);
-	//AnimatorHolder::animRegister(bulletAnimator);
+	AnimatorHolder::animRegister(flyAnimator);
 
 
 	//birds = new std::vector<Bird*>();
@@ -342,6 +344,7 @@ void GamePlay::displayMainScreen(unsigned long now) {
 		Terrain::getInstance().drawBackground();
 
 		currentGame->superAce->displayAll();
+		currentGame->birds->at(0)->displayAll();
 		al_flip_display();
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 		Terrain::getInstance().updateBackground();
@@ -402,7 +405,11 @@ void GamePlay::startNewGame() {
 								landingAnimation,
 								landingAnimator,
 								deathAnimation,
-								deathAnimator);
+								deathAnimator,
+								flyAnimation,
+								flyAnimator);
+
+	currentGame->birds->at(0)->startMoving();
 
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));

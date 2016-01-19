@@ -2,7 +2,7 @@
 
 #include <cassert>
 #include <allegro5/allegro_native_dialog.h>
-
+#include <iostream>
 BitmapLoader::BitmapLoader(void) {}
 
 BitmapLoader::~BitmapLoader() {
@@ -32,6 +32,7 @@ ALLEGRO_BITMAP* BitmapLoader::getBitmap(const std::string path) const {
 
 ALLEGRO_BITMAP* BitmapLoader::load(const std::string& path) {
 	ALLEGRO_BITMAP *b = getBitmap(path);
+	std::cout << "path=" << path << "\n";
 	if (!b) {
 		bitmaps[path] = (b = loadBitmap(path));
 		assert(b);

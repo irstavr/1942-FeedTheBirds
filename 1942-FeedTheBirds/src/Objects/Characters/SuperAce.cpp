@@ -52,7 +52,7 @@ void SuperAce::moveRight() {
 
 void SuperAce::shoot() {
 	// Fish (aka. bullets)
-	MovingAnimation* bulletAnimation = new MovingAnimation(0, 0, 20, true, 4);
+	MovingAnimation* bulletAnimation = new MovingAnimation(5, 0, 20, true, 4);
 	MovingAnimator* bulletAnimator = new MovingAnimator();
 
 	AnimatorHolder::animRegister(bulletAnimator);

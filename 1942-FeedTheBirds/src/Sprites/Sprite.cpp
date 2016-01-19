@@ -16,7 +16,13 @@ Sprite::~Sprite() {
 }
 
 void Sprite::setFrame(byte i) {
-	//TODO
+	if (currFilm->getTotalFrames() > 1) {
+		if (i != frameNo) {
+			//assert(i < currFilm->GetTotalFrames());
+			if (i >= currFilm->getTotalFrames()) i = 0;
+			frameBox = currFilm->getFrameBox(frameNo = i);
+		}
+	}
 }
 
 byte Sprite::getFrame(void) const { 
@@ -99,13 +105,7 @@ void Sprite::display(Rect image) {
 	//al_draw_bitmap_region(currFilm->GetBitmap(), frameBox.x, frameBox.y, frameBox.w, frameBox.h, da.x, da.y, 0);
 }
 
-void Sprite::move(int x, int y, int leftDirection) {
-	if (leftDirection) {
-		this->x -= x;
-		this->y -= y;
-	}
-	else {
+void Sprite::move(int x, int y) {
 		this->x += x;
 		this->y += y;
-	}
 }
