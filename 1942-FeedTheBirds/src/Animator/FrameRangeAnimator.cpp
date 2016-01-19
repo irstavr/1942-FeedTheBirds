@@ -21,7 +21,7 @@ void FrameRangeAnimator::progress (unsigned long currTime) {
 	    else
 			++currFrame;
 
-	    sprite->move(anim->getDx(), anim->getDy());
+	    sprite->move(anim->getDx(), anim->getDy(), 0);
 	    sprite->setFrame(currFrame);
 	    lastTime += anim->getDelay();
 

@@ -99,7 +99,13 @@ void Sprite::display(Rect image) {
 	//al_draw_bitmap_region(currFilm->GetBitmap(), frameBox.x, frameBox.y, frameBox.w, frameBox.h, da.x, da.y, 0);
 }
 
-void Sprite::move(int x, int y) {
-	this->x += x;
-	this->y += y;
+void Sprite::move(int x, int y, int leftDirection) {
+	if (leftDirection) {
+		this->x -= x;
+		this->y -= y;
+	}
+	else {
+		this->x += x;
+		this->y += y;
+	}
 }

@@ -8,7 +8,6 @@
 #include "..\Utilities\Utilities.h"
 using namespace std;
 
-
 class Sprite {
 	AnimationFilm* currFilm;
 	byte frameNo;
@@ -16,6 +15,7 @@ class Sprite {
 	bool flip_h, flip_v;
 	bool isVisible;
 	bool canMove;
+	bool leftDirection;
 
 public:
 	Sprite(Dim _x, Dim _y, AnimationFilm* film);
@@ -49,7 +49,7 @@ public:
 	void enableMovement(void);
 	void disableMovement(void);
 
-	virtual void move(int x, int y);
+	virtual void move(int x, int y, int leftDirection);
 	void display(Rect image);
 };
 

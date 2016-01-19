@@ -64,7 +64,6 @@ void SuperAce::shoot() {
 		bulletAnimator);
 	fishes->push_back(fish);
 	fish->startMoving();
-	
 }
 
 void SuperAce::displayAll() {
