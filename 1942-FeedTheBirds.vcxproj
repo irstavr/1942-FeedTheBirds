@@ -186,6 +186,7 @@
     <ClInclude Include="1942-FeedTheBirds\include\Animator\FrameRangeAnimator.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Animator\MovingAnimator.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Animator\TimerTickAnimator.h" />
+    <ClInclude Include="1942-FeedTheBirds\include\GameAction\AI.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\CollisionChecker.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\GamePlay.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\InputManager.h" />

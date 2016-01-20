@@ -3,7 +3,8 @@
 GamePlay::GamePlay() :
 	title("anti1942 - StopWars"),
 	gameState(GAME_STATE_INTRO),
-	windowHeight(START_SCREEN_WINDOW_HEIGHT), windowWidth(START_SCREEN_WINDOW_WIDTH)
+	windowHeight(START_SCREEN_WINDOW_HEIGHT), 
+	windowWidth(START_SCREEN_WINDOW_WIDTH)
 {
 	//time(-1), startTime(0),
 	//musicOn(false), pauseTime(-1.5), colorB(false) {
@@ -198,7 +199,6 @@ void GamePlay::initGameEngine() {
 	AnimatorHolder::animRegister(deathAnimator);
 	AnimatorHolder::animRegister(takeOffAnimator);
 	AnimatorHolder::animRegister(flyAnimator);
-
 
 	//birds = new std::vector<Bird*>();
 

@@ -370,6 +370,9 @@
     <ClInclude Include="1942-FeedTheBirds\include\Animator\FrameRangeAnimator.h">
       <Filter>Header Files\Animator</Filter>
     </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\GameAction\AI.h">
+      <Filter>Header Files\GameAction</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="1942-FeedTheBirds\data\Fonts\arial.ttf">
