@@ -8,6 +8,8 @@
 #include "../../Animator/FrameRangeAnimator.h"
 #include "../../Animation/AnimationFilmHolder.h"
 #include "../Items/Fish.h"
+#include "../Items/BirdDropping.h"
+#include "Bird.h"
 
 typedef vector<Fish*> FISHES;
 

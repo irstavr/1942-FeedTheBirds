@@ -57,11 +57,11 @@ void SuperAce::shoot() {
 
 	AnimatorHolder::animRegister(bulletAnimator);
 	Fish* fish = new Fish(x+110, y+30,
-		(AnimationFilm*)
-		AnimationFilmHolder::getSingleton()->
-		getFilm("doubleFish"),
-		bulletAnimation,
-		bulletAnimator);
+						(AnimationFilm*)
+						AnimationFilmHolder::getSingleton()->
+						getFilm("doubleFish"),
+						bulletAnimation,
+						bulletAnimator);
 	fishes->push_back(fish);
 	fish->startMoving();
 }
@@ -83,5 +83,19 @@ void SuperAce::die() {
 // super ace - pows -> activate LEVELUP SUPERACE
 void SuperAce::collisionAction(Sprite* s)
 {
+	cout << "COLLISION! SUPER ACE!\n";	
+	
+	if (Bird* v = dynamic_cast<Bird*>(s)) {
 
+	}
+
+	if (BirdDropping* v = dynamic_cast<BirdDropping*>(s)) {
+
+	}
+	/*
+	if (Pow* v = dynamic_cast<Pow*>(s)) {
+		// old was safely casted to NewType
+		v->doSomething();
+	}
+	*/
 }
