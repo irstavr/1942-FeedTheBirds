@@ -37,7 +37,7 @@ public:
 	/*solve all the outrange stuff*/
 	void solveOutRange();
 	/*solve all the collision stuff*/
-	int solveCollision(int &p, int status);
+	int solveCollision();
 	/*return if the game is still running*/
 	bool isRunning() const;
 	void clearUp();

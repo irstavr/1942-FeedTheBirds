@@ -64,7 +64,6 @@ private:
 	FrameRangeAnimator *landingAnimator;
 	FrameRangeAnimation *deathAnimation;
 	FrameRangeAnimator *deathAnimator;
-
 	FrameRangeAnimation *flyAnimation;
 	FrameRangeAnimator *flyAnimator;
 

@@ -3,7 +3,7 @@
 
 #include <string>
 #include <utility>
-
+#include <iostream>
 #include "..\Animation\AnimationFilm.h"
 #include "..\Utilities\Utilities.h"
 using namespace std;
@@ -43,7 +43,9 @@ public:
 	bool isSpriteVisible(void) const;
 	bool collisionCheck(Sprite* s);
 	
-	virtual void collisionAction(Sprite* s) {};
+	virtual void collisionAction(Sprite* s) {
+		cout << "COLLISION ! ! ! !! \n";
+	};
 	
 	void enableMovement(void);
 	void disableMovement(void);

@@ -51,3 +51,7 @@ void Bird::removeLife() {
 void Bird::leaveScreen() {
 
 }
+
+void collisionAction(Sprite* s) {
+
+}

@@ -37,7 +37,6 @@ void GamePlay::initGamePlay() {
 	// Cleaning
 	cleanGamePlay();
 	cleanAllegro();
-
 }
 
 bool GamePlay::initAllegro() {
@@ -203,7 +202,6 @@ void GamePlay::initGameEngine() {
 	//birds = new std::vector<Bird*>();
 
 }
-
 
 void GamePlay::runMainLoop() {
 	startButton->setVisibility(true);
@@ -414,6 +412,11 @@ void GamePlay::startNewGame() {
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 	Terrain::getInstance();
+
+
+	CollisionChecker::getInstance()->
+		registerCollisions(currentGame->superAce, currentGame->birds->at(0));
+
 }
 
 void GamePlay::cleanGamePlay() {
@@ -424,7 +427,7 @@ void GamePlay::cleanGamePlay() {
 	Terrain::cleanUp();
 	//BitmapLoader::~BitmapLoader();
 
-	//CollisionChecker::cleanUp();
+	CollisionChecker::getInstance()->cleanUp();
 	//AnimationFilmHolder::destroy();
 
 	//cleanAllegro();

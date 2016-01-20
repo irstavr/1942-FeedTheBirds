@@ -9,6 +9,13 @@ CollisionChecker *CollisionChecker::collisionChecker;
 CollisionChecker::CollisionChecker(void) {
 }
 
+CollisionChecker::~CollisionChecker(void) {
+}
+
+void CollisionChecker::cleanUp() {
+	delete collisionChecker;
+}
+
 void CollisionChecker::initialize(void) {
 	if (collisionChecker == NULL)
 		collisionChecker = new CollisionChecker();
@@ -24,8 +31,9 @@ void CollisionChecker::registerCollisions (Sprite* s1, Sprite* s2) {
 	p.second = s2;
 	pairs.push_back(p);
 }
-/*
+
 void CollisionChecker::registerCollisionsWithPows(Sprite* superAce) {
+	/*
 	Pair p;
 	p.second = superAce;
 	std::list<Pows *>powsList = PowsHolder::getHeartList();
@@ -38,12 +46,14 @@ void CollisionChecker::registerCollisionsWithPows(Sprite* superAce) {
 		++i;
 		++PowsHolder::inForCheck;
 	}
+	*/
 }
-*/
+
 void CollisionChecker::cancel(Sprite* s1, Sprite* s2) {
 }
 
 void CollisionChecker::check(void) const {
+	cout << "collision check\n";
 	std::for_each(pairs.begin(), pairs.end(), checkFunctor());
 }
 

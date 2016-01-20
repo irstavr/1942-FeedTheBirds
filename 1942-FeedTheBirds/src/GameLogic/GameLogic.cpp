@@ -24,11 +24,11 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 							deathAnimator);
 
 	Bird *bird = new Bird(1000, 500,
-		(AnimationFilm*)
-		AnimationFilmHolder::getSingleton()->
-		getFilm("bonusBird"),
-		flyAnimation,
-		flyAnimator);
+						(AnimationFilm*)
+						AnimationFilmHolder::getSingleton()->
+						getFilm("bonusBird"),
+						flyAnimation,
+						flyAnimator);
 
 	birds = new vector<Bird*>();
 	birds->push_back(bird);
@@ -46,4 +46,8 @@ GameLogic::~GameLogic()
 
 bool GameLogic::isRunning() const {
 	return gameRunning;
+}
+
+int GameLogic::solveCollision() {
+	return 0;
 }
