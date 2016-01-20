@@ -58,6 +58,9 @@ private:
 	static void shootingCompleted(Animator*, void *closure);
 	static void invinsibilityEnded(Animator *, void *closure);
 
+
+	virtual void collisionAction(Sprite* s);
+
 };
 
 #endif

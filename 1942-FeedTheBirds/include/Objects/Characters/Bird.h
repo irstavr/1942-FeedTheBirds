@@ -4,6 +4,7 @@
 #include "..\Items\BirdDropping.h"
 #include "..\..\Animator\FrameRangeAnimator.h"
 #include "..\..\Animation\AnimationFilmHolder.h"
+#include "..\Items\Fish.h"
 
 typedef vector<BirdDropping*> DROPPINGS;
 
@@ -20,13 +21,15 @@ public:
 	void leaveScreen(void);
 	void startMoving(void);
 
+	virtual void collisionAction(Sprite *s);
 private:
+
+	DROPPINGS *droppings;
+
 	int birdLives;
 	float birdSpeed;
 	bool releasesPowerUp;
 	bool isGrey;
-
-	DROPPINGS *droppings;
 
 	FrameRangeAnimation *flyAnimation;
 	FrameRangeAnimator *flyAnimator;

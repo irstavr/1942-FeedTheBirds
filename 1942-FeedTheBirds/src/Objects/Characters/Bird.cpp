@@ -52,6 +52,17 @@ void Bird::leaveScreen() {
 
 }
 
-void collisionAction(Sprite* s) {
+// called when bird collides with Fish
+void Bird::collisionAction(Sprite* s) {
 
+	Fish* fish = (Fish*) s;
+
+	birdLives--;
+	
+	// kill fish sprite
+	delete fish;
+
+	if (birdLives == 0) {
+		leaveScreen();
+	}
 }

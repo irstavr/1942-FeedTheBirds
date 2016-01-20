@@ -21,6 +21,7 @@ class CollisionChecker {
 	// super ace - birdshits -> DIE SUPER ACE
 	// super ace - pows -> activate LEVELUP SUPERACE
 	// birds - fishes -> BIRD LOSES LIFE
+	
 	// birds - borders -> KILL BIRD SPRITE
 	// fishes - borders -> KILL FISH SPRITE
 	// birdshits - borders -> KILL BIRDSHIT SPRITE

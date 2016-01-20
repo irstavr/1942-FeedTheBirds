@@ -77,3 +77,11 @@ void SuperAce::displayAll() {
 void SuperAce::die() {
 
 }
+
+// super ace - birds -> DIE SUPER ACE - GAMEOVER/LOSE LIFE
+// super ace - birdshits -> DIE SUPER ACE
+// super ace - pows -> activate LEVELUP SUPERACE
+void SuperAce::collisionAction(Sprite* s)
+{
+
+}
