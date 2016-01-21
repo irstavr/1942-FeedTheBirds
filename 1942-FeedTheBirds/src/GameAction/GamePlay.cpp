@@ -284,8 +284,10 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				currentGame->birds->at(0)->startMoving();
 				break;
 			case ALLEGRO_KEY_ENTER:
-				InputManager::onKeyEnter(gameState, display, startButton, gameOverButton);
-				cleanGamePlay();
+				if (gameState == GAME_STATE_GAMEOVER) {
+					InputManager::onKeyEnter(gameState, display, startButton, gameOverButton);
+					cleanGamePlay();
+				}
 				break;
 				/* O:  Just for our debugging*/
 			case ALLEGRO_KEY_O:
@@ -437,16 +439,19 @@ void GamePlay::startNewGame() {
 void GamePlay::cleanGamePlay() {
 	// TODO: clean all instances of all the classes!
 	//
-	if(currentGame)delete currentGame;
+	if (gameState != GAME_STATE_INTRO) {
+		if (currentGame)
+			delete currentGame;
 
-	Terrain::cleanUp();
-	//BitmapLoader::~BitmapLoader();
 
-	CollisionChecker::getInstance()->cleanUp();
-	//AnimationFilmHolder::destroy();
+		Terrain::cleanUp();
+		//BitmapLoader::~BitmapLoader();
 
-	//cleanAllegro();
+		CollisionChecker::getInstance()->cleanUp();
+		//AnimationFilmHolder::destroy();
 
+		//cleanAllegro();
+	}
 }
 
 void GamePlay::cleanAllegro() {
