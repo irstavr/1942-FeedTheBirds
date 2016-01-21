@@ -278,6 +278,11 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				InputManager::onKeyS(gameState, display, startButton);
 				startNewGame();
 				break;
+			case ALLEGRO_KEY_L:
+				currentGame->birds->at(0)->flyAnimator->stop();
+				currentGame->birds->at(0)->flyAnimation->setNewOffsets(10, 10);
+				currentGame->birds->at(0)->startMoving();
+				break;
 			case ALLEGRO_KEY_ENTER:
 				InputManager::onKeyEnter(gameState, display, startButton, gameOverButton);
 				cleanGamePlay();
@@ -422,7 +427,7 @@ void GamePlay::startNewGame() {
 void GamePlay::cleanGamePlay() {
 	// TODO: clean all instances of all the classes!
 	//
-	delete currentGame;
+	if(currentGame)delete currentGame;
 
 	Terrain::cleanUp();
 	//BitmapLoader::~BitmapLoader();

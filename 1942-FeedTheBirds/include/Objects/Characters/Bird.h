@@ -20,6 +20,9 @@ public:
 	void removeLife(void);
 	void leaveScreen(void);
 	void startMoving(void);
+	void createRoute();
+	FrameRangeAnimation *flyAnimation;
+	FrameRangeAnimator *flyAnimator;
 
 	virtual void collisionAction(Sprite *s);
 private:
@@ -31,8 +34,6 @@ private:
 	bool releasesPowerUp;
 	bool isGrey;
 
-	FrameRangeAnimation *flyAnimation;
-	FrameRangeAnimator *flyAnimator;
 	TickAnimation *tickAnimation;
 	TimerTickAnimator *timerTick;
 };

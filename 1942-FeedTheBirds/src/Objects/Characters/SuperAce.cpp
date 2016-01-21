@@ -86,7 +86,7 @@ void SuperAce::collisionAction(Sprite* s)
 	cout << "COLLISION! SUPER ACE!\n";	
 	
 	if (Bird* v = dynamic_cast<Bird*>(s)) {
-
+		
 	}
 
 	if (BirdDropping* v = dynamic_cast<BirdDropping*>(s)) {

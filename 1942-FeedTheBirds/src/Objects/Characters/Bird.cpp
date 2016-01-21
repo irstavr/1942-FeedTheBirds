@@ -39,12 +39,16 @@ void Bird::displayAll() {
 }
 
 void Bird::startMoving(void) {
-	fprintf(stdout, "startMoving -> ButtonBird.cpp\n");
+	fprintf(stdout, "startMoving -> Bird.cpp\n");
 	flyAnimator->start(this, flyAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(flyAnimator);
 }
 
 void Bird::removeLife() {
+
+}
+
+void Bird::createRoute() {
 
 }
 
@@ -54,7 +58,6 @@ void Bird::leaveScreen() {
 
 // called when bird collides with Fish
 void Bird::collisionAction(Sprite* s) {
-
 	Fish* fish = (Fish*) s;
 
 	birdLives--;
