@@ -18,8 +18,7 @@ namespace InputManager {
 	void move(bool, bool, bool, bool, SuperAce* &superAce);
 
 	/* called if press space bar */
-	void shoot(SuperAce* superAce);
-
+	void shoot(GameLogic* &game, SuperAce* &superAce);
 	/* called if press key A */
 	void twist();
 	/* called if press P */

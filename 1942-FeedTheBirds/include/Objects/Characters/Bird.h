@@ -11,9 +11,11 @@ typedef vector<BirdDropping*> DROPPINGS;
 class Bird : public Sprite {
 public:
 	Bird::Bird(Dim _x, Dim _y, AnimationFilm* film,
-		FrameRangeAnimation *_flyAnimation,
-		FrameRangeAnimator *_flyAnimator);
+				FrameRangeAnimation *_flyAnimation,
+				FrameRangeAnimator *_flyAnimator);
 	~Bird(void);
+	
+	DROPPINGS *droppings;
 
 	void shoot();
 	void displayAll();
@@ -26,8 +28,6 @@ public:
 
 	virtual void collisionAction(Sprite *s);
 private:
-
-	DROPPINGS *droppings;
 
 	int birdLives;
 	float birdSpeed;
