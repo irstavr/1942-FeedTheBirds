@@ -24,6 +24,11 @@ frame_t	FrameRangeAnimation::getEndFrame(void) const {
 void FrameRangeAnimation::setEndFrame(frame_t v) { 
 	end = v; 
 }
+
+void FrameRangeAnimation::setNewOffsets(offset_t dx, offset_t dy) {
+	setDx(dx);
+	setDy(dy);
+}
     
 Animation* FrameRangeAnimation::clone(animid_t newId) const {
 	return new FrameRangeAnimation(start, end, getDx(), getDy(), getDelay(), getContinuous(), newId);

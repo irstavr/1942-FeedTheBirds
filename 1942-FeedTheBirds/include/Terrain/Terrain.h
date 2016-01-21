@@ -57,7 +57,7 @@ public:
 	static Terrain& getInstance();
 	void updateBackground();
 	void drawBackground();
-	
+	float getTerrainX();
 	// deleted function to make sure they are unacceptable
 	// in order to be sure we dont get copies of the singleton
 	Terrain(Terrain const&) = delete;

@@ -34,6 +34,10 @@ Terrain& Terrain::getInstance() {
 	return instance;
 }
 
+float Terrain::getTerrainX() {
+	return this->x;
+}
+
 void Terrain::updateBackground() {
 	this->x += this->velX * this->dirX;
 	if (this->x + this->width <= 0)
