@@ -37,7 +37,7 @@ public:
 	//virtual void collisionAction(Sprite *s);
 	void die(void);
 	static bool deathCompleted(void);
-	bool isDead();
+	bool isSuperAceDead();
 	void playDeathAnimation();
 	void gotHit();
 	void setInvinsibility(bool _inv) { isInvisible = _inv; };
@@ -49,6 +49,7 @@ private:
 	float speedx, speedy;
 	FISHES *fishes;
 
+	bool isDead;
 	bool isInvisible;
 	bool isShooting;
 	bool hasSideFighter;

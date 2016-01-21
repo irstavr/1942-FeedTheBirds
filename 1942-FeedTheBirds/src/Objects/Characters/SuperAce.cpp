@@ -16,6 +16,7 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 	landAnimator(_landAnimator),
 	deathAnimation(_deathAnimation), 
 	deathAnimator(_deathAnimator) {
+	isDead = false;
 	isInvisible = false;
 	isShooting = false;
 	fishes = new vector<Fish*>();
@@ -93,17 +94,21 @@ void SuperAce::collisionAction(Sprite* s) {
 	// collision super ace with a bird
 	if (Bird* v = dynamic_cast<Bird*>(s)) {
 		// kill Bird
-		v->setVisibility(true);
+		v->removeLife();
+		if (v->getLives() == 0) {
+			v->setVisibility(false);
+		}
 
 		// super ace loses a life
-		playerProfile->decrLifes();
+		playerProfile->decrLives();
 
 		// flash super Ace
 
 
 		//check if game is over
-		if (playerProfile->getLifes() == 0) {
+		if (playerProfile->getLives() == 0) {
 			// GameOver
+			isDead = true;
 		}
 	}
 
@@ -113,9 +118,18 @@ void SuperAce::collisionAction(Sprite* s) {
 		// flashes
 		// if 0 lives => gameover
 		// kill BirdDropping
-		v->setVisibility(true);
+		v->setVisibility(false);
 
-		playerProfile->decrLifes();
+		playerProfile->decrLives();
+
+		// flash super Ace
+
+
+		//check if game is over
+		if (playerProfile->isDead()) {
+			// GameOver
+			isDead = true;
+		}
 	}
 	
 	// collision super ace with a POW POW
@@ -123,4 +137,11 @@ void SuperAce::collisionAction(Sprite* s) {
 		// activate LEVELUP on superAce
 	}
 	*/
+}
+
+bool SuperAce::isSuperAceDead(void) {
+	if (isDead)
+		return true;
+	else
+		return false;
 }

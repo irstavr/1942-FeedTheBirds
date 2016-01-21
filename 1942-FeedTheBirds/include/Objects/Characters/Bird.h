@@ -19,6 +19,7 @@ public:
 
 	void shoot();
 	void displayAll();
+	int getLives();
 	void removeLife(void);
 	void leaveScreen(void);
 	void startMoving(void);

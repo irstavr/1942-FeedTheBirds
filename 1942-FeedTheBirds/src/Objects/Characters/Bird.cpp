@@ -1,11 +1,12 @@
 #include "..\..\..\include\Objects\Characters\Bird.h"
 
 Bird::Bird(Dim _x, Dim _y, AnimationFilm* film,
-	FrameRangeAnimation *_flyAnimation,
-	FrameRangeAnimator *_flyAnimator) :
-	Sprite(_x, _y, film),
-	flyAnimation(_flyAnimation),
+			FrameRangeAnimation *_flyAnimation,
+			FrameRangeAnimator *_flyAnimator) :
+			Sprite(_x, _y, film),
+			flyAnimation(_flyAnimation),
 	flyAnimator(_flyAnimator){
+	birdLives = 2; //TODO: change
 	droppings = new vector<BirdDropping*>();
 }
 
@@ -19,20 +20,23 @@ void Bird::shoot() {
 
 	AnimatorHolder::animRegister(bulletAnimator);
 	BirdDropping* dropping = new BirdDropping(x - 70, y - 30,
-		(AnimationFilm*)
-		AnimationFilmHolder::getSingleton()->
-		getFilm("doubleFish"),
-		bulletAnimation,
-		bulletAnimator);
+											(AnimationFilm*)
+											AnimationFilmHolder::getSingleton()->
+											getFilm("doubleFish"),
+											bulletAnimation,
+											bulletAnimator);
 	droppings->push_back(dropping);
 	dropping->startMoving();
 }
 
 void Bird::displayAll() {
-	this->display(Rect(0, 0, 0, 0));
-	for (unsigned int i = 0; i < droppings->size(); i++) {
-		BirdDropping* dropping = droppings->at(i);
-		dropping->display(Rect(0, 0, 0, 0));
+	if (isSpriteVisible()) {
+		this->display(Rect(0, 0, 0, 0));
+
+		for (unsigned int i = 0; i < droppings->size(); i++) {
+			BirdDropping* dropping = droppings->at(i);
+			dropping->display(Rect(0, 0, 0, 0));
+		}
 	}
 }
 
@@ -42,8 +46,12 @@ void Bird::startMoving(void) {
 	AnimatorHolder::markAsRunning(flyAnimator);
 }
 
-void Bird::removeLife() {
+int Bird::getLives() {
+	return birdLives;
+}
 
+void Bird::removeLife() {
+	birdLives--;
 }
 
 void Bird::createRoute() {
@@ -58,14 +66,13 @@ void Bird::leaveScreen() {
 void Bird::collisionAction(Sprite* s) {
 	Fish* fish = (Fish*) s;
 
-	birdLives--;
+	removeLife();
 	
 	// kill fish sprite
-	fish->setVisibility(false);
-	fish->disableMovement();
-
 	if (birdLives == 0) {
 		leaveScreen();
+		fish->setVisibility(false);
+		fish->disableMovement();
 	}
 
 }

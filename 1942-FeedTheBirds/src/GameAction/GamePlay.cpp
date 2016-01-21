@@ -312,7 +312,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 void GamePlay::updateGameState() {
 
 	AnimatorHolder::progress(getCurrTime());
-
+	
 	if (gameState == GAME_STATE_MAINGAME) {
 		// TODO
 		// initialize:
@@ -322,6 +322,10 @@ void GamePlay::updateGameState() {
 		// update scores/lives/etc on the display
 		// etc 
 		//
+		if (currentGame->superAce->isSuperAceDead()) {
+			gameOver(getCurrTime());
+		}
+
 		CollisionChecker::getInstance()->check();
 	}
 }
@@ -399,6 +403,11 @@ void GamePlay::resumeGame(void) {
 void GamePlay::gameOver(unsigned long now) {
 	//TODO: display message to play again
 	cout << "GAME OVER FILARAKI";
+
+	gameState = GAME_STATE_GAMEOVER;
+
+	delete currentGame;
+
 	Terrain::getInstance().drawBackground();
 	//->setVisibility(true);
 
@@ -452,8 +461,8 @@ void GamePlay::cleanGamePlay() {
 	// TODO: clean all instances of all the classes!
 	//
 	if (gameState != GAME_STATE_INTRO) {
-		if (currentGame)
-			delete currentGame;
+		//if (currentGame)
+		//	delete currentGame;
 
 
 		Terrain::cleanUp();
