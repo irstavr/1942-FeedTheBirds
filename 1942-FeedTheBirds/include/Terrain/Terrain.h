@@ -35,7 +35,6 @@ public:
 
 	static Terrain* terrain; //sigleton
 
-	/* mike geig - parallax bg */
 	float x;
 	float y;
 	float velX;

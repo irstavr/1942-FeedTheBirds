@@ -35,7 +35,7 @@ Terrain& Terrain::getInstance() {
 }
 
 float Terrain::getTerrainX() {
-	return this->x;
+	return -((this->x)/3);
 }
 
 void Terrain::updateBackground() {

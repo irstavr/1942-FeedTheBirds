@@ -272,7 +272,8 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				InputManager::twist();
 				break;
 			case ALLEGRO_KEY_P:
-				InputManager::pause(gameState);
+				pauseGame(currTime);
+				//InputManager::pause(gameState);
 				break;
 			case ALLEGRO_KEY_S:
 				InputManager::onKeyS(gameState, display, startButton);
@@ -336,7 +337,7 @@ void GamePlay::render(unsigned long timestamp) {
 		displayMainScreen(timestamp);
 	}
 	if (gameState == GAME_STATE_PAUSED) {
-		pauseGame(timestamp);
+		//pauseGame(timestamp);
 	}
 	if (gameState == GAME_STATE_GAMEOVER) {
 		gameOver(timestamp);
@@ -353,6 +354,7 @@ void GamePlay::displayMainScreen(unsigned long now) {
 		al_flip_display();
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 		Terrain::getInstance().updateBackground();
+		checkActionPoints();
 	}
 }
 
@@ -369,12 +371,22 @@ void GamePlay::displayStartScreen(unsigned long now) {
 	TerrainStartScreen::getInstance().updateBackground();
 }
 
+void GamePlay::checkActionPoints() {
+
+	cout << "terrainX = "<< Terrain::getInstance().getTerrainX()<<" \n";
+	if (Terrain::getInstance().getTerrainX()==50) {
+		cout << "actionPointTriggered \n";
+	}
+}
+
 void GamePlay::pauseGame(unsigned long now) {
 	//TODO: display message with GAME PAUSED
-	gameState = GAME_STATE_PAUSED;
-	AnimatorHolder::pause();
-	pauseButton->startFlashing();
-	pauseButton->setVisibility(true);
+	if (gameState == GAME_STATE_MAINGAME) {
+		gameState = GAME_STATE_PAUSED;
+		AnimatorHolder::pause();
+		pauseButton->startFlashing();
+		pauseButton->setVisibility(true);
+	}
 }
 
 void GamePlay::resumeGame(void) {
