@@ -1,11 +1,13 @@
 #ifndef SP_H
 #define SP_H
 
+#include <assert.h>
 #include <string>
 #include <utility>
 #include <iostream>
 #include "..\Animation\AnimationFilm.h"
 #include "..\Utilities\Utilities.h"
+
 using namespace std;
 
 class Sprite {

@@ -9,8 +9,7 @@ Bird::Bird(Dim _x, Dim _y, AnimationFilm* film,
 	droppings = new vector<BirdDropping*>();
 }
 
-Bird::~Bird(void)
-{
+Bird::~Bird(void) {
 	delete droppings;
 }
 
@@ -62,7 +61,8 @@ void Bird::collisionAction(Sprite* s) {
 	birdLives--;
 	
 	// kill fish sprite
-	delete fish;
+	fish->setVisibility(false);
+	fish->disableMovement();
 
 	if (birdLives == 0) {
 		leaveScreen();

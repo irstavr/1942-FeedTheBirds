@@ -31,6 +31,7 @@ byte Sprite::getFrame(void) const {
 
 Rect Sprite::getRect(void) const {
 	Rect bbox = currFilm->getFrameBox(frameNo);
+	assert(bbox.w!=0 && bbox.h!=0 && "bbox empty");
 	return Rect(x, y, bbox.w, bbox.h);
 	//return Rect(x, y, SCALE*bbox.w, SCALE*bbox.h);
 }

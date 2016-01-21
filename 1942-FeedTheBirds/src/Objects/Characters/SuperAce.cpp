@@ -71,10 +71,13 @@ void SuperAce::shoot(vector<Bird*>* birds) {
 }
 
 void SuperAce::displayAll() {
-	this->display(Rect(0, 0, 0, 0));
-	for (unsigned int i = 0; i < fishes->size(); i++) {
-		Fish* fish = fishes->at(i);
-		fish->display(Rect(0, 0, 0, 0));
+	if (this->isSpriteVisible()) {
+		this->display(Rect(0, 0, 0, 0));
+		
+		for (unsigned int i = 0; i < fishes->size(); i++) {
+			if (fishes->at(i)->isSpriteVisible())
+				fishes->at(i)->display(Rect(0, 0, 0, 0));
+		}
 	}
 }
 

@@ -35,8 +35,8 @@ Fish::~Fish()
 {
 	delete flyAnimation;
 	delete flyAnimator;
-	delete tickAnimation;
-	delete timerTick;
+	//delete tickAnimation;
+///	delete timerTick;
 }
 
 bool Fish::inRange(float x, float y, float num) {

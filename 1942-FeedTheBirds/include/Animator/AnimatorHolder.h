@@ -18,9 +18,7 @@ private:
 	class ProgressFunctor : public std::unary_function<Animator*, void> {
 		unsigned long t;
 	public:
-		ProgressFunctor(unsigned long _t) : 
-				t(_t) {
-		}
+		ProgressFunctor(unsigned long _t) :  t(_t) {}
 		void operator()(Animator* a) const { 
 			a->progress(t); 
 		}
@@ -35,8 +33,5 @@ public:
 	static void pause(void);
 	static void resume(void);
 	//static void display(ALLEGRO_BITMAP* at);
-
-
 };
-
 #endif
