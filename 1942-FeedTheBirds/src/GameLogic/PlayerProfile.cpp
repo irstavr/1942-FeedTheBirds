@@ -20,7 +20,6 @@ PlayerProfile::PlayerProfile() {
 	birdsFeeded = 0;
 	hasBonus = false;
 	eatenYellowPOW = false;
-
 }
 
 // destructor
@@ -79,4 +78,3 @@ void PlayerProfile::incrNumBirdsFeeded(void) {
 unsigned int PlayerProfile::getNumBirdsFeeded(void) { 
 	return birdsFeeded;
 }
-

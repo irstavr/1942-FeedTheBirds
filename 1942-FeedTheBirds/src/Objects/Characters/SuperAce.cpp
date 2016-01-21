@@ -1,6 +1,7 @@
 #include "..\..\..\include\Objects\Characters\SuperAce.h"
 
-SuperAce::SuperAce(Dim _x, Dim _y, AnimationFilm* film,
+SuperAce::SuperAce(PlayerProfile* playerProfile,
+				Dim _x, Dim _y, AnimationFilm* film,
 				FrameRangeAnimation *_takeOffAnimation, 
 				FrameRangeAnimator *_takeOffAnimator,
 				FrameRangeAnimation *_landAnimation, 
@@ -8,6 +9,7 @@ SuperAce::SuperAce(Dim _x, Dim _y, AnimationFilm* film,
 				FrameRangeAnimation *_deathAnimation, 
 				FrameRangeAnimator *_deathAnimator) :
 	Sprite(_x, _y, film),
+	playerProfile(playerProfile),
 	takeOffAnimation(_takeOffAnimation), 
 	takeOffAnimator(_takeOffAnimator),
 	landAnimation(_landAnimation), 
@@ -90,16 +92,30 @@ void SuperAce::collisionAction(Sprite* s) {
 
 	// collision super ace with a bird
 	if (Bird* v = dynamic_cast<Bird*>(s)) {
-		// Super Ace loses a life
-		// if 0 lives => gameover
-		// kill Bird ?
+		// kill Bird
+		v->setVisibility(true);
+
+		// super ace loses a life
+		playerProfile->decrLifes();
+
+		// flash super Ace
+
+
+		//check if game is over
+		if (playerProfile->getLifes() == 0) {
+			// GameOver
+		}
 	}
 
 	// collision super ace with a koutsoulia :P
 	if (BirdDropping* v = dynamic_cast<BirdDropping*>(s)) {
 		// Super Ace loses a life
+		// flashes
 		// if 0 lives => gameover
-		// kill BirdDropping ?
+		// kill BirdDropping
+		v->setVisibility(true);
+
+		playerProfile->decrLifes();
 	}
 	
 	// collision super ace with a POW POW

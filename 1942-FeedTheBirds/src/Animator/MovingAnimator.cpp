@@ -39,7 +39,6 @@ void MovingAnimator::progress(unsigned long currTime) {
 			progress(currTime);  // Recursion (make it a loop)
 		}
 	}
-
 }
 
 void MovingAnimator::start(Sprite* s, MovingAnimation* a, unsigned long t) {

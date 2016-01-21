@@ -10,8 +10,9 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 					FrameRangeAnimator *flyAnimator) :
 		gameRunning(true),
 		highScore(0) {
-	profile = new PlayerProfile(std::make_pair(5,5));
-	superAce = new SuperAce(200,
+	profile = new PlayerProfile(std::make_pair(0,0));
+	superAce = new SuperAce(profile,
+							200,
 							300,
 							(AnimationFilm*)
 								AnimationFilmHolder::getSingleton()->

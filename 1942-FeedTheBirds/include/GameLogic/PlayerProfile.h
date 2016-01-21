@@ -19,20 +19,14 @@ public:
 	PlayerProfile();
 	~PlayerProfile();
 
-private:
-	BlastAnimationMap_t blastAnimationMap;
-	COORDS startXY;
-	Points score;
-	Lifes lifes;
-	bool isAlive;
-	unsigned int birdsFeeded;
-	
+	void incrLifes(void);
+	void decrLifes(void);
+	Lifes getLifes(void);
 	bool isDead();
-
-	bool hasBonus; //TODO: add every bonus separately !!!
-	bool eatenYellowPOW;	//TODO: add every POW here
-	bool eatenBlueSPOW;
-	bool eatenPurplePOW;
+	
+	void setNumBirdsFeeded(unsigned int birdsNum);
+	void incrNumBirdsFeeded(void);
+	unsigned int getNumBirdsFeeded(void);
 
 	int getStartX(void);
 	int getStartY(void);
@@ -41,14 +35,17 @@ private:
 	void setScore(Points newScore);
 	Points getScore(void);
 
-	void incrLifes(void);
-	void decrLifes(void);
-	Lifes getLifes(void);
-
-	void setNumBirdsFeeded(unsigned int birdsNum);
-	void incrNumBirdsFeeded(void);
-	unsigned int getNumBirdsFeeded(void);
-
+private:
+	BlastAnimationMap_t blastAnimationMap;
+	COORDS startXY;
+	Points score;
+	Lifes lifes;
+	bool isAlive;
+	unsigned int birdsFeeded;
+	bool hasBonus; //TODO: add every bonus separately !!!
+	bool eatenYellowPOW;	//TODO: add every POW here
+	bool eatenBlueSPOW;
+	bool eatenPurplePOW;
 };
 
 #endif

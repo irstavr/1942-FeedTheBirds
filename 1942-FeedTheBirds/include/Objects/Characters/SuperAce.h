@@ -11,16 +11,16 @@
 #include "..\Items\Fish.h"
 #include "..\Items\BirdDropping.h"
 #include "Bird.h"
-
+#include "..\..\GameLogic\PlayerProfile.h"
 
 typedef vector<Fish*> FISHES;
 
 class SuperAce : public Sprite {
 public:
-	SuperAce::SuperAce(Dim _x, Dim _y, AnimationFilm* film,
-		FrameRangeAnimation *_takeOffAnimation, FrameRangeAnimator *_takeOffAnimator,
-		FrameRangeAnimation *_landAnimation, FrameRangeAnimator *_landAnimator,
-		FrameRangeAnimation *_deathAnimation, FrameRangeAnimator *_deathAnimator);
+	SuperAce::SuperAce(PlayerProfile* playerProfile, Dim _x, Dim _y, AnimationFilm* film,
+						FrameRangeAnimation *_takeOffAnimation, FrameRangeAnimator *_takeOffAnimator,
+						FrameRangeAnimation *_landAnimation, FrameRangeAnimator *_landAnimator,
+						FrameRangeAnimation *_deathAnimation, FrameRangeAnimator *_deathAnimator);
 	~SuperAce(void);
 
 	void shoot(vector<Bird*>* birds);
@@ -42,8 +42,8 @@ public:
 	void gotHit();
 	void setInvinsibility(bool _inv) { isInvisible = _inv; };
 	void displayAll();
-
 	virtual void collisionAction(Sprite* s);
+
 private:
 	float dx, dy;
 	float speedx, speedy;
@@ -54,6 +54,7 @@ private:
 	bool hasSideFighter;
 	//bool hasQuadGun;
 
+	PlayerProfile* playerProfile;
 	FrameRangeAnimation *takeOffAnimation, *landAnimation, *deathAnimation;
 	FrameRangeAnimator *takeOffAnimator, *landAnimator, *deathAnimator;
 	FlashingAnimation *flashAnimation;
