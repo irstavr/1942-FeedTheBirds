@@ -1,6 +1,5 @@
 #include "..\..\..\include\Objects\Characters\Bird.h"
 
-
 Bird::Bird(Dim _x, Dim _y, AnimationFilm* film,
 	FrameRangeAnimation *_flyAnimation,
 	FrameRangeAnimator *_flyAnimator) :
@@ -52,9 +51,8 @@ void Bird::leaveScreen() {
 
 }
 
-// called when bird collides with Fish
+// called when Bird collides with Fish
 void Bird::collisionAction(Sprite* s) {
-
 	Fish* fish = (Fish*) s;
 
 	birdLives--;
@@ -65,4 +63,5 @@ void Bird::collisionAction(Sprite* s) {
 	if (birdLives == 0) {
 		leaveScreen();
 	}
+
 }

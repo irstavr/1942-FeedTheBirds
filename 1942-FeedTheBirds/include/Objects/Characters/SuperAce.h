@@ -1,15 +1,17 @@
 #ifndef _SUPERACE_H
 #define _SUPERACE_H
 
-#include "../../Sprites/Sprite.h"
-#include "../../Animator/MovingAnimator.h"
-#include "../../Animator/TimerTickAnimator.h"
-#include "../../Animator/FlashingAnimator.h"
-#include "../../Animator/FrameRangeAnimator.h"
-#include "../../Animation/AnimationFilmHolder.h"
-#include "../Items/Fish.h"
-#include "../Items/BirdDropping.h"
+#include "..\..\Sprites\Sprite.h"
+#include "..\..\Animator\MovingAnimator.h"
+#include "..\..\Animator\TimerTickAnimator.h"
+#include "..\..\Animator\FlashingAnimator.h"
+#include "..\..\Animator\FrameRangeAnimator.h"
+#include "..\..\Animation\AnimationFilmHolder.h"
+#include "..\..\GameAction\CollisionChecker.h"
+#include "..\Items\Fish.h"
+#include "..\Items\BirdDropping.h"
 #include "Bird.h"
+
 
 typedef vector<Fish*> FISHES;
 
@@ -21,6 +23,7 @@ public:
 		FrameRangeAnimation *_deathAnimation, FrameRangeAnimator *_deathAnimator);
 	~SuperAce(void);
 
+	void shoot(vector<Bird*>* birds);
 	void moveUp();
 	void moveDown();
 	void moveLeft();
@@ -38,8 +41,9 @@ public:
 	void playDeathAnimation();
 	void gotHit();
 	void setInvinsibility(bool _inv) { isInvisible = _inv; };
-	void shoot();
 	void displayAll();
+
+	virtual void collisionAction(Sprite* s);
 private:
 	float dx, dy;
 	float speedx, speedy;
@@ -60,9 +64,5 @@ private:
 	static void shootingCompleted(Animator*, void *closure);
 	static void invinsibilityEnded(Animator *, void *closure);
 
-
-	virtual void collisionAction(Sprite* s);
-
 };
-
 #endif

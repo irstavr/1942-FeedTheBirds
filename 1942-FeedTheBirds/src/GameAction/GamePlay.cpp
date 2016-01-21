@@ -266,7 +266,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				keys[LEFT] = true;
 				break;
 			case ALLEGRO_KEY_SPACE:
-				InputManager::shoot(currentGame->superAce);
+				InputManager::shoot(currentGame, currentGame->superAce);
 				break;
 			case ALLEGRO_KEY_A:
 				InputManager::twist();
@@ -313,7 +313,7 @@ void GamePlay::updateGameState() {
 		// check if win
 		// update scores/lives/etc on the display
 		// etc 
-
+		//
 		CollisionChecker::getInstance()->check();
 	}
 }
@@ -413,10 +413,20 @@ void GamePlay::startNewGame() {
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 	Terrain::getInstance();
 
+	// register superAce - birds collisionList
+	BIRDS* birds = currentGame->birds;
+	for (unsigned int i = 0; i < birds->size(); i++) {
+		CollisionChecker::getInstance()->
+			registerCollisions(currentGame->superAce,
+							   currentGame->birds->at(i));
 
-	CollisionChecker::getInstance()->
-		registerCollisions(currentGame->superAce, currentGame->birds->at(0));
-
+		DROPPINGS* bullshits = currentGame->birds->at(i)->droppings;
+		for (unsigned int i = 0; i < bullshits->size(); i++) {
+			CollisionChecker::getInstance()->
+				registerCollisions(currentGame->superAce,
+									currentGame->birds->at(i)->droppings->at(i));
+		}
+	}
 }
 
 void GamePlay::cleanGamePlay() {

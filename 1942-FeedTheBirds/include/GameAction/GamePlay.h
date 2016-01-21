@@ -1,8 +1,6 @@
 #ifndef GP_H
 #define GP_H
 
-#include "InputManager.h"
-#include "CollisionChecker.h"
 #include "..\GameLogic\GameLogic.h"
 #include "..\Terrain\TerrainStartScreen.h"
 #include "..\Terrain\Terrain.h"
@@ -14,6 +12,8 @@
 #include "..\Animator\FlashingAnimator.h"
 #include "..\Animator\AnimatorHolder.h"
 #include "..\Objects\Characters\SuperAce.h"
+#include "InputManager.h"
+#include "CollisionChecker.h"
 
 enum KEYS { UP, DOWN, LEFT, RIGHT };
 

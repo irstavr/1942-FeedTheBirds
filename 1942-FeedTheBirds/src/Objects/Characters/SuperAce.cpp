@@ -1,12 +1,12 @@
 #include "..\..\..\include\Objects\Characters\SuperAce.h"
 
 SuperAce::SuperAce(Dim _x, Dim _y, AnimationFilm* film,
-	FrameRangeAnimation *_takeOffAnimation, 
-	FrameRangeAnimator *_takeOffAnimator,
-	FrameRangeAnimation *_landAnimation, 
-	FrameRangeAnimator *_landAnimator,
-	FrameRangeAnimation *_deathAnimation, 
-	FrameRangeAnimator *_deathAnimator) :
+				FrameRangeAnimation *_takeOffAnimation, 
+				FrameRangeAnimator *_takeOffAnimator,
+				FrameRangeAnimation *_landAnimation, 
+				FrameRangeAnimator *_landAnimator,
+				FrameRangeAnimation *_deathAnimation, 
+				FrameRangeAnimator *_deathAnimator) :
 	Sprite(_x, _y, film),
 	takeOffAnimation(_takeOffAnimation), 
 	takeOffAnimator(_takeOffAnimator),
@@ -19,8 +19,7 @@ SuperAce::SuperAce(Dim _x, Dim _y, AnimationFilm* film,
 	fishes = new vector<Fish*>();
 }
 
-SuperAce::~SuperAce(void) 
-{
+SuperAce::~SuperAce(void) {
 	delete fishes;
 	isInvisible = true;
 	isShooting = false;
@@ -50,7 +49,7 @@ void SuperAce::moveRight() {
 	}
 }
 
-void SuperAce::shoot() {
+void SuperAce::shoot(vector<Bird*>* birds) {
 	// Fish (aka. bullets)
 	MovingAnimation* bulletAnimation = new MovingAnimation(5, 0, 20, true, 4);
 	MovingAnimator* bulletAnimator = new MovingAnimator();
@@ -64,6 +63,11 @@ void SuperAce::shoot() {
 						bulletAnimator);
 	fishes->push_back(fish);
 	fish->startMoving();
+
+	for (unsigned int i = 0; i < birds->size(); i++) {
+		CollisionChecker::getInstance()->
+				registerCollisions(birds->at(i), fish);
+	}
 }
 
 void SuperAce::displayAll() {
@@ -78,24 +82,27 @@ void SuperAce::die() {
 
 }
 
-// super ace - birds -> DIE SUPER ACE - GAMEOVER/LOSE LIFE
-// super ace - birdshits -> DIE SUPER ACE
-// super ace - pows -> activate LEVELUP SUPERACE
-void SuperAce::collisionAction(Sprite* s)
-{
+void SuperAce::collisionAction(Sprite* s) {
 	cout << "COLLISION! SUPER ACE!\n";	
-	
+
+	// collision super ace with a bird
 	if (Bird* v = dynamic_cast<Bird*>(s)) {
+		// Super Ace loses a life
+		// if 0 lives => gameover
+		// kill Bird ?
 
 	}
 
+	// collision super ace with a koutsoulia :P
 	if (BirdDropping* v = dynamic_cast<BirdDropping*>(s)) {
-
+		// Super Ace loses a life
+		// if 0 lives => gameover
+		// kill BirdDropping ?
 	}
-	/*
-	if (Pow* v = dynamic_cast<Pow*>(s)) {
-		// old was safely casted to NewType
-		v->doSomething();
+	
+	// collision super ace with a POW POW
+	/*if (Pow* v = dynamic_cast<Pow*>(s)) {
+		// activate LEVELUP on superAce
 	}
 	*/
 }

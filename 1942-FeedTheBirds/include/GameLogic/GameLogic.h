@@ -2,15 +2,21 @@
 #define GAME_LOGIC_H
 
 #include <vector>
+
 #include "PlayerProfile.h"
 #include "..\Sprites\Sprite.h"
-#include "..\Objects\Characters\SuperAce.h"
-#include "..\Objects\Characters\Bird.h"
 #include "..\Objects\Items\Fish.h"
+#include "..\Objects\Characters\Bird.h"
+#include "..\Objects\Characters\SuperAce.h"
 
 typedef vector<Bird*> BIRDS;
 
 class GameLogic {
+public:
+
+	BIRDS *birds;
+	PlayerProfile* profile;
+	SuperAce* superAce;
 
 public:
 	GameLogic(FrameRangeAnimation *takeOffAnimation,
@@ -23,11 +29,6 @@ public:
 				FrameRangeAnimator *flyAnimator);
 	~GameLogic();
 
-	SuperAce *superAce;
-	BIRDS *birds;
-
-
-	PlayerProfile* profile;
 
 	int height, width, superAceKilled;
 	bool gameRunning;
