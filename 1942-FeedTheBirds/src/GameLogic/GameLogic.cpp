@@ -6,8 +6,8 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 					  FrameRangeAnimator *landingAnimator,
 					  FrameRangeAnimation *deathAnimation,
 					  FrameRangeAnimator *deathAnimator,
-					FrameRangeAnimation *flyAnimation,
-					FrameRangeAnimator *flyAnimator) :
+					  FrameRangeAnimation *flyAnimation,
+					  FrameRangeAnimator *flyAnimator) :
 		gameRunning(true),
 		highScore(0) {
 	profile = new PlayerProfile(std::make_pair(0,0));
@@ -26,8 +26,8 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 
 	Bird *bird = new Bird(1000, 500,
 						(AnimationFilm*)
-						AnimationFilmHolder::getSingleton()->
-						getFilm("bonusBird"),
+							AnimationFilmHolder::getSingleton()->
+								getFilm("bonusBird"),
 						flyAnimation,
 						flyAnimator);
 
@@ -35,11 +35,7 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 	birds->push_back(bird);
 }
 
-GameLogic::~GameLogic()
-{
-	//delete superAce;
-	//delete birds;
-	//delete profile;
+GameLogic::~GameLogic() {
 	gameRunning = 0;
 	superAceKilled = 1;
 	highScore = 0;

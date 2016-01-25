@@ -23,9 +23,9 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 }
 
 SuperAce::~SuperAce(void) {
-	delete fishes;
 	isInvisible = true;
 	isShooting = false;
+	isDead = true;
 }
 
 void SuperAce::moveUp() {

@@ -280,9 +280,9 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				startNewGame();
 				break;
 			case ALLEGRO_KEY_L:
-				currentGame->birds->at(0)->flyAnimator->stop();
-				currentGame->birds->at(0)->flyAnimation->setNewOffsets(10, 10);
-				currentGame->birds->at(0)->startMoving();
+				//currentGame->birds->at(0)->flyAnimator->stop();
+				//currentGame->birds->at(0)->flyAnimation->setNewOffsets(10, 10);
+				//currentGame->birds->at(0)->startMoving();
 				break;
 			case ALLEGRO_KEY_ENTER:
 				if (gameState == GAME_STATE_GAMEOVER) {
@@ -355,6 +355,7 @@ void GamePlay::displayMainScreen(unsigned long now) {
 
 		currentGame->superAce->displayAll();
 		currentGame->birds->at(0)->displayAll();
+		
 		al_flip_display();
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 		Terrain::getInstance().updateBackground();
@@ -406,7 +407,8 @@ void GamePlay::gameOver(unsigned long now) {
 
 	gameState = GAME_STATE_GAMEOVER;
 
-	delete currentGame;
+	currentGame->highScore = 0;
+	currentGame->gameRunning = false;
 
 	Terrain::getInstance().drawBackground();
 	//->setVisibility(true);
@@ -425,6 +427,7 @@ void GamePlay::gameOver(unsigned long now) {
 void GamePlay::startNewGame() {
 	gameState = GAME_STATE_MAINGAME;
 	// TODO: play music ?
+	
 
 	currentGame = new GameLogic(takeOffAnimation,
 								takeOffAnimator,
@@ -437,10 +440,9 @@ void GamePlay::startNewGame() {
 
 	currentGame->birds->at(0)->startMoving();
 
-	al_flip_display();
-	al_clear_to_color(al_map_rgb(0, 0, 0));
-	Terrain::getInstance();
-
+	Terrain::cleanUp();
+	displayMainScreen(getCurrTime());
+	
 	// register superAce - birds collisionList
 	BIRDS* birds = currentGame->birds;
 	for (unsigned int i = 0; i < birds->size(); i++) {

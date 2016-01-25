@@ -33,10 +33,8 @@ Fish::Fish(Dim _x, Dim _y, AnimationFilm* film,
 
 Fish::~Fish()
 {
-	delete flyAnimation;
-	delete flyAnimator;
-	//delete tickAnimation;
-///	delete timerTick;
+	isInvisible = true;
+	isMetWithBird = false;
 }
 
 bool Fish::inRange(float x, float y, float num) {
