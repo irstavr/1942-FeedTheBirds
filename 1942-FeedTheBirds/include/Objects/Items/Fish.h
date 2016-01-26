@@ -25,6 +25,7 @@ private:
 
 	bool isInvisible;
 	bool isMetWithBird;
+	bool isAlive;
 
 public:
 
@@ -37,6 +38,7 @@ public:
 	/*check if num is in [x, y]*/
 	bool inRange(float x, float y, float num);
 
+	bool isDead();
 	void Fish::startMoving(void);
 };
 

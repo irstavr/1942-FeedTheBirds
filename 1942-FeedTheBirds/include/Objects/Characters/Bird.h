@@ -25,7 +25,9 @@ public:
 	void removeLife(void);
 	void leaveScreen(void);
 	void startMoving(void);
-	void createRoute();
+	void createRoute(void);
+	bool isDead(void);
+
 	FrameRangeAnimation *flyAnimation;
 	FrameRangeAnimator *flyAnimator;
 
@@ -36,6 +38,8 @@ private:
 	float birdSpeed;
 	bool releasesPowerUp;
 	bool isGrey;
+
+	bool isAlive;
 
 	TickAnimation *tickAnimation;
 	TimerTickAnimator *timerTick;

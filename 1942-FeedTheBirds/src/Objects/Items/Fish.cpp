@@ -45,6 +45,10 @@ void Fish::move(float dt, float &x, float&y) {
 	x += speedX;// *dt;
 }
 
+bool Fish::isDead(void) {
+	return !isAlive;
+}
+
 void Fish::startMoving(void) {
 	fprintf(stdout, "startMoving -> Fish.cpp\n");
 	flyAnimator->start(this, flyAnimation, getCurrTime());
