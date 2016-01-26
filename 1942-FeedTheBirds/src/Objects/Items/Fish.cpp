@@ -49,6 +49,10 @@ bool Fish::isDead(void) {
 	return !isAlive;
 }
 
+void Fish::setDead(void) {
+	isAlive = false;
+}
+
 void Fish::startMoving(void) {
 	fprintf(stdout, "startMoving -> Fish.cpp\n");
 	flyAnimator->start(this, flyAnimation, getCurrTime());

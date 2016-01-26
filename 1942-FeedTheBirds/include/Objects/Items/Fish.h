@@ -39,6 +39,7 @@ public:
 	bool inRange(float x, float y, float num);
 
 	bool isDead();
+	void setDead();
 	void Fish::startMoving(void);
 };
 
