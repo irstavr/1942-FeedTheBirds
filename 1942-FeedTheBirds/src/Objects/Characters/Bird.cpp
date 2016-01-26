@@ -62,7 +62,10 @@ void Bird::createRoute() {
 }
 
 void Bird::leaveScreen() {
-
+	flyAnimator->stop();
+	flyAnimation->setNewOffsets(5, -20);
+	flyAnimation->setDelay(50);
+	startMoving();
 }
 
 bool Bird::isDead(void) {
