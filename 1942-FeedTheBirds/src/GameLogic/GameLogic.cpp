@@ -6,8 +6,8 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 					  FrameRangeAnimator *landingAnimator,
 					  FrameRangeAnimation *deathAnimation,
 					  FrameRangeAnimator *deathAnimator):
-		gameRunning(true),
-		highScore(0) {
+	gameRunning(true),
+	highScore(0) {
 	profile = new PlayerProfile(std::make_pair(0,0));
 	superAce = new SuperAce(profile,
 							100,
@@ -25,11 +25,7 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 	birds = new vector<Bird*>();
 }
 
-GameLogic::~GameLogic()
-{
-	//delete superAce;
-	//delete birds;
-	//delete profile;
+GameLogic::~GameLogic() {
 	gameRunning = 0;
 	superAceKilled = 1;
 	highScore = 0;

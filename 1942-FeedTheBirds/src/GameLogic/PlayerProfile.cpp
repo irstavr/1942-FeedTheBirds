@@ -7,7 +7,7 @@
 PlayerProfile::PlayerProfile(COORDS xy) {
 	score = -1;
 	startXY = xy;
-	lifes = _STARTING_LIFES;
+	lives = _STARTING_LIFES;
 	birdsFeeded = 0;
 	hasBonus = false;
 	eatenYellowPOW = false;
@@ -16,7 +16,7 @@ PlayerProfile::PlayerProfile(COORDS xy) {
 PlayerProfile::PlayerProfile() {
 	score = -1;
 	startXY = std::make_pair(0, 0);
-	lifes = _STARTING_LIFES;
+	lives = _STARTING_LIFES;
 	birdsFeeded = 0;
 	hasBonus = false;
 	eatenYellowPOW = false;
@@ -25,7 +25,7 @@ PlayerProfile::PlayerProfile() {
 // destructor
 PlayerProfile::~PlayerProfile() {
 	score = -1;
-	lifes = 0;
+	lives = 0;
 	birdsFeeded = 0;
 	hasBonus = false;
 	eatenYellowPOW = false;
@@ -54,16 +54,16 @@ Points PlayerProfile::getScore(void) {
 }
 
 // lifes
-void PlayerProfile::incrLifes(void) { 
-	++lifes; 
+void PlayerProfile::incrLives(void) { 
+	++lives;
 }
 
-void PlayerProfile::decrLifes(void) { 
-	--lifes; 
+void PlayerProfile::decrLives(void) { 
+	--lives;
 }
 
-Lifes PlayerProfile::getLifes(void) { 
-	return lifes; 
+Lives PlayerProfile::getLives(void) { 
+	return lives; 
 }
 
 // Birds feed
@@ -77,4 +77,11 @@ void PlayerProfile::incrNumBirdsFeeded(void) {
 
 unsigned int PlayerProfile::getNumBirdsFeeded(void) { 
 	return birdsFeeded;
+}
+
+bool PlayerProfile::isDead() {
+	if (lives == 0) {
+		return true;
+	}
+	return false;
 }

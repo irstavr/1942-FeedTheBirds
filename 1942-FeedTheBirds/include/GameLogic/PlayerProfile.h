@@ -7,7 +7,7 @@
 #define _STARTING_LIFES 5
 
 typedef int Points;
-typedef unsigned int Lifes;
+typedef unsigned int Lives;
 typedef std::pair<bool, bool> PowerUpPair_t;
 typedef std::pair<bool, PowerUpPair_t> BlastAnimationMapKey_t;
 typedef std::map<BlastAnimationMapKey_t, std::string> BlastAnimationMap_t;
@@ -19,9 +19,9 @@ public:
 	PlayerProfile();
 	~PlayerProfile();
 
-	void incrLifes(void);
-	void decrLifes(void);
-	Lifes getLifes(void);
+	void incrLives(void);
+	void decrLives(void);
+	Lives getLives(void);
 	bool isDead();
 	
 	void setNumBirdsFeeded(unsigned int birdsNum);
@@ -39,7 +39,7 @@ private:
 	BlastAnimationMap_t blastAnimationMap;
 	COORDS startXY;
 	Points score;
-	Lifes lifes;
+	Lives lives;
 	bool isAlive;
 	unsigned int birdsFeeded;
 	bool hasBonus; //TODO: add every bonus separately !!!

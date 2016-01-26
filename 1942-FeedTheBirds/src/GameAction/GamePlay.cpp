@@ -280,9 +280,9 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				startNewGame();
 				break;
 			case ALLEGRO_KEY_L:
-				currentGame->birds->at(0)->flyAnimator->stop();
-				currentGame->birds->at(0)->flyAnimation->setNewOffsets(10, 10);
-				currentGame->birds->at(0)->startMoving();
+				//currentGame->birds->at(0)->flyAnimator->stop();
+				//currentGame->birds->at(0)->flyAnimation->setNewOffsets(10, 10);
+				//currentGame->birds->at(0)->startMoving();
 				break;
 			case ALLEGRO_KEY_ENTER:
 				if (gameState == GAME_STATE_GAMEOVER) {
@@ -312,7 +312,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 void GamePlay::updateGameState() {
 
 	AnimatorHolder::progress(getCurrTime());
-
+	
 	if (gameState == GAME_STATE_MAINGAME) {
 		// TODO
 		// initialize:
@@ -322,6 +322,10 @@ void GamePlay::updateGameState() {
 		// update scores/lives/etc on the display
 		// etc 
 		//
+		if (currentGame->superAce->isSuperAceDead()) {
+			gameOver(getCurrTime());
+		}
+
 		CollisionChecker::getInstance()->check();
 	}
 }
@@ -347,10 +351,11 @@ void GamePlay::displayMainScreen(unsigned long now) {
 		Terrain::getInstance().drawBackground();
 
 		currentGame->superAce->displayAll();
+
 		for (int i = 0; i < currentGame->birds->size(); i++) {
 			currentGame->birds->at(i)->displayAll();
 		}
-
+		
 		al_flip_display();
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 		Terrain::getInstance().updateBackground();
@@ -398,6 +403,12 @@ void GamePlay::resumeGame(void) {
 void GamePlay::gameOver(unsigned long now) {
 	//TODO: display message to play again
 	cout << "GAME OVER FILARAKI";
+
+	gameState = GAME_STATE_GAMEOVER;
+
+	currentGame->highScore = 0;
+	currentGame->gameRunning = false;
+
 	Terrain::getInstance().drawBackground();
 	//->setVisibility(true);
 
@@ -415,6 +426,7 @@ void GamePlay::gameOver(unsigned long now) {
 void GamePlay::startNewGame() {
 	gameState = GAME_STATE_MAINGAME;
 	// TODO: play music ?
+	
 
 	currentGame = new GameLogic(takeOffAnimation,
 								takeOffAnimator,
@@ -423,10 +435,9 @@ void GamePlay::startNewGame() {
 								deathAnimation,
 								deathAnimator);
 
-	al_flip_display();
-	al_clear_to_color(al_map_rgb(0, 0, 0));
-	Terrain::getInstance();
-
+	Terrain::cleanUp();
+	displayMainScreen(getCurrTime());
+	
 	// register superAce - birds collisionList
 	/*BIRDS* birds = currentGame->birds;
 	for (unsigned int i = 0; i < birds->size(); i++) {
@@ -447,8 +458,8 @@ void GamePlay::cleanGamePlay() {
 	// TODO: clean all instances of all the classes!
 	//
 	if (gameState != GAME_STATE_INTRO) {
-		if (currentGame)
-			delete currentGame;
+		//if (currentGame)
+		//	delete currentGame;
 
 
 		Terrain::cleanUp();
