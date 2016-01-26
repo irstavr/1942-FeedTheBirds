@@ -6,7 +6,7 @@
 #include "..\..\Animation\AnimationFilmHolder.h"
 #include "..\Items\Fish.h"
 #include "..\..\GameAction\CollisionChecker.h"
-//#include "SuperAce.h"
+#include "SuperAce.h"
 
 typedef vector<BirdDropping*> DROPPINGS;
 
@@ -19,7 +19,7 @@ public:
 	
 	DROPPINGS *droppings;
 
-//	void shoot(CollisionChecker*& checker, SuperAce* &superAce);
+	void shoot(CollisionChecker*& checker, SuperAce* &superAce);
 	void displayAll();
 	int getLives();
 	void removeLife(void);

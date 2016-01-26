@@ -5,7 +5,6 @@
 
 #include "PlayerProfile.h"
 #include "..\Sprites\Sprite.h"
-#include "..\Objects\Items\Fish.h"
 #include "..\Objects\Characters\Bird.h"
 #include "..\Objects\Characters\SuperAce.h"
 

@@ -58,3 +58,14 @@ void Fish::startMoving(void) {
 	flyAnimator->start(this, flyAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(flyAnimator);
 }
+
+void Fish::addToCollisionListWithFishes(void) {
+
+	for (unsigned int i = 0; i < currentGame->birds->size(); i++) {
+		if (!birds->at(i)->isDead()) {
+			cout << "REGISTER COLLISION! BIRD" << i << " WITH FISH!\n";
+			CollisionChecker::getInstance()->
+				registerCollisions(birds->at(i), this);
+		}
+	}
+}

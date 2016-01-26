@@ -8,6 +8,7 @@
 #include "../../Animator/AnimatorHolder.h"
 #include <utility>
 #include <vector>
+#include "../../GameAction/CollisionChecker.h"
 
 using namespace std;
 
@@ -37,6 +38,8 @@ public:
 	void move(float dt, float &x, float&y);
 	/*check if num is in [x, y]*/
 	bool inRange(float x, float y, float num);
+
+	void addToCollisionListWithFishes(void);
 
 	bool isDead();
 	void setDead();
