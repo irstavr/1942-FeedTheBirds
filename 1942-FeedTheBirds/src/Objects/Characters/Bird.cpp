@@ -6,7 +6,7 @@ Bird::Bird(Dim _x, Dim _y, AnimationFilm* film,
 			Sprite(_x, _y, film),
 			flyAnimation(_flyAnimation),
 	flyAnimator(_flyAnimator){
-	birdLives = 2; //TODO: change
+	birdLives = 3; //TODO: change
 	droppings = new vector<BirdDropping*>();
 }
 
@@ -75,6 +75,7 @@ bool Bird::isDead(void) {
 // called when Bird collides with Fish
 void Bird::collisionAction(Sprite* s) {
 	Fish* fish = (Fish*) s;
+	cout << "COLLISION!\n";
 
 	removeLife();
 	fish->setVisibility(false);
