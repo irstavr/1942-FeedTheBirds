@@ -336,9 +336,6 @@ void GamePlay::render(unsigned long timestamp) {
 	if (gameState == GAME_STATE_MAINGAME) {
 		displayMainScreen(timestamp);
 	}
-	if (gameState == GAME_STATE_PAUSED) {
-		//pauseGame(timestamp);
-	}
 	if (gameState == GAME_STATE_GAMEOVER) {
 		gameOver(timestamp);
 	}
@@ -350,7 +347,10 @@ void GamePlay::displayMainScreen(unsigned long now) {
 		Terrain::getInstance().drawBackground();
 
 		currentGame->superAce->displayAll();
-		currentGame->birds->at(0)->displayAll();
+		for (int i = 0; i < currentGame->birds->size(); i++) {
+			currentGame->birds->at(i)->displayAll();
+		}
+
 		al_flip_display();
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 		Terrain::getInstance().updateBackground();
@@ -360,7 +360,6 @@ void GamePlay::displayMainScreen(unsigned long now) {
 
 /* show first window with start screen */
 void GamePlay::displayStartScreen(unsigned long now) {
-
 	TerrainStartScreen::getInstance().drawBackground();
 	if (startButton->isSpriteVisible()) {
 		startButton->display(Rect(0, 0, 0, 0));
@@ -372,9 +371,9 @@ void GamePlay::displayStartScreen(unsigned long now) {
 }
 
 void GamePlay::checkActionPoints() {
-
-	cout << "terrainX = "<< Terrain::getInstance().getTerrainX()<<" \n";
-	if (Terrain::getInstance().getTerrainX()==50) {
+	//cout << "terrainX = "<< Terrain::getInstance().getTerrainX()<<" \n";
+	if (Terrain::getInstance().getTerrainX()==100) {
+		currentGame->createBird(1000, 600, "bonusBird", flyAnimation, flyAnimator);
 		cout << "actionPointTriggered \n";
 	}
 }
@@ -422,18 +421,14 @@ void GamePlay::startNewGame() {
 								landingAnimation,
 								landingAnimator,
 								deathAnimation,
-								deathAnimator,
-								flyAnimation,
-								flyAnimator);
-
-	currentGame->birds->at(0)->startMoving();
+								deathAnimator);
 
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 	Terrain::getInstance();
 
 	// register superAce - birds collisionList
-	BIRDS* birds = currentGame->birds;
+	/*BIRDS* birds = currentGame->birds;
 	for (unsigned int i = 0; i < birds->size(); i++) {
 		CollisionChecker::getInstance()->
 			registerCollisions(currentGame->superAce,
@@ -445,7 +440,7 @@ void GamePlay::startNewGame() {
 				registerCollisions(currentGame->superAce,
 									currentGame->birds->at(i)->droppings->at(i));
 		}
-	}
+	}*/
 }
 
 void GamePlay::cleanGamePlay() {

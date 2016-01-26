@@ -13,7 +13,7 @@ Bird::~Bird(void) {
 	delete droppings;
 }
 
-void Bird::shoot() {
+/*void Bird::shoot(CollisionChecker*& checker, SuperAce* &superAce) {
 	MovingAnimation* bulletAnimation = new MovingAnimation(-5, 0, 20, true, 4);
 	MovingAnimator* bulletAnimator = new MovingAnimator();
 
@@ -26,7 +26,10 @@ void Bird::shoot() {
 		bulletAnimator);
 	droppings->push_back(dropping);
 	dropping->startMoving();
-}
+
+	checker->registerCollisions(superAce, dropping);
+
+}*/
 
 void Bird::displayAll() {
 	this->display(Rect(0, 0, 0, 0));

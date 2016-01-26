@@ -57,7 +57,7 @@ private:
 	Button *startButton, *pauseButton, *winButton, *gameOverButton;
 
 	bool keys[4] = { false, false, false, false };
-
+	unsigned int actionPoint;
 	FrameRangeAnimation *takeOffAnimation;
 	FrameRangeAnimator *takeOffAnimator;
 	FrameRangeAnimation *landingAnimation;

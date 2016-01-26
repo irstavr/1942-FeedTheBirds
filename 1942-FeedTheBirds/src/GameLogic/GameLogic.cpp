@@ -5,14 +5,12 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 					  FrameRangeAnimation *landingAnimation,
 					  FrameRangeAnimator *landingAnimator,
 					  FrameRangeAnimation *deathAnimation,
-					  FrameRangeAnimator *deathAnimator,
-					FrameRangeAnimation *flyAnimation,
-					FrameRangeAnimator *flyAnimator) :
+					  FrameRangeAnimator *deathAnimator):
 		gameRunning(true),
 		highScore(0) {
 	profile = new PlayerProfile(std::make_pair(0,0));
 	superAce = new SuperAce(profile,
-							200,
+							100,
 							300,
 							(AnimationFilm*)
 								AnimationFilmHolder::getSingleton()->
@@ -24,15 +22,7 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 							deathAnimation,
 							deathAnimator);
 
-	Bird *bird = new Bird(1000, 500,
-						(AnimationFilm*)
-						AnimationFilmHolder::getSingleton()->
-						getFilm("bonusBird"),
-						flyAnimation,
-						flyAnimator);
-
 	birds = new vector<Bird*>();
-	birds->push_back(bird);
 }
 
 GameLogic::~GameLogic()
@@ -43,6 +33,23 @@ GameLogic::~GameLogic()
 	gameRunning = 0;
 	superAceKilled = 1;
 	highScore = 0;
+}
+
+void GameLogic::createBird(Dim _x, Dim _y, char* filmId,
+	FrameRangeAnimation *flyAnimation,
+	FrameRangeAnimator *flyAnimator) {
+	Bird *bird = new Bird(_x, _y,
+		(AnimationFilm*)
+		AnimationFilmHolder::getSingleton()->
+		getFilm(filmId),
+		flyAnimation,
+		flyAnimator);
+
+	birds->push_back(bird);
+
+	bird->startMoving();
+	CollisionChecker::getInstance()->
+		registerCollisions(superAce, bird);
 }
 
 bool GameLogic::isRunning() const {

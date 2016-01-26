@@ -5,6 +5,8 @@
 #include "..\..\Animator\FrameRangeAnimator.h"
 #include "..\..\Animation\AnimationFilmHolder.h"
 #include "..\Items\Fish.h"
+#include "..\..\GameAction\CollisionChecker.h"
+//#include "SuperAce.h"
 
 typedef vector<BirdDropping*> DROPPINGS;
 
@@ -17,7 +19,7 @@ public:
 	
 	DROPPINGS *droppings;
 
-	void shoot();
+//	void shoot(CollisionChecker*& checker, SuperAce* &superAce);
 	void displayAll();
 	void removeLife(void);
 	void leaveScreen(void);

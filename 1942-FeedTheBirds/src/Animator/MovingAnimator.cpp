@@ -20,7 +20,7 @@ Sprite* MovingAnimator::getSprite(void) {
 void MovingAnimator::progress(unsigned long currTime) {
 	assert(currTime >= 0);
 	assert(anim);
-	assert(lastTime <= currTime);
+	//assert(lastTime <= currTime);
 
 	while (currTime > lastTime && currTime - lastTime >= anim->getDelay()) {
 		//sprite->move(anim->getDx(), anim->getDy());

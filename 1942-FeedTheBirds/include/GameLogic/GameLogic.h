@@ -24,9 +24,7 @@ public:
 				FrameRangeAnimation *landingAnimation,
 				FrameRangeAnimator *landingAnimator,
 				FrameRangeAnimation *deathAnimation,
-				FrameRangeAnimator *deathAnimator,
-				FrameRangeAnimation *flyAnimation,
-				FrameRangeAnimator *flyAnimator);
+				FrameRangeAnimator *deathAnimator);
 	~GameLogic();
 
 
@@ -42,6 +40,10 @@ public:
 	/*return if the game is still running*/
 	bool isRunning() const;
 	void clearUp();
+
+	void createBird(Dim _x, Dim _y, char* film,
+		FrameRangeAnimation *flyAnimation,
+		FrameRangeAnimator *flyAnimator);
 };
 
 #endif
