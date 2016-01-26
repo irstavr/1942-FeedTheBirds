@@ -70,12 +70,13 @@ void Bird::collisionAction(Sprite* s) {
 	Fish* fish = (Fish*) s;
 
 	removeLife();
+	fish->setVisibility(false);
+	fish->disableMovement();
 	
 	// kill fish sprite
 	if (birdLives == 0) {
+		cout << "BIRD DEAD!\n";
 		leaveScreen();
-		fish->setVisibility(false);
-		fish->disableMovement();
 	}
 
 }
