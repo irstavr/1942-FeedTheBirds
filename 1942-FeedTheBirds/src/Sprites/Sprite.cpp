@@ -95,7 +95,7 @@ void Sprite::disableMovement(void) {
 }
 
 bool Sprite::collisionCheck(Sprite* s) {
-	if (s->isSpriteVisible()) {
+	if (s->isSpriteVisible() && this->isSpriteVisible()) {
 		int x1, y1, x2, y2, x3, y3, x4, y4;
 		Rect b1, b2;
 		b1 = s->getRect();
