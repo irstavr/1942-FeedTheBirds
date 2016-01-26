@@ -1,11 +1,11 @@
 # 1942 - Feed The Birds
 
 1. SuperAce
-        explosion
-        loop
-        flashing - otan xanei zwh 
-                    ki otan kanei loop
-        
+    explosion
+    loop
+    flashing - otan xanei zwh 
+                ki otan kanei loop
+    
 2. Mikra Aeroplana
     1-2 fores purovoloun k feugoun
     ta rixnoume me 1 fish
@@ -49,8 +49,6 @@
     
     7 power ups
     
-
 6. Arxh kai telos pistas
-
 
 7. Configurations

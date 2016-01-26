@@ -6,7 +6,7 @@ Bird::Bird(Dim _x, Dim _y, AnimationFilm* film,
 			Sprite(_x, _y, film),
 			flyAnimation(_flyAnimation),
 	flyAnimator(_flyAnimator){
-	birdLives = 3; //TODO: change
+	birdLives = 2; //TODO: change
 	droppings = new vector<BirdDropping*>();
 }
 
