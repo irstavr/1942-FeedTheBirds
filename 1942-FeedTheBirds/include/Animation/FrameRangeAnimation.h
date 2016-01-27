@@ -3,7 +3,7 @@
 
 #include "MovingAnimation.h"
 
-typedef unsigned char frame_t;
+typedef unsigned int frame_t;
 
 class FrameRangeAnimation : public MovingAnimation {
     frame_t start, end;

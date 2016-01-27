@@ -20,6 +20,11 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 	isInvisible = false;
 	isShooting = false;
 	fishes = new vector<Fish*>();
+
+	injuredAnimation = new FlashingAnimation(10, 200, 200, 0);
+	injuredAnimator = new FlashingAnimator();
+	//AnimatorHolder::animRegister(injuredAnimator);
+
 }
 
 SuperAce::~SuperAce(void) {
@@ -99,11 +104,25 @@ void SuperAce::die() {
 }
 
 void SuperAce::injured(){
-	FlashingAnimation* injuredAnimation = new FlashingAnimation(1, 100, 100, 10);
-	FlashingAnimator* injuredAnimator = new FlashingAnimator();
-	AnimatorHolder::animRegister(injuredAnimator);
 	isInvisible = true;
-	//start flashing
+	startFlashing();
+	
+	//stopFlashing();
+}
+
+void SuperAce::startFlashing(void) {
+	fprintf(stdout, "startFlashing -> SuperAce.cpp\n");
+	//injuredAnimation->setRepetitions(5);
+	injuredAnimator->start(this, injuredAnimation, getCurrTime());
+	AnimatorHolder::markAsRunning(injuredAnimator);
+}
+
+void SuperAce::stopFlashing(void) {
+	fprintf(stdout, "stopFlashing -> SuperAce.cpp\n");
+	isInvisible = false;
+	AnimatorHolder::markAsSuspended(injuredAnimator);
+	AnimatorHolder::cancel(injuredAnimator);
+	this->setVisibility(true);
 }
 
 void SuperAce::collisionAction(Sprite* s) {
@@ -123,11 +142,7 @@ void SuperAce::collisionAction(Sprite* s) {
 
 		// super ace loses a life
 		playerProfile->decrLives();
-
 		
-
-
-
 
 		//check if game is over
 		if (playerProfile->getLives() == 0) {
@@ -138,6 +153,8 @@ void SuperAce::collisionAction(Sprite* s) {
 
 	// collision super ace with a koutsoulia :P
 	if (BirdDropping* v = dynamic_cast<BirdDropping*>(s)) {
+
+		cout << "COLLISION! SUPER ACE - koutsoulia!\n";
 		// Super Ace loses a life
 		// flashes
 		// if 0 lives => gameover
@@ -146,6 +163,7 @@ void SuperAce::collisionAction(Sprite* s) {
 
 		playerProfile->decrLives();
 
+		injured();
 		// flash super Ace
 
 

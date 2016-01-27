@@ -44,6 +44,8 @@ public:
 	void displayAll();
 	virtual void collisionAction(Sprite* s);
 	void injured();
+	void startFlashing(void);
+	void stopFlashing(void);
 
 private:
 	float dx, dy;
@@ -63,6 +65,9 @@ private:
 	FlashingAnimator *flashAnimator;
 	TickAnimation *tickAnimation;
 	TimerTickAnimator *timerTick;
+	FlashingAnimation* injuredAnimation;
+	FlashingAnimator* injuredAnimator;
+
 
 	static void shootingCompleted(Animator*, void *closure);
 	static void invinsibilityEnded(Animator *, void *closure);
