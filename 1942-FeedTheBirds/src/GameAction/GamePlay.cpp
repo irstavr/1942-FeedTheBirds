@@ -188,7 +188,7 @@ void GamePlay::initGameEngine() {
 	takeOffAnimator = new FrameRangeAnimator();
 	deathAnimation = new FrameRangeAnimation(1, 6, 0, 0, 200, false, 4);
 	deathAnimator = new FrameRangeAnimator();
-	flyAnimation = new FrameRangeAnimation(1, 3, -5, -5, 200, false, 3);
+	flyAnimation = new FrameRangeAnimation(1, 3, -5, -5, 200, true, 3);
 	flyAnimator = new FrameRangeAnimator();
 
 	//bulletAnimation = new MovingAnimation(0, 0, 20, true, 4);
