@@ -266,10 +266,10 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				keys[LEFT] = true;
 				break;
 			case ALLEGRO_KEY_SPACE:
-				InputManager::shoot(currentGame, currentGame->superAce);
+				if (gameState == GAME_STATE_MAINGAME)InputManager::shoot(currentGame, currentGame->superAce);
 				break;
 			case ALLEGRO_KEY_A:
-				InputManager::twist();
+				if (gameState == GAME_STATE_MAINGAME)InputManager::twist();
 				break;
 			case ALLEGRO_KEY_P:
 				pauseGame(currTime);
@@ -379,6 +379,8 @@ void GamePlay::checkActionPoints() {
 	//cout << "terrainX = "<< Terrain::getInstance().getTerrainX()<<" \n";
 	if (Terrain::getInstance().getTerrainX()==100) {
 		currentGame->createBird(1000, 400, "bonusBird", flyAnimation, flyAnimator);
+		currentGame->createBird(1200, 400, "bonusBird", flyAnimation->clone(12), flyAnimator->clone());
+		currentGame->createBird(800, 400, "bonusBird", flyAnimation->clone(10), flyAnimator->clone());
 		cout << "actionPointTriggered \n";
 	}
 }

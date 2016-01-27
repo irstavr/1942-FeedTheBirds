@@ -35,3 +35,7 @@ void FrameRangeAnimator::progress (unsigned long currTime) {
 	}
 }
 
+FrameRangeAnimator* FrameRangeAnimator::clone() const {
+	return new FrameRangeAnimator();
+}
+

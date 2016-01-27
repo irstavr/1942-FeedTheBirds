@@ -24,6 +24,10 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 
 	birds = new vector<Bird*>();
 
+	/*explosion = new Sprite(superAce->x, superAce->y,
+		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("bambam"));
+	deathAnimator->start(explosion, deathAnimation, getCurrTime());
+	AnimatorHolder::markAsRunning(deathAnimator);*/
 }
 
 GameLogic::~GameLogic() {

@@ -17,6 +17,7 @@ public:
 	BIRDS *birds;
 	PlayerProfile* profile;
 	SuperAce* superAce;
+	Sprite* explosion;
 
 public:
 	GameLogic(FrameRangeAnimation *takeOffAnimation,
