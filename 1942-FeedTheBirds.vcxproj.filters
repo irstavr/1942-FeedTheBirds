@@ -195,6 +195,12 @@
     <ClCompile Include="1942-FeedTheBirds\src\Animator\FrameRangeAnimator.cpp">
       <Filter>Source Files\Animator</Filter>
     </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\Animation\MovingPathAnimation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\Animator\MovingPathAnimator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\SideFighter.cpp">
       <Filter>Source Files\Objects\Characters</Filter>
     </ClCompile>
@@ -375,6 +381,12 @@
     </ClInclude>
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\AI.h">
       <Filter>Header Files\GameAction</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\Animation\MovingPathAnimation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\Animator\MovingPathAnimator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\SideFighter.h">
       <Filter>Header Files\Objects\Characters</Filter>
