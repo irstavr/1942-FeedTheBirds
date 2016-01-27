@@ -20,7 +20,7 @@ namespace InputManager {
 	/* called if press space bar */
 	void shoot(GameLogic* &game, SuperAce* &superAce);
 	/* called if press key A */
-	void twist();
+	void twist(SuperAce *& superAce);
 	/* called if press P */
 	void pause(int&);
 

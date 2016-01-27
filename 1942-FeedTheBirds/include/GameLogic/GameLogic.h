@@ -13,7 +13,6 @@ typedef vector<Bird*> BIRDS;
 
 class GameLogic {
 public:
-
 	BIRDS *birds;
 	PlayerProfile* profile;
 	SuperAce* superAce;
@@ -24,7 +23,9 @@ public:
 				FrameRangeAnimation *landingAnimation,
 				FrameRangeAnimator *landingAnimator,
 				FrameRangeAnimation *deathAnimation,
-				FrameRangeAnimator *deathAnimator);
+				FrameRangeAnimator *deathAnimator,
+				MovingPathAnimation* loopAnimation,
+				MovingPathAnimator* loopAnimator);
 	~GameLogic();
 
 

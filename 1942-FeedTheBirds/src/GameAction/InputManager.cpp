@@ -16,7 +16,6 @@ void InputManager::moveRight(SuperAce* &superAce) {
 	superAce->moveRight();
 }
 
-
 void InputManager::move(bool up, bool down, bool left, bool right, SuperAce* &superAce) {
 
 	//cout << "up=" << up << " down=" << down<< " left=" << left<< " right= " << right << "\n";
@@ -39,7 +38,9 @@ void InputManager::shoot(GameLogic* &game, SuperAce* &superAce)
 	superAce->shoot(game->birds);
 }
 
-void InputManager::twist() {
+void InputManager::twist(SuperAce* &superAce) 
+{
+	superAce->twist();
 }
 
 void InputManager::pause(int &gameState) 
