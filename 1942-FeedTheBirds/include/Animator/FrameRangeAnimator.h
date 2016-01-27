@@ -17,6 +17,7 @@ class FrameRangeAnimator : public Animator {
 	~FrameRangeAnimator(){}
 
 	void display(ALLEGRO_BITMAP* at) {};
+	FrameRangeAnimator* FrameRangeAnimator::clone() const;
 };
 
 #endif

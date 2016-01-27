@@ -4,7 +4,7 @@
 #include "Animation.h"
 #include <list>
 
-typedef unsigned char frame_t;
+typedef unsigned int frame_t;
 
 struct PathEntry {
 	offset_t dx, dy;

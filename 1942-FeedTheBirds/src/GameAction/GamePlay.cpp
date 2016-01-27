@@ -186,9 +186,9 @@ void GamePlay::initGameEngine() {
 	landingAnimator = new FrameRangeAnimator();
 	takeOffAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 2);
 	takeOffAnimator = new FrameRangeAnimator();
-	deathAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 3);
+	deathAnimation = new FrameRangeAnimation(1, 6, 0, 0, 200, false, 4);
 	deathAnimator = new FrameRangeAnimator();
-	flyAnimation = new FrameRangeAnimation(1, 3, -5, -5, 200, false, 3);
+	flyAnimation = new FrameRangeAnimation(1, 3, -5, -5, 200, true, 3);
 	flyAnimator = new FrameRangeAnimator();
 
 	loopAnimation = createLoopAnimation(0, 100, "superAce");
@@ -278,10 +278,12 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				keys[LEFT] = true;
 				break;
 			case ALLEGRO_KEY_SPACE:
-				InputManager::shoot(currentGame, currentGame->superAce);
+				if (gameState == GAME_STATE_MAINGAME)
+					InputManager::shoot(currentGame, currentGame->superAce);
 				break;
 			case ALLEGRO_KEY_A:
-				InputManager::twist(currentGame->superAce);
+				if (gameState == GAME_STATE_MAINGAME)
+					InputManager::twist(currentGame->superAce);
 				break;
 			case ALLEGRO_KEY_P:
 				pauseGame(currTime);
@@ -391,6 +393,8 @@ void GamePlay::checkActionPoints() {
 	//cout << "terrainX = "<< Terrain::getInstance().getTerrainX()<<" \n";
 	if (Terrain::getInstance().getTerrainX()==100) {
 		currentGame->createBird(1000, 400, "bonusBird", flyAnimation, flyAnimator);
+		currentGame->createBird(1200, 400, "bonusBird", flyAnimation->clone(12), flyAnimator->clone());
+		currentGame->createBird(800, 400, "bonusBird", flyAnimation->clone(10), flyAnimator->clone());
 		cout << "actionPointTriggered \n";
 	}
 }

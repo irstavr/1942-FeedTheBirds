@@ -3,7 +3,7 @@
 
 #include "Animation.h"
 
-typedef unsigned char frame_t;
+typedef unsigned int frame_t;
 
 class FlashingAnimation : public Animation {
 	frame_t	repetitions;

@@ -11,6 +11,7 @@
 #include "..\..\GameAction\CollisionChecker.h"
 #include "..\Items\Fish.h"
 #include "..\Items\BirdDropping.h"
+#include "..\Items\PowerUp.h"
 #include "Bird.h"
 #include "..\..\GameLogic\PlayerProfile.h"
 
@@ -47,17 +48,21 @@ public:
 	void displayAll();
 	virtual void collisionAction(Sprite* s);
 	void injured();
+	void startFlashing(void);
+	void stopFlashing(void);
+	void fetchSideFighters();
 
 private:
 	float dx, dy;
 	float speedx, speedy;
 	FISHES *fishes;
 
+
 	bool isDead;
 	bool isInvisible;
 	bool isShooting;
 	bool hasSideFighter;
-	//bool hasQuadGun;
+	bool hasQuadGun;
 
 	PlayerProfile* playerProfile;
 	FrameRangeAnimation *takeOffAnimation, *landAnimation, *deathAnimation;
@@ -68,6 +73,8 @@ private:
 	TimerTickAnimator *timerTick;
 	MovingPathAnimation * loopAnimation;
 	MovingPathAnimator* loopAnimator;
+	FlashingAnimation* injuredAnimation;
+	FlashingAnimator* injuredAnimator;
 
 	static void shootingCompleted(Animator*, void *closure);
 	static void invinsibilityEnded(Animator *, void *closure); 

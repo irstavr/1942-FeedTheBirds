@@ -20,7 +20,9 @@ private:
 	public:
 		ProgressFunctor(unsigned long _t) :  t(_t) {}
 		void operator()(Animator* a) const { 
-			a->progress(t); 
+			if (!(a->hasFinished())) {
+				a->progress(t);
+			}
 		}
 	};
 public:

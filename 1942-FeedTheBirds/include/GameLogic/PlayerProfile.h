@@ -4,10 +4,10 @@
 #include "../../include/Utilities/Utilities.h"
 #include <map>
 
-#define _STARTING_LIFES 5
+#define _STARTING_LIFES 4
 
 typedef int Points;
-typedef unsigned int Lives;
+typedef int Lives;
 typedef std::pair<bool, bool> PowerUpPair_t;
 typedef std::pair<bool, PowerUpPair_t> BlastAnimationMapKey_t;
 typedef std::map<BlastAnimationMapKey_t, std::string> BlastAnimationMap_t;
@@ -23,6 +23,11 @@ public:
 	void decrLives(void);
 	Lives getLives(void);
 	bool isDead();
+
+	void setLoops(int n);
+	int  getLoops();
+	void incrLoops(int n);
+	void decrLoops(int n);
 	
 	void setNumBirdsFeeded(unsigned int birdsNum);
 	void incrNumBirdsFeeded(void);
@@ -40,6 +45,7 @@ private:
 	COORDS startXY;
 	Points score;
 	Lives lives;
+	int loops;
 	bool isAlive;
 	unsigned int birdsFeeded;
 	bool hasBonus; //TODO: add every bonus separately !!!
