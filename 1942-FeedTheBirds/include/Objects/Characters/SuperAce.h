@@ -10,6 +10,7 @@
 #include "..\..\GameAction\CollisionChecker.h"
 #include "..\Items\Fish.h"
 #include "..\Items\BirdDropping.h"
+#include "Bird.h"
 #include "..\..\GameLogic\PlayerProfile.h"
 
 typedef vector<Fish*> FISHES;
@@ -22,7 +23,7 @@ public:
 						FrameRangeAnimation *_deathAnimation, FrameRangeAnimator *_deathAnimator);
 	~SuperAce(void);
 
-	void shoot();
+	void shoot(vector<Bird*>* birds);
 	void moveUp();
 	void moveDown();
 	void moveLeft();

@@ -40,6 +40,5 @@ typedef std::pair<int, int> COORDS;
 /* get system current time */
 extern unsigned int getCurrTime(void);
 
-GameLogic *currentGameInUtilities;
 
 #endif

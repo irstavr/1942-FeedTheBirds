@@ -434,7 +434,7 @@ void GamePlay::startNewGame() {
 								landingAnimator,
 								deathAnimation,
 								deathAnimator);
-	currentGameInUtilities = currentGame;
+
 	Terrain::cleanUp();
 	displayMainScreen(getCurrTime());
 	

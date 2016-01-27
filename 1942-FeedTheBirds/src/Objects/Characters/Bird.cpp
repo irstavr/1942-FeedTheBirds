@@ -14,7 +14,7 @@ Bird::~Bird(void) {
 	delete droppings;
 }
 
-void Bird::shoot(CollisionChecker*& checker, SuperAce* &superAce) {
+/*void Bird::shoot(CollisionChecker*& checker, SuperAce* &superAce) {
 	MovingAnimation* bulletAnimation = new MovingAnimation(-5, 0, 20, true, 4);
 	MovingAnimator* bulletAnimator = new MovingAnimator();
 
@@ -30,7 +30,7 @@ void Bird::shoot(CollisionChecker*& checker, SuperAce* &superAce) {
 
 	checker->registerCollisions(superAce, dropping);
 
-}
+}*/
 
 void Bird::displayAll() {
 	if (isSpriteVisible()) {

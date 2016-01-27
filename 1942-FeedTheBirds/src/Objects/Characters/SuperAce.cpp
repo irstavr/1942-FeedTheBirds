@@ -52,7 +52,7 @@ void SuperAce::moveRight() {
 	}
 }
 
-void SuperAce::shoot() {
+void SuperAce::shoot(vector<Bird*>* birds) {
 	// Fish (aka. bullets)
 	MovingAnimation* bulletAnimation = new MovingAnimation(5, 0, 20, true, 4);
 	MovingAnimator* bulletAnimator = new MovingAnimator();
@@ -66,7 +66,14 @@ void SuperAce::shoot() {
 						bulletAnimator);
 	fishes->push_back(fish);
 	fish->startMoving();
-	fish->addToCollisionListWithFishes();
+
+	for (unsigned int i = 0; i < birds->size(); i++) {
+		if (!birds->at(i)->isDead()) {
+			cout << "REGISTER COLLISION! BIRD" << i << " WITH FISH!\n";
+			CollisionChecker::getInstance()->
+				registerCollisions(birds->at(i), fish);
+		}
+	}
 }
 
 void SuperAce::displayAll() {
