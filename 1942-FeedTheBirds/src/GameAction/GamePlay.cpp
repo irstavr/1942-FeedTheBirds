@@ -352,7 +352,7 @@ void GamePlay::displayMainScreen(unsigned long now) {
 
 		currentGame->superAce->displayAll();
 
-		for (int i = 0; i < currentGame->birds->size(); i++) {
+		for (size_t i = 0; i < currentGame->birds->size(); i++) {
 			currentGame->birds->at(i)->displayAll();
 		}
 		
@@ -428,13 +428,13 @@ void GamePlay::startNewGame() {
 	// TODO: play music ?
 	
 
-	currentGame = new GameLogic(takeOffAnimation,
+	this->currentGame = new GameLogic(takeOffAnimation,
 								takeOffAnimator,
 								landingAnimation,
 								landingAnimator,
 								deathAnimation,
 								deathAnimator);
-	currentGameInUtilities = currentGame;
+	//currentGameGlobalInstance = this->currentGame;
 	Terrain::cleanUp();
 	displayMainScreen(getCurrTime());
 	

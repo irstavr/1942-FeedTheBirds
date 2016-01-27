@@ -5,7 +5,6 @@
 #include "..\..\Animation\FlashingAnimation.h"
 #include "..\..\Animator\FlashingAnimator.h"
 #include "..\..\Animator\AnimatorHolder.h"
-#include "..\..\Utilities\Utilities.h"
 
 class Button : public Sprite {
 private:

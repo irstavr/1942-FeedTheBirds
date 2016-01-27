@@ -44,10 +44,14 @@ public:
 	void setVisibility(bool v);
 	bool isSpriteVisible(void) const;
 	bool collisionCheck(Sprite* s);
-	
-	virtual void collisionAction(Sprite* s) {
+
+	virtual void collisionAction() {
 		cout << "COLLISION ! ! ! !! \n";
 	};
+
+	/*virtual void collisionAction(Sprite* s) {
+		cout << "COLLISION ! ! ! !! \n";
+	};*/
 	
 	void enableMovement(void);
 	void disableMovement(void);

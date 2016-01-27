@@ -1,12 +1,12 @@
 #ifndef _BIRDDROPPING_H
 #define _BIRDDROPPING_H
 
-#include "../../Sprites/Sprite.h"
+#include "../../Animation/AnimationFilm.h"
+#include "../../Animation/MovingAnimation.h"
 #include "../../Animator/MovingAnimator.h"
 #include "../../Animator/TimerTickAnimator.h"
-#include "../../Animator/FlashingAnimator.h"
 #include "../../Animator/AnimatorHolder.h"
-#include <utility>
+#include "../../Utilities/Utilities.h"
 #include <vector>
 
 	using namespace std;

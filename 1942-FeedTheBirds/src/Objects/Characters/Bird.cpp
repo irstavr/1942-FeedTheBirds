@@ -72,20 +72,11 @@ bool Bird::isDead(void) {
 	return !isAlive;
 }
 
-// called when Bird collides with Fish
-void Bird::collisionAction(Sprite* s) {
-	Fish* fish = (Fish*) s;
-	cout << "COLLISION!\n";
-
-	removeLife();
-	fish->setVisibility(false);
-	fish->disableMovement();
-	fish->setDead();
-
-	// kill fish sprite
+void Bird::collisionAction() {
+	cout << "BIRD COLLISION!\n";
+	this->removeLife();
 	if (birdLives == 0) {
 		cout << "BIRD DEAD!\n";
 		leaveScreen();
 	}
-
 }

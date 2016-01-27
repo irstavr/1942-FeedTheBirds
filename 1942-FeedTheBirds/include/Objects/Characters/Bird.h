@@ -2,11 +2,10 @@
 #define _BIRD_H
 
 #include "..\Items\BirdDropping.h"
+#include ".\SuperAce.h"
 #include "..\..\Animator\FrameRangeAnimator.h"
-#include "..\..\Animation\AnimationFilmHolder.h"
-#include "..\Items\Fish.h"
+#include "..\..\Animation\AnimationFilm.h"
 #include "..\..\GameAction\CollisionChecker.h"
-#include "SuperAce.h"
 
 typedef vector<BirdDropping*> DROPPINGS;
 
@@ -31,7 +30,8 @@ public:
 	FrameRangeAnimation *flyAnimation;
 	FrameRangeAnimator *flyAnimator;
 
-	virtual void collisionAction(Sprite *s);
+	virtual void collisionAction();
+	//virtual void collisionAction(Sprite *s);
 private:
 
 	int birdLives;

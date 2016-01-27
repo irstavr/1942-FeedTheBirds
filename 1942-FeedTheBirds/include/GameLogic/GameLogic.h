@@ -2,11 +2,8 @@
 #define GAME_LOGIC_H
 
 #include <vector>
-
-#include "PlayerProfile.h"
-#include "..\Sprites\Sprite.h"
-#include "..\Objects\Characters\Bird.h"
 #include "..\Objects\Characters\SuperAce.h"
+#include "..\Objects\Characters\Bird.h"
 
 typedef vector<Bird*> BIRDS;
 

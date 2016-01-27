@@ -2,15 +2,12 @@
 #define _SUPERACE_H
 
 #include "..\..\Sprites\Sprite.h"
-#include "..\..\Animator\MovingAnimator.h"
-#include "..\..\Animator\TimerTickAnimator.h"
-#include "..\..\Animator\FlashingAnimator.h"
-#include "..\..\Animator\FrameRangeAnimator.h"
-#include "..\..\Animation\AnimationFilmHolder.h"
-#include "..\..\GameAction\CollisionChecker.h"
 #include "..\Items\Fish.h"
-#include "..\Items\BirdDropping.h"
+#include "..\..\Animator\FrameRangeAnimator.h"
 #include "..\..\GameLogic\PlayerProfile.h"
+#include "..\..\Animator\FlashingAnimator.h"
+#include "..\..\Animation\AnimationFilmHolder.h"
+
 
 typedef vector<Fish*> FISHES;
 
@@ -33,7 +30,6 @@ public:
 	//void removeLife(void);
 	//void addLife(void);
 	unsigned int getLives(void);
-	//virtual void collisionAction(Sprite *s);
 	void die(void);
 	static bool deathCompleted(void);
 	bool isSuperAceDead();
@@ -41,7 +37,8 @@ public:
 	void gotHit();
 	void setInvinsibility(bool _inv) { isInvisible = _inv; };
 	void displayAll();
-	virtual void collisionAction(Sprite* s);
+	virtual void collisionAction();
+	//virtual void collisionAction(Sprite* s);
 
 private:
 	float dx, dy;

@@ -2,18 +2,10 @@
 #define GP_H
 
 #include "..\GameLogic\GameLogic.h"
-#include "..\Terrain\TerrainStartScreen.h"
-#include "..\Terrain\Terrain.h"
-#include "..\Utilities\Utilities.h"
-#include "..\Animation\AnimationFilmHolder.h"
 #include "..\Objects\Items\Button.h"
-#include "..\Animation\FlashingAnimation.h"
-#include "..\Animator\FrameRangeAnimator.h"
-#include "..\Animator\FlashingAnimator.h"
-#include "..\Animator\AnimatorHolder.h"
-#include "..\Objects\Characters\SuperAce.h"
+#include "..\Terrain\TerrainStartScreen.h"
 #include "InputManager.h"
-#include "CollisionChecker.h"
+
 
 enum KEYS { UP, DOWN, LEFT, RIGHT };
 

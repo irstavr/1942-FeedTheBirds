@@ -61,11 +61,19 @@ void Fish::startMoving(void) {
 
 void Fish::addToCollisionListWithFishes(void) {
 
-	for (unsigned int i = 0; i < currentGame->birds->size(); i++) {
-		if (!birds->at(i)->isDead()) {
-			cout << "REGISTER COLLISION! BIRD" << i << " WITH FISH!\n";
-			CollisionChecker::getInstance()->
-				registerCollisions(birds->at(i), this);
-		}
-	}
+	//for (unsigned int i = 0; i < currentGameInUtilities->birds->size(); i++) {
+	//	if (!currentGameInUtilities->birds->at(i)->isDead()) {
+	//		cout << "REGISTER COLLISION! BIRD" << i << " WITH FISH!\n";
+	//		CollisionChecker::getInstance()->
+	//			registerCollisions(currentGameInUtilities->birds->at(i), this);
+	//	}
+	//}
+}
+
+
+void Fish::collisionAction() {
+	cout << "Fish COLLISION!\n";
+	this->setVisibility(false);
+	this->disableMovement();
+	this->setDead();
 }

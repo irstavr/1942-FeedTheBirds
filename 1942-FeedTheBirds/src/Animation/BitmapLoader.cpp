@@ -13,7 +13,8 @@ BitmapLoader::~BitmapLoader() {
 ALLEGRO_BITMAP *loadBitmap(const std::string& path) {
 	ALLEGRO_BITMAP *bitmap = al_load_bitmap(path.c_str());
 	if (!bitmap) {
-		fprintf(stderr, "Could not load bitmap file %s", path);
+		std::cerr << "Could not load bitmap file " << path << std::endl;
+		//fprintf(stderr, "Could not load bitmap file %s", path);
 		al_show_native_message_box(al_get_current_display(), "Error", "Error", ("Could not load bitmap file " + path + "\n").c_str(), NULL, ALLEGRO_MESSAGEBOX_ERROR);
 		exit(1);
 	}

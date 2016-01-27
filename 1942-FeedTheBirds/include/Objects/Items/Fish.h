@@ -1,14 +1,12 @@
 #ifndef _FISH_H
 #define _FISH_H
 
+#include <vector>
 #include "../../Sprites/Sprite.h"
 #include "../../Animator/MovingAnimator.h"
 #include "../../Animator/TimerTickAnimator.h"
-#include "../../Animator/FlashingAnimator.h"
+#include "../../Utilities/Utilities.h"
 #include "../../Animator/AnimatorHolder.h"
-#include <utility>
-#include <vector>
-#include "../../GameAction/CollisionChecker.h"
 
 using namespace std;
 
@@ -44,6 +42,8 @@ public:
 	bool isDead();
 	void setDead();
 	void Fish::startMoving(void);
+
+	virtual void collisionAction();
 };
 
 #endif

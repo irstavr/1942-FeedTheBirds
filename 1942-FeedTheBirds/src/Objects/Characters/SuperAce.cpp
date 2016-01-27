@@ -81,58 +81,22 @@ void SuperAce::displayAll() {
 }
 
 void SuperAce::die() {
-
+	isDead = true;
 }
 
-void SuperAce::collisionAction(Sprite* s) {
-	cout << "COLLISION! SUPER ACE!\n";	
+void SuperAce::collisionAction() {
+	cout << "COLLISION! SUPER ACE!\n";
+	//super ace loses a life
+	playerProfile->decrLives();
 
-	// collision super ace with a bird
-	if (Bird* v = dynamic_cast<Bird*>(s)) {
-		// kill Bird
-		v->removeLife();
-		if (v->getLives() == 0) {
-			v->setVisibility(false);
-		}
+	// flash super Ace
+	//this->flash();?
 
-		// super ace loses a life
-		playerProfile->decrLives();
-
-		// flash super Ace
-
-
-		//check if game is over
-		if (playerProfile->getLives() == 0) {
-			// GameOver
-			isDead = true;
-		}
+	//check if game is over
+	if (playerProfile->getLives() == 0) {
+		// GameOver
+		this->die();
 	}
-
-	// collision super ace with a koutsoulia :P
-	if (BirdDropping* v = dynamic_cast<BirdDropping*>(s)) {
-		// Super Ace loses a life
-		// flashes
-		// if 0 lives => gameover
-		// kill BirdDropping
-		v->setVisibility(false);
-
-		playerProfile->decrLives();
-
-		// flash super Ace
-
-
-		//check if game is over
-		if (playerProfile->isDead()) {
-			// GameOver
-			isDead = true;
-		}
-	}
-	
-	// collision super ace with a POW POW
-	/*if (Pow* v = dynamic_cast<Pow*>(s)) {
-		// activate LEVELUP on superAce
-	}
-	*/
 }
 
 bool SuperAce::isSuperAceDead(void) {
