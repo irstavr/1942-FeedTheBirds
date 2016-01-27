@@ -43,6 +43,7 @@ public:
 	void setInvinsibility(bool _inv) { isInvisible = _inv; };
 	void displayAll();
 	virtual void collisionAction(Sprite* s);
+	void injured();
 
 private:
 	float dx, dy;

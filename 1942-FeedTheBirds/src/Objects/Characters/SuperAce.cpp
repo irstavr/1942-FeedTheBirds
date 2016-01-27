@@ -91,6 +91,14 @@ void SuperAce::die() {
 
 }
 
+void SuperAce::injured(){
+	FlashingAnimation* injuredAnimation = new FlashingAnimation(1, 100, 100, 10);
+	FlashingAnimator* injuredAnimator = new FlashingAnimator();
+	AnimatorHolder::animRegister(injuredAnimator);
+	isInvisible = true;
+	//start flashing
+}
+
 void SuperAce::collisionAction(Sprite* s) {
 	cout << "COLLISION! SUPER ACE!\n";	
 
@@ -105,7 +113,9 @@ void SuperAce::collisionAction(Sprite* s) {
 		// super ace loses a life
 		playerProfile->decrLives();
 
-		// flash super Ace
+		
+
+
 
 
 		//check if game is over

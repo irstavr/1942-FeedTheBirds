@@ -378,7 +378,7 @@ void GamePlay::displayStartScreen(unsigned long now) {
 void GamePlay::checkActionPoints() {
 	//cout << "terrainX = "<< Terrain::getInstance().getTerrainX()<<" \n";
 	if (Terrain::getInstance().getTerrainX()==100) {
-		currentGame->createBird(1000, 600, "bonusBird", flyAnimation, flyAnimator);
+		currentGame->createBird(1000, 400, "bonusBird", flyAnimation, flyAnimator);
 		cout << "actionPointTriggered \n";
 	}
 }

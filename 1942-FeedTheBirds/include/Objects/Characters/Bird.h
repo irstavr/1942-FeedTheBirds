@@ -19,7 +19,7 @@ public:
 	
 	DROPPINGS *droppings;
 
-//	void shoot(CollisionChecker*& checker, SuperAce* &superAce);
+	BirdDropping* shoot();
 	void displayAll();
 	int getLives();
 	void removeLife(void);

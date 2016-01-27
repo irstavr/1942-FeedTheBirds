@@ -23,6 +23,7 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 							deathAnimator);
 
 	birds = new vector<Bird*>();
+
 }
 
 GameLogic::~GameLogic() {
@@ -46,6 +47,11 @@ void GameLogic::createBird(Dim _x, Dim _y, char* filmId,
 	bird->startMoving();
 	CollisionChecker::getInstance()->
 		registerCollisions(superAce, bird);
+
+	//Na ginei sto AI!!
+	BirdDropping* dropping = bird->shoot();
+	CollisionChecker::getInstance()->
+		registerCollisions(superAce, dropping);
 }
 
 bool GameLogic::isRunning() const {
