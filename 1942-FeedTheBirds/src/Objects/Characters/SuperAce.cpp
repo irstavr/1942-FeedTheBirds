@@ -22,6 +22,34 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 	fishes = new vector<Fish*>();
 	hasQuadGun = false;
 
+
+
+
+	this->sf1 = new SideFighter(
+		this->x, this->y-20, 
+		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("sidefighter"),
+		new FrameRangeAnimation(1, 3, 0, 0, 200, false, 21),
+		new FrameRangeAnimator(),
+		new FrameRangeAnimation(1, 3, 0, 0, 200, false, 22),
+		new FrameRangeAnimator(),
+		new FrameRangeAnimation(1, 6, 0, 0, 200, false, 23),
+		new FrameRangeAnimator(), 
+		this->fishes);
+
+	this->sf1->setVisibility(false);
+
+	this->sf2 = new SideFighter(
+		this->x, this->y+20, 
+		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("sidefighter"), 
+		new FrameRangeAnimation(1, 3, 0, 0, 200, false, 24),
+		new FrameRangeAnimator(),
+		new FrameRangeAnimation(1, 3, 0, 0, 200, false, 25),
+		new FrameRangeAnimator(),
+		new FrameRangeAnimation(1, 6, 0, 0, 200, false, 26),
+		new FrameRangeAnimator(), 
+		this->fishes);
+	this->sf1->setVisibility(false);
+
 	injuredAnimation = new FlashingAnimation(10, 200, 200, 0);
 	injuredAnimator = new FlashingAnimator();
 	//AnimatorHolder::animRegister(injuredAnimator);
@@ -240,8 +268,5 @@ void SuperAce::collisionAction(Sprite* s) {
 }
 
 bool SuperAce::isSuperAceDead(void) {
-	if (isDead)
-		return true;
-	else
-		return false;
+	return this->isDead;
 }

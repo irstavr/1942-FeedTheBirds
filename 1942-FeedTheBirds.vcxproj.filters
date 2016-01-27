@@ -195,6 +195,9 @@
     <ClCompile Include="1942-FeedTheBirds\src\Animator\FrameRangeAnimator.cpp">
       <Filter>Source Files\Animator</Filter>
     </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\SideFighter.cpp">
+      <Filter>Source Files\Objects\Characters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="1942-FeedTheBirds\data\Bitmaps\1942_sprite_sheet.png">
@@ -372,6 +375,9 @@
     </ClInclude>
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\AI.h">
       <Filter>Header Files\GameAction</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\SideFighter.h">
+      <Filter>Header Files\Objects\Characters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

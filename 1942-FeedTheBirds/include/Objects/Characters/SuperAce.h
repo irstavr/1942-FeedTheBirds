@@ -11,7 +11,8 @@
 #include "..\Items\Fish.h"
 #include "..\Items\BirdDropping.h"
 #include "..\Items\PowerUp.h"
-#include "Bird.h"
+#include "./Bird.h"
+#include "./SideFighter.h"
 #include "..\..\GameLogic\PlayerProfile.h"
 
 typedef vector<Fish*> FISHES;
@@ -54,6 +55,8 @@ private:
 	float speedx, speedy;
 	FISHES *fishes;
 
+	SideFighter *sf1;
+	SideFighter *sf2;
 
 	bool isDead;
 	bool isInvisible;
