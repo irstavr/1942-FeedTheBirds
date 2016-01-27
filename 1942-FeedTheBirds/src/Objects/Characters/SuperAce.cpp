@@ -88,6 +88,13 @@ void SuperAce::displayAll() {
 }
 
 void SuperAce::die() {
+	//isDead = true;
+	cout << "Stuff is happening" << endl;
+	Sprite* explosion = new Sprite(this->x, this->y, 
+		(AnimationFilm*) AnimationFilmHolder::getSingleton()->getFilm("bambam"));
+	explosion->setVisibility(true);
+	deathAnimator->start(explosion, deathAnimation, getCurrTime());
+	AnimatorHolder::markAsRunning(deathAnimator);
 
 }
 
@@ -100,7 +107,11 @@ void SuperAce::injured(){
 }
 
 void SuperAce::collisionAction(Sprite* s) {
-	cout << "COLLISION! SUPER ACE!\n";	
+	cout << "COLLISION! SUPER ACE!\n";
+	if (playerProfile->getLives() == 5) {
+		// GameOver
+		this->die();
+	}
 
 	// collision super ace with a bird
 	if (Bird* v = dynamic_cast<Bird*>(s)) {
@@ -121,7 +132,7 @@ void SuperAce::collisionAction(Sprite* s) {
 		//check if game is over
 		if (playerProfile->getLives() == 0) {
 			// GameOver
-			isDead = true;
+			this->die();
 		}
 	}
 
@@ -141,7 +152,7 @@ void SuperAce::collisionAction(Sprite* s) {
 		//check if game is over
 		if (playerProfile->isDead()) {
 			// GameOver
-			isDead = true;
+			this->die();
 		}
 	}
 	

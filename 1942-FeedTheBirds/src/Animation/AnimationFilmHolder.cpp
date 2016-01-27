@@ -14,7 +14,7 @@ AnimationFilmHolder::AnimationFilmHolder(const char* path) {
 		if (ch != '#' && ch != '\n') {
 			cfg.getline(buff, 1412);
 			sscanf(buff, "bitmap=%s id=%s frames=%d bboxes=%s", bitmap, id, &frames, bboxes);
-			fprintf(stderr, "%s %d %d %s\n", bitmap, id, frames, bboxes);
+			std::cerr << bitmap << " " << id << " " << frames << " " << bboxes << " " << endl;
 			AnimationFilm* anim_f = new AnimationFilm(bitmapLoader.load(bitmap), read_bboxes(bboxes, frames), id);
 			filmMap[id] = anim_f;
 			cout << "bitmap=" << bitmap << " id= " << id << " frames=" << frames
