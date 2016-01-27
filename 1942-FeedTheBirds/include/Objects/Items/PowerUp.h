@@ -4,7 +4,7 @@
 #include "../../Animator/MovingAnimator.h"
 #include "../../Animator/AnimatorHolder.h"
 
-typedef enum PowerUpType {QuadGun, EnemyCrash, SideFighters, ExtraLife, NoEnemyBullets, ExtraLoop, Points} PowerUpType_t;
+typedef enum PowerUpType {QuadGun, EnemyCrash, SideFighters, ExtraLife, NoEnemyBullets, ExtraLoop, Points1000} PowerUpType_t;
 
 class PowerUp:public Sprite {
 private:

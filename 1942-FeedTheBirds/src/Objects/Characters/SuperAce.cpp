@@ -125,6 +125,31 @@ void SuperAce::stopFlashing(void) {
 	this->setVisibility(true);
 }
 
+void SuperAce::fetchSideFighters()
+{
+	//Yeah......
+}
+
+void SuperAce::setLoops(int n)
+{
+	this->loops = n;
+}
+
+int SuperAce::getLoops()
+{
+	return this->loops;
+}
+
+void SuperAce::incrLoops(int n)
+{
+	this->loops += n;
+}
+
+void SuperAce::decrLoops(int n)
+{
+	this->loops -= n;
+}
+
 void SuperAce::collisionAction(Sprite* s) {
 	cout << "COLLISION! SUPER ACE!\n";
 	if (playerProfile->getLives() == 5) {
@@ -175,10 +200,36 @@ void SuperAce::collisionAction(Sprite* s) {
 	}
 	
 	// collision super ace with a POW POW
-	/*if (Pow* v = dynamic_cast<Pow*>(s)) {
-		// activate LEVELUP on superAce
+	if (PowerUp* v = dynamic_cast<PowerUp*>(s)) {
+		if (!v->isExhausted()) {
+			switch (v->getType())
+			{
+			case QuadGun:
+				this->hasQuadGun = true;
+				break;
+			case EnemyCrash:
+				//todo
+				break;
+			case SideFighters:
+				this->fetchSideFighters();
+				break;
+			case ExtraLife:
+				playerProfile->incrLives();
+				break;
+			case NoEnemyBullets:
+				//todo
+				break;
+			case ExtraLoop:
+				this->incrLoops(1);
+				break;
+			case Points1000:
+				playerProfile->incrScore(1000);
+				break;
+			default:
+				break;
+			}
+		}
 	}
-	*/
 }
 
 bool SuperAce::isSuperAceDead(void) {
