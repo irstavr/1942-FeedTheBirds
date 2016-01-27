@@ -20,6 +20,7 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 	isInvisible = false;
 	isShooting = false;
 	fishes = new vector<Fish*>();
+	hasQuadGun = false;
 
 	injuredAnimation = new FlashingAnimation(10, 200, 200, 0);
 	injuredAnimator = new FlashingAnimator();
@@ -79,6 +80,32 @@ void SuperAce::shoot(vector<Bird*>* birds) {
 				registerCollisions(birds->at(i), fish);
 		}
 	}
+
+	if (this->hasQuadGun) {
+		// Fish (aka. bullets)
+		MovingAnimation* bulletAnimation2 = new MovingAnimation(5, 0, 20, true, 4);
+		MovingAnimator* bulletAnimator2 = new MovingAnimator();
+
+		AnimatorHolder::animRegister(bulletAnimator2);
+		Fish* fish2 = new Fish(x + 110, y + 10,
+			(AnimationFilm*)
+			AnimationFilmHolder::getSingleton()->
+			getFilm("doubleFish"),
+			bulletAnimation2,
+			bulletAnimator2);
+		fishes->push_back(fish2);
+		fish2->startMoving();
+
+		for (unsigned int i = 0; i < birds->size(); i++) {
+			if (!birds->at(i)->isDead()) {
+				cout << "REGISTER COLLISION! BIRD" << i << " WITH FISH!\n";
+				CollisionChecker::getInstance()->
+					registerCollisions(birds->at(i), fish2);
+			}
+		}
+	}
+
+
 }
 
 void SuperAce::displayAll() {
@@ -128,26 +155,6 @@ void SuperAce::stopFlashing(void) {
 void SuperAce::fetchSideFighters()
 {
 	//Yeah......
-}
-
-void SuperAce::setLoops(int n)
-{
-	this->loops = n;
-}
-
-int SuperAce::getLoops()
-{
-	return this->loops;
-}
-
-void SuperAce::incrLoops(int n)
-{
-	this->loops += n;
-}
-
-void SuperAce::decrLoops(int n)
-{
-	this->loops -= n;
 }
 
 void SuperAce::collisionAction(Sprite* s) {
@@ -220,7 +227,7 @@ void SuperAce::collisionAction(Sprite* s) {
 				//todo
 				break;
 			case ExtraLoop:
-				this->incrLoops(1);
+				playerProfile->incrLoops(1);
 				break;
 			case Points1000:
 				playerProfile->incrScore(1000);

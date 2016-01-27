@@ -20,9 +20,15 @@ bool PowerUp::isExhausted()
 	return this->exhasted;
 }
 
-void PowerUp::move(int x, int y)
+void PowerUp::move(int dx, int dy)
 {
-	//tbd
+	x += dx;
+	x += dy;
+}
+
+void PowerUp::move()
+{
+	x += speedx;
 }
 
 void PowerUp::startMoving()
@@ -44,4 +50,5 @@ PowerUp::PowerUp(
 {
 	this->exhasted = false;
 	this->setVisibility(true);
+	this->speedx = 10;
 }

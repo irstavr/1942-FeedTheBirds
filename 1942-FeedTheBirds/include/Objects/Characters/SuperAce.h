@@ -48,17 +48,12 @@ public:
 	void startFlashing(void);
 	void stopFlashing(void);
 	void fetchSideFighters();
-	void setLoops(int n);
-	int  getLoops();
-	void incrLoops(int n);
-	void decrLoops(int n);
 
 private:
 	float dx, dy;
 	float speedx, speedy;
 	FISHES *fishes;
 
-	int loops;
 
 	bool isDead;
 	bool isInvisible;

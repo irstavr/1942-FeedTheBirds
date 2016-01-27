@@ -8,6 +8,7 @@ typedef enum PowerUpType {QuadGun, EnemyCrash, SideFighters, ExtraLife, NoEnemyB
 
 class PowerUp:public Sprite {
 private:
+	int speedx;
 	PowerUpType_t type;
 	MovingAnimator *flyAnimator;
 	MovingAnimation *flyAnimation;
@@ -18,6 +19,7 @@ public:
 	void exhaust();
 	bool isExhausted();
 	void move(int x, int y);
+	void move();
 	void startMoving();
 	PowerUp(Dim _x, Dim _y, AnimationFilm* film,
 		MovingAnimation *_Animation, MovingAnimator *_Animator);

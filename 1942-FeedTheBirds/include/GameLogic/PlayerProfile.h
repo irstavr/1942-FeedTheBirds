@@ -23,6 +23,11 @@ public:
 	void decrLives(void);
 	Lives getLives(void);
 	bool isDead();
+
+	void setLoops(int n);
+	int  getLoops();
+	void incrLoops(int n);
+	void decrLoops(int n);
 	
 	void setNumBirdsFeeded(unsigned int birdsNum);
 	void incrNumBirdsFeeded(void);
@@ -40,6 +45,7 @@ private:
 	COORDS startXY;
 	Points score;
 	Lives lives;
+	int loops;
 	bool isAlive;
 	unsigned int birdsFeeded;
 	bool hasBonus; //TODO: add every bonus separately !!!

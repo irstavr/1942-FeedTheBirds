@@ -85,3 +85,23 @@ bool PlayerProfile::isDead() {
 	}
 	return false;
 }
+
+void PlayerProfile::setLoops(int n)
+{
+	this->loops = n;
+}
+
+int PlayerProfile::getLoops()
+{
+	return this->loops;
+}
+
+void PlayerProfile::incrLoops(int n)
+{
+	this->loops += n;
+}
+
+void PlayerProfile::decrLoops(int n)
+{
+	this->loops -= n;
+}
