@@ -1,7 +1,7 @@
 # 1942 - Feed The Birds
 
 1. SuperAce
-    explosion   -- NIKOS 
+    explosion
     loop
     flashing - otan xanei zwh 
                 ki otan kanei loop
