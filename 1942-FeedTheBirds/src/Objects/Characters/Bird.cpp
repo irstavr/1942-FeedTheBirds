@@ -7,6 +7,7 @@ Bird::Bird(Dim _x, Dim _y, AnimationFilm* film,
 			flyAnimation(_flyAnimation),
 	flyAnimator(_flyAnimator){
 	birdLives = 2; //TODO: change
+	isAlive = true;
 	droppings = new vector<BirdDropping*>();
 }
 
@@ -81,7 +82,6 @@ void Bird::collisionAction(Sprite* s) {
 	fish->setVisibility(false);
 	fish->disableMovement();
 	fish->setDead();
-
 	// kill fish sprite
 	if (birdLives == 0) {
 		cout << "BIRD DEAD!\n";
