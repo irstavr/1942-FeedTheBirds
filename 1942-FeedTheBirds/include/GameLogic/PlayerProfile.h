@@ -4,10 +4,10 @@
 #include "../../include/Utilities/Utilities.h"
 #include <map>
 
-#define _STARTING_LIFES 5
+#define _STARTING_LIFES 4
 
 typedef int Points;
-typedef unsigned int Lives;
+typedef int Lives;
 typedef std::pair<bool, bool> PowerUpPair_t;
 typedef std::pair<bool, PowerUpPair_t> BlastAnimationMapKey_t;
 typedef std::map<BlastAnimationMapKey_t, std::string> BlastAnimationMap_t;

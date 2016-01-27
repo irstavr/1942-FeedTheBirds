@@ -14,7 +14,7 @@ public:
     frame_t	getEndFrame(void) const;
     void setEndFrame(frame_t v);
 	void setNewOffsets(offset_t dx, offset_t dy);
-    Animation* clone(animid_t newId) const;
+	FrameRangeAnimation* clone(animid_t newId) const;
 };
 
 #endif

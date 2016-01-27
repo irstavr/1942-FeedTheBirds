@@ -6,6 +6,7 @@
 #include "..\..\Animator\TimerTickAnimator.h"
 #include "..\..\Animator\FlashingAnimator.h"
 #include "..\..\Animator\FrameRangeAnimator.h"
+#include "..\..\Animator\MovingPathAnimator.h"
 #include "..\..\Animation\AnimationFilmHolder.h"
 #include "..\..\GameAction\CollisionChecker.h"
 #include "..\Items\Fish.h"
@@ -22,7 +23,8 @@ public:
 	SuperAce::SuperAce(PlayerProfile* playerProfile, Dim _x, Dim _y, AnimationFilm* film,
 						FrameRangeAnimation *_takeOffAnimation, FrameRangeAnimator *_takeOffAnimator,
 						FrameRangeAnimation *_landAnimation, FrameRangeAnimator *_landAnimator,
-						FrameRangeAnimation *_deathAnimation, FrameRangeAnimator *_deathAnimator);
+						FrameRangeAnimation *_deathAnimation, FrameRangeAnimator *_deathAnimator,
+						MovingPathAnimation* _loopAnimation, MovingPathAnimator* _loopAnimator);
 	~SuperAce(void);
 
 	void shoot(vector<Bird*>* birds);
@@ -30,6 +32,7 @@ public:
 	void moveDown();
 	void moveLeft();
 	void moveRight();
+	void twist(void);
 	//virtual void move(int dx, int dy);
 	void startLanding(void);
 	void startTakeOff(void);
@@ -71,12 +74,13 @@ private:
 	FlashingAnimator *flashAnimator;
 	TickAnimation *tickAnimation;
 	TimerTickAnimator *timerTick;
+	MovingPathAnimation * loopAnimation;
+	MovingPathAnimator* loopAnimator;
 	FlashingAnimation* injuredAnimation;
 	FlashingAnimator* injuredAnimator;
 
-
 	static void shootingCompleted(Animator*, void *closure);
-	static void invinsibilityEnded(Animator *, void *closure);
-
+	static void invinsibilityEnded(Animator *, void *closure); 
+	
 };
 #endif

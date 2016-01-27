@@ -191,16 +191,28 @@ void GamePlay::initGameEngine() {
 	flyAnimation = new FrameRangeAnimation(1, 3, -5, -5, 200, true, 3);
 	flyAnimator = new FrameRangeAnimator();
 
-	//bulletAnimation = new MovingAnimation(0, 0, 20, true, 4);
-	//bulletAnimator = new MovingAnimator();
+	loopAnimation = createLoopAnimation(0, 100, "superAce");
+	loopAnimator = new MovingPathAnimator();
 
+	AnimatorHolder::animRegister(loopAnimator);
 	AnimatorHolder::animRegister(landingAnimator);
 	AnimatorHolder::animRegister(deathAnimator);
 	AnimatorHolder::animRegister(takeOffAnimator);
 	AnimatorHolder::animRegister(flyAnimator);
+}
 
-	//birds = new std::vector<Bird*>();
-
+MovingPathAnimation* GamePlay::createLoopAnimation(int x, int y, const std::string film_id) {
+	std::list<PathEntry> paths;
+	PathEntry path;
+	Rect rect = AnimationFilmHolder::getSingleton()->getFilm(film_id)->getFrameBox(0);
+	paths.push_back(PathEntry(0, 0, false, false, 0, 50));
+	paths.push_back(PathEntry(0, -10, true, false, 0, 100));
+	paths.push_back(PathEntry(0, -10, false, false, 0, 100));
+	paths.push_back(PathEntry(0, -10, true, false, 0, 100));
+	paths.push_back(PathEntry(0, -10, false, false, 0, 100));
+	paths.push_back(PathEntry(0, -10, true, false, 0, 100));
+	paths.push_back(PathEntry(0, -10, false, false, 1, 100));
+	return new MovingPathAnimation(paths, 0);
 }
 
 void GamePlay::runMainLoop() {
@@ -266,10 +278,12 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				keys[LEFT] = true;
 				break;
 			case ALLEGRO_KEY_SPACE:
-				InputManager::shoot(currentGame, currentGame->superAce);
+				if (gameState == GAME_STATE_MAINGAME)
+					InputManager::shoot(currentGame, currentGame->superAce);
 				break;
 			case ALLEGRO_KEY_A:
-				InputManager::twist();
+				if (gameState == GAME_STATE_MAINGAME)
+					InputManager::twist(currentGame->superAce);
 				break;
 			case ALLEGRO_KEY_P:
 				pauseGame(currTime);
@@ -379,6 +393,8 @@ void GamePlay::checkActionPoints() {
 	//cout << "terrainX = "<< Terrain::getInstance().getTerrainX()<<" \n";
 	if (Terrain::getInstance().getTerrainX()==100) {
 		currentGame->createBird(1000, 400, "bonusBird", flyAnimation, flyAnimator);
+		currentGame->createBird(1200, 400, "bonusBird", flyAnimation->clone(12), flyAnimator->clone());
+		currentGame->createBird(800, 400, "bonusBird", flyAnimation->clone(10), flyAnimator->clone());
 		cout << "actionPointTriggered \n";
 	}
 }
@@ -433,7 +449,9 @@ void GamePlay::startNewGame() {
 								landingAnimation,
 								landingAnimator,
 								deathAnimation,
-								deathAnimator);
+								deathAnimator,
+								loopAnimation,
+								loopAnimator);
 
 	Terrain::cleanUp();
 	displayMainScreen(getCurrTime());

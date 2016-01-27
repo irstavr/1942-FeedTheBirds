@@ -30,6 +30,6 @@ void FrameRangeAnimation::setNewOffsets(offset_t dx, offset_t dy) {
 	setDy(dy);
 }
     
-Animation* FrameRangeAnimation::clone(animid_t newId) const {
+FrameRangeAnimation* FrameRangeAnimation::clone(animid_t newId) const {
 	return new FrameRangeAnimation(start, end, getDx(), getDy(), getDelay(), getContinuous(), newId);
 }

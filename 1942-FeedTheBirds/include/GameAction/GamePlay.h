@@ -66,6 +66,8 @@ private:
 	FrameRangeAnimator *deathAnimator;
 	FrameRangeAnimation *flyAnimation;
 	FrameRangeAnimator *flyAnimator;
+	MovingPathAnimation* loopAnimation;
+	MovingPathAnimator* loopAnimator;
 
 	/* initialization */
 	bool initAllegro();
@@ -105,7 +107,6 @@ private:
 	void pauseGame(unsigned long now);
 	void gameOver(unsigned long now);
 	void resumeGame(void);
-
+	MovingPathAnimation *createLoopAnimation(int x, int y, const std::string film_id);
 };
-
 #endif
