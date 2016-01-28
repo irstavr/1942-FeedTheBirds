@@ -29,7 +29,7 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 
 	this->explosion = new Sprite(this->x, this->y,
 		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("bambam"));
-
+	this->explosion->setVisibility(false);
 
 
 	this->sf1 = new SideFighter(
@@ -116,7 +116,7 @@ void SuperAce::shoot(vector<Bird*>* birds) {
 		MovingAnimator* bulletAnimator = new MovingAnimator();
 
 		AnimatorHolder::animRegister(bulletAnimator);
-		Fish* fish = new Fish(x + 110, y + 30,
+		Fish* fish = new Fish(x + 50, y-5,
 			(AnimationFilm*)
 			AnimationFilmHolder::getSingleton()->
 			getFilm("doubleFish"),
@@ -179,6 +179,7 @@ void SuperAce::displayAll() {
 
 void SuperAce::die() {
 	//isDead = true;
+	unsigned long time = getCurrTime();
 	this->disableMovement();
 	this->explosion->setX(this->x+50);
 	this->explosion->setY(this->y);
@@ -186,7 +187,9 @@ void SuperAce::die() {
 	this->explosion->setVisibility(true);
 	this->deathAnimator->start(explosion, deathAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(this->deathAnimator);
-
+	/*while (time == time + 1000) {
+		this->explosion->setVisibility(false);
+	}*/
 }
 
 void SuperAce::injured(){

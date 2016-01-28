@@ -182,13 +182,13 @@ void GamePlay::initGameEngine() {
 	// SuperAce
 	// add take off, landing, explosion(?) bbs
 	int total_frames = AnimationFilmHolder::getSingleton()->getFilm("bonusBird")->getTotalFrames();
-	landingAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 1);
+	landingAnimation = new FrameRangeAnimation(0, 3, 0, 0, 200, false, 1);
 	landingAnimator = new FrameRangeAnimator();
-	takeOffAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 2);
+	takeOffAnimation = new FrameRangeAnimation(0, 3, 0, 0, 200, false, 2);
 	takeOffAnimator = new FrameRangeAnimator();
-	deathAnimation = new FrameRangeAnimation(1, 6, 0, 0, 200, false, 4);
+	deathAnimation = new FrameRangeAnimation(0, 6, 0, 0, 200, false, 4);
 	deathAnimator = new FrameRangeAnimator();
-	flyAnimation = new FrameRangeAnimation(1, 3, -10, -10, 100, true, 3);
+	flyAnimation = new FrameRangeAnimation(0, 3, -10, -10, 300, true, 3);
 	flyAnimator = new FrameRangeAnimator();
 
 	loopAnimation = createLoopAnimation(0, 0, "superAce");
@@ -202,26 +202,25 @@ void GamePlay::initGameEngine() {
 
 }
 
-/*MovingPathAnimation* GamePlay::createSmallBirdAnimation(int x, int y, const std::string film_id) {
+MovingPathAnimation* GamePlay::createSmallBirdAnimation() {
 	std::list<PathEntry> paths;
 	cout << "createsmallBirdAnimation\n";
-	//Rect rect = AnimationFilmHolder::getSingleton()->getFilm(film_id)->getFrameBox(0);
-	paths.push_back(PathEntry(x, y, false, false, 1, 50));
-	paths.push_back(PathEntry(x, y - 100, true, false, 1, 100));
-	paths.push_back(PathEntry(x, y - 150, false, false, 1, 100));
-	paths.push_back(PathEntry(x, y - 200, true, false, 1, 100));
-	paths.push_back(PathEntry(x, y - 250, false, false, 1, 100));
-	paths.push_back(PathEntry(x, y - 300, true, false, 1, 100));
-	paths.push_back(PathEntry(x, y - 350, false, false, 1, 100));
+	paths.push_back(PathEntry(0, 0, false, false, 1, 50));
+	paths.push_back(PathEntry(0, 0, true, false, 1, 100));
+	paths.push_back(PathEntry(0, 0, false, false, 1, 100));
+	paths.push_back(PathEntry(0, 0, true, false, 1, 100));
+	paths.push_back(PathEntry(0, 0, false, false, 1, 100));
+	paths.push_back(PathEntry(0, 0, true, false, 1, 100));
+	paths.push_back(PathEntry(0, 0, false, false, 1, 100));
 	return new MovingPathAnimation(paths, 1);
-}*/
+}
 
 MovingPathAnimation* GamePlay::createLoopAnimation(int x, int y, const std::string film_id) {
 	std::list<PathEntry> paths;
 	//Rect rect = AnimationFilmHolder::getSingleton()->getFilm(film_id)->getFrameBox(0);
 	paths.push_back(PathEntry(0,	0,  false,	false, 1, 50));
 
-	paths.push_back(PathEntry(+150, -150, false,	false, 1, 150));
+	paths.push_back(PathEntry(+50, -50, false,	false, 1, 150));
 	//paths.push_back(PathEntry(x + 150, y + 150, false, false, 1, 150));
 
 	paths.push_back(PathEntry(-50, -50, true,	false, 1, 150));
@@ -415,7 +414,7 @@ void GamePlay::checkActionPoints() {
 	if (Terrain::getInstance().getTerrainX()==100) {
 		currentGame->createBird(1000, 400, "bonusBird", flyAnimation, flyAnimator);
 		currentGame->createBird(1200, 400, "bonusBird", flyAnimation->clone(12), flyAnimator->clone());
-		currentGame->createBird(800, 400, "bonusBird", flyAnimation->clone(10), flyAnimator->clone());
+		currentGame->createBird(800, 400, "bigBird", flyAnimation->clone(10), flyAnimator->clone());
 		cout << "actionPointTriggered \n";
 	}
 }

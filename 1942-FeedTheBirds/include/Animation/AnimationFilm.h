@@ -22,7 +22,12 @@ public:
 	ALLEGRO_BITMAP *getBitmap(void) const;
 	const std::string getId(void) const;
 	const Rect getFrameBox(byte frameNo) const;
+	const Rect getBoundingBox(byte frameNo) const;
 	void displayFrame(const Point& at, byte frameNo, bool flip_h, bool flip_v) const;
+
+private:
+	int frameWidth;
+	int frameHeight;
 };
 
 #endif
