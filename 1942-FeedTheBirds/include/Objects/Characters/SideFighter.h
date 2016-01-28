@@ -31,15 +31,19 @@ public:
 		FISHES *_fishes);
 
 
-	void move(int x, int y);
+	void move(int dx, int dy);
 	void startMoving();
 
 	int getLives();
-	void incrLives(int n);
 	void setLives(int n);
+	void incrLives();
+	void decrLives();
 
+	void die();
 	void shoot(vector<Bird*> *birds);
 	virtual void collisionAction(Sprite* s);
+
+	void displayAll();
 
 
 };

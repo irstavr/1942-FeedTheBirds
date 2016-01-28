@@ -27,11 +27,13 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 	fishes = new vector<Fish*>();
 	hasQuadGun = false;
 
+	this->explosion = new Sprite(this->x, this->y,
+		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("bambam"));
 
 
 
 	this->sf1 = new SideFighter(
-		this->x, this->y-20, 
+		this->x, this->y-110, 
 		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("sidefighter"),
 		new FrameRangeAnimation(1, 3, 0, 0, 200, false, 21),
 		new FrameRangeAnimator(),
@@ -41,10 +43,9 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 		new FrameRangeAnimator(), 
 		this->fishes);
 
-	this->sf1->setVisibility(false);
 
 	this->sf2 = new SideFighter(
-		this->x, this->y+20, 
+		this->x, this->y+110, 
 		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("sidefighter"), 
 		new FrameRangeAnimation(1, 3, 0, 0, 200, false, 24),
 		new FrameRangeAnimator(),
@@ -53,7 +54,6 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 		new FrameRangeAnimation(1, 6, 0, 0, 200, false, 26),
 		new FrameRangeAnimator(), 
 		this->fishes);
-	this->sf1->setVisibility(false);
 
 	injuredAnimation = new FlashingAnimation(10, 200, 200, 0);
 	injuredAnimator = new FlashingAnimator();
@@ -68,26 +68,30 @@ SuperAce::~SuperAce(void) {
 }
 
 void SuperAce::moveUp() {
-	if (y>10) {
+	if (y>10 && this->canMove) {
 		y -= 2;
+		this->moveSideFighters(0, -2);
 	}
 }
 
 void SuperAce::moveDown() {
-	if (y < SCREEN_WINDOW_HEIGHT - 120) {
+	if (y < SCREEN_WINDOW_HEIGHT - 120 && this->canMove) {
 		y += 2;
+		this->moveSideFighters(0, 2);
 	}
 }
 
 void SuperAce::moveLeft() {
-	if (x > 10) {
+	if (x > 10 && this->canMove) {
 		x -= 2;
+		this->moveSideFighters(-2, 0);
 	}
 }
 
 void SuperAce::moveRight() {
-	if (x < SCREEN_WINDOW_WIDTH/2) {
+	if (x < SCREEN_WINDOW_WIDTH/2 && this->canMove) {
 		x += 2;
+		this->moveSideFighters(2, 0);
 	}
 }
 
@@ -125,54 +129,60 @@ void SuperAce::shoot(vector<Bird*>* birds) {
 					registerCollisions(birds->at(i), fish);
 			}
 		}
-	}
+		this->sf1->shoot(birds);
+		this->sf2->shoot(birds);
 
-	if (this->hasQuadGun) {
-		// Fish (aka. bullets)
-		MovingAnimation* bulletAnimation2 = new MovingAnimation(5, 0, 20, true, 4);
-		MovingAnimator* bulletAnimator2 = new MovingAnimator();
+		if (this->hasQuadGun) {
+			// Fish (aka. bullets)
+			MovingAnimation* bulletAnimation2 = new MovingAnimation(5, 0, 20, true, 4);
+			MovingAnimator* bulletAnimator2 = new MovingAnimator();
 
-		AnimatorHolder::animRegister(bulletAnimator2);
-		Fish* fish2 = new Fish(x + 110, y + 10,
-			(AnimationFilm*)
-			AnimationFilmHolder::getSingleton()->
-			getFilm("doubleFish"),
-			bulletAnimation2,
-			bulletAnimator2);
-		fishes->push_back(fish2);
-		fish2->startMoving();
+			AnimatorHolder::animRegister(bulletAnimator2);
+			Fish* fish2 = new Fish(x + 110, y + 10,
+				(AnimationFilm*)
+				AnimationFilmHolder::getSingleton()->
+				getFilm("doubleFish"),
+				bulletAnimation2,
+				bulletAnimator2);
+			fishes->push_back(fish2);
+			fish2->startMoving();
 
-		for (unsigned int i = 0; i < birds->size(); i++) {
-			if (!birds->at(i)->isDead()) {
-				cout << "REGISTER COLLISION! BIRD" << i << " WITH FISH!\n";
-				CollisionChecker::getInstance()->
-					registerCollisions(birds->at(i), fish2);
+			for (unsigned int i = 0; i < birds->size(); i++) {
+				if (!birds->at(i)->isDead()) {
+					cout << "REGISTER COLLISION! BIRD" << i << " WITH FISH!\n";
+					CollisionChecker::getInstance()->
+						registerCollisions(birds->at(i), fish2);
+				}
 			}
 		}
 	}
-
-
 }
 
 void SuperAce::displayAll() {
 	if (this->isSpriteVisible()) {
 		this->display(Rect(0, 0, 0, 0));
-		
+
 		for (unsigned int i = 0; i < fishes->size(); i++) {
 			if (fishes->at(i)->isSpriteVisible())
 				fishes->at(i)->display(Rect(0, 0, 0, 0));
+		}
+		this->sf1->displayAll();
+		this->sf2->displayAll();
+		if (this->explosion->isSpriteVisible()) {
+			this->explosion->display(Rect(0, 0, 0, 0));
 		}
 	}
 }
 
 void SuperAce::die() {
 	isDead = true;
+	this->disableMovement();
+	this->explosion->setX(this->x+50);
+	this->explosion->setY(this->y);
 	cout << "Stuff is happening" << endl;
-	Sprite* explosion = new Sprite(this->x, this->y, 
-		(AnimationFilm*) AnimationFilmHolder::getSingleton()->getFilm("bambam"));
-	explosion->setVisibility(true);
-	deathAnimator->start(explosion, deathAnimation, getCurrTime());
-	AnimatorHolder::markAsRunning(deathAnimator);
+	this->explosion->setVisibility(true);
+	this->deathAnimator->start(explosion, deathAnimation, getCurrTime());
+	AnimatorHolder::markAsRunning(this->deathAnimator);
 
 }
 
@@ -199,6 +209,12 @@ void SuperAce::stopFlashing(void) {
 void SuperAce::fetchSideFighters()
 {
 	//Yeah......
+}
+
+void SuperAce::moveSideFighters(int dx, int dy)
+{
+	this->sf1->move(dx, dy);
+	this->sf2->move(dx, dy);
 }
 
 void SuperAce::collisionAction(Sprite* s) {

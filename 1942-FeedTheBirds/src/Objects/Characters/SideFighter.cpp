@@ -22,13 +22,16 @@ SideFighter::SideFighter(
 	AnimatorHolder::animRegister(landAnimator);
 	AnimatorHolder::animRegister(deathAnimator);
 	AnimatorHolder::animRegister(takeOffAnimator);
-	this->lives = 1;
+	this->lives = 0;
+	this->setVisibility(false);
+	//this->lives = 1;
+	//this->setVisibility(true);
 }
 
-void SideFighter::move(int x, int y)
+void SideFighter::move(int dx, int dy)
 {
-	this->x += x;
-	this->y += y;
+	this->x += dx;
+	this->y += dy;
 }
 
 void SideFighter::startMoving()
@@ -40,19 +43,31 @@ int SideFighter::getLives()
 	return this->lives;
 }
 
-void SideFighter::incrLives(int n)
-{
-	this->lives += n;
-}
-
 void SideFighter::setLives(int n)
 {
 	this->lives = n;
 }
 
+void SideFighter::incrLives()
+{
+	this->lives++;
+	this->setVisibility(true);
+}
+
+void SideFighter::decrLives()
+{
+	if (!(--this->lives)) this->die();
+}
+
+void SideFighter::die()
+{
+	//impl to come
+	this->setVisibility(false);
+}
+
 void SideFighter::shoot(vector<Bird*>* birds)
 {
-	if (!this->lives) return;
+	if (!(this->lives && this->isSpriteVisible())) return;
 	// Fish (aka. bullets)
 	MovingAnimation* bulletAnimation = new MovingAnimation(5, 0, 20, true, 4);
 	MovingAnimator* bulletAnimator = new MovingAnimator();
@@ -80,4 +95,14 @@ void SideFighter::collisionAction(Sprite * s)
 {
 	//todo
 
+}
+
+void SideFighter::displayAll() {
+	if (this->isSpriteVisible()){
+		this->display(Rect(0, 0, 0, 0));
+		for (unsigned int i = 0; i < fishes->size(); i++) {
+			if (fishes->at(i)->isSpriteVisible())
+				fishes->at(i)->display(Rect(0, 0, 0, 0));
+		}
+	}
 }

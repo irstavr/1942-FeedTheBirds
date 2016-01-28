@@ -66,8 +66,10 @@ private:
 	bool isShooting;
 	bool hasSideFighter;
 	bool hasQuadGun;
+	void moveSideFighters(int dx, int dy);
 
 	PlayerProfile* playerProfile;
+	Sprite* explosion;
 	FrameRangeAnimation *takeOffAnimation, *landAnimation, *deathAnimation;
 	FrameRangeAnimator *takeOffAnimator, *landAnimator, *deathAnimator;
 	FlashingAnimation *flashAnimation;

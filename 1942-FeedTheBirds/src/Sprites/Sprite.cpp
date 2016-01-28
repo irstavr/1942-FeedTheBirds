@@ -7,6 +7,7 @@ Sprite::Sprite(Dim _x, Dim _y, AnimationFilm* film) :
 	flip_h(false), flip_v(false) {
 	frameNo = currFilm->getTotalFrames();
 	setFrame(0);
+	canMove = true;
 }
 
 Sprite::~Sprite() {

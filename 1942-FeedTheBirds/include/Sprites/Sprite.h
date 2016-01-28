@@ -16,9 +16,9 @@ class Sprite {
 	Rect frameBox;
 	bool flip_h, flip_v;
 	bool isVisible;
-	bool canMove;
 
 public:
+	bool canMove;
 	Sprite(Dim _x, Dim _y, AnimationFilm* film);
 	~Sprite();
 
