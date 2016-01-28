@@ -101,7 +101,9 @@ void SuperAce::twist(void) {
 	//moving path animation
 	loopAnimator->start(this, loopAnimation,getCurrTime() );
 	AnimatorHolder::markAsRunning(loopAnimator);
-	//invisible
+
+	// flashing
+
 
 	//decrease num of loops available for superace
 

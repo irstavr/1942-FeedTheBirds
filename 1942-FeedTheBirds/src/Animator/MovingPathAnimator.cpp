@@ -10,7 +10,6 @@ MovingPathAnimator::MovingPathAnimator(void) :
 }
 
 void MovingPathAnimator::start(Sprite* s, MovingPathAnimation* a, unsigned long t) {
-	cout << __FUNCTION__ << "\n";
 	assert(s);
 	assert(a);
 
@@ -23,7 +22,6 @@ void MovingPathAnimator::start(Sprite* s, MovingPathAnimation* a, unsigned long 
 }
 
 void MovingPathAnimator::progress(unsigned long currTime) {
-	cout << __FUNCTION__ << "\n";
 
 	while (currTime > lastTime && currTime - lastTime >= currEntry->delay) {
 		//sprite->move(currEntry->dx, currEntry->dy);
