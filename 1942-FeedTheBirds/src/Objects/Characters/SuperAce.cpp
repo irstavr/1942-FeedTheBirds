@@ -100,6 +100,7 @@ void SuperAce::twist(void) {
 	cout << "TWIST SUPERACE\n";
 	//moving path animation
 	loopAnimator->start(this, loopAnimation,getCurrTime() );
+	AnimatorHolder::markAsRunning(loopAnimator);
 	//invisible
 
 	//decrease num of loops available for superace
@@ -175,7 +176,7 @@ void SuperAce::displayAll() {
 }
 
 void SuperAce::die() {
-	isDead = true;
+	//isDead = true;
 	this->disableMovement();
 	this->explosion->setX(this->x+50);
 	this->explosion->setY(this->y);
