@@ -108,6 +108,6 @@ private:
 	void pauseGame(unsigned long now);
 	void gameOver(unsigned long now);
 	void resumeGame(void);
-	MovingPathAnimation *createLoopAnimation(int x, int y, const std::string film_id);
+	MovingPathAnimation *createLoopAnimation(void);
 };
 #endif

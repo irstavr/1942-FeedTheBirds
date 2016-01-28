@@ -191,7 +191,7 @@ void GamePlay::initGameEngine() {
 	flyAnimation = new FrameRangeAnimation(1, 3, -5, -5, 200, true, 3);
 	flyAnimator = new FrameRangeAnimator();
 
-	loopAnimation = createLoopAnimation(0, 0, "superAce");
+	loopAnimation = createLoopAnimation();
 	loopAnimator = new MovingPathAnimator();
 
 	AnimatorHolder::animRegister(loopAnimator);
@@ -202,23 +202,13 @@ void GamePlay::initGameEngine() {
 
 }
 
-MovingPathAnimation* GamePlay::createLoopAnimation(int x, int y, const std::string film_id) {
+MovingPathAnimation* GamePlay::createLoopAnimation() {
 	std::list<PathEntry> paths;
-	//Rect rect = AnimationFilmHolder::getSingleton()->getFilm(film_id)->getFrameBox(0);
 	paths.push_back(PathEntry(0,	0,  false,	false, 1, 50));
-
-	paths.push_back(PathEntry(+150, -150, false,	false, 1, 150));
-	//paths.push_back(PathEntry(x + 150, y + 150, false, false, 1, 150));
-
+	paths.push_back(PathEntry(+50, -50, false,	false, 1, 150));
 	paths.push_back(PathEntry(-50, -50, true,	false, 1, 150));
-	//paths.push_back(PathEntry(x-150, y-150, true,	false, 1, 150));
-
 	paths.push_back(PathEntry(-50, +50, true,	false, 1, 150));
-	//paths.push_back(PathEntry(x, y + 200, true, false, 1, 150));
-
-	//paths.push_back(PathEntry(x, y + 200, true, false, 1, 150));
 	paths.push_back(PathEntry(+50, +50 , false, false, 1, 150));
-
 	return new MovingPathAnimation(paths, 1);
 }
 
