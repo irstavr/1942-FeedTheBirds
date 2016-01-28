@@ -10,6 +10,7 @@
 #include "..\Animation\FlashingAnimation.h"
 #include "..\Animator\FrameRangeAnimator.h"
 #include "..\Animator\FlashingAnimator.h"
+#include "..\Animator\MovingPathAnimator.h"
 #include "..\Animator\AnimatorHolder.h"
 #include "..\Objects\Characters\SuperAce.h"
 #include "InputManager.h"
