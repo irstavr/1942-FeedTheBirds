@@ -26,8 +26,8 @@ public:
 
 	void setLoops(int n);
 	int  getLoops();
-	void incrLoops(int n);
-	void decrLoops(int n);
+	void incrLoops();
+	void decrLoops();
 	
 	void setNumBirdsFeeded(unsigned int birdsNum);
 	void incrNumBirdsFeeded(void);

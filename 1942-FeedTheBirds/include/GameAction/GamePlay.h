@@ -45,6 +45,8 @@ private:
 	const int windowHeight;
 	const int windowWidth;
 
+	Terrain* terrain;
+
 	/* Allegro initialization*/
 	ALLEGRO_DISPLAY *display;
 	ALLEGRO_EVENT_QUEUE *eventQueue;
@@ -108,7 +110,8 @@ private:
 	void pauseGame(unsigned long now);
 	void gameOver(unsigned long now);
 	void resumeGame(void);
-	MovingPathAnimation *createLoopAnimation(int x, int y, const std::string film_id);
+
 	MovingPathAnimation* createSmallBirdAnimation();
+	MovingPathAnimation *createLoopAnimation(void);
 };
 #endif

@@ -214,3 +214,4 @@ ModelManifest.xml
 *.vcxproj
 1942-FeedTheBirds.vcxproj
 1942-FeedTheBirds.vcxproj
+*.db

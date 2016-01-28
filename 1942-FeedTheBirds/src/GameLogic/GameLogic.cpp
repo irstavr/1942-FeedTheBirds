@@ -14,6 +14,7 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 	profile = new PlayerProfile(std::make_pair(0,0));
 
 
+	birds = new vector<Bird*>();
 	superAce = new SuperAce(profile,
 							100,
 							300,
@@ -27,9 +28,9 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 							deathAnimation,
 							deathAnimator,
 							loopAnimation,
-							loopAnimator);
+							loopAnimator,
+		                    this->birds);
 
-	birds = new vector<Bird*>();
 
 	/*explosion = new Sprite(superAce->x, superAce->y,
 		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("bambam"));

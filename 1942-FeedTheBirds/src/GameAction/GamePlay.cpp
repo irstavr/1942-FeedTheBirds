@@ -4,8 +4,7 @@ GamePlay::GamePlay() :
 	title("anti1942 - StopWars"),
 	gameState(GAME_STATE_INTRO),
 	windowHeight(START_SCREEN_WINDOW_HEIGHT), 
-	windowWidth(START_SCREEN_WINDOW_WIDTH)
-{
+	windowWidth(START_SCREEN_WINDOW_WIDTH) {
 	//time(-1), startTime(0),
 	//musicOn(false), pauseTime(-1.5), colorB(false) {
 }
@@ -139,6 +138,7 @@ void GamePlay::initGameEngine() {
 	// AnimationFilmHolder
 	// Background
 	// etc.
+	terrain = new Terrain();
 	TerrainStartScreen::getInstance();
 	AnimationFilmHolder::initialize("1942-FeedTheBirds\\data\\films.ini");
 	AnimationFilmHolder *animFH = AnimationFilmHolder::getSingleton();
@@ -191,7 +191,7 @@ void GamePlay::initGameEngine() {
 	flyAnimation = new FrameRangeAnimation(0, 3, -10, -10, 300, true, 3);
 	flyAnimator = new FrameRangeAnimator();
 
-	loopAnimation = createLoopAnimation(0, 0, "superAce");
+	loopAnimation = createLoopAnimation();
 	loopAnimator = new MovingPathAnimator();
 
 	AnimatorHolder::animRegister(loopAnimator);
@@ -215,23 +215,15 @@ MovingPathAnimation* GamePlay::createSmallBirdAnimation() {
 	return new MovingPathAnimation(paths, 1);
 }
 
-MovingPathAnimation* GamePlay::createLoopAnimation(int x, int y, const std::string film_id) {
+
+/// loop animation for super ace when pressing A
+MovingPathAnimation* GamePlay::createLoopAnimation() {
 	std::list<PathEntry> paths;
-	//Rect rect = AnimationFilmHolder::getSingleton()->getFilm(film_id)->getFrameBox(0);
 	paths.push_back(PathEntry(0,	0,  false,	false, 1, 50));
-
-	paths.push_back(PathEntry(+50, -50, false,	false, 1, 150));
-	//paths.push_back(PathEntry(x + 150, y + 150, false, false, 1, 150));
-
-	paths.push_back(PathEntry(-50, -50, true,	false, 1, 150));
-	//paths.push_back(PathEntry(x-150, y-150, true,	false, 1, 150));
-
-	paths.push_back(PathEntry(-50, +50, true,	false, 1, 150));
-	//paths.push_back(PathEntry(x, y + 200, true, false, 1, 150));
-
-	//paths.push_back(PathEntry(x, y + 200, true, false, 1, 150));
-	paths.push_back(PathEntry(+50, +50 , false, false, 1, 150));
-
+	paths.push_back(PathEntry(50, -50, false,	false, 1, 100));
+	paths.push_back(PathEntry(-50, -50, true,	false, 1, 100));
+	paths.push_back(PathEntry(-50, 50, true,	false, 1, 100));
+	paths.push_back(PathEntry(50, 50 , false, false, 1, 100));
 	return new MovingPathAnimation(paths, 1);
 }
 
@@ -359,8 +351,8 @@ void GamePlay::updateGameState() {
 		if (currentGame->superAce->isSuperAceDead()) {
 			gameOver(getCurrTime());
 		}
-
 		CollisionChecker::getInstance()->check();
+
 	}
 }
 
@@ -382,7 +374,10 @@ void GamePlay::render(unsigned long timestamp) {
 /* show first window with start screen */
 void GamePlay::displayMainScreen(unsigned long now) {
 	if (gameState == GAME_STATE_MAINGAME) {
-		Terrain::getInstance().drawBackground();
+		terrain->drawBackground(currentGame->profile->getScore(),
+								currentGame->profile->getScore(),
+								currentGame->profile->getLives(),
+								currentGame->profile->getLoops());
 
 		currentGame->superAce->displayAll();
 
@@ -392,7 +387,8 @@ void GamePlay::displayMainScreen(unsigned long now) {
 		
 		al_flip_display();
 		al_clear_to_color(al_map_rgb(0, 0, 0));
-		Terrain::getInstance().updateBackground();
+		terrain->updateBackground();
+
 		checkActionPoints();
 	}
 }
@@ -411,7 +407,7 @@ void GamePlay::displayStartScreen(unsigned long now) {
 
 void GamePlay::checkActionPoints() {
 	//cout << "terrainX = "<< Terrain::getInstance().getTerrainX()<<" \n";
-	if (Terrain::getInstance().getTerrainX()==100) {
+	if (terrain->getTerrainX() == 100) {
 		currentGame->createBird(1000, 400, "bonusBird", flyAnimation, flyAnimator);
 		currentGame->createBird(1200, 400, "bonusBird", flyAnimation->clone(12), flyAnimator->clone());
 		currentGame->createBird(800, 400, "bigBird", flyAnimation->clone(10), flyAnimator->clone());
@@ -445,25 +441,24 @@ void GamePlay::gameOver(unsigned long now) {
 	currentGame->highScore = 0;
 	currentGame->gameRunning = false;
 
-	Terrain::getInstance().drawBackground();
-	//->setVisibility(true);
+	terrain->drawBackground(currentGame->profile->getScore(),
+							currentGame->profile->getScore(),
+							currentGame->profile->getLives(),
+							currentGame->profile->getLoops());
 
-	//gameOverButton->startFlashing();
 	if (gameOverButton->isSpriteVisible()) {
 		gameOverButton->display(Rect(0, 0, 0, 0));
 	}
 	
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));
-
-	Terrain::getInstance().updateBackground();
+	terrain->updateBackground();
 }
 
 void GamePlay::startNewGame() {
 	gameState = GAME_STATE_MAINGAME;
 	// TODO: play music ?
 	
-
 	currentGame = new GameLogic(takeOffAnimation,
 								takeOffAnimator,
 								landingAnimation,
@@ -473,23 +468,9 @@ void GamePlay::startNewGame() {
 								loopAnimation,
 								loopAnimator);
 
-	Terrain::cleanUp();
+	terrain = new Terrain();
 	displayMainScreen(getCurrTime());
 	
-	// register superAce - birds collisionList
-	/*BIRDS* birds = currentGame->birds;
-	for (unsigned int i = 0; i < birds->size(); i++) {
-		CollisionChecker::getInstance()->
-			registerCollisions(currentGame->superAce,
-							   currentGame->birds->at(i));
-
-		DROPPINGS* bullshits = currentGame->birds->at(i)->droppings;
-		for (unsigned int i = 0; i < bullshits->size(); i++) {
-			CollisionChecker::getInstance()->
-				registerCollisions(currentGame->superAce,
-									currentGame->birds->at(i)->droppings->at(i));
-		}
-	}*/
 }
 
 void GamePlay::cleanGamePlay() {
@@ -499,8 +480,6 @@ void GamePlay::cleanGamePlay() {
 		//if (currentGame)
 		//	delete currentGame;
 
-
-		Terrain::cleanUp();
 		//BitmapLoader::~BitmapLoader();
 
 		CollisionChecker::getInstance()->cleanUp();

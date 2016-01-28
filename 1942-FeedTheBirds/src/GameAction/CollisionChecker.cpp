@@ -53,7 +53,6 @@ void CollisionChecker::cancel(Sprite* s1, Sprite* s2) {
 }
 
 void CollisionChecker::check(void) const {
-	//cout << "collision check\n";
 	std::for_each(pairs.begin(), pairs.end(), checkFunctor());
 }
 

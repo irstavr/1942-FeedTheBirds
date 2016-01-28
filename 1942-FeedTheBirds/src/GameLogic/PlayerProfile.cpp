@@ -5,27 +5,30 @@
 
 // constructors
 PlayerProfile::PlayerProfile(COORDS xy) {
-	score = -1;
+	score = 0;
 	startXY = xy;
 	lives = _STARTING_LIFES;
 	birdsFeeded = 0;
+	loops = 3;
 	hasBonus = false;
 	eatenYellowPOW = false;
 }
 
 PlayerProfile::PlayerProfile() {
-	score = -1;
+	score = 0;
 	startXY = std::make_pair(0, 0);
 	lives = _STARTING_LIFES;
 	birdsFeeded = 0;
+	loops = 3;
 	hasBonus = false;
 	eatenYellowPOW = false;
 }
 
 // destructor
 PlayerProfile::~PlayerProfile() {
-	score = -1;
+	score = 0;
 	lives = 0;
+	loops = 0;
 	birdsFeeded = 0;
 	hasBonus = false;
 	eatenYellowPOW = false;
@@ -96,12 +99,12 @@ int PlayerProfile::getLoops()
 	return this->loops;
 }
 
-void PlayerProfile::incrLoops(int n)
+void PlayerProfile::incrLoops()
 {
-	this->loops += n;
+	this->loops++;
 }
 
-void PlayerProfile::decrLoops(int n)
+void PlayerProfile::decrLoops()
 {
-	this->loops -= n;
+	this->loops--;
 }
