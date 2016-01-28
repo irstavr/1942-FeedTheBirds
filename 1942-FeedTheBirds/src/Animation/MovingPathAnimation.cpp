@@ -5,6 +5,10 @@ MovingPathAnimation::MovingPathAnimation(const std::list<PathEntry>& _path,
 	path(_path), Animation(id) {
 }
 
+MovingPathAnimation::~MovingPathAnimation(void) {
+	path.clear();
+}
+
 std::list<PathEntry>::iterator 
 MovingPathAnimation::getFirstPathEntry(void) { 
 	return path.begin(); 
@@ -15,8 +19,7 @@ MovingPathAnimation::getLastPathEntry(void) {
 	return path.end(); 
 }
 
-void MovingPathAnimation::setPath(const std::list<PathEntry>& p) 
-{
+void MovingPathAnimation::setPath(const std::list<PathEntry>& p) {
 	path.clear(); path = p;
 }
 

@@ -199,20 +199,21 @@ void GamePlay::initGameEngine() {
 	AnimatorHolder::animRegister(deathAnimator);
 	AnimatorHolder::animRegister(takeOffAnimator);
 	AnimatorHolder::animRegister(flyAnimator);
+
 }
 
 MovingPathAnimation* GamePlay::createLoopAnimation(int x, int y, const std::string film_id) {
 	std::list<PathEntry> paths;
-	PathEntry path;
-	Rect rect = AnimationFilmHolder::getSingleton()->getFilm(film_id)->getFrameBox(0);
-	paths.push_back(PathEntry(0, 0, false, false, 0, 50));
-	paths.push_back(PathEntry(0, -10, true, false, 0, 100));
-	paths.push_back(PathEntry(0, -10, false, false, 0, 100));
-	paths.push_back(PathEntry(0, -10, true, false, 0, 100));
-	paths.push_back(PathEntry(0, -10, false, false, 0, 100));
-	paths.push_back(PathEntry(0, -10, true, false, 0, 100));
-	paths.push_back(PathEntry(0, -10, false, false, 1, 100));
-	return new MovingPathAnimation(paths, 0);
+	cout << "createLoopAnimation!!!!!!!!!!!!!!!!!!!\n";
+	//Rect rect = AnimationFilmHolder::getSingleton()->getFilm(film_id)->getFrameBox(0);
+	paths.push_back(PathEntry(x,	y,  false,	false, 1, 50));
+	paths.push_back(PathEntry(x, y-100, true,	false, 1, 100));
+	paths.push_back(PathEntry(x, y-150, false,	false, 1, 100));
+	paths.push_back(PathEntry(x, y-200, true,	false, 1, 100));
+	paths.push_back(PathEntry(x, y-250, false,	false, 1, 100));
+	paths.push_back(PathEntry(x, y-300, true,	false, 1, 100));
+	paths.push_back(PathEntry(x, y-350, false,	false, 1, 100));
+	return new MovingPathAnimation(paths, 1);
 }
 
 void GamePlay::runMainLoop() {

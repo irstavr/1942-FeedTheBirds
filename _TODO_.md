@@ -1,10 +1,10 @@
 # 1942 - Feed The Birds
 
 1. SuperAce
-    explosion
-    loop
-    flashing - otan xanei zwh 
-                ki otan kanei loop
+    -explosion
+    -loop
+    -flashing - otan xanei zwh  -- DONE! OK!
+                ki otan kanei loop  
     
 2. Mikra Aeroplana
     1-2 fores purovoloun k feugoun
@@ -18,6 +18,7 @@
                                gurnane pisw
     ta dikinitira -> perissoterous kuklous
     ta jets -> grhgores epitheseis, megaluteres kampules 
+    
 3. Mesaia Aeroplana
     ligotera suxna apo ta mikra
     gia na pesoun 4 xtuphmata
@@ -50,5 +51,17 @@
     7 power ups
     
 6. Arxh kai telos pistas
+    scaling animator 
+        beginning
+        end
 
-7. Configurations
+7. Options
+    fps
+    
+
+FIX:
+-replay button
+-Terrain as Animator class
+-when superAce flashes cannot kill birds or be killed from birds
+-action points
+-update points/lives/loopsNum on Terrain Screen

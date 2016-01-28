@@ -49,6 +49,7 @@ class MovingPathAnimation : public Animation {
 	std::list<PathEntry> path;
 public:
 	MovingPathAnimation(const std::list<PathEntry>& _path, animid_t id);
+	~MovingPathAnimation();
 	std::list<PathEntry>::iterator getFirstPathEntry(void);
 	std::list<PathEntry>::iterator getLastPathEntry(void);
 	void setPath(const std::list<PathEntry>& p);
