@@ -46,6 +46,7 @@ int SideFighter::getLives()
 void SideFighter::setLives(int n)
 {
 	this->lives = n;
+	if(this->lives) this->setVisibility(true);
 }
 
 void SideFighter::incrLives()

@@ -208,7 +208,8 @@ void SuperAce::stopFlashing(void) {
 
 void SuperAce::fetchSideFighters()
 {
-	//Yeah......
+	this->sf1->setLives(1);
+	this->sf2->setLives(1);
 }
 
 void SuperAce::moveSideFighters(int dx, int dy)
