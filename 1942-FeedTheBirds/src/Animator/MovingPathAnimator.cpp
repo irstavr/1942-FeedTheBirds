@@ -6,12 +6,11 @@ MovingPathAnimator::MovingPathAnimator(void) :
 	sprite((Sprite*)0),
 	anim((MovingPathAnimation*)0), 
 	currFrame(0xFF),
-	currIndex(0)
-{
+	currIndex(0) {
 }
 
 void MovingPathAnimator::start(Sprite* s, MovingPathAnimation* a, unsigned long t) {
-	cout << "start moving path animator\n";
+	cout << __FUNCTION__ << "\n";
 	assert(s);
 	assert(a);
 
@@ -24,10 +23,10 @@ void MovingPathAnimator::start(Sprite* s, MovingPathAnimation* a, unsigned long 
 }
 
 void MovingPathAnimator::progress(unsigned long currTime) {
-	cout << "progress moving path animator\n";
-	
+	cout << __FUNCTION__ << "\n";
+
 	while (currTime > lastTime && currTime - lastTime >= currEntry->delay) {
-		//sprite->Move(currEntry->dx, currEntry->dy);
+		//sprite->move(currEntry->dx, currEntry->dy);
 		sprite->setFlipH(currEntry->h_flip);
 		sprite->setFlipV(currEntry->v_flip);
 		sprite->setFrame(currEntry->frame);

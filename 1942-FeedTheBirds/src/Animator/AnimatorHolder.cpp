@@ -7,7 +7,7 @@ std::list<Animator*> AnimatorHolder::paused;
 unsigned long AnimatorHolder::pauseTime;
 
 void AnimatorHolder::animRegister(Animator* a) {
-	//assert(a);
+	assert(a);
 	suspended.push_back(a);
 }
 

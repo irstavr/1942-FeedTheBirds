@@ -27,9 +27,6 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 	fishes = new vector<Fish*>();
 	hasQuadGun = false;
 
-
-
-
 	this->sf1 = new SideFighter(
 		this->x, this->y-20, 
 		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("sidefighter"),
