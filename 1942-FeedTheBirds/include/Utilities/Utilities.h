@@ -31,7 +31,7 @@
 #define TERRAIN_IMAGE_HEIGHT 669
 
 #define FPS 120
-#define LPS 120
+#define LPS 200
 
 typedef int Dim;
 typedef unsigned char byte;

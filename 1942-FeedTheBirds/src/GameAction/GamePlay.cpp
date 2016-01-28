@@ -188,7 +188,7 @@ void GamePlay::initGameEngine() {
 	takeOffAnimator = new FrameRangeAnimator();
 	deathAnimation = new FrameRangeAnimation(1, 6, 0, 0, 200, false, 4);
 	deathAnimator = new FrameRangeAnimator();
-	flyAnimation = new FrameRangeAnimation(1, 3, -5, -5, 200, true, 3);
+	flyAnimation = new FrameRangeAnimation(1, 3, -10, -10, 100, true, 3);
 	flyAnimator = new FrameRangeAnimator();
 
 	loopAnimation = createLoopAnimation();
@@ -201,14 +201,30 @@ void GamePlay::initGameEngine() {
 	AnimatorHolder::animRegister(flyAnimator);
 
 }
+/*
+MovingPathAnimation* GamePlay::createSmallBirdAnimation(int x, int y, const std::string film_id) {
+	std::list<PathEntry> paths;
+	cout << "createsmallBirdAnimation\n";
+	//Rect rect = AnimationFilmHolder::getSingleton()->getFilm(film_id)->getFrameBox(0);
+	paths.push_back(PathEntry(x, y, false, false, 1, 50));
+	paths.push_back(PathEntry(x, y - 100, true, false, 1, 100));
+	paths.push_back(PathEntry(x, y - 150, false, false, 1, 100));
+	paths.push_back(PathEntry(x, y - 200, true, false, 1, 100));
+	paths.push_back(PathEntry(x, y - 250, false, false, 1, 100));
+	paths.push_back(PathEntry(x, y - 300, true, false, 1, 100));
+	paths.push_back(PathEntry(x, y - 350, false, false, 1, 100));
+	return new MovingPathAnimation(paths, 1);
+}
+*/
 
+/// loop animation for super ace when pressing A
 MovingPathAnimation* GamePlay::createLoopAnimation() {
 	std::list<PathEntry> paths;
 	paths.push_back(PathEntry(0,	0,  false,	false, 1, 50));
-	paths.push_back(PathEntry(+50, -50, false,	false, 1, 150));
+	paths.push_back(PathEntry(50, -50, false,	false, 1, 150));
 	paths.push_back(PathEntry(-50, -50, true,	false, 1, 150));
-	paths.push_back(PathEntry(-50, +50, true,	false, 1, 150));
-	paths.push_back(PathEntry(+50, +50 , false, false, 1, 150));
+	paths.push_back(PathEntry(-50, 50, true,	false, 1, 150));
+	paths.push_back(PathEntry(50, 50 , false, false, 1, 150));
 	return new MovingPathAnimation(paths, 1);
 }
 

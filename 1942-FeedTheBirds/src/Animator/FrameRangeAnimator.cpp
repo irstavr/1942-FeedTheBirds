@@ -22,7 +22,7 @@ void FrameRangeAnimator::progress (unsigned long currTime) {
 	    else
 			++currFrame;
 		//cout << currFrame << "\n"; 
-		cout << anim->getId()<< ": " << (int) currFrame << endl;
+		//cout << anim->getId()<< ": " << (int) currFrame << endl;
 		sprite->move(anim->getDx(), anim->getDy());
 		sprite->setFrame(currFrame);
 		lastTime += anim->getDelay();

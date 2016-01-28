@@ -96,17 +96,13 @@ void SuperAce::moveRight() {
 }
 
 void SuperAce::twist(void) {
+	if (playerProfile->getLoops() != 0) {
+		playerProfile->decrLoops();
 
-	cout << "TWIST SUPERACE\n";
-	//moving path animation
-	loopAnimator->start(this, loopAnimation,getCurrTime() );
-	AnimatorHolder::markAsRunning(loopAnimator);
-
-	// flashing
-
-
-	//decrease num of loops available for superace
-
+		//moving path animation
+		loopAnimator->start(this, loopAnimation, getCurrTime());
+		AnimatorHolder::markAsRunning(loopAnimator);
+	}
 }
 
 void SuperAce::shoot(vector<Bird*>* birds) {
@@ -290,7 +286,7 @@ void SuperAce::collisionAction(Sprite* s) {
 				//todo
 				break;
 			case ExtraLoop:
-				playerProfile->incrLoops(1);
+				playerProfile->incrLoops();
 				break;
 			case Points1000:
 				playerProfile->incrScore(1000);
