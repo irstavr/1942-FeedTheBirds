@@ -1,10 +1,9 @@
 # 1942 - Feed The Birds
 
 1. SuperAce
-    -explosion
-    -loop
+    -explosion -- DONE OK
+    -loop -- DONE OK
     -flashing - otan xanei zwh  -- DONE! OK!
-                ki otan kanei loop  
     
 2. Mikra Aeroplana
     1-2 fores purovoloun k feugoun
@@ -65,3 +64,4 @@ FIX:
 -when superAce flashes cannot kill birds or be killed from birds
 -action points
 -update points/lives/loopsNum on Terrain Screen
+-moving path animator na exei kai frame range

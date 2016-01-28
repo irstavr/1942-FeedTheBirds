@@ -30,8 +30,6 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 	this->explosion = new Sprite(this->x, this->y,
 		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("bambam"));
 
-
-
 	this->sf1 = new SideFighter(
 		this->x, this->y-110, 
 		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("sidefighter"),
@@ -42,7 +40,6 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 		new FrameRangeAnimation(1, 6, 0, 0, 200, false, 23),
 		new FrameRangeAnimator(), 
 		this->fishes);
-
 
 	this->sf2 = new SideFighter(
 		this->x, this->y+110, 
@@ -57,7 +54,6 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 
 	injuredAnimation = new FlashingAnimation(10, 200, 200, 0);
 	injuredAnimator = new FlashingAnimator();
-	//AnimatorHolder::animRegister(injuredAnimator);
 
 }
 
@@ -96,12 +92,17 @@ void SuperAce::moveRight() {
 }
 
 void SuperAce::twist(void) {
-	if (playerProfile->getLoops() != 0) {
+	// twist only if num of available loops >0
+	// and only if super ace is not invisible 
+	// (hes not already in a twist)
+	if (playerProfile->getLoops() != 0 && !this->isInvisible) {
+		this->setInvinsibility(true);
 		playerProfile->decrLoops();
 
 		//moving path animation
 		loopAnimator->start(this, loopAnimation, getCurrTime());
 		AnimatorHolder::markAsRunning(loopAnimator);
+		this->setInvinsibility(false);
 	}
 }
 
@@ -123,7 +124,7 @@ void SuperAce::shoot(vector<Bird*>* birds) {
 
 		for (unsigned int i = 0; i < birds->size(); i++) {
 			if (!birds->at(i)->isDead()) {
-				cout << "REGISTER COLLISION! BIRD" << i << " WITH FISH!\n";
+				cerr << "REGISTER COLLISION! BIRD" << i << " WITH FISH!\n";
 				CollisionChecker::getInstance()->
 					registerCollisions(birds->at(i), fish);
 			}
@@ -148,7 +149,7 @@ void SuperAce::shoot(vector<Bird*>* birds) {
 
 			for (unsigned int i = 0; i < birds->size(); i++) {
 				if (!birds->at(i)->isDead()) {
-					cout << "REGISTER COLLISION! BIRD" << i << " WITH FISH!\n";
+					cerr << "REGISTER COLLISION! BIRD" << i << " WITH FISH!\n";
 					CollisionChecker::getInstance()->
 						registerCollisions(birds->at(i), fish2);
 				}
@@ -178,7 +179,7 @@ void SuperAce::die() {
 	this->disableMovement();
 	this->explosion->setX(this->x+50);
 	this->explosion->setY(this->y);
-	cout << "Stuff is happening" << endl;
+	cerr << "Stuff is happening" << endl;
 	this->explosion->setVisibility(true);
 	this->deathAnimator->start(explosion, deathAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(this->deathAnimator);
@@ -219,7 +220,7 @@ void SuperAce::moveSideFighters(int dx, int dy)
 
 void SuperAce::collisionAction(Sprite* s) {
 	if (!isInvisible) {
-		cout << "COLLISION! SUPER ACE!\n";
+		cerr << "COLLISION! SUPER ACE!\n";
 		/*if (playerProfile->getLives() == 5) {
 			// GameOver
 			this->die();
@@ -235,7 +236,7 @@ void SuperAce::collisionAction(Sprite* s) {
 
 			// super ace loses a life
 			playerProfile->decrLives();
-			cout << "lifes: " << playerProfile->getLives() << "\n";
+			cerr << "lifes: " << playerProfile->getLives() << "\n";
 
 
 			//check if game is over
@@ -247,7 +248,7 @@ void SuperAce::collisionAction(Sprite* s) {
 
 		// collision super ace with a koutsoulia :P
 		if (BirdDropping* v = dynamic_cast<BirdDropping*>(s)) {
-			cout << "COLLISION! SUPER ACE - koutsoulia!\n";
+			cerr << "COLLISION! SUPER ACE - koutsoulia!\n";
 			//remove bird
 			v->setVisibility(false);
 
