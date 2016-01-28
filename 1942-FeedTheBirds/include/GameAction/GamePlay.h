@@ -45,6 +45,8 @@ private:
 	const int windowHeight;
 	const int windowWidth;
 
+	Terrain* terrain;
+
 	/* Allegro initialization*/
 	ALLEGRO_DISPLAY *display;
 	ALLEGRO_EVENT_QUEUE *eventQueue;
