@@ -26,14 +26,10 @@ private:
 	std::list<Sprite*> terrainObjects;	//init at beginning
 	float startYPos; // for view window (initially: terrainHeight - viewWinHeight)
 
-	static std::list<Sprite*> getVisibleObjects(); // returns list of objects on the view window
-
 public:
 
 	Terrain();
 	~Terrain();
-
-	static Terrain* terrain; //sigleton
 
 	float x;
 	float y;
@@ -52,10 +48,8 @@ public:
 	ALLEGRO_COLOR grey;
 	const char* font_file;
 
-	static void cleanUp();
-	static Terrain& getInstance();
 	void updateBackground();
-	void drawBackground();
+	void drawBackground(int highscore, int score, int lives, int loops);
 	float getTerrainX();
 	// deleted function to make sure they are unacceptable
 	// in order to be sure we dont get copies of the singleton

@@ -221,10 +221,10 @@ MovingPathAnimation* GamePlay::createSmallBirdAnimation(int x, int y, const std:
 MovingPathAnimation* GamePlay::createLoopAnimation() {
 	std::list<PathEntry> paths;
 	paths.push_back(PathEntry(0,	0,  false,	false, 1, 50));
-	paths.push_back(PathEntry(50, -50, false,	false, 1, 150));
-	paths.push_back(PathEntry(-50, -50, true,	false, 1, 150));
-	paths.push_back(PathEntry(-50, 50, true,	false, 1, 150));
-	paths.push_back(PathEntry(50, 50 , false, false, 1, 150));
+	paths.push_back(PathEntry(50, -50, false,	false, 1, 100));
+	paths.push_back(PathEntry(-50, -50, true,	false, 1, 100));
+	paths.push_back(PathEntry(-50, 50, true,	false, 1, 100));
+	paths.push_back(PathEntry(50, 50 , false, false, 1, 100));
 	return new MovingPathAnimation(paths, 1);
 }
 
@@ -352,8 +352,8 @@ void GamePlay::updateGameState() {
 		if (currentGame->superAce->isSuperAceDead()) {
 			gameOver(getCurrTime());
 		}
-
 		CollisionChecker::getInstance()->check();
+
 	}
 }
 
@@ -375,7 +375,10 @@ void GamePlay::render(unsigned long timestamp) {
 /* show first window with start screen */
 void GamePlay::displayMainScreen(unsigned long now) {
 	if (gameState == GAME_STATE_MAINGAME) {
-		terrain->drawBackground();
+		terrain->drawBackground(currentGame->profile->getScore(),
+								currentGame->profile->getScore(),
+								currentGame->profile->getLives(),
+								currentGame->profile->getLoops());
 
 		currentGame->superAce->displayAll();
 
@@ -439,7 +442,10 @@ void GamePlay::gameOver(unsigned long now) {
 	currentGame->highScore = 0;
 	currentGame->gameRunning = false;
 
-	terrain->drawBackground();
+	terrain->drawBackground(currentGame->profile->getScore(),
+							currentGame->profile->getScore(),
+							currentGame->profile->getLives(),
+							currentGame->profile->getLoops());
 
 	if (gameOverButton->isSpriteVisible()) {
 		gameOverButton->display(Rect(0, 0, 0, 0));

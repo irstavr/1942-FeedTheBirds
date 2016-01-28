@@ -6,7 +6,7 @@
 #include "..\..\Animation\AnimationFilmHolder.h"
 #include "..\Items\Fish.h"
 #include "..\..\GameAction\CollisionChecker.h"
-//#include "SuperAce.h"
+#include "..\..\GameLogic\PlayerProfile.h"
 
 typedef vector<BirdDropping*> DROPPINGS;
 
@@ -39,7 +39,6 @@ private:
 	float birdSpeed;
 	bool releasesPowerUp;
 	bool isGrey;
-
 	bool isAlive;
 
 	TickAnimation *tickAnimation;

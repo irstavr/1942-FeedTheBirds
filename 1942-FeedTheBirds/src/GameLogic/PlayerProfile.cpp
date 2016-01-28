@@ -5,7 +5,7 @@
 
 // constructors
 PlayerProfile::PlayerProfile(COORDS xy) {
-	score = -1;
+	score = 0;
 	startXY = xy;
 	lives = _STARTING_LIFES;
 	birdsFeeded = 0;
@@ -15,7 +15,7 @@ PlayerProfile::PlayerProfile(COORDS xy) {
 }
 
 PlayerProfile::PlayerProfile() {
-	score = -1;
+	score = 0;
 	startXY = std::make_pair(0, 0);
 	lives = _STARTING_LIFES;
 	birdsFeeded = 0;
@@ -26,7 +26,7 @@ PlayerProfile::PlayerProfile() {
 
 // destructor
 PlayerProfile::~PlayerProfile() {
-	score = -1;
+	score = 0;
 	lives = 0;
 	loops = 0;
 	birdsFeeded = 0;

@@ -1,6 +1,6 @@
 #include "..\..\include\Terrain\Terrain.h"
 
-Terrain* Terrain::terrain;
+using namespace std;
 
 Terrain::Terrain() :
 	font_file("1942-FeedTheBirds\\data\\Fonts\\karmatic_arcade_font.ttf"),
@@ -25,15 +25,6 @@ Terrain::Terrain() :
 Terrain::~Terrain() {
 }
 
-void Terrain::cleanUp() {
-	delete terrain;
-}
-
-Terrain& Terrain::getInstance() {
-	static Terrain instance;
-	return instance;
-}
-
 float Terrain::getTerrainX() {
 	return -((this->x)/3);
 }
@@ -44,23 +35,19 @@ void Terrain::updateBackground() {
 		this->x = 0;
 }
 
-void Terrain::drawBackground() {
+void Terrain::drawBackground(int highscore, int score, int lives, int loops) {
+	al_draw_scaled_bitmap(bgImage, 0, 0, width, height, x, y, width * 3, height * 3, 0);
 
-	//if (this->x + this->width < SCREEN_WINDOW_WIDTH)
-		al_draw_scaled_bitmap(bgImage, 0, 0, width, height, x, y, width * 3, height * 3, 0);
-		//al_draw_bitmap(this->bgImage, this->x + this->width, this->y, 0);
+	al_draw_text(font2, bright_green, 100, 10, ALLEGRO_ALIGN_CENTER, "Score ");
+	al_draw_text(font2, bright_green, 220, 10, ALLEGRO_ALIGN_CENTER, to_string(score).c_str());
+	al_draw_text(font1, bright_green, 510, 10, ALLEGRO_ALIGN_CENTER, "High Score ");
+	al_draw_text(font1, bright_green, 700, 10, ALLEGRO_ALIGN_CENTER, to_string(highscore).c_str());
 
-		al_draw_text(font2, bright_green, 100, 10, ALLEGRO_ALIGN_CENTER, "Score ");
-		al_draw_text(font2, bright_green, 220, 10, ALLEGRO_ALIGN_CENTER, "3000 ");
-		al_draw_text(font1, bright_green, 510, 10, ALLEGRO_ALIGN_CENTER, "High Score ");
-		al_draw_text(font1, bright_green, 700, 10, ALLEGRO_ALIGN_CENTER, "10000 ");
-
-		//while (lives != 0) {
+	for (int i = 0; i < lives; i++) {
 		al_draw_scaled_bitmap(remainingLivesImage, 0, 0, 170, 170, 20, 600, 70, 70, 0);
-			//al_draw_bitmap(remainingLivesImage, 100, 600, 0);
-		//}
-		//while (lives != 0) {
-		al_draw_scaled_bitmap(remainingLivesImage, 0, 0, 170, 170, 1200, 600, 70, 70, 0);
-		//}
+	}
 
+	for (int j = 0; j < loops; j++) {
+		al_draw_scaled_bitmap(remainingLivesImage, 0, 0, 170, 170, 1200, 600, 70, 70, 0);
+	}
 }

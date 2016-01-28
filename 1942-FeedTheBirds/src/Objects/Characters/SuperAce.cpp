@@ -239,8 +239,7 @@ void SuperAce::collisionAction(Sprite* s) {
 			// super ace loses a life
 			playerProfile->decrLives();
 			cerr << "lifes: " << playerProfile->getLives() << "\n";
-
-
+			
 			//check if game is over
 			if (playerProfile->getLives() == 0) {
 				// GameOver

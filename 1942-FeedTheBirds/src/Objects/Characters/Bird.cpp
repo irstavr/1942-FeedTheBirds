@@ -83,12 +83,13 @@ void Bird::scare()
 // called when Bird collides with Fish
 void Bird::collisionAction(Sprite* s) {
 	Fish* fish = (Fish*) s;
-	cout << "COLLISION!\n";
+	cerr << "COLLISION! fish with bird \n";
 
 	removeLife();
 	fish->setVisibility(false);
 	fish->disableMovement();
 	fish->setDead();
+
 	// kill fish sprite
 	if (birdLives == 0) {
 		cout << "BIRD DEAD!\n";
