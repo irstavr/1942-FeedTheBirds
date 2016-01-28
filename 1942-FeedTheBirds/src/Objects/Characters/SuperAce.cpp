@@ -1,25 +1,27 @@
 #include "..\..\..\include\Objects\Characters\SuperAce.h"
 
 SuperAce::SuperAce(PlayerProfile* playerProfile,
-				Dim _x, Dim _y, AnimationFilm* film,
-				FrameRangeAnimation *_takeOffAnimation,
-				FrameRangeAnimator *_takeOffAnimator,
-				FrameRangeAnimation *_landAnimation, 
-				FrameRangeAnimator *_landAnimator,
-				FrameRangeAnimation *_deathAnimation,
-				FrameRangeAnimator *_deathAnimator,
-				MovingPathAnimation* _loopAnimation,
-				MovingPathAnimator* _loopAnimator) :
+	Dim _x, Dim _y, AnimationFilm* film,
+	FrameRangeAnimation *_takeOffAnimation,
+	FrameRangeAnimator *_takeOffAnimator,
+	FrameRangeAnimation *_landAnimation,
+	FrameRangeAnimator *_landAnimator,
+	FrameRangeAnimation *_deathAnimation,
+	FrameRangeAnimator *_deathAnimator,
+	MovingPathAnimation* _loopAnimation,
+	MovingPathAnimator* _loopAnimator,
+	vector<Bird*> *_birds) :
 	Sprite(_x, _y, film),
 	playerProfile(playerProfile),
-	takeOffAnimation(_takeOffAnimation), 
+	takeOffAnimation(_takeOffAnimation),
 	takeOffAnimator(_takeOffAnimator),
-	landAnimation(_landAnimation), 
+	landAnimation(_landAnimation),
 	landAnimator(_landAnimator),
-	deathAnimation(_deathAnimation), 
+	deathAnimation(_deathAnimation),
 	deathAnimator(_deathAnimator),
 	loopAnimation(_loopAnimation),
-	loopAnimator(_loopAnimator)
+	loopAnimator(_loopAnimator),
+	birds(_birds)
 {
 	isDead = false;
 	isInvisible = false;
@@ -275,7 +277,10 @@ void SuperAce::collisionAction(Sprite* s) {
 				this->hasQuadGun = true;
 				break;
 			case EnemyCrash:
-				//todo
+				for (std::vector<Bird*>::iterator it = this->birds->begin(); it != this->birds->end();it++)
+				{
+					if (!(*it)->isDead()) (*it)->scare();
+				}
 				break;
 			case SideFighters:
 				this->fetchSideFighters();

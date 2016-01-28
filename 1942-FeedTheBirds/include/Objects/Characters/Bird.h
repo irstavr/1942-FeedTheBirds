@@ -27,6 +27,7 @@ public:
 	void startMoving(void);
 	void createRoute(void);
 	bool isDead(void);
+	void scare();
 
 	FrameRangeAnimation *flyAnimation;
 	FrameRangeAnimator *flyAnimator;

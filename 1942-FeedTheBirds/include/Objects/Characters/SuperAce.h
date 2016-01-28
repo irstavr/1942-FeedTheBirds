@@ -24,7 +24,7 @@ public:
 						FrameRangeAnimation *_takeOffAnimation, FrameRangeAnimator *_takeOffAnimator,
 						FrameRangeAnimation *_landAnimation, FrameRangeAnimator *_landAnimator,
 						FrameRangeAnimation *_deathAnimation, FrameRangeAnimator *_deathAnimator,
-						MovingPathAnimation* _loopAnimation, MovingPathAnimator* _loopAnimator);
+						MovingPathAnimation* _loopAnimation, MovingPathAnimator* _loopAnimator, vector<Bird*> *_birds);
 	~SuperAce(void);
 
 	void shoot(vector<Bird*>* birds);
@@ -54,6 +54,7 @@ public:
 	void fetchSideFighters();
 
 private:
+	vector<Bird*> *birds;
 	float dx, dy;
 	float speedx, speedy;
 	FISHES *fishes;

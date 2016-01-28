@@ -73,6 +73,13 @@ bool Bird::isDead(void) {
 	return !isAlive;
 }
 
+void Bird::scare()
+{
+	birdLives = 0;
+	leaveScreen();
+	isAlive = false;
+}
+
 // called when Bird collides with Fish
 void Bird::collisionAction(Sprite* s) {
 	Fish* fish = (Fish*) s;
