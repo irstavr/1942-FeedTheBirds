@@ -64,6 +64,7 @@ FIX:
 -action points
 -update points/lives/loopsNum on Terrain Screen
 -moving path animator na exei kai frame range
--AUDIO 
+-add AUDIO
 -change Bird constructor ---> add also birdLives (every category has diff num of lives)
--PowsHolder ?
+-PowsHolder ??
+-terrain ending + land in animation
