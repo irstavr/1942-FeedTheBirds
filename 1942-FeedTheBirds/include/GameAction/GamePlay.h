@@ -109,6 +109,8 @@ private:
 
 	void displayStartScreen(unsigned long now);
 	void displayMainScreen(unsigned long now);
+	void displayPauseGame(unsigned long now);
+	void displayGameOver(unsigned long now);
 	void checkActionPoints();
 	void pauseGame(unsigned long now);
 	void gameOver(unsigned long now);

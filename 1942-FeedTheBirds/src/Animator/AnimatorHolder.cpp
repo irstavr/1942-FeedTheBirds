@@ -53,16 +53,29 @@ void AnimatorHolder::progress(unsigned long currTime) {
 	//pending_suspention.clear();
 }
 
-void AnimatorHolder::pause(void) {
+void AnimatorHolder::pause() {
 	pauseTime = clock();
 
 	std::list<Animator *>::iterator it;
 	printf("size of running list = %d\n", running.size());
 
 	for (it = running.begin(); it != running.end(); ++it) {
-		paused.push_back(*it);
+		 paused.push_back(*it);
 	}
 	running.clear();
+}
+
+void AnimatorHolder::pauseAllExcept(Animator* anim) {
+	pauseTime = clock();
+
+	std::list<Animator *>::iterator it;
+	printf("size of running list = %d\n", running.size());
+
+	for (it = running.begin(); it != running.end(); ++it) {
+			if (*it != anim) paused.push_back(*it);
+	}
+	running.clear();
+	running.push_back(anim);
 }
 
 void AnimatorHolder::resume(void) {

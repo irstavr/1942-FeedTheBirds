@@ -41,7 +41,8 @@ public:
 	static void markAsSuspended(Animator* a);
 
 	static void progress(unsigned long currTime);
-	static void pause(void);
+	static void pause();
+	static void pauseAllExcept(Animator* anim);
 	static void resume(void);
 	//static void display(ALLEGRO_BITMAP* at);
 };

@@ -62,19 +62,19 @@ bool GamePlay::initAllegro() {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to create fpstimer!\n", NULL, NULL);
 		return false;
 	}
-	/*
+	
 	lpsTimer = al_create_timer(1.0 / LPS);
 	if (!lpsTimer) {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to create lpstimer!\n", NULL, NULL);
 		return false;
 	}
-	*/
+	
 
 	display = al_create_display(START_SCREEN_WINDOW_WIDTH, START_SCREEN_WINDOW_HEIGHT);
 	if (!display) {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to create display!\n", NULL, NULL);
 		al_destroy_timer(fpsTimer);
-		//al_destroy_timer(lpsTimer);
+		al_destroy_timer(lpsTimer);
 		return false;
 	}
 	al_set_new_window_position(0, 0);
@@ -83,7 +83,7 @@ bool GamePlay::initAllegro() {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to initialize audio!\n", NULL, NULL);
 		al_destroy_display(display);
 		al_destroy_timer(fpsTimer);
-		//al_destroy_timer(lpsTimer);
+		al_destroy_timer(lpsTimer);
 		return false;
 	}
 
@@ -91,7 +91,7 @@ bool GamePlay::initAllegro() {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to initialize audio codecs!\n", NULL, NULL);
 		al_destroy_display(display);
 		al_destroy_timer(fpsTimer);
-		//al_destroy_timer(lpsTimer);
+		al_destroy_timer(lpsTimer);
 		return false;
 	}
 
@@ -100,7 +100,7 @@ bool GamePlay::initAllegro() {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to create event_queue!\n", NULL, NULL);
 		al_destroy_display(display);
 		al_destroy_timer(fpsTimer);
-		//al_destroy_timer(lpsTimer);
+		al_destroy_timer(lpsTimer);
 		return false;
 	}
 
@@ -108,7 +108,7 @@ bool GamePlay::initAllegro() {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to initialize primitives addon!\n", NULL, NULL);
 		al_destroy_display(display);
 		al_destroy_timer(fpsTimer);
-		//al_destroy_timer(lpsTimer);
+		al_destroy_timer(lpsTimer);
 		return false;
 	}
 
@@ -121,10 +121,10 @@ bool GamePlay::initAllegro() {
 	al_register_event_source(eventQueue, al_get_display_event_source(display));
 	al_register_event_source(eventQueue, al_get_keyboard_event_source());
 	al_register_event_source(eventQueue, al_get_timer_event_source(fpsTimer));
-	//al_register_event_source(eventQueue, al_get_timer_event_source(lpsTimer));
+	al_register_event_source(eventQueue, al_get_timer_event_source(lpsTimer));
 
 	//Start timers 
-	//al_start_timer(lpsTimer);
+	al_start_timer(lpsTimer);
 	al_start_timer(fpsTimer);
 
 	return true;
@@ -237,13 +237,14 @@ void GamePlay::runMainLoop() {
 	while (gameState != GAME_STATE_FINISHED) {
 		currTime = getCurrTime();
 		al_wait_for_event(eventQueue, &alEvent);
-
 		/* read from local input event queue */
 		inputManagement(alEvent);
-		/* game loop logic */
-		updateGameState();
+		if (alEvent.timer.source == lpsTimer) {
+			/* game loop logic */
+			updateGameState();
+		}
 		/* draw screen */
-		render(currTime);
+		if(alEvent.timer.source==fpsTimer) render(currTime);
 	}
 }
 
@@ -324,9 +325,10 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				/* O:  Just for our debugging*/
 			case ALLEGRO_KEY_O:
 				if (gameState == GAME_STATE_MAINGAME) {
-					gameState = GAME_STATE_GAMEOVER;
-					gameOverButton->setVisibility(true);
-					gameOverButton->startFlashing();
+					gameOver(currTime);
+					//gameState = GAME_STATE_GAMEOVER;
+					//gameOverButton->setVisibility(true);
+					//gameOverButton->startFlashing();
 					break;
 				}
 			}		
@@ -372,11 +374,10 @@ void GamePlay::render(unsigned long timestamp) {
 		displayMainScreen(timestamp);
 	}
 	if (gameState == GAME_STATE_GAMEOVER) {
-		gameOver(timestamp);
+		displayGameOver(timestamp);
 	}
-	if (gameState == GAME_STATE_GAMEOVER) {
-		if (pauseButton->isSpriteVisible())
-			pauseButton->display(Rect(0, 0, 0, 0));
+	if (gameState == GAME_STATE_PAUSED) {
+		displayPauseGame(currTime);
 	}
 }
 
@@ -438,25 +439,48 @@ void GamePlay::resumeGame(void) {
 
 void GamePlay::gameOver(unsigned long now) {
 	//TODO: display message to play again
-	cout << "GAME OVER FILARAKI";
+	if (gameState != GAME_STATE_GAMEOVER) {
+		cout << "GAME OVER FILARAKI";
+		gameState = GAME_STATE_GAMEOVER;
+		currentGame->superAce->explode();
+		AnimatorHolder::pauseAllExcept(deathAnimator);
+		gameOverButton->startFlashing();
+		ScoreBoard::getInstance().setScore(0);
+		currentGame->gameRunning = false;
+	}
+}
 
-	gameState = GAME_STATE_GAMEOVER;
-
-	ScoreBoard::getInstance().setScore(0);
-	currentGame->gameRunning = false;
-
+void GamePlay::displayGameOver(unsigned long now) {
 	terrain->drawBackground(ScoreBoard::getInstance().getScore(),
-							ScoreBoard::getInstance().getHighScore(),
-							currentGame->profile->getLives(),
-							currentGame->profile->getLoops());
-
+		ScoreBoard::getInstance().getHighScore(),
+		currentGame->profile->getLives(),
+		currentGame->profile->getLoops());
+	currentGame->superAce->displayAll();
 	if (gameOverButton->isSpriteVisible()) {
+		gameOverButton->setX(600);
+		gameOverButton->setY(300);
 		gameOverButton->display(Rect(0, 0, 0, 0));
 	}
-	
+
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));
-	terrain->updateBackground();
+	//terrain->updateBackground();
+}
+
+void GamePlay::displayPauseGame(unsigned long now) {
+	terrain->drawBackground(ScoreBoard::getInstance().getScore(),
+		ScoreBoard::getInstance().getHighScore(),
+		currentGame->profile->getLives(),
+		currentGame->profile->getLoops());
+
+	if (pauseButton->isSpriteVisible()) {
+		pauseButton->setX(600);
+		pauseButton->setY(300);
+		pauseButton->display(Rect(0, 0, 0, 0));
+	}
+	al_flip_display();
+	al_clear_to_color(al_map_rgb(0, 0, 0));
+	//terrain->updateBackground();
 }
 
 void GamePlay::startNewGame() {
@@ -497,7 +521,7 @@ void GamePlay::cleanGamePlay() {
 }
 
 void GamePlay::cleanAllegro() {
-//	al_destroy_timer(lpsTimer);
+	al_destroy_timer(lpsTimer);
 	al_destroy_timer(fpsTimer);
 	al_destroy_display(display);
 	al_destroy_event_queue(eventQueue);

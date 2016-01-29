@@ -112,7 +112,7 @@ void SuperAce::twist(void) {
 void SuperAce::shoot(vector<Bird*>* birds) {
 	// Fish (aka. bullets)
 	if (!isInvincible) {
-		MovingAnimation* bulletAnimation = new MovingAnimation(5, 0, 20, true, 4);
+		MovingAnimation* bulletAnimation = new MovingAnimation(2, 0, 5, true, 4);
 		MovingAnimator* bulletAnimator = new MovingAnimator();
 
 		AnimatorHolder::animRegister(bulletAnimator);
@@ -137,7 +137,7 @@ void SuperAce::shoot(vector<Bird*>* birds) {
 
 		if (this->hasQuadGun) {
 			// Fish (aka. bullets)
-			MovingAnimation* bulletAnimation2 = new MovingAnimation(5, 0, 20, true, 4);
+			MovingAnimation* bulletAnimation2 = new MovingAnimation(2, 0, 5, true, 4);
 			MovingAnimator* bulletAnimator2 = new MovingAnimator();
 
 			AnimatorHolder::animRegister(bulletAnimator2);
@@ -178,15 +178,15 @@ void SuperAce::displayAll() {
 }
 
 void SuperAce::explode() {
-	unsigned long time = getCurrTime();
+	cerr << "Explosion!\n";
 	this->disableMovement();
-	this->explosion->setX(this->x+50);
+	this->explosion->setX(this->x);
 	this->explosion->setY(this->y);
 	cerr << "Stuff is happening" << endl;
 	this->explosion->setVisibility(true);
 	this->deathAnimator->start(explosion, deathAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(this->deathAnimator);
-	
+	die();
 }
 
 void SuperAce::die() {
