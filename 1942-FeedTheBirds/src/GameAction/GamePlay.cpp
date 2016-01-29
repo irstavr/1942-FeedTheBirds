@@ -473,6 +473,8 @@ void GamePlay::startNewGame() {
 								loopAnimator);
 
 	terrain = new Terrain();
+	ScoreBoard::getInstance().setScore(0);
+
 	ai = new AI(currentGame, flyAnimator, flyAnimation);
 	displayMainScreen(getCurrTime());
 	

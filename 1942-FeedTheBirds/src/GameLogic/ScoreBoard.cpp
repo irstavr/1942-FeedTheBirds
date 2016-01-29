@@ -9,7 +9,6 @@ ScoreBoard::ScoreBoard() {
 // destructor
 ScoreBoard::~ScoreBoard() {
 	score = 0;
-	highScore = 0;
 }
 
 // get instance of singleton class
