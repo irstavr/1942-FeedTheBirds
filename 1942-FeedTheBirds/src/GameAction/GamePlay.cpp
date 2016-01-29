@@ -303,8 +303,10 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				//InputManager::pause(gameState);
 				break;
 			case ALLEGRO_KEY_S:
-				InputManager::onKeyS(gameState, display, startButton);
-				startNewGame();
+				if (gameState == GAME_STATE_INTRO) {
+					InputManager::onKeyS(gameState, display, startButton);
+					startNewGame();
+				}
 				break;
 			case ALLEGRO_KEY_L:
 				//currentGame->birds->at(0)->flyAnimator->stop();
