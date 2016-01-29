@@ -15,10 +15,10 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 	birds = new vector<Bird*>();
 	superAce = new SuperAce(profile,
 							100,
-							300,
+							285,
 							(AnimationFilm*)
 								AnimationFilmHolder::getSingleton()->
-									getFilm("superAce"),
+									getFilm("takeOff"),
 							takeOffAnimation,
 							takeOffAnimator,
 							landingAnimation,
@@ -28,7 +28,6 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 							loopAnimation,
 							loopAnimator,
 		                    this->birds);
-
 }
 
 GameLogic::~GameLogic() {
@@ -42,20 +41,16 @@ Bird* GameLogic::createBird(Dim _x, Dim _y, int birdLives,
 							FrameRangeAnimator *flyAnimator) {
 	Bird *bird = new Bird(_x, _y, birdLives,
 						(AnimationFilm*)
-						AnimationFilmHolder::getSingleton()->
-						getFilm(filmId),
-						flyAnimation,
-						flyAnimator);
+							AnimationFilmHolder::getSingleton()->
+								getFilm(filmId),
+									flyAnimation,
+									flyAnimator);
 
 	birds->push_back(bird);
 	bird->startMoving();
 
 	CollisionChecker::getInstance()->registerCollisions(superAce, bird);
 
-	////Na ginei sto AI!!
-	//BirdDropping* dropping = bird->shoot();
-	//CollisionChecker::getInstance()->
-	//	registerCollisions(superAce, dropping);
 	return bird;
 }
 

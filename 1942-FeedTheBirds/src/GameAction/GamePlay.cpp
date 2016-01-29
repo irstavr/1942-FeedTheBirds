@@ -5,8 +5,7 @@ GamePlay::GamePlay() :
 	gameState(GAME_STATE_INTRO),
 	windowHeight(START_SCREEN_WINDOW_HEIGHT), 
 	windowWidth(START_SCREEN_WINDOW_WIDTH) {
-	//time(-1), startTime(0),
-	//musicOn(false), pauseTime(-1.5), colorB(false) {
+	//musicOn(false),  {
 }
 
 GamePlay *GamePlay::instance(bool newOne) {
@@ -17,7 +16,6 @@ GamePlay *GamePlay::instance(bool newOne) {
 }
 
 GamePlay::~GamePlay() {
-
 }
 
 void GamePlay::start() {
@@ -184,9 +182,6 @@ void GamePlay::initGameEngine() {
 								flashAnimation, 
 								flashAnimator);
 
-	// replay button ?
-
-
 	// Characters - Items:
 
 	// SuperAce
@@ -194,7 +189,7 @@ void GamePlay::initGameEngine() {
 	int total_frames = AnimationFilmHolder::getSingleton()->getFilm("bonusBird")->getTotalFrames();
 	landingAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 1);
 	landingAnimator = new FrameRangeAnimator();
-	takeOffAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 2);
+	takeOffAnimation = new FrameRangeAnimation(1, 4, 80, 0, 300, false, 2);
 	takeOffAnimator = new FrameRangeAnimator();
 	deathAnimation = new FrameRangeAnimation(1, 6, 0, 0, 200, false, 4);
 	deathAnimator = new FrameRangeAnimator();
@@ -330,7 +325,6 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 
 /* game loop logic */
 void GamePlay::updateGameState() {
-
 	AnimatorHolder::progress(getCurrTime());
 	
 	if (gameState == GAME_STATE_MAINGAME) {
@@ -472,8 +466,8 @@ void GamePlay::displayPauseGame(unsigned long now) {
 
 void GamePlay::startNewGame() {
 	gameState = GAME_STATE_MAINGAME;
-	// TODO: play music ?
 	AudioHolder::stop();
+
 	currentGame = new GameLogic(takeOffAnimation,
 								takeOffAnimator,
 								landingAnimation,
@@ -482,6 +476,12 @@ void GamePlay::startNewGame() {
 								deathAnimator,
 								loopAnimation,
 								loopAnimator);
+
+
+	currentGame->superAce->takeOffAnimator->start(currentGame->superAce,
+													takeOffAnimation, 
+													getCurrTime());
+	AnimatorHolder::markAsRunning(takeOffAnimator);
 
 	terrain = new Terrain();
 	ScoreBoard::getInstance().setScore(0);
