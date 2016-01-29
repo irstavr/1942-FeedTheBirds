@@ -24,7 +24,7 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 		birds(_birds)
 {
 	isDead = false;
-	isInvisible = false;
+	isInvincible = false;
 	isShooting = false;
 	fishes = new vector<Fish*>();
 	hasQuadGun = false;
@@ -61,7 +61,7 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 }
 
 SuperAce::~SuperAce(void) {
-	isInvisible = true;
+	isInvincible = true;
 	isShooting = false;
 	isDead = true;
 }
@@ -98,20 +98,20 @@ void SuperAce::twist(void) {
 	// twist only if num of available loops >0
 	// and only if super ace is not invisible 
 	// (hes not already in a twist)
-	if (playerProfile->getLoops() != 0 && !this->isInvisible) {
-		this->setInvinsibility(true);
+	if (playerProfile->getLoops() != 0 && !this->isInvincible) {
+		this->setInvincibility(true);
 		playerProfile->decrLoops();
 
 		//moving path animation
 		loopAnimator->start(this, loopAnimation, getCurrTime());
 		AnimatorHolder::markAsRunning(loopAnimator);
-		this->setInvinsibility(false);
+		this->setInvincibility(false);
 	}
 }
 
 void SuperAce::shoot(vector<Bird*>* birds) {
 	// Fish (aka. bullets)
-	if (!isInvisible) {
+	if (!isInvincible) {
 		MovingAnimation* bulletAnimation = new MovingAnimation(5, 0, 20, true, 4);
 		MovingAnimator* bulletAnimator = new MovingAnimator();
 
@@ -177,8 +177,7 @@ void SuperAce::displayAll() {
 	}
 }
 
-void SuperAce::die() {
-	//isDead = true;
+void SuperAce::explode() {
 	unsigned long time = getCurrTime();
 	this->disableMovement();
 	this->explosion->setX(this->x+50);
@@ -187,9 +186,11 @@ void SuperAce::die() {
 	this->explosion->setVisibility(true);
 	this->deathAnimator->start(explosion, deathAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(this->deathAnimator);
-	/*while (time == time + 1000) {
-		this->explosion->setVisibility(false);
-	}*/
+	
+}
+
+void SuperAce::die() {
+	isDead = true;
 }
 
 void SuperAce::injured(){
@@ -206,7 +207,7 @@ void SuperAce::startFlashing(void) {
 
 void SuperAce::stopFlashing(void) {
 	fprintf(stdout, "stopFlashing -> SuperAce.cpp\n");
-	isInvisible = false;
+	isInvincible = false;
 	AnimatorHolder::markAsSuspended(injuredAnimator);
 	AnimatorHolder::cancel(injuredAnimator);
 	this->setVisibility(true);
@@ -225,7 +226,7 @@ void SuperAce::moveSideFighters(int dx, int dy)
 }
 
 void SuperAce::collisionAction(Sprite* s) {
-	if (!isInvisible) {
+	if (!isInvincible) {
 		cerr << "COLLISION! SUPER ACE!\n";
 		/*if (playerProfile->getLives() == 5) {
 			// GameOver
@@ -247,7 +248,7 @@ void SuperAce::collisionAction(Sprite* s) {
 			//check if game is over
 			if (playerProfile->getLives() == 0) {
 				// GameOver
-				this->die();
+				this->explode();
 			}
 		}
 

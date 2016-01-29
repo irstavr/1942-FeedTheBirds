@@ -42,11 +42,10 @@ public:
 	unsigned int getLives(void);
 	//virtual void collisionAction(Sprite *s);
 	void die(void);
+	void explode(void);
 	static bool deathCompleted(void);
 	bool isSuperAceDead();
-	void playDeathAnimation();
-	void gotHit();
-	void setInvinsibility(bool _inv) { isInvisible = _inv; };
+	void setInvincibility(bool _inv) { isInvincible = _inv; };
 	void displayAll();
 	virtual void collisionAction(Sprite* s);
 	void injured();
@@ -64,7 +63,7 @@ private:
 	SideFighter *sf2;
 
 	bool isDead;
-	bool isInvisible;
+	bool isInvincible;
 	bool isShooting;
 	bool hasSideFighter;
 	bool hasQuadGun;

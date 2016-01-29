@@ -23,6 +23,15 @@ private:
 			if (!(a->hasFinished())) {
 				a->progress(t);
 			}
+			/*else {
+				if (FrameRangeAnimator* v = dynamic_cast<FrameRangeAnimator*>(a)) {
+					if (v->getCurrFrame() > 7) {
+						//if (SuperAce* v = dynamic_cast<FrameRangeAnimator*>(a))
+					}
+				}
+
+
+			}*/
 		}
 	};
 public:

@@ -374,6 +374,10 @@ void GamePlay::render(unsigned long timestamp) {
 	if (gameState == GAME_STATE_GAMEOVER) {
 		gameOver(timestamp);
 	}
+	if (gameState == GAME_STATE_GAMEOVER) {
+		if (pauseButton->isSpriteVisible())
+			pauseButton->display(Rect(0, 0, 0, 0));
+	}
 }
 
 /* show first window with start screen */

@@ -12,6 +12,8 @@ class FrameRangeAnimator : public Animator {
 
 	public:
 	void progress(unsigned long currTime);
+	frame_t getCurrFrame();
+	Sprite* getAnimationSprite();
 	void start(Sprite* s, FrameRangeAnimation* a, unsigned long t);
 	FrameRangeAnimator(void);
 	~FrameRangeAnimator(){}

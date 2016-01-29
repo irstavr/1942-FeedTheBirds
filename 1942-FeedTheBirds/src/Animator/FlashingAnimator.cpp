@@ -22,6 +22,7 @@ void FlashingAnimator::progress(unsigned long currTime) {
 		if ((repetitions == anim->getRepetitions()) && (anim->getRepetitions() != 0)) {
 			fprintf(stdout, "stop progress\n");
 			state = ANIMATOR_FINISHED;
+			sprite->setVisibility(true);
 			notifyProgressed();
 			repetitions = 0;
 			return;
