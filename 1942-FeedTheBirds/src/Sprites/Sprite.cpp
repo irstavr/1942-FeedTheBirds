@@ -17,13 +17,13 @@ Sprite::~Sprite() {
 }
 
 void Sprite::setFrame(byte i) {
-	if (currFilm->getTotalFrames() > 1) {
+	//if (currFilm->getTotalFrames() > 1) {
 		if (i != frameNo) {
 			//assert(i < currFilm->GetTotalFrames());
-			if (i >= currFilm->getTotalFrames()) i = 0;
+			//if (i >= currFilm->getTotalFrames()) i = 0;
 			frameBox = currFilm->getFrameBox(frameNo = i);
 		}
-	}
+	//}
 }
 
 byte Sprite::getFrame(void) const { 
@@ -31,7 +31,8 @@ byte Sprite::getFrame(void) const {
 }
 
 Rect Sprite::getRect(void) const {
-	Rect bbox = currFilm->getFrameBox(frameNo);
+	//cout << "GETRECT" << frameNo;
+	Rect bbox = currFilm->getBoundingBox(frameNo);
 	assert(bbox.w!=0 && bbox.h!=0 && "bbox empty");
 	return Rect(x, y, bbox.w, bbox.h);
 	//return Rect(x, y, SCALE*bbox.w, SCALE*bbox.h);
@@ -40,7 +41,7 @@ Rect Sprite::getRect(void) const {
 void Sprite::setAnimationFilm(AnimationFilm *animF) {
 	currFilm = animF;
 	frameNo = animF->getTotalFrames();
-	setFrame(0);
+	setFrame(1);
 };
 
 void Sprite::setVisibility(bool v) {

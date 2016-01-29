@@ -17,7 +17,7 @@ AnimationFilmHolder::AnimationFilmHolder(const char* path) {
 			std::cerr << bitmap << " " << id << " " << frames << " " << bboxes << " " << endl;
 			AnimationFilm* anim_f = new AnimationFilm(bitmapLoader.load(bitmap), read_bboxes(bboxes, frames), id);
 			filmMap[id] = anim_f;
-			cout << "bitmap=" << bitmap << " id= " << id << " frames=" << frames
+			cerr << "bitmap=" << bitmap << " id= " << id << " frames=" << frames
 				 << " bboxes=" << bboxes << "\n";
 		}
 		else {
@@ -40,8 +40,6 @@ vector<Rect> AnimationFilmHolder::read_bboxes(const char* path, int framesNo) {
 	char buff[512], ch = ' ';
 	int x, y, w, h;
 	vector<Rect> vect;
-	//Rect bbox(0, 0, 80, 80);
-	//vect.push_back(bbox);
 	ifstream cfg(path);
 	for (int i = 0; i < framesNo; i++) {
 		cfg.getline(buff, 512);

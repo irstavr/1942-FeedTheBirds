@@ -112,6 +112,8 @@ private:
 	void pauseGame(unsigned long now);
 	void gameOver(unsigned long now);
 	void resumeGame(void);
+
+	MovingPathAnimation* createSmallBirdAnimation();
 	MovingPathAnimation *createLoopAnimation(void);
 };
 #endif
