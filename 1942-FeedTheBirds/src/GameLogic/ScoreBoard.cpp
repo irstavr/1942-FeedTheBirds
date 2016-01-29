@@ -22,6 +22,9 @@ ScoreBoard& ScoreBoard::getInstance() {
 void ScoreBoard::incrScore(Score addedPoints) {
 	assert(addedPoints >= 0);
 	score += addedPoints;
+	if (highScore < score) {
+		highScore = score;
+	}
 }
 
 // set score of game

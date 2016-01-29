@@ -35,7 +35,7 @@ void Terrain::updateBackground() {
 		this->x = 0;
 }
 
-void Terrain::drawBackground(int highscore, int score, int lives, int loops) {
+void Terrain::drawBackground(int score, int highscore, int lives, int loops) {
 	al_draw_scaled_bitmap(bgImage, 0, 0, width, height, x, y, width * 3, height * 3, 0);
 
 	al_draw_text(font2, bright_green, 100, 10, ALLEGRO_ALIGN_CENTER, "Score ");
