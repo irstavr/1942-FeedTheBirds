@@ -29,7 +29,7 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 	fishes = new vector<Fish*>();
 	hasQuadGun = false;
 
-	this->explosion = new Sprite(this->x, this->y,
+	this->explosion = new Sprite(this->x-10, this->y,
 		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("bambam"));
 	this->explosion->setVisibility(false);
 

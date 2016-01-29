@@ -4,7 +4,7 @@
 #include "../../include/Utilities/Utilities.h"
 #include <map>
 
-#define _STARTING_LIFES 4
+#define _STARTING_LIFES 5
 
 typedef int Points;
 typedef int Lives;

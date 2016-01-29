@@ -220,11 +220,11 @@ MovingPathAnimation* GamePlay::createSmallBirdAnimation(int x, int y, const std:
 /// loop animation for super ace when pressing A
 MovingPathAnimation* GamePlay::createLoopAnimation() {
 	std::list<PathEntry> paths;
-	paths.push_back(PathEntry(0,	0,  false,	false, 1, 50));
-	paths.push_back(PathEntry(50, -50, false,	false, 1, 100));
-	paths.push_back(PathEntry(-50, -50, true,	false, 1, 100));
-	paths.push_back(PathEntry(-50, 50, true,	false, 1, 100));
-	paths.push_back(PathEntry(50, 50 , false, false, 1, 100));
+	paths.push_back(PathEntry(0,	0,  false,	false, 0, 50));
+	paths.push_back(PathEntry(50, -50, false,	false, 0, 100));
+	paths.push_back(PathEntry(-50, -50, true,	false, 0, 100));
+	paths.push_back(PathEntry(-50, 50, true,	false, 0, 100));
+	paths.push_back(PathEntry(50, 50 , false, false, 0, 100));
 	return new MovingPathAnimation(paths, 1);
 }
 

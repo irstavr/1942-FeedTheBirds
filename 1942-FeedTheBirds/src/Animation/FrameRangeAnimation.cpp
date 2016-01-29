@@ -10,7 +10,7 @@ FrameRangeAnimation::FrameRangeAnimation (
 }
 
 frame_t	FrameRangeAnimation::getStartFrame(void) const { 
-	return start; 
+	return start-1; 
 }
     
 void FrameRangeAnimation::setStartFrame(frame_t v) { 
