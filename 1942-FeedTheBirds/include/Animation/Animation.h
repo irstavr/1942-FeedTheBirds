@@ -3,7 +3,7 @@
 
 #include "allegro5\allegro.h"
 
-typedef signed char	offset_t;
+typedef int	offset_t;
 typedef unsigned short delay_t;
 typedef unsigned int animid_t;
 

@@ -65,8 +65,8 @@ void AI::handleLittleBirds()
 					BirdDropping* dropping = (*it)->shoot();
 					CollisionChecker::getInstance()->registerCollisions(gameLogic->superAce, dropping);
 				}
-				(*it)->flyAnimation->setDx(-((*it)->getX() - gameLogic->superAce->getX()));
 				(*it)->flyAnimation->setDy(-((*it)->getY() - gameLogic->superAce->getY()));
+				(*it)->flyAnimation->setDx(-((*it)->getX() - (gameLogic->superAce->getX() + 200)));
 			}
 
 		}
