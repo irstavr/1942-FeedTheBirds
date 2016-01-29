@@ -14,6 +14,7 @@
 #include "..\Animator\MovingPathAnimator.h"
 #include "..\Animator\AnimatorHolder.h"
 #include "..\Objects\Characters\SuperAce.h"
+#include "AudioHolder.h"
 #include "AI.h"
 #include "InputManager.h"
 #include "CollisionChecker.h"

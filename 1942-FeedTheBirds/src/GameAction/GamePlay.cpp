@@ -95,6 +95,14 @@ bool GamePlay::initAllegro() {
 		return false;
 	}
 
+	if (!al_reserve_samples(1)) {
+		al_show_native_message_box(NULL, "Error", NULL, "failed to initialize audio codecs!\n", NULL, NULL);
+		al_destroy_display(display);
+		al_destroy_timer(fpsTimer);
+		al_destroy_timer(lpsTimer);
+		return false;
+	}
+
 	eventQueue = al_create_event_queue();
 	if (!eventQueue) {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to create event_queue!\n", NULL, NULL);
@@ -202,22 +210,9 @@ void GamePlay::initGameEngine() {
 	AnimatorHolder::animRegister(takeOffAnimator);
 	AnimatorHolder::animRegister(flyAnimator);
 
+	AudioHolder::initialize();
+	AudioHolder::changeToSound("intro");
 }
-/*
-MovingPathAnimation* GamePlay::createSmallBirdAnimation(int x, int y, const std::string film_id) {
-	std::list<PathEntry> paths;
-	cout << "createsmallBirdAnimation\n";
-	//Rect rect = AnimationFilmHolder::getSingleton()->getFilm(film_id)->getFrameBox(0);
-	paths.push_back(PathEntry(x, y, false, false, 1, 50));
-	paths.push_back(PathEntry(x, y - 100, true, false, 1, 100));
-	paths.push_back(PathEntry(x, y - 150, false, false, 1, 100));
-	paths.push_back(PathEntry(x, y - 200, true, false, 1, 100));
-	paths.push_back(PathEntry(x, y - 250, false, false, 1, 100));
-	paths.push_back(PathEntry(x, y - 300, true, false, 1, 100));
-	paths.push_back(PathEntry(x, y - 350, false, false, 1, 100));
-	return new MovingPathAnimation(paths, 1);
-}
-*/
 
 /// loop animation for super ace when pressing A
 MovingPathAnimation* GamePlay::createLoopAnimation() {
@@ -311,11 +306,6 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 					startNewGame();
 				}
 				break;
-			case ALLEGRO_KEY_L:
-				//currentGame->birds->at(0)->flyAnimator->stop();
-				//currentGame->birds->at(0)->flyAnimation->setNewOffsets(10, 10);
-				//currentGame->birds->at(0)->startMoving();
-				break;
 			case ALLEGRO_KEY_ENTER:
 				if (gameState == GAME_STATE_GAMEOVER) {
 					InputManager::onKeyEnter(gameState, display, startButton, gameOverButton);
@@ -326,9 +316,6 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 			case ALLEGRO_KEY_O:
 				if (gameState == GAME_STATE_MAINGAME) {
 					gameOver(currTime);
-					//gameState = GAME_STATE_GAMEOVER;
-					//gameOverButton->setVisibility(true);
-					//gameOverButton->startFlashing();
 					break;
 				}
 			}		
@@ -486,7 +473,7 @@ void GamePlay::displayPauseGame(unsigned long now) {
 void GamePlay::startNewGame() {
 	gameState = GAME_STATE_MAINGAME;
 	// TODO: play music ?
-	
+	AudioHolder::stop();
 	currentGame = new GameLogic(takeOffAnimation,
 								takeOffAnimator,
 								landingAnimation,
