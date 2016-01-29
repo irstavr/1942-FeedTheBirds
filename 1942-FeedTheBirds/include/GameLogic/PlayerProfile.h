@@ -2,6 +2,8 @@
 #define GAME_PROFILE_H
 
 #include "../../include/Utilities/Utilities.h"
+#include <stdio.h>
+#include <allegro5/allegro.h>
 #include <map>
 
 #define _STARTING_LIFES 5
@@ -35,15 +37,15 @@ public:
 
 	int getStartX(void);
 	int getStartY(void);
-
+	/*
 	void incrScore(Points addedPoints);
 	void setScore(Points newScore);
 	Points getScore(void);
-
+	*/
 private:
 	BlastAnimationMap_t blastAnimationMap;
 	COORDS startXY;
-	Points score;
+	//Points score;
 	Lives lives;
 	int loops;
 	bool isAlive;

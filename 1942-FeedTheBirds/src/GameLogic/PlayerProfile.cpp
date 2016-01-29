@@ -1,11 +1,7 @@
-#include <stdio.h>
-#include <allegro5/allegro.h>
-
 #include "../../include/GameLogic/PlayerProfile.h"
 
 // constructors
 PlayerProfile::PlayerProfile(COORDS xy) {
-	score = 0;
 	startXY = xy;
 	lives = _STARTING_LIFES;
 	birdsFeeded = 0;
@@ -15,7 +11,6 @@ PlayerProfile::PlayerProfile(COORDS xy) {
 }
 
 PlayerProfile::PlayerProfile() {
-	score = 0;
 	startXY = std::make_pair(0, 0);
 	lives = _STARTING_LIFES;
 	birdsFeeded = 0;
@@ -26,7 +21,6 @@ PlayerProfile::PlayerProfile() {
 
 // destructor
 PlayerProfile::~PlayerProfile() {
-	score = 0;
 	lives = 0;
 	loops = 0;
 	birdsFeeded = 0;
@@ -40,20 +34,6 @@ int PlayerProfile::getStartX(void) {
 
 int PlayerProfile::getStartY(void) {
 	return startXY.second; 
-}
-
-// score
-void PlayerProfile::incrScore(Points addedPoints) {
-	assert(addedPoints >= 0);
-	score += addedPoints;
-}
-
-void PlayerProfile::setScore(Points newScore) { 
-	score = newScore; 
-}
-
-Points PlayerProfile::getScore(void) { 
-	return score; 
 }
 
 // lifes

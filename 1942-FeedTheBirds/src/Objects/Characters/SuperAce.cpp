@@ -1,27 +1,27 @@
 #include "..\..\..\include\Objects\Characters\SuperAce.h"
 
 SuperAce::SuperAce(PlayerProfile* playerProfile,
-	Dim _x, Dim _y, AnimationFilm* film,
-	FrameRangeAnimation *_takeOffAnimation,
-	FrameRangeAnimator *_takeOffAnimator,
-	FrameRangeAnimation *_landAnimation,
-	FrameRangeAnimator *_landAnimator,
-	FrameRangeAnimation *_deathAnimation,
-	FrameRangeAnimator *_deathAnimator,
-	MovingPathAnimation* _loopAnimation,
-	MovingPathAnimator* _loopAnimator,
-	vector<Bird*> *_birds) :
-	Sprite(_x, _y, film),
-	playerProfile(playerProfile),
-	takeOffAnimation(_takeOffAnimation),
-	takeOffAnimator(_takeOffAnimator),
-	landAnimation(_landAnimation),
-	landAnimator(_landAnimator),
-	deathAnimation(_deathAnimation),
-	deathAnimator(_deathAnimator),
-	loopAnimation(_loopAnimation),
-	loopAnimator(_loopAnimator),
-	birds(_birds)
+					Dim _x, Dim _y, AnimationFilm* film,
+					FrameRangeAnimation *_takeOffAnimation,
+					FrameRangeAnimator *_takeOffAnimator,
+					FrameRangeAnimation *_landAnimation,
+					FrameRangeAnimator *_landAnimator,
+					FrameRangeAnimation *_deathAnimation,
+					FrameRangeAnimator *_deathAnimator,
+					MovingPathAnimation* _loopAnimation,
+					MovingPathAnimator* _loopAnimator,
+					vector<Bird*> *_birds) :
+		Sprite(_x, _y, film),
+		playerProfile(playerProfile),
+		takeOffAnimation(_takeOffAnimation),
+		takeOffAnimator(_takeOffAnimator),
+		landAnimation(_landAnimation),
+		landAnimator(_landAnimator),
+		deathAnimation(_deathAnimation),
+		deathAnimator(_deathAnimator),
+		loopAnimation(_loopAnimation),
+		loopAnimator(_loopAnimator),
+		birds(_birds)
 {
 	isDead = false;
 	isInvisible = false;
@@ -298,7 +298,7 @@ void SuperAce::collisionAction(Sprite* s) {
 				playerProfile->incrLoops();
 				break;
 			case Points1000:
-				playerProfile->incrScore(1000);
+				ScoreBoard::getInstance().incrScore(1000);
 				break;
 			default:
 				break;

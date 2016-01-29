@@ -15,6 +15,7 @@
 #include "./Bird.h"
 #include "./SideFighter.h"
 #include "..\..\GameLogic\PlayerProfile.h"
+#include "..\..\GameLogic\ScoreBoard.h"
 
 typedef vector<Fish*> FISHES;
 

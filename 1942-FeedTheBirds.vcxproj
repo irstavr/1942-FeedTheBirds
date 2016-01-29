@@ -132,6 +132,7 @@
     <ClCompile Include="1942-FeedTheBirds\src\GameLogic\GameLogic.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\GameLogic\PlayerProfile.cpp" />
     <ClCompile Include="1942-feedthebirds\src\1942-FeedTheBirdsMain.cpp" />
+    <ClCompile Include="1942-FeedTheBirds\src\GameLogic\ScoreBoard.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\Bird.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\SideFighter.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Objects\Characters\SuperAce.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\InputManager.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameLogic\GameLogic.h" />
     <ClInclude Include="1942-FeedTheBirds\include\GameLogic\PlayerProfile.h" />
+    <ClInclude Include="1942-FeedTheBirds\include\GameLogic\ScoreBoard.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\Bird.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\SideFighter.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Objects\Characters\SuperAce.h" />

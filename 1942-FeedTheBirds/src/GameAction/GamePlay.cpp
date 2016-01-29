@@ -140,6 +140,8 @@ void GamePlay::initGameEngine() {
 	// etc.
 	terrain = new Terrain();
 	TerrainStartScreen::getInstance();
+	ScoreBoard::getInstance();
+
 	AnimationFilmHolder::initialize("1942-FeedTheBirds\\data\\films.ini");
 	AnimationFilmHolder *animFH = AnimationFilmHolder::getSingleton();
 
@@ -377,8 +379,8 @@ void GamePlay::render(unsigned long timestamp) {
 /* show first window with start screen */
 void GamePlay::displayMainScreen(unsigned long now) {
 	if (gameState == GAME_STATE_MAINGAME) {
-		terrain->drawBackground(currentGame->profile->getScore(),
-								currentGame->profile->getScore(),
+		terrain->drawBackground(ScoreBoard::getInstance().getScore(),
+								ScoreBoard::getInstance().getHighScore(),
 								currentGame->profile->getLives(),
 								currentGame->profile->getLoops());
 
@@ -436,11 +438,11 @@ void GamePlay::gameOver(unsigned long now) {
 
 	gameState = GAME_STATE_GAMEOVER;
 
-	currentGame->highScore = 0;
+	ScoreBoard::getInstance().setScore(0);
 	currentGame->gameRunning = false;
 
-	terrain->drawBackground(currentGame->profile->getScore(),
-							currentGame->profile->getScore(),
+	terrain->drawBackground(ScoreBoard::getInstance().getScore(),
+							ScoreBoard::getInstance().getHighScore(),
 							currentGame->profile->getLives(),
 							currentGame->profile->getLoops());
 

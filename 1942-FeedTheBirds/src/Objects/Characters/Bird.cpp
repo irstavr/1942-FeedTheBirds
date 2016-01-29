@@ -91,6 +91,9 @@ void Bird::collisionAction(Sprite* s) {
 	fish->disableMovement();
 	fish->setDead();
 
+	//TODO: change depending on the kind of bird
+	ScoreBoard::getInstance().incrScore(500);
+
 	// kill fish sprite
 	if (birdLives == 0) {
 		cout << "BIRD DEAD!\n";

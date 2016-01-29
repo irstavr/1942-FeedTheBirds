@@ -60,6 +60,7 @@
 
 FIX:
 -replay button
+-pause button
 -when superAce flashes cannot kill birds or be killed from birds
 -action points
 -update points on Terrain Screen - ADD SCORE CLASS

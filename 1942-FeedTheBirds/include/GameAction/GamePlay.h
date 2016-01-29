@@ -2,6 +2,7 @@
 #define GP_H
 
 #include "..\GameLogic\GameLogic.h"
+#include "..\GameLogic\ScoreBoard.h"
 #include "..\Terrain\TerrainStartScreen.h"
 #include "..\Terrain\Terrain.h"
 #include "..\Utilities\Utilities.h"

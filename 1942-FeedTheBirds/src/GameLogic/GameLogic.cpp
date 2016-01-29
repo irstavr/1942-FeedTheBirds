@@ -7,12 +7,10 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 					  FrameRangeAnimation *deathAnimation,
 					  FrameRangeAnimator *deathAnimator,
 					  MovingPathAnimation* loopAnimation,
-					  MovingPathAnimator* loopAnimator
-						):
-	gameRunning(true),
-	highScore(0) {
+					  MovingPathAnimator* loopAnimator) {
+	gameRunning = true;
+	superAceKilled = false;
 	profile = new PlayerProfile(std::make_pair(0,0));
-
 
 	birds = new vector<Bird*>();
 	superAce = new SuperAce(profile,
@@ -31,17 +29,11 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 							loopAnimator,
 		                    this->birds);
 
-
-	/*explosion = new Sprite(superAce->x, superAce->y,
-		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("bambam"));
-	deathAnimator->start(explosion, deathAnimation, getCurrTime());
-	AnimatorHolder::markAsRunning(deathAnimator);*/
 }
 
 GameLogic::~GameLogic() {
-	gameRunning = 0;
-	superAceKilled = 1;
-	highScore = 0;
+	gameRunning = false;
+	superAceKilled = true;
 }
 
 Bird* GameLogic::createBird(Dim _x, Dim _y, int birdLives,

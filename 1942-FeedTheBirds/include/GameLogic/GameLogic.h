@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "ScoreBoard.h"
 #include "PlayerProfile.h"
 #include "..\Sprites\Sprite.h"
 #include "..\Objects\Items\Fish.h"
@@ -17,35 +18,28 @@ public:
 	PlayerProfile* profile;
 	SuperAce* superAce;
 	Sprite* explosion;
+	ScoreBoard* scoreBoard;
 
-public:
+	bool superAceKilled, gameRunning;
 	GameLogic(FrameRangeAnimation *takeOffAnimation,
-				FrameRangeAnimator *takeOffAnimator,
-				FrameRangeAnimation *landingAnimation,
-				FrameRangeAnimator *landingAnimator,
-				FrameRangeAnimation *deathAnimation,
-				FrameRangeAnimator *deathAnimator,
-				MovingPathAnimation* loopAnimation,
-				MovingPathAnimator* loopAnimator);
+			FrameRangeAnimator *takeOffAnimator,
+			FrameRangeAnimation *landingAnimation,
+			FrameRangeAnimator *landingAnimator,
+			FrameRangeAnimation *deathAnimation,
+			FrameRangeAnimator *deathAnimator,
+			MovingPathAnimation* loopAnimation,
+			MovingPathAnimator* loopAnimator);
 	~GameLogic();
-
-
-	int height, width, superAceKilled;
-	bool gameRunning;
-	
-	Points highScore;
-
-	/*solve all the outrange stuff*/
-	void solveOutRange();
-	/*solve all the collision stuff*/
-	int solveCollision();
-	/*return if the game is still running*/
-	bool isRunning() const;
-	void clearUp();
 
 	Bird* createBird(Dim _x, Dim _y, int birdLives, char* film,
 					FrameRangeAnimation *flyAnimation,
 					FrameRangeAnimator *flyAnimator);
+private:
+	/*solve all the collision stuff*/
+	int solveCollision();
+	/*return if the game is still running*/
+	bool isRunning() const;
+
 };
 
 #endif

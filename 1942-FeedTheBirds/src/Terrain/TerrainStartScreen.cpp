@@ -43,5 +43,4 @@ void TerrainStartScreen::drawBackground() {
 	al_draw_text(font3, grey, 310, 310, ALLEGRO_ALIGN_CENTER, "Irini");
 	al_draw_text(font3, grey, 310, 340, ALLEGRO_ALIGN_CENTER, "Eleni");
 	al_draw_text(font3, grey, 310, 370, ALLEGRO_ALIGN_CENTER, "Nikos");
-	
 }

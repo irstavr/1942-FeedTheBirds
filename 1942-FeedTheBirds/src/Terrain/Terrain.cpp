@@ -43,14 +43,16 @@ void Terrain::drawBackground(int highscore, int score, int lives, int loops) {
 	al_draw_text(font1, bright_green, 510, 10, ALLEGRO_ALIGN_CENTER, "High Score ");
 	al_draw_text(font1, bright_green, 700, 10, ALLEGRO_ALIGN_CENTER, to_string(highscore).c_str());
 
-	int bitWidth = al_get_bitmap_width(remainingLivesImage);
+	int livesImgWidth = al_get_bitmap_width(remainingLivesImage);
 
 	for (int i = 0; i < lives; i++) {
-		al_draw_scaled_bitmap(remainingLivesImage, 0, 0, bitWidth, bitWidth, 20+(i*71), 600, 70, 70, 0);
+		al_draw_scaled_bitmap(remainingLivesImage, 0, 0, livesImgWidth, livesImgWidth, 20+(i*71), 600, 70, 70, 0);
 	}
 
-	// change PHOTO for loops
+	// TODO: change PHOTO for loops
+	int loopsImgWidth = al_get_bitmap_width(remainingLivesImage);
+
 	for (int j = 0; j < loops; j++) {
-		al_draw_scaled_bitmap(remainingLivesImage, 0, 0, bitWidth, bitWidth, 1200-(j*71), 600, 70, 70, 0);
+		al_draw_scaled_bitmap(remainingLivesImage, 0, 0, loopsImgWidth, loopsImgWidth, 1200-(j*71), 600, 70, 70, 0);
 	}
 }

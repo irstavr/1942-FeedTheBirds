@@ -7,6 +7,7 @@
 #include "..\Items\Fish.h"
 #include "..\..\GameAction\CollisionChecker.h"
 #include "..\..\GameLogic\PlayerProfile.h"
+#include "..\..\GameLogic\ScoreBoard.h"
 
 typedef vector<BirdDropping*> DROPPINGS;
 
