@@ -100,5 +100,4 @@ void Bird::collisionAction(Sprite* s) {
 		leaveScreen();
 		this->isAlive = false;
 	}
-
 }

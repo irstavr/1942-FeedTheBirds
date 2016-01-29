@@ -21,7 +21,8 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 		deathAnimator(_deathAnimator),
 		loopAnimation(_loopAnimation),
 		loopAnimator(_loopAnimator),
-		birds(_birds)
+		birds(_birds),
+		film(film)
 {
 	isDead = false;
 	isInvincible = false;
@@ -33,27 +34,27 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("bambam"));
 	this->explosion->setVisibility(false);
 
-	this->sf1 = new SideFighter(
-		this->x, this->y-110, 
-		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("sidefighter"),
-		new FrameRangeAnimation(1, 3, 0, 0, 200, false, 21),
-		new FrameRangeAnimator(),
-		new FrameRangeAnimation(1, 3, 0, 0, 200, false, 22),
-		new FrameRangeAnimator(),
-		new FrameRangeAnimation(1, 6, 0, 0, 200, false, 23),
-		new FrameRangeAnimator(), 
-		this->fishes);
+	this->sf1 = new SideFighter(this->x, this->y-110, 
+								(AnimationFilm*)
+									AnimationFilmHolder::getSingleton()
+									->getFilm("sidefighter"),
+								new FrameRangeAnimation(1, 3, 0, 0, 200, false, 21),
+								new FrameRangeAnimator(),
+								new FrameRangeAnimation(1, 3, 0, 0, 200, false, 22),
+								new FrameRangeAnimator(),
+								new FrameRangeAnimation(1, 6, 0, 0, 200, false, 23),
+								new FrameRangeAnimator(), 
+								this->fishes);
 
-	this->sf2 = new SideFighter(
-		this->x, this->y+110, 
-		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("sidefighter"), 
-		new FrameRangeAnimation(1, 3, 0, 0, 200, false, 24),
-		new FrameRangeAnimator(),
-		new FrameRangeAnimation(1, 3, 0, 0, 200, false, 25),
-		new FrameRangeAnimator(),
-		new FrameRangeAnimation(1, 6, 0, 0, 200, false, 26),
-		new FrameRangeAnimator(), 
-		this->fishes);
+	this->sf2 = new SideFighter(this->x, this->y+110, 
+								(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("sidefighter"), 
+								new FrameRangeAnimation(1, 3, 0, 0, 200, false, 24),
+								new FrameRangeAnimator(),
+								new FrameRangeAnimation(1, 3, 0, 0, 200, false, 25),
+								new FrameRangeAnimator(),
+								new FrameRangeAnimation(1, 6, 0, 0, 200, false, 26),
+								new FrameRangeAnimator(), 
+								this->fishes);
 
 	injuredAnimation = new FlashingAnimation(10, 200, 200, 0);
 	injuredAnimator = new FlashingAnimator();
@@ -61,7 +62,7 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 }
 
 SuperAce::~SuperAce(void) {
-	isInvincible = true;
+	isInvincible = false;
 	isShooting = false;
 	isDead = true;
 }
@@ -109,6 +110,16 @@ void SuperAce::twist(void) {
 	}
 }
 
+void SuperAce::startTakeOff(void) {
+	takeOffAnimator->start(this, takeOffAnimation, getCurrTime());
+	AnimatorHolder::markAsRunning(takeOffAnimator);
+}
+
+void SuperAce::startLanding(void) {
+	landAnimator->start(this, landAnimation, getCurrTime());
+	AnimatorHolder::markAsRunning(landAnimator);
+}
+
 void SuperAce::shoot(vector<Bird*>* birds) {
 	// Fish (aka. bullets)
 	if (!isInvincible) {
@@ -116,12 +127,12 @@ void SuperAce::shoot(vector<Bird*>* birds) {
 		MovingAnimator* bulletAnimator = new MovingAnimator();
 
 		AnimatorHolder::animRegister(bulletAnimator);
-		Fish* fish = new Fish(x + 50, y-5,
-			(AnimationFilm*)
-			AnimationFilmHolder::getSingleton()->
-			getFilm("doubleFish"),
-			bulletAnimation,
-			bulletAnimator);
+		Fish* fish = new Fish(x + 20, y-40,
+								(AnimationFilm*)
+									AnimationFilmHolder::getSingleton()->
+									getFilm("doubleFish"),
+								bulletAnimation,
+								bulletAnimator);
 		fishes->push_back(fish);
 		fish->startMoving();
 

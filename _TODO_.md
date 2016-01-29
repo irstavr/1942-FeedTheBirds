@@ -59,13 +59,12 @@
     
 
 FIX:
--replay button
--pause button
+-flip bird when leaving screen
 -when superAce flashes cannot kill birds or be killed from birds
 -action points
--update points on Terrain Screen - ADD SCORE CLASS
 -moving path animator na exei kai frame range ? 
 -add AUDIO
 -change Bird constructor ---> add also birdSpeed (every category has diff delay speed ==> CHECK MOVING PATH)
 -PowsHolder ??
 -terrain ending + land in animation
+-add id on birds --> in order to diff the scores we get when we kill diff kinds of birds

@@ -34,24 +34,24 @@ public:
 	void moveLeft();
 	void moveRight();
 	void twist(void);
-	//virtual void move(int dx, int dy);
 	void startLanding(void);
 	void startTakeOff(void);
-	//void removeLife(void);
-	//void addLife(void);
-	unsigned int getLives(void);
-	//virtual void collisionAction(Sprite *s);
 	void die(void);
 	void explode(void);
 	static bool deathCompleted(void);
 	bool isSuperAceDead();
+
 	void setInvincibility(bool _inv) { isInvincible = _inv; };
+
 	void displayAll();
 	virtual void collisionAction(Sprite* s);
 	void injured();
 	void startFlashing(void);
 	void stopFlashing(void);
 	void fetchSideFighters();
+	FrameRangeAnimation *takeOffAnimation;
+	FrameRangeAnimator *takeOffAnimator;
+	AnimationFilm* film;
 
 private:
 	vector<Bird*> *birds;
@@ -71,8 +71,8 @@ private:
 
 	PlayerProfile* playerProfile;
 	Sprite* explosion;
-	FrameRangeAnimation *takeOffAnimation, *landAnimation, *deathAnimation;
-	FrameRangeAnimator *takeOffAnimator, *landAnimator, *deathAnimator;
+	FrameRangeAnimation *landAnimation, *deathAnimation;
+	FrameRangeAnimator *landAnimator, *deathAnimator;
 	FlashingAnimation *flashAnimation;
 	FlashingAnimator *flashAnimator;
 	TickAnimation *tickAnimation;

@@ -11,7 +11,7 @@ void FrameRangeAnimator::start(Sprite* s, FrameRangeAnimation* a, unsigned long 
 	anim = a;
 	lastTime = t;
 	state = ANIMATOR_RUNNING;
-	cout << "startFrame= " << anim->getStartFrame() << "\n";
+	//cerr << "startFrame= " << anim->getStartFrame() << "\n";
 	sprite->setFrame(currFrame = anim->getStartFrame());
 }
 
@@ -29,8 +29,8 @@ void FrameRangeAnimator::progress (unsigned long currTime) {
 		if (currFrame > anim->getEndFrame())
 			currFrame = anim->getStartFrame();
 		else {
-			//cout << currFrame << "\n"; 
-			//cout << anim->getId()<< ": " << (int) currFrame << endl;
+			//cerr << "currFrame = " << currFrame << "\n"; 
+			//cerr << "anim->getId() = " << anim->getId()<< ": " << (int) currFrame << endl;
 			sprite->move(anim->getDx(), anim->getDy());
 			sprite->setFrame(currFrame);
 			lastTime += anim->getDelay();
