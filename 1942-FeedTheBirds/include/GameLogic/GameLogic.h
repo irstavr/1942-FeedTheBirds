@@ -43,7 +43,7 @@ public:
 	bool isRunning() const;
 	void clearUp();
 
-	void createBird(Dim _x, Dim _y, char* film,
+	Bird* createBird(Dim _x, Dim _y, char* film,
 		FrameRangeAnimation *flyAnimation,
 		FrameRangeAnimator *flyAnimator);
 };

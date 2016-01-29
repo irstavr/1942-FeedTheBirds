@@ -5,7 +5,7 @@ using namespace std;
 AnimationFilmHolder *AnimationFilmHolder::animationFH = NULL;
 
 AnimationFilmHolder::AnimationFilmHolder(const char* path) {
-	char buff[1412], ch = ' ', bitmap[50], bboxes[50], id[50];
+	char buff[1412], ch = ' ', bitmap[500], bboxes[500], id[500];
 	int frames;
 	BitmapLoader bitmapLoader;
 	ifstream cfg(path);

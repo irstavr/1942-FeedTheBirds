@@ -5,7 +5,7 @@
 
 typedef signed char	offset_t;
 typedef unsigned short delay_t;
-typedef unsigned short animid_t;
+typedef unsigned int animid_t;
 
 class Animation {
 

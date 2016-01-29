@@ -13,6 +13,7 @@
 #include "..\Animator\MovingPathAnimator.h"
 #include "..\Animator\AnimatorHolder.h"
 #include "..\Objects\Characters\SuperAce.h"
+#include "AI.h"
 #include "InputManager.h"
 #include "CollisionChecker.h"
 
@@ -45,6 +46,7 @@ private:
 	const int windowHeight;
 	const int windowWidth;
 
+	AI *ai;
 	Terrain* terrain;
 
 	/* Allegro initialization*/

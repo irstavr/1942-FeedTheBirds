@@ -408,12 +408,7 @@ void GamePlay::displayStartScreen(unsigned long now) {
 
 void GamePlay::checkActionPoints() {
 	//cout << "terrainX = "<< Terrain::getInstance().getTerrainX()<<" \n";
-	if (terrain->getTerrainX() == 100) {
-		currentGame->createBird(1000, 400, "bonusBird", flyAnimation, flyAnimator);
-		currentGame->createBird(1200, 400, "bonusBird", flyAnimation->clone(12), flyAnimator->clone());
-		currentGame->createBird(800, 400, "bonusBird", flyAnimation->clone(10), flyAnimator->clone());
-		cerr << "actionPointTriggered \n";
-	}
+	ai->eventAtX(this->terrain->getTerrainX());
 }
 
 void GamePlay::pauseGame(unsigned long now) {
@@ -470,6 +465,7 @@ void GamePlay::startNewGame() {
 								loopAnimator);
 
 	terrain = new Terrain();
+	ai = new AI(currentGame, flyAnimator, flyAnimation);
 	displayMainScreen(getCurrTime());
 	
 }
