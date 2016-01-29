@@ -1,13 +1,14 @@
 #include "..\..\..\include\Objects\Characters\Bird.h"
 
-Bird::Bird(Dim _x, Dim _y, AnimationFilm* film,
+Bird::Bird(Dim _x, Dim _y, int birdLives,
+			AnimationFilm* film,
 			FrameRangeAnimation *_flyAnimation,
 			FrameRangeAnimator *_flyAnimator) :
-			Sprite(_x, _y, film),
-			flyAnimation(_flyAnimation),
-	flyAnimator(_flyAnimator){
-	birdLives = 2; //TODO: change
-	isAlive = true;
+		Sprite(_x, _y, film),
+		flyAnimation(_flyAnimation),
+		flyAnimator(_flyAnimator),
+		birdLives(birdLives),
+		isAlive(true) {
 	droppings = new vector<BirdDropping*>();
 }
 

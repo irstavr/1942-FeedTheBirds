@@ -13,9 +13,7 @@ AI::AI(GameLogic *_gameLogic, FrameRangeAnimator *_flyAnimator, FrameRangeAnimat
 	bonusBirds = new std::vector<Bird*>;
 }
 
-AI::~AI()
-{
-
+AI::~AI() {
 }
 
 void AI::eventAtX(int x)
@@ -34,20 +32,22 @@ void AI::eventAtX(int x)
 
 void AI::addBonusBird(int x, int y) {
 	this->bonusBirds->push_back(gameLogic->createBird(
-		x, y,
-		"bonusBird",
-		flyAnimation->clone(lastUsedID++),
-		flyAnimator->clone()));
+								x, y,
+								1,	//bird lives
+								"bonusBird",
+								flyAnimation->clone(lastUsedID++),
+								flyAnimator->clone()));
 }
 
 void AI::addLittleBird(int x, int y) {
 	std::ostringstream sstr;
 	sstr << "smallBird" << ((x + y) % 3)+1;
 	this->smallBirds->push_back(gameLogic->createBird(
-		x, y,
-		(char*)sstr.str().c_str(),
-		flyAnimation->clone(lastUsedID++),
-		flyAnimator->clone()));
+								x, y, 
+								2, //bird lives
+								(char*)sstr.str().c_str(),
+								flyAnimation->clone(lastUsedID++),
+								flyAnimator->clone()));
 }
 
 void AI::handleLittleBirds()

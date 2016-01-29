@@ -62,9 +62,9 @@ FIX:
 -replay button
 -when superAce flashes cannot kill birds or be killed from birds
 -action points
--update points on Terrain Screen
--moving path animator na exei kai frame range
+-update points on Terrain Screen - ADD SCORE CLASS
+-moving path animator na exei kai frame range ? 
 -add AUDIO
--change Bird constructor ---> add also birdLives (every category has diff num of lives)
+-change Bird constructor ---> add also birdSpeed (every category has diff delay speed ==> CHECK MOVING PATH)
 -PowsHolder ??
 -terrain ending + land in animation

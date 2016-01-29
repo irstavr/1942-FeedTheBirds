@@ -44,21 +44,21 @@ GameLogic::~GameLogic() {
 	highScore = 0;
 }
 
-Bird* GameLogic::createBird(Dim _x, Dim _y, char* filmId,
-	FrameRangeAnimation *flyAnimation,
-	FrameRangeAnimator *flyAnimator) {
-	Bird *bird = new Bird(_x, _y,
-		(AnimationFilm*)
-		AnimationFilmHolder::getSingleton()->
-		getFilm(filmId),
-		flyAnimation,
-		flyAnimator);
+Bird* GameLogic::createBird(Dim _x, Dim _y, int birdLives,
+							char* filmId,
+							FrameRangeAnimation *flyAnimation,
+							FrameRangeAnimator *flyAnimator) {
+	Bird *bird = new Bird(_x, _y, birdLives,
+						(AnimationFilm*)
+						AnimationFilmHolder::getSingleton()->
+						getFilm(filmId),
+						flyAnimation,
+						flyAnimator);
 
 	birds->push_back(bird);
-
 	bird->startMoving();
-	CollisionChecker::getInstance()->
-		registerCollisions(superAce, bird);
+
+	CollisionChecker::getInstance()->registerCollisions(superAce, bird);
 
 	////Na ginei sto AI!!
 	//BirdDropping* dropping = bird->shoot();

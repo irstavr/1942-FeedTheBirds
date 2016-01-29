@@ -12,7 +12,9 @@ typedef vector<BirdDropping*> DROPPINGS;
 
 class Bird : public Sprite {
 public:
-	Bird::Bird(Dim _x, Dim _y, AnimationFilm* film,
+	Bird::Bird(Dim _x, Dim _y, 
+				int birdLives,
+				AnimationFilm* film,
 				FrameRangeAnimation *_flyAnimation,
 				FrameRangeAnimator *_flyAnimator);
 	~Bird(void);
