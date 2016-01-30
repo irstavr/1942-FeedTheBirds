@@ -54,6 +54,7 @@ private:
 	void handleMediumBirds();
 	void handleBoss();
 	MovingPathAnimation * createSmallGreenBirdAnimation();
+	std::list<PathEntry>* createSmoothDiagonalPath(int dx, int dy);
 	std::list<PathEntry>* createCircularPath(int radius, int startAngle, int endAngle);
 };
 
