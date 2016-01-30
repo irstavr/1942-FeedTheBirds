@@ -62,8 +62,8 @@ FIX:
 -flip bird when leaving screen  -- DONE
 -moving path animator STA BIRDS  -- DONE
 -add AUDIO -- DONE!
+-change Bird constructor ---> add birdSpeed (every category has diff delay speed ==> CHECK MOVING PATH) -- DONE
+-add id on birds --> in order to diff the scores we get when we kill diff kinds of birds  -- DONE
 -when superAce flashes cannot kill birds or be killed from birds
 -action points on AI 
--change Bird constructor ---> add also birdSpeed (every category has diff delay speed ==> CHECK MOVING PATH)
--add id on birds --> in order to diff the scores we get when we kill diff kinds of birds  -- DONE
 -PowsHolder ??
