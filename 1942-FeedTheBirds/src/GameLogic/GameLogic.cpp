@@ -2,8 +2,8 @@
 
 GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 					  FrameRangeAnimator *takeOffAnimator,
-					  FrameRangeAnimation *landingAnimation,
-					  FrameRangeAnimator *landingAnimator,
+					  MovingPathAnimation *landingAnimation,
+					  MovingPathAnimator *landingAnimator,
 					  FrameRangeAnimation *deathAnimation,
 					  FrameRangeAnimator *deathAnimator,
 					  MovingPathAnimation* loopAnimation,

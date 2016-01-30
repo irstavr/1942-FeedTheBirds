@@ -187,14 +187,15 @@ void GamePlay::initGameEngine() {
 	// SuperAce
 	// add take off, landing, explosion(?) bbs
 	//int total_frames = AnimationFilmHolder::getSingleton()->getFilm("bonusBird")->getTotalFrames();
-	landingAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 1);
-	landingAnimator = new FrameRangeAnimator();
 	takeOffAnimation = new FrameRangeAnimation(1, 4, 80, 0, 300, false, 2);
 	takeOffAnimator = new FrameRangeAnimator();
-	deathAnimation = new FrameRangeAnimation(1, 6, 0, 0, 200, false, 4);
+	deathAnimation = new FrameRangeAnimation(1, 8, 0, 0, 150, false, 4);
 	deathAnimator = new FrameRangeAnimator();
 	flyAnimation = new FrameRangeAnimation(1, 3, 0, 0, 100, true, 3);
 	flyAnimator = new FrameRangeAnimator();
+
+	landingAnimation = createLandingAnimation();
+	landingAnimator = new MovingPathAnimator();
 
 	loopAnimation = createLoopAnimation();
 	loopAnimator = new MovingPathAnimator();
@@ -209,14 +210,24 @@ void GamePlay::initGameEngine() {
 	AudioHolder::changeToSound("intro");
 }
 
-/// loop animation for super ace when pressing A
+// loop animation for super ace when pressing A
+MovingPathAnimation* GamePlay::createLandingAnimation() {
+	std::list<PathEntry> paths;
+	paths.push_back(PathEntry(20, 0, false, false, 4, 50));
+	paths.push_back(PathEntry(20, 0, false, false, 3, 100));
+	paths.push_back(PathEntry(20, 0, false, false, 2, 100));
+	paths.push_back(PathEntry(20, 0, false, false, 1, 100));
+	return new MovingPathAnimation(paths, 1);
+}
+
+// loop animation for super ace when pressing A
 MovingPathAnimation* GamePlay::createLoopAnimation() {
 	std::list<PathEntry> paths;
-	paths.push_back(PathEntry(0,	0,  false,	false, 0, 50));
-	paths.push_back(PathEntry(50, -50, false,	false, 0, 100));
-	paths.push_back(PathEntry(-50, -50, true,	false, 0, 100));
-	paths.push_back(PathEntry(-50, 50, true,	false, 0, 100));
-	paths.push_back(PathEntry(50, 50 , false, false, 0, 100));
+	paths.push_back(PathEntry(0,	0,  false,	false, 3, 50));
+	paths.push_back(PathEntry(50, -50, false,	false, 3, 100));
+	paths.push_back(PathEntry(-50, -50, true,	false, 3, 100));
+	paths.push_back(PathEntry(-50, 50, true,	false, 3, 100));
+	paths.push_back(PathEntry(50, 50 , false, false, 3, 100));
 	return new MovingPathAnimation(paths, 1);
 }
 
@@ -336,11 +347,36 @@ void GamePlay::updateGameState() {
 		// update scores/lives/etc on the display
 		// etc 
 		//
+		checkAnimationFlags();
 		if (currentGame->superAce->isSuperAceDead()) {
 			gameOver(getCurrTime());
 		}
 		CollisionChecker::getInstance()->check();
 
+	}
+}
+
+void GamePlay::checkAnimationFlags() {
+	if (currentGame->superAce->isInvincible) {
+
+		cerr << "injuredTime = " << currentGame->superAce->injuredTime;
+		if (currentGame->superAce->injuredTime + 3000<getCurrTime()) {
+			currentGame->superAce->isInvincible = false;
+		}
+		cerr << "loopTime = " << currentGame->superAce->loopTime;
+		if (currentGame->superAce->loopTime + 2000<getCurrTime()) {
+			currentGame->superAce->isInvincible = false;
+		}
+		cerr << "explosionTime = " << currentGame->superAce->explosionTime;
+		if (currentGame->superAce->explosionTime + 1000<getCurrTime()) {
+			currentGame->superAce->setVisibility(false);
+		}
+	}
+
+	if (currentGame->superAce->isLanding) {
+		if (currentGame->superAce->landingTime + 1000<getCurrTime()) {
+			gameFinished();
+		}
 	}
 }
 
@@ -428,6 +464,17 @@ void GamePlay::gameOver(unsigned long now) {
 		gameOverButton->startFlashing();
 		ScoreBoard::getInstance().setScore(0);
 		currentGame->gameRunning = false;
+	}
+}
+
+void GamePlay::gameFinished() {
+	if (gameState != GAME_STATE_GAMEOVER) {
+		gameState = GAME_STATE_GAMEOVER;
+		// TODO
+		// show score
+		// win picture
+		// statistics
+		// new level ?
 	}
 }
 

@@ -26,8 +26,8 @@ void AI::eventAtX(int x)
 {
 	handleLittleBirds();
 	switch (x) {
-	case 10:
-		//gameLogic->superAce->startTakeOff();
+	case 1000:
+		gameLogic->superAce->startLanding();
 		break;
 	case 100:
 		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75, SCREEN_WINDOW_HEIGHT+10, "smallGreenBird", smallGreenBirdAnimation);

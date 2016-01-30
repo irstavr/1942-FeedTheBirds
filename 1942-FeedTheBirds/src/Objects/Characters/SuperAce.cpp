@@ -4,8 +4,8 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 					Dim _x, Dim _y, AnimationFilm* film,
 					FrameRangeAnimation *_takeOffAnimation,
 					FrameRangeAnimator *_takeOffAnimator,
-					FrameRangeAnimation *_landAnimation,
-					FrameRangeAnimator *_landAnimator,
+					MovingPathAnimation *_landAnimation,
+					MovingPathAnimator *_landAnimator,
 					FrameRangeAnimation *_deathAnimation,
 					FrameRangeAnimator *_deathAnimator,
 					MovingPathAnimation* _loopAnimation,
@@ -101,12 +101,14 @@ void SuperAce::twist(void) {
 	// (hes not already in a twist)
 	if (playerProfile->getLoops() != 0 && !this->isInvincible) {
 		this->setInvincibility(true);
+		// our trick ! oho ho ho
+		loopTime = getCurrTime();
+
 		playerProfile->decrLoops();
 
 		//moving path animation
 		loopAnimator->start(this, loopAnimation, getCurrTime());
 		AnimatorHolder::markAsRunning(loopAnimator);
-		this->setInvincibility(false);
 	}
 }
 
@@ -116,6 +118,11 @@ void SuperAce::startTakeOff(void) {
 }
 
 void SuperAce::startLanding(void) {
+	landingTime = getCurrTime();
+	this->isLanding = true;
+	this->disableMovement();
+	this->setX(100);
+	this->setY(285);
 	landAnimator->start(this, landAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(landAnimator);
 }
@@ -182,18 +189,21 @@ void SuperAce::displayAll() {
 		}
 		this->sf1->displayAll();
 		this->sf2->displayAll();
+	}
 		if (this->explosion->isSpriteVisible()) {
 			this->explosion->display(Rect(0, 0, 0, 0));
 		}
-	}
+	//}
 }
 
 void SuperAce::explode() {
 	cerr << "Explosion!\n";
+	this->setInvincibility(true);
+	explosionTime = getCurrTime();
+
 	this->disableMovement();
 	this->explosion->setX(this->x);
 	this->explosion->setY(this->y);
-	cerr << "Stuff is happening" << endl;
 	this->explosion->setVisibility(true);
 	this->deathAnimator->start(explosion, deathAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(this->deathAnimator);
@@ -205,7 +215,9 @@ void SuperAce::die() {
 }
 
 void SuperAce::injured(){
-	//isInvisible = true;
+	isInvincible = true;
+	injuredTime = getCurrTime();
+	cerr << "injuredTime = " << injuredTime;
 	startFlashing();
 }
 
@@ -255,7 +267,10 @@ void SuperAce::collisionAction(Sprite* s) {
 			// super ace loses a life
 			playerProfile->decrLives();
 			cerr << "lifes: " << playerProfile->getLives() << "\n";
-			
+
+			// flash super Ace
+			injured();
+
 			//check if game is over
 			if (playerProfile->getLives() == 0) {
 				// GameOver

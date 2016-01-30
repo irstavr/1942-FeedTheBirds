@@ -67,14 +67,14 @@ private:
 	unsigned int actionPoint;
 	FrameRangeAnimation *takeOffAnimation;
 	FrameRangeAnimator *takeOffAnimator;
-	FrameRangeAnimation *landingAnimation;
-	FrameRangeAnimator *landingAnimator;
 	FrameRangeAnimation *deathAnimation;
 	FrameRangeAnimator *deathAnimator;
 	FrameRangeAnimation *flyAnimation;
 	FrameRangeAnimator *flyAnimator;
 	MovingPathAnimation* loopAnimation;
 	MovingPathAnimator* loopAnimator;
+	MovingPathAnimation* landingAnimation;
+	MovingPathAnimator* landingAnimator;
 
 	/* initialization */
 	bool initAllegro();
@@ -86,9 +86,10 @@ private:
 	void cleanGamePlay();
 	/* inits engine of game - all classes instances */
 	void initGameEngine();
+	MovingPathAnimation * createLandingAnimation();
 	/* read from local input event queue */
 	void inputManagement(ALLEGRO_EVENT);
-
+	void checkAnimationFlags();
 	/* updates game state and starts music */
 	void startNewGame();
 	/* game loop logic */
@@ -116,6 +117,7 @@ private:
 	void pauseGame(unsigned long now);
 	void gameOver(unsigned long now);
 	void resumeGame(void);
+	void gameFinished(void);
 
 	MovingPathAnimation* createSmallBirdAnimation();
 	MovingPathAnimation *createLoopAnimation(void);

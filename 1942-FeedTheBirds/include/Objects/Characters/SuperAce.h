@@ -21,11 +21,7 @@ typedef vector<Fish*> FISHES;
 
 class SuperAce : public Sprite {
 public:
-	SuperAce::SuperAce(PlayerProfile* playerProfile, Dim _x, Dim _y, AnimationFilm* film,
-						FrameRangeAnimation *_takeOffAnimation, FrameRangeAnimator *_takeOffAnimator,
-						FrameRangeAnimation *_landAnimation, FrameRangeAnimator *_landAnimator,
-						FrameRangeAnimation *_deathAnimation, FrameRangeAnimator *_deathAnimator,
-						MovingPathAnimation* _loopAnimation, MovingPathAnimator* _loopAnimator, vector<Bird*> *_birds);
+	SuperAce(PlayerProfile * playerProfile, Dim _x, Dim _y, AnimationFilm * film, FrameRangeAnimation * _takeOffAnimation, FrameRangeAnimator * _takeOffAnimator, MovingPathAnimation * _landAnimation, MovingPathAnimator * _landAnimator, FrameRangeAnimation * _deathAnimation, FrameRangeAnimator * _deathAnimator, MovingPathAnimation * _loopAnimation, MovingPathAnimator * _loopAnimator, vector<Bird*>* _birds);
 	~SuperAce(void);
 
 	void shoot(vector<Bird*>* birds);
@@ -40,7 +36,13 @@ public:
 	void explode(void);
 	static bool deathCompleted(void);
 	bool isSuperAceDead();
+	unsigned long injuredTime;
+	unsigned long explosionTime;
+	unsigned long loopTime;
+	unsigned long landingTime;
 
+	bool isInvincible;
+	bool isLanding;
 	void setInvincibility(bool _inv) { isInvincible = _inv; };
 
 	void displayAll();
@@ -63,7 +65,6 @@ private:
 	SideFighter *sf2;
 
 	bool isDead;
-	bool isInvincible;
 	bool isShooting;
 	bool hasSideFighter;
 	bool hasQuadGun;
@@ -71,8 +72,8 @@ private:
 
 	PlayerProfile* playerProfile;
 	Sprite* explosion;
-	FrameRangeAnimation *landAnimation, *deathAnimation;
-	FrameRangeAnimator *landAnimator, *deathAnimator;
+	FrameRangeAnimation *deathAnimation;
+	FrameRangeAnimator *deathAnimator;
 	FlashingAnimation *flashAnimation;
 	FlashingAnimator *flashAnimator;
 	TickAnimation *tickAnimation;
@@ -81,6 +82,8 @@ private:
 	MovingPathAnimator* loopAnimator;
 	FlashingAnimation* injuredAnimation;
 	FlashingAnimator* injuredAnimator;
+	MovingPathAnimation* landAnimation;
+	MovingPathAnimator* landAnimator;
 
 	static void shootingCompleted(Animator*, void *closure);
 	static void invinsibilityEnded(Animator *, void *closure); 

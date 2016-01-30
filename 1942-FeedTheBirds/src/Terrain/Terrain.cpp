@@ -10,7 +10,7 @@ Terrain::Terrain() :
 {
 	bgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\sample_terrain.bmp");
 	remainingLivesImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\life.png");
-	remainingLoopsImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\life.png");
+	remainingLoopsImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\loop.png");
 
 	font1 = al_load_ttf_font(font_file, 28, 0);
 	font2 = al_load_ttf_font(font_file, -28, 0);
@@ -46,13 +46,13 @@ void Terrain::drawBackground(int score, int highscore, int lives, int loops) {
 	int livesImgWidth = al_get_bitmap_width(remainingLivesImage);
 
 	for (int i = 0; i < lives; i++) {
-		al_draw_scaled_bitmap(remainingLivesImage, 0, 0, livesImgWidth, livesImgWidth, 20+(i*71), 600, 70, 70, 0);
+		al_draw_scaled_bitmap(remainingLivesImage, 0, 0, livesImgWidth, livesImgWidth, 20+(i*61), 600, 60, 60, 0);
 	}
 
 	// TODO: change PHOTO for loops
-	int loopsImgWidth = al_get_bitmap_width(remainingLivesImage);
+	int loopsImgWidth = al_get_bitmap_width(remainingLoopsImage);
 
 	for (int j = 0; j < loops; j++) {
-		al_draw_scaled_bitmap(remainingLivesImage, 0, 0, loopsImgWidth, loopsImgWidth, 1200-(j*71), 600, 70, 70, 0);
+		al_draw_scaled_bitmap(remainingLoopsImage, 0, 0, loopsImgWidth, loopsImgWidth, 1220-(j*55), 600, 50, 50, 0);
 	}
 }
