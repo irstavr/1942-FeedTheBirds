@@ -30,75 +30,28 @@ void AI::eventAtX(int x)
 		//gameLogic->superAce->startTakeOff();
 		break;
 	case 100:
-		this->addSmallGreenBird(SCREEN_WINDOW_WIDTH*0.75, SCREEN_WINDOW_HEIGHT+10);
-		this->addSmallGreenBird(SCREEN_WINDOW_WIDTH*0.75+50, SCREEN_WINDOW_HEIGHT+60);
-		this->addSmallGreenBird(SCREEN_WINDOW_WIDTH*0.75+100, SCREEN_WINDOW_HEIGHT+110);
+		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75, SCREEN_WINDOW_HEIGHT+10, "smallGreenBird", smallGreenBirdAnimation);
+		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+50, SCREEN_WINDOW_HEIGHT+60, "smallYellowBird", smallYellowBirdAnimation);
+		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+100, SCREEN_WINDOW_HEIGHT+200, "smallRedBird", smallRedBirdAnimation);
 		break;
 	default:
 		break;
 	}
 }
 
-void AI::addBonusBird(int x, int y) {
-	this->bonusBirds->push_back(gameLogic->
-									createBird(x, y,
-												1,	//bird lives
-												"bonusBird",
-												flyAnimation->clone(lastUsedID++),
-												flyAnimator->clone()));
-}
-
-void AI::addSmallGreenBird(int x, int y) {
+void AI::addSmallBird(int x, int y, char* id, MovingPathAnimation* visVitalis) {
 	this->smallBirds->push_back(birdPathAnimator->clone());
 	this->smallBirds->back()->setHandleFrames(false);
 	AnimatorHolder::markAsRunning(this->smallBirds->back());
 	this->smallBirds->back()->start(
 		gameLogic->createBird(
 			x, y, 1,
-			"smallBird2",
+			id,
 			flyAnimation->clone(lastUsedID++),
 			flyAnimator->clone()),
-		smallGreenBirdAnimation->clone(lastUsedID++), getCurrTime());
+		visVitalis->clone(lastUsedID++), getCurrTime());
 }
 
-void AI::addSmallBlueBird(int x, int y) {
-	this->smallBirds->push_back(birdPathAnimator->clone());
-	this->smallBirds->back()->setHandleFrames(false);
-	AnimatorHolder::markAsRunning(this->smallBirds->back());
-	this->smallBirds->back()->start(
-		gameLogic->createBird(
-			x, y, 1,
-			"smallBird1",
-			flyAnimation->clone(lastUsedID++),
-			flyAnimator->clone()),
-		smallBlueBirdAnimation->clone(lastUsedID++), getCurrTime());
-}
-
-void AI::addSmallRedBird(int x, int y) {
-	this->smallBirds->push_back(birdPathAnimator->clone());
-	this->smallBirds->back()->setHandleFrames(false);
-	this->smallBirds->back()->start(
-		gameLogic->createBird(
-			x, y, 1,
-			"bonusBird",
-			flyAnimation->clone(lastUsedID++),
-			flyAnimator->clone()),
-		smallRedBirdAnimation->clone(lastUsedID++), getCurrTime());
-	AnimatorHolder::markAsRunning(this->smallBirds->back());
-}
-
-void AI::addSmallYellowBird(int x, int y) {
-	this->smallBirds->push_back(birdPathAnimator->clone());
-	this->smallBirds->back()->setHandleFrames(false);
-	AnimatorHolder::markAsRunning(this->smallBirds->back());
-	this->smallBirds->back()->start(
-		gameLogic->createBird(
-			x, y, 1,
-			"smallBird3",
-			flyAnimation->clone(lastUsedID++),
-			flyAnimator->clone()),
-		smallYellowBirdAnimation->clone(lastUsedID++), getCurrTime());
-}
 
 void AI::handleLittleBirds()
 {

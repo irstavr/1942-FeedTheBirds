@@ -42,22 +42,16 @@ private:
 
 	FrameRangeAnimation *flyAnimation;
 	FrameRangeAnimator *flyAnimator;
-	MovingPathAnimation *smallGreenBirdAnimation;
+
 	MovingPathAnimator *birdPathAnimator;
+	MovingPathAnimation *smallGreenBirdAnimation;
 	MovingPathAnimation *smallBlueBirdAnimation;
 	MovingPathAnimation *smallRedBirdAnimation;
 	MovingPathAnimation *smallYellowBirdAnimation;
 
 	unsigned int lastUsedID;
 
-	void addBonusBird(int x, int y);
-	void addSmallGreenBird(int x, int y);
-
-	void addSmallBlueBird(int x, int y);
-
-	void addSmallRedBird(int x, int y);
-
-	void addSmallYellowBird(int x, int y);
+	void addSmallBird(int x, int y, char * id, MovingPathAnimation * visVitalis);
 
 	void handleLittleBirds();
 	void handleMediumBirds();

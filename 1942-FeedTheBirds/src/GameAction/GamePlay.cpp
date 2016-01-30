@@ -186,7 +186,7 @@ void GamePlay::initGameEngine() {
 
 	// SuperAce
 	// add take off, landing, explosion(?) bbs
-	int total_frames = AnimationFilmHolder::getSingleton()->getFilm("bonusBird")->getTotalFrames();
+	//int total_frames = AnimationFilmHolder::getSingleton()->getFilm("bonusBird")->getTotalFrames();
 	landingAnimation = new FrameRangeAnimation(1, 3, 0, 0, 200, false, 1);
 	landingAnimator = new FrameRangeAnimator();
 	takeOffAnimation = new FrameRangeAnimation(1, 4, 80, 0, 300, false, 2);
