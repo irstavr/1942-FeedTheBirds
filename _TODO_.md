@@ -77,4 +77,7 @@ FIX:
 -action points on AI 
 -PowsHolder ??
 - New screen when player finishes game! 
+        show score
+        show winning picture
+        button for new game
 - New Levels ? 
