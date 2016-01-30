@@ -35,16 +35,22 @@ GameLogic::~GameLogic() {
 	superAceKilled = true;
 }
 
-Bird* GameLogic::createBird(Dim _x, Dim _y, int birdLives,
+Bird* GameLogic::createBird(Dim _x, Dim _y, 
+							BirdID birdID,
+							BirdLives birdLives,
+							BirdSpeed birdSpeed,
 							char* filmId,
 							FrameRangeAnimation *flyAnimation,
 							FrameRangeAnimator *flyAnimator) {
-	Bird *bird = new Bird(_x, _y, birdLives,
-						(AnimationFilm*)
-							AnimationFilmHolder::getSingleton()->
-								getFilm(filmId),
-									flyAnimation,
-									flyAnimator);
+	Bird *bird = new Bird(_x, _y, 
+						  birdID,
+						  birdLives,
+						  birdSpeed,
+						  (AnimationFilm*)
+								AnimationFilmHolder::getSingleton()->
+									getFilm(filmId),
+										flyAnimation,
+										flyAnimator);
 
 	birds->push_back(bird);
 	bird->startMoving();

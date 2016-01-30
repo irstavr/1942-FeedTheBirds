@@ -39,16 +39,18 @@ void AI::eventAtX(int x)
 	}
 }
 
-void AI::addSmallBird(int x, int y, char* id, MovingPathAnimation* visVitalis) {
+void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis) {
 	this->smallBirds->push_back(birdPathAnimator->clone());
 	this->smallBirds->back()->setHandleFrames(false);
 	AnimatorHolder::markAsRunning(this->smallBirds->back());
 	this->smallBirds->back()->start(
-		gameLogic->createBird(
-			x, y, 1,
-			id,
-			flyAnimation->clone(lastUsedID++),
-			flyAnimator->clone()),
+		gameLogic->createBird(x, y, 
+							littleBird,
+							littleBirdLives,
+							littleBirdSpeed, // TODO: TO BE USED on AI!
+							filmId,
+							flyAnimation->clone(lastUsedID++),
+							flyAnimator->clone()),
 		visVitalis->clone(lastUsedID++), getCurrTime());
 }
 
@@ -200,5 +202,3 @@ std::list<PathEntry>* AI::createCircularPath(int radius, int startAngle, int end
 	paths->push_back(PathEntry(0, 0, false, false, 0, 0));
 	return paths;
 }
-
-

@@ -1,13 +1,18 @@
 #include "..\..\..\include\Objects\Characters\Bird.h"
 
-Bird::Bird(Dim _x, Dim _y, int birdLives,
+Bird::Bird(Dim _x, Dim _y, 
+			BirdID birdID, 
+			BirdLives birdLives,
+			BirdSpeed birdSpeed,
 			AnimationFilm* film,
 			FrameRangeAnimation *_flyAnimation,
 			FrameRangeAnimator *_flyAnimator) :
 		Sprite(_x, _y, film),
 		flyAnimation(_flyAnimation),
 		flyAnimator(_flyAnimator),
+		birdID(birdID),
 		birdLives(birdLives),
+		birdSpeed(birdSpeed),
 		isAlive(true) {
 	droppings = new vector<BirdDropping*>();
 }
@@ -30,8 +35,6 @@ BirdDropping* Bird::shoot() {
 	droppings->push_back(dropping);
 	dropping->startMoving();
 	return dropping;
-	//checker->registerCollisions(superAce, dropping);
-
 }
 
 void Bird::displayAll() {
@@ -46,21 +49,18 @@ void Bird::displayAll() {
 }
 
 void Bird::startMoving(void) {
-	fprintf(stdout, "startMoving -> Bird.cpp\n");
+	cerr << "startMoving -> Bird.cpp\n";
 	flyAnimator->start(this, flyAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(flyAnimator);
 }
 
 int Bird::getLives() {
-	return birdLives;
+	return this->birdLives;
 }
 
 void Bird::removeLife() {
-	birdLives--;
-}
-
-void Bird::createRoute() {
-
+	// force compiler to convert an int value to an enumerated value
+	this->birdLives = static_cast<BirdLives>(birdLives - 1);
 }
 
 void Bird::leaveScreen() {
@@ -76,12 +76,16 @@ bool Bird::isDead(void) {
 }
 
 void Bird::scare() {
-	birdLives = 0;
+	birdLives = static_cast<BirdLives>(0);
 	leaveScreen();
 	isAlive = false;
 }
 
-// called when Bird collides with Fish
+int Bird::getBirdID() {
+	return this->birdID;
+}
+
+// Called when Bird collides with Fish
 void Bird::collisionAction(Sprite* s) {
 	Fish* fish = (Fish*) s;
 	cerr << "COLLISION! fish with bird \n";
@@ -91,8 +95,15 @@ void Bird::collisionAction(Sprite* s) {
 	fish->disableMovement();
 	fish->setDead();
 
-	//TODO: change depending on the kind of bird
-	ScoreBoard::getInstance().incrScore(500);
+	if (birdID == littleBird) {
+		ScoreBoard::getInstance().incrScore(100);
+	}
+	else if (birdID == mediumBird) {
+		ScoreBoard::getInstance().incrScore(300);
+	}
+	else if (birdID == bossBird) {
+		ScoreBoard::getInstance().incrScore(1000);
+	}
 
 	// kill fish sprite
 	if (birdLives == 0) {
