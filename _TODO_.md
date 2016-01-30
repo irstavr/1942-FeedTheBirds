@@ -4,7 +4,7 @@
     -explosion -- DONE OK
     -loop -- DONE OK
     -flashing - otan xanei zwh  -- DONE! OK!
-   
+    
 2. Mikra Aeroplana
     1-2 fores purovoloun k feugoun
     ta rixnoume me 1 fish
@@ -52,18 +52,27 @@
 6. Arxh kai telos pistas
     scaling animator 
         beginning -- DONE
-        end 
+        end
 
 7. Options
     fps
+	
+8. Sounds
+	start sound
+	shootFish sound
+	birdTwitting
+	explosion
+	gameOver
+	loopSound
+	collisionSound
+    
 
 FIX:
-
--flip bird when leaving screen  -- DONE
--moving path animator STA BIRDS  -- DONE
--add AUDIO -- DONE!
+-flip bird when leaving screen
 -when superAce flashes cannot kill birds or be killed from birds
--action points on AI 
+-action points on AI
+-moving path animator STA BIRDS
+-add AUDIO
 -change Bird constructor ---> add also birdSpeed (every category has diff delay speed ==> CHECK MOVING PATH)
--add id on birds --> in order to diff the scores we get when we kill diff kinds of birds  -- DONE
 -PowsHolder ??
+-add id on birds --> in order to diff the scores we get when we kill diff kinds of birds
