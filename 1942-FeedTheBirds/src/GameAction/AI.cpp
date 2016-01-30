@@ -26,13 +26,13 @@ void AI::eventAtX(int x)
 {
 	handleLittleBirds();
 	switch (x) {
-	case 10:
-		//gameLogic->superAce->startTakeOff();
-		break;
 	case 100:
 		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75, SCREEN_WINDOW_HEIGHT+10, "smallGreenBird", smallGreenBirdAnimation);
 		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+50, SCREEN_WINDOW_HEIGHT+60, "smallYellowBird", smallYellowBirdAnimation);
 		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+100, SCREEN_WINDOW_HEIGHT+200, "smallRedBird", smallRedBirdAnimation);
+		break;
+	case 10000:	// terrain length minus something : P
+		//gameLogic->superAce->startLanding();
 		break;
 	default:
 		break;
@@ -179,6 +179,7 @@ std::list<PathEntry>* AI::createSmoothDiagonalPath(int dx, int dy) {//close enou
 	}
 	return paths;
 }
+
 std::list<PathEntry>* AI::createCircularPath(int radius, int startAngle, int endAngle) {
 	std::list<PathEntry> *paths= new std::list<PathEntry>;
 	int lastx, lasty, i;

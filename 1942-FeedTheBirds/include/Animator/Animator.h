@@ -27,8 +27,6 @@ public:
 
 	virtual void display(ALLEGRO_BITMAP* at) = 0;
 
-	//virtual enum animatorType_t getAnimatorType(void);
-
 protected:
 	unsigned long lastTime;
 	animatorstate_t	state;

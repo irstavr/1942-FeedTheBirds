@@ -67,6 +67,7 @@ void Bird::leaveScreen() {
 	flyAnimator->stop();
 	flyAnimation->setNewOffsets(5, -20);
 	flyAnimation->setDelay(50);
+	this->setFlipH(true);
 	startMoving();
 }
 
@@ -74,8 +75,7 @@ bool Bird::isDead(void) {
 	return !isAlive;
 }
 
-void Bird::scare()
-{
+void Bird::scare() {
 	birdLives = 0;
 	leaveScreen();
 	isAlive = false;

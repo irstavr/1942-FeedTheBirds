@@ -88,10 +88,3 @@ void AnimatorHolder::resume(void) {
 	}
 	paused.clear();
 }
-
-/* void AnimatorHolder::display(ALLEGRO_BITMAP* at) {
-
-	for (unsigned int i = 0; i<running.size(); ++i)
-		running[i]->display(at);
-}
-*/
