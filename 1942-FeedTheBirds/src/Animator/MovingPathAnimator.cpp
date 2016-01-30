@@ -7,6 +7,7 @@ MovingPathAnimator::MovingPathAnimator(void) :
 	anim((MovingPathAnimation*)0), 
 	currFrame(0xFF),
 	currIndex(0) {
+	handleFrames = true;
 }
 
 void MovingPathAnimator::start(Sprite* s, MovingPathAnimation* a, unsigned long t) {
@@ -21,13 +22,22 @@ void MovingPathAnimator::start(Sprite* s, MovingPathAnimation* a, unsigned long 
 	sprite->setFrame(currFrame = currEntry->frame);
 }
 
+MovingPathAnimator * MovingPathAnimator::clone() const
+{
+	return new MovingPathAnimator();
+}
+
+void MovingPathAnimator::setHandleFrames(bool b)
+{
+	this->handleFrames = b;
+}
+
 void MovingPathAnimator::progress(unsigned long currTime) {
 
 	while (currTime > lastTime && currTime - lastTime >= currEntry->delay) {
-		//sprite->move(currEntry->dx, currEntry->dy);
 		sprite->setFlipH(currEntry->h_flip);
 		sprite->setFlipV(currEntry->v_flip);
-		sprite->setFrame(currEntry->frame);
+		if(handleFrames) sprite->setFrame(currEntry->frame);
 		sprite->move(currEntry->dx, currEntry->dy);
 		lastTime += currEntry->delay;
 		++currEntry;

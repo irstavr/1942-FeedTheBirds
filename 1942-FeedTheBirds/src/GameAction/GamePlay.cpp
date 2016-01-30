@@ -193,7 +193,7 @@ void GamePlay::initGameEngine() {
 	takeOffAnimator = new FrameRangeAnimator();
 	deathAnimation = new FrameRangeAnimation(1, 6, 0, 0, 200, false, 4);
 	deathAnimator = new FrameRangeAnimator();
-	flyAnimation = new FrameRangeAnimation(1, 3, -10, -10, 100, true, 3);
+	flyAnimation = new FrameRangeAnimation(1, 3, 0, 0, 100, true, 3);
 	flyAnimator = new FrameRangeAnimator();
 
 	loopAnimation = createLoopAnimation();
@@ -372,7 +372,7 @@ void GamePlay::displayMainScreen(unsigned long now) {
 
 		currentGame->superAce->displayAll();
 
-		for (int i = 0; i < currentGame->birds->size(); i++) {
+		for (size_t i = 0; i < currentGame->birds->size(); i++) {
 			currentGame->birds->at(i)->displayAll();
 		}
 		

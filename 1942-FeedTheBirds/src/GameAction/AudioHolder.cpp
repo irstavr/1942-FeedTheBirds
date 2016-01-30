@@ -7,7 +7,7 @@ ALLEGRO_SAMPLE_ID* AudioHolder::sample_id;
 AudioHolder::AudioHolder(void) {}
 
 AudioHolder::~AudioHolder(void) {
-	for(int i=0; i<samples.size(); ++i)
+	for(size_t i=0; i<samples.size(); ++i)
 		al_destroy_sample(samples[i]);
 }
 

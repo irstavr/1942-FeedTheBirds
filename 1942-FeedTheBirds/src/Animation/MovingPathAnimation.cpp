@@ -23,6 +23,6 @@ void MovingPathAnimation::setPath(const std::list<PathEntry>& p) {
 	path.clear(); path = p;
 }
 
-Animation* MovingPathAnimation::clone(animid_t newId) const {
+MovingPathAnimation* MovingPathAnimation::clone(animid_t newId) const {
 	return new MovingPathAnimation(path, newId);
 }

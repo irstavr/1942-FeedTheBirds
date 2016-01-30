@@ -53,7 +53,7 @@ public:
 	std::list<PathEntry>::iterator getFirstPathEntry(void);
 	std::list<PathEntry>::iterator getLastPathEntry(void);
 	void setPath(const std::list<PathEntry>& p);
-	Animation* clone(animid_t newId) const;
+	MovingPathAnimation* clone(animid_t newId) const;
 };
 
 #endif

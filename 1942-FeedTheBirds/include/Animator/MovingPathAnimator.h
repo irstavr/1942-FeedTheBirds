@@ -11,11 +11,13 @@ class MovingPathAnimator : public Animator {
 	frame_t currFrame;
 	std::list<PathEntry>::iterator currEntry;
 	int currIndex;
+	bool handleFrames;
 
 public:
 	MovingPathAnimator(void);
 	~MovingPathAnimator() {}
 
+	void setHandleFrames(bool b);
 	void progress(unsigned long currTime);
 	void start(Sprite* s, MovingPathAnimation* a, unsigned long t);
 
@@ -34,6 +36,7 @@ public:
 
 	int getCurrIndex() { return currIndex; }
 	void setCurrIndex(int index) { currIndex = index; }
+	MovingPathAnimator* clone() const;
 };
 
 #endif
