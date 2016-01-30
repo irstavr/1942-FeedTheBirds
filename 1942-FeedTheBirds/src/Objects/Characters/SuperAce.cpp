@@ -106,7 +106,7 @@ void SuperAce::twist(void) {
 
 		playerProfile->decrLoops();
 
-		//moving path animation
+		// moving path animation
 		loopAnimator->start(this, loopAnimation, getCurrTime());
 		AnimatorHolder::markAsRunning(loopAnimator);
 	}

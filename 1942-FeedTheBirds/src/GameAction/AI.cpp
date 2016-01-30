@@ -26,29 +26,31 @@ void AI::eventAtX(int x)
 {
 	handleLittleBirds();
 	switch (x) {
-	case 1000:
-		gameLogic->superAce->startLanding();
-		break;
 	case 100:
 		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75, SCREEN_WINDOW_HEIGHT+10, "smallGreenBird", smallGreenBirdAnimation);
 		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+50, SCREEN_WINDOW_HEIGHT+60, "smallYellowBird", smallYellowBirdAnimation);
 		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+100, SCREEN_WINDOW_HEIGHT+200, "smallRedBird", smallRedBirdAnimation);
+		break;
+	case 1000:	// terrain length minus something : P
+		gameLogic->superAce->startLanding();
 		break;
 	default:
 		break;
 	}
 }
 
-void AI::addSmallBird(int x, int y, char* id, MovingPathAnimation* visVitalis) {
+void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis) {
 	this->smallBirds->push_back(birdPathAnimator->clone());
 	this->smallBirds->back()->setHandleFrames(false);
 	AnimatorHolder::markAsRunning(this->smallBirds->back());
 	this->smallBirds->back()->start(
-		gameLogic->createBird(
-			x, y, 1,
-			id,
-			flyAnimation->clone(lastUsedID++),
-			flyAnimator->clone()),
+		gameLogic->createBird(x, y, 
+							littleBird,
+							littleBirdLives,
+							littleBirdSpeed, // TODO: TO BE USED on AI!
+							filmId,
+							flyAnimation->clone(lastUsedID++),
+							flyAnimator->clone()),
 		visVitalis->clone(lastUsedID++), getCurrTime());
 }
 
@@ -179,6 +181,7 @@ std::list<PathEntry>* AI::createSmoothDiagonalPath(int dx, int dy) {//close enou
 	}
 	return paths;
 }
+
 std::list<PathEntry>* AI::createCircularPath(int radius, int startAngle, int endAngle) {
 	std::list<PathEntry> *paths= new std::list<PathEntry>;
 	int lastx, lasty, i;
@@ -199,5 +202,3 @@ std::list<PathEntry>* AI::createCircularPath(int radius, int startAngle, int end
 	paths->push_back(PathEntry(0, 0, false, false, 0, 0));
 	return paths;
 }
-
-
