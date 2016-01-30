@@ -103,7 +103,7 @@ void SuperAce::twist(void) {
 		this->setInvincibility(true);
 		playerProfile->decrLoops();
 
-		//moving path animation
+		// moving path animation
 		loopAnimator->start(this, loopAnimation, getCurrTime());
 		AnimatorHolder::markAsRunning(loopAnimator);
 		this->setInvincibility(false);

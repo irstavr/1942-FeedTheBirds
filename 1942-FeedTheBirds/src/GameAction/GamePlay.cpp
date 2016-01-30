@@ -212,11 +212,11 @@ void GamePlay::initGameEngine() {
 /// loop animation for super ace when pressing A
 MovingPathAnimation* GamePlay::createLoopAnimation() {
 	std::list<PathEntry> paths;
-	paths.push_back(PathEntry(0,	0,  false,	false, 0, 50));
-	paths.push_back(PathEntry(50, -50, false,	false, 0, 100));
-	paths.push_back(PathEntry(-50, -50, true,	false, 0, 100));
-	paths.push_back(PathEntry(-50, 50, true,	false, 0, 100));
-	paths.push_back(PathEntry(50, 50 , false, false, 0, 100));
+	paths.push_back(PathEntry(0,	0,  false,	false, 3, 50));
+	paths.push_back(PathEntry(50, -50, false,	false, 3, 250));
+	paths.push_back(PathEntry(-50, -50, true,	false, 3, 250));
+	paths.push_back(PathEntry(-50, 50, true,	false, 3, 250));
+	paths.push_back(PathEntry(50, 50 , false,	false, 3, 250));
 	return new MovingPathAnimation(paths, 1);
 }
 
