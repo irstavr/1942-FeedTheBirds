@@ -43,17 +43,29 @@ private:
 	FrameRangeAnimation *flyAnimation;
 	FrameRangeAnimator *flyAnimator;
 	MovingPathAnimation *smallGreenBirdAnimation;
-	MovingPathAnimator *smallGreenBirdAnimator;
+	MovingPathAnimator *birdPathAnimator;
+	MovingPathAnimation *smallBlueBirdAnimation;
+	MovingPathAnimation *smallRedBirdAnimation;
+	MovingPathAnimation *smallYellowBirdAnimation;
 
 	unsigned int lastUsedID;
 
 	void addBonusBird(int x, int y);
-	void addLittleBird(int x, int y);
+	void addSmallGreenBird(int x, int y);
+
+	void addSmallBlueBird(int x, int y);
+
+	void addSmallRedBird(int x, int y);
+
+	void addSmallYellowBird(int x, int y);
 
 	void handleLittleBirds();
 	void handleMediumBirds();
 	void handleBoss();
 	MovingPathAnimation * createSmallGreenBirdAnimation();
+	MovingPathAnimation * createSmallBlueBirdAnimation();
+	MovingPathAnimation * createSmallRedBirdAnimation();
+	MovingPathAnimation * createSmallYellowBirdAnimation();
 	std::list<PathEntry>* createSmoothDiagonalPath(int dx, int dy);
 	std::list<PathEntry>* createCircularPath(int radius, int startAngle, int endAngle);
 };

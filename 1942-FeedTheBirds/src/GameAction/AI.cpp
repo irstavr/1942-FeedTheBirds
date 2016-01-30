@@ -10,8 +10,13 @@ AI::AI(GameLogic *_gameLogic, FrameRangeAnimator* _flyAnimator, FrameRangeAnimat
 	mediumBirds = new std::vector<Bird*>;
 	largeBirds  = new std::vector<Bird*>;
 	bonusBirds  = new std::vector<Bird*>;
+
+	birdPathAnimator = new MovingPathAnimator();
+
 	smallGreenBirdAnimation = this->createSmallGreenBirdAnimation();
-	smallGreenBirdAnimator = new MovingPathAnimator();
+	smallBlueBirdAnimation = this->createSmallBlueBirdAnimation();
+	smallRedBirdAnimation = this->createSmallRedBirdAnimation();
+	smallYellowBirdAnimation = this->createSmallYellowBirdAnimation();
 }
 
 AI::~AI() {
@@ -25,9 +30,9 @@ void AI::eventAtX(int x)
 		//gameLogic->superAce->startTakeOff();
 		break;
 	case 100:
-		this->addLittleBird(SCREEN_WINDOW_WIDTH*0.75, SCREEN_WINDOW_HEIGHT+10);
-		this->addLittleBird(SCREEN_WINDOW_WIDTH*0.75+50, SCREEN_WINDOW_HEIGHT+60);
-		this->addLittleBird(SCREEN_WINDOW_WIDTH*0.75+100, SCREEN_WINDOW_HEIGHT+110);
+		this->addSmallGreenBird(SCREEN_WINDOW_WIDTH*0.75, SCREEN_WINDOW_HEIGHT+10);
+		this->addSmallGreenBird(SCREEN_WINDOW_WIDTH*0.75+50, SCREEN_WINDOW_HEIGHT+60);
+		this->addSmallGreenBird(SCREEN_WINDOW_WIDTH*0.75+100, SCREEN_WINDOW_HEIGHT+110);
 		break;
 	default:
 		break;
@@ -43,23 +48,56 @@ void AI::addBonusBird(int x, int y) {
 												flyAnimator->clone()));
 }
 
-void AI::addLittleBird(int x, int y) {
-	std::ostringstream sstr;
-	sstr << "smallBird" << ((x + y) % 3)+1;
-	
-	this->smallBirds->push_back(smallGreenBirdAnimator->clone());
+void AI::addSmallGreenBird(int x, int y) {
+	this->smallBirds->push_back(birdPathAnimator->clone());
 	this->smallBirds->back()->setHandleFrames(false);
 	AnimatorHolder::markAsRunning(this->smallBirds->back());
 	this->smallBirds->back()->start(
 		gameLogic->createBird(
 			x, y, 1,
-			(char*)sstr.str().c_str(),
+			"smallBird2",
 			flyAnimation->clone(lastUsedID++),
 			flyAnimator->clone()),
 		smallGreenBirdAnimation->clone(lastUsedID++), getCurrTime());
+}
 
-	
+void AI::addSmallBlueBird(int x, int y) {
+	this->smallBirds->push_back(birdPathAnimator->clone());
+	this->smallBirds->back()->setHandleFrames(false);
+	AnimatorHolder::markAsRunning(this->smallBirds->back());
+	this->smallBirds->back()->start(
+		gameLogic->createBird(
+			x, y, 1,
+			"smallBird1",
+			flyAnimation->clone(lastUsedID++),
+			flyAnimator->clone()),
+		smallBlueBirdAnimation->clone(lastUsedID++), getCurrTime());
+}
 
+void AI::addSmallRedBird(int x, int y) {
+	this->smallBirds->push_back(birdPathAnimator->clone());
+	this->smallBirds->back()->setHandleFrames(false);
+	this->smallBirds->back()->start(
+		gameLogic->createBird(
+			x, y, 1,
+			"bonusBird",
+			flyAnimation->clone(lastUsedID++),
+			flyAnimator->clone()),
+		smallRedBirdAnimation->clone(lastUsedID++), getCurrTime());
+	AnimatorHolder::markAsRunning(this->smallBirds->back());
+}
+
+void AI::addSmallYellowBird(int x, int y) {
+	this->smallBirds->push_back(birdPathAnimator->clone());
+	this->smallBirds->back()->setHandleFrames(false);
+	AnimatorHolder::markAsRunning(this->smallBirds->back());
+	this->smallBirds->back()->start(
+		gameLogic->createBird(
+			x, y, 1,
+			"smallBird3",
+			flyAnimation->clone(lastUsedID++),
+			flyAnimator->clone()),
+		smallYellowBirdAnimation->clone(lastUsedID++), getCurrTime());
 }
 
 void AI::handleLittleBirds()
@@ -95,6 +133,34 @@ void AI::handleBoss() {
 
 MovingPathAnimation* AI::createSmallGreenBirdAnimation() {
 	std::list<PathEntry> paths;
+	//todo appropriately
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.17, 180, 720));
+	return new MovingPathAnimation(paths, 0);
+}
+
+MovingPathAnimation* AI::createSmallBlueBirdAnimation() {
+	std::list<PathEntry> paths;
+	//todo appropriately
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.17, 180, 720));
+	return new MovingPathAnimation(paths, 0);
+}
+
+MovingPathAnimation* AI::createSmallRedBirdAnimation() {
+	std::list<PathEntry> paths;
+	//todo appropriately
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.17, 180, 720));
+	return new MovingPathAnimation(paths, 0);
+}
+
+MovingPathAnimation* AI::createSmallYellowBirdAnimation() {
+	std::list<PathEntry> paths;
+	//todo appropriately
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100));
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.17, 180, 720));
