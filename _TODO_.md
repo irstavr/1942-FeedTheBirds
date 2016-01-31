@@ -36,7 +36,7 @@
     apo to katw meros
     stamatane kapou pshla k arxizoun na kinountai pros ta plagia
     
-    ta prasina -> rixnoun 3 sfaires
+    ta prasina -> rixnoun 3 sfaires tautoxrona
                    gia na pesei 25 xtuphmata
     
     ta gkri -> +speed kai gia na pesoun 35 xtuphmata
@@ -67,17 +67,23 @@
 	collisionSound
     
 
-FIX:
--flip bird when leaving screen  -- DONE
--moving path animator STA BIRDS  -- DONE
--add AUDIO -- DONE!
--change Bird constructor ---> add birdSpeed (every category has diff delay speed ==> CHECK MOVING PATH) -- DONE
--add id on birds --> in order to diff the scores we get when we kill diff kinds of birds  -- DONE
--when superAce flashes cannot kill birds or be killed from birds -- DONE
--action points on AI 
--PowsHolder ??
+# FIX:
+- bug with flipping
+- bug with looping
+- add audio sounds
+- add birdFire on bird constructor -- DONE
+
+- AI
+    handle birds move
+    
+- PowerUp
+    - create power ups on terrain
+
+- Main window initial position on screen
+
 - New screen when player finishes game! 
-        show score
-        show winning picture
-        button for new game
-- New Levels ? 
+    show score
+    show winning picture
+    button for new game
+        
+- New Levels ?

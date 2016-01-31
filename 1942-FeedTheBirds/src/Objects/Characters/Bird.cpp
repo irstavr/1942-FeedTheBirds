@@ -4,6 +4,7 @@ Bird::Bird(Dim _x, Dim _y,
 			BirdID birdID, 
 			BirdLives birdLives,
 			BirdSpeed birdSpeed,
+			BirdFire birdFire,
 			AnimationFilm* film,
 			FrameRangeAnimation *_flyAnimation,
 			FrameRangeAnimator *_flyAnimator) :
@@ -13,6 +14,7 @@ Bird::Bird(Dim _x, Dim _y,
 		birdID(birdID),
 		birdLives(birdLives),
 		birdSpeed(birdSpeed),
+		birdFire(birdFire),
 		isAlive(true) {
 	droppings = new vector<BirdDropping*>();
 }
@@ -28,8 +30,8 @@ BirdDropping* Bird::shoot() {
 	AnimatorHolder::animRegister(bulletAnimator);
 	BirdDropping* dropping = new BirdDropping(x - 70, y - 30,
 											(AnimationFilm*)
-											AnimationFilmHolder::getSingleton()->
-											getFilm("birdshit"),
+												AnimationFilmHolder::getSingleton()->
+												getFilm("birdshit"),
 											bulletAnimation,
 											bulletAnimator);
 	droppings->push_back(dropping);
@@ -49,7 +51,7 @@ void Bird::displayAll() {
 }
 
 void Bird::startMoving(void) {
-	cerr << "startMoving -> Bird.cpp\n";
+	cerr << __FUNCTION__ << "\n";
 	flyAnimator->start(this, flyAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(flyAnimator);
 }
@@ -61,6 +63,12 @@ int Bird::getLives() {
 void Bird::removeLife() {
 	// force compiler to convert an int value to an enumerated value
 	this->birdLives = static_cast<BirdLives>(birdLives - 1);
+}
+
+// called when bird fires a bullshit
+void Bird::decrFire() {
+	// force compiler to convert an int value to an enumerated value
+	this->birdFire = static_cast<BirdFire>(birdFire - 1);
 }
 
 void Bird::leaveScreen() {
@@ -85,8 +93,9 @@ int Bird::getBirdID() {
 
 // Called when Bird collides with Fish
 void Bird::collisionAction(Sprite* s) {
-	Fish* fish = (Fish*) s;
 	cerr << "COLLISION! fish with bird \n";
+
+	Fish* fish = (Fish*) s;
 
 	removeLife();
 	fish->setVisibility(false);

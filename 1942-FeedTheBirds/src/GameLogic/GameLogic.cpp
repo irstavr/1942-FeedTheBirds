@@ -39,6 +39,7 @@ Bird* GameLogic::createBird(Dim _x, Dim _y,
 							BirdID birdID,
 							BirdLives birdLives,
 							BirdSpeed birdSpeed,
+							BirdFire birdFire,
 							char* filmId,
 							FrameRangeAnimation *flyAnimation,
 							FrameRangeAnimator *flyAnimator) {
@@ -46,6 +47,7 @@ Bird* GameLogic::createBird(Dim _x, Dim _y,
 						  birdID,
 						  birdLives,
 						  birdSpeed,
+						  birdFire,
 						  (AnimationFilm*)
 								AnimationFilmHolder::getSingleton()->
 									getFilm(filmId),
@@ -55,7 +57,8 @@ Bird* GameLogic::createBird(Dim _x, Dim _y,
 	birds->push_back(bird);
 	bird->startMoving();
 
-	CollisionChecker::getInstance()->registerCollisions(superAce, bird);
+	CollisionChecker::getInstance()->
+					registerCollisions(superAce, bird);
 
 	return bird;
 }

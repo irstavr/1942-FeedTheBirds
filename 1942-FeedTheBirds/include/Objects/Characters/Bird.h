@@ -1,13 +1,13 @@
 #ifndef _BIRD_H
 #define _BIRD_H
 
-#include "..\Items\BirdDropping.h"
-#include "..\..\Animator\FrameRangeAnimator.h"
 #include "..\..\Animation\AnimationFilmHolder.h"
-#include "..\Items\Fish.h"
 #include "..\..\GameAction\CollisionChecker.h"
+#include "..\..\Animator\FrameRangeAnimator.h"
 #include "..\..\GameLogic\PlayerProfile.h"
 #include "..\..\GameLogic\ScoreBoard.h"
+#include "..\Items\BirdDropping.h"
+#include "..\Items\Fish.h"
 
 typedef vector<BirdDropping*> DROPPINGS;
 
@@ -30,7 +30,6 @@ enum BirdLives {
 
 // TODO: to be used on AI 
 // TODO: change values
-//
 // Adds different action speed on every bird
 enum BirdSpeed {
 	littleBirdSpeed = 10,
@@ -40,12 +39,20 @@ enum BirdSpeed {
 	GreyBossSpeed
 };
 
+enum BirdFire {
+	littleBirdFire = 2,
+	mediumBirdFire = 8,
+	bossBirdFire   = 1000	//endless shooting on the middle of the screen
+};
+
 class Bird : public Sprite {
+
 public:
 	Bird::Bird(Dim _x, Dim _y,
 				BirdID birdID,
 				BirdLives birdLives,
 				BirdSpeed birdSpeed,
+				BirdFire birdFire,
 				AnimationFilm* film,
 				FrameRangeAnimation *_flyAnimation,
 				FrameRangeAnimator *_flyAnimator);
@@ -59,6 +66,7 @@ public:
 	void displayAll();
 	int getLives();
 	void removeLife(void);
+	void decrFire();
 	void leaveScreen(void);
 	void startMoving(void);
 	bool isDead(void);
@@ -67,10 +75,11 @@ public:
 	virtual void collisionAction(Sprite *s);
 
 private:
-
 	BirdID birdID;
 	BirdLives birdLives;
-	int birdSpeed;
+	BirdSpeed birdSpeed;
+	BirdFire birdFire;
+
 	bool releasesPowerUp;
 	bool isGrey;
 	bool isAlive;

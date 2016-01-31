@@ -43,15 +43,20 @@ void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitali
 	this->smallBirds->push_back(birdPathAnimator->clone());
 	this->smallBirds->back()->setHandleFrames(false);
 	AnimatorHolder::markAsRunning(this->smallBirds->back());
+
+	MovingPathAnimation* visVitalisCloned = visVitalis->clone(lastUsedID++);
+
 	this->smallBirds->back()->start(
-		gameLogic->createBird(x, y, 
-							littleBird,
-							littleBirdLives,
-							littleBirdSpeed, // TODO: TO BE USED on AI!
-							filmId,
-							flyAnimation->clone(lastUsedID++),
-							flyAnimator->clone()),
-		visVitalis->clone(lastUsedID++), getCurrTime());
+				gameLogic->createBird(x, y, 
+									littleBird,
+									littleBirdLives,
+									littleBirdSpeed, // TODO: TO BE USED on AI!
+									littleBirdFire,
+									filmId,
+									flyAnimation->clone(lastUsedID++),
+									flyAnimator->clone()),
+				visVitalisCloned, 
+				getCurrTime());
 }
 
 
@@ -72,6 +77,7 @@ void AI::handleLittleBirds()
 				)//Bird is within 20% of superAce's y
 			{
 				BirdDropping* dropping = bird->shoot();
+				bird->decrFire();
 				CollisionChecker::getInstance()->registerCollisions(gameLogic->superAce, dropping);
 			}
 		}

@@ -31,7 +31,14 @@ public:
 			MovingPathAnimator* loopAnimator);
 	~GameLogic();
 
-	Bird * createBird(Dim _x, Dim _y, BirdID birdID, BirdLives birdLives, BirdSpeed birdSpeed, char * filmId, FrameRangeAnimation * flyAnimation, FrameRangeAnimator * flyAnimator);
+	Bird * createBird(Dim _x, Dim _y, 
+					BirdID birdID, 
+					BirdLives birdLives, 
+					BirdSpeed birdSpeed, 
+					BirdFire birdFire,
+					char * filmId, 
+					FrameRangeAnimation * flyAnimation, 
+					FrameRangeAnimator * flyAnimator);
 
 private:
 	/*solve all the collision stuff*/
