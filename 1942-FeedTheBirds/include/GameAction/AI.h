@@ -56,7 +56,7 @@ private:
 	void handleMediumBirds();
 	void handleBoss();
 
-	MovingPathAnimation * createbigBirdAnimation();
+	MovingPathAnimation * createBigBirdAnimation();
 	MovingPathAnimation * createMediumBrownBirdAnimation();
 	MovingPathAnimation * createMediumGreenBirdAnimation();
 	MovingPathAnimation * createMediumYellowBirdAnimation();

@@ -111,10 +111,12 @@ void AI::handleBoss() {
 
 }
 
-MovingPathAnimation* AI::createbigBirdAnimation() {
+MovingPathAnimation* AI::createBigBirdAnimation() {
 	std::list<PathEntry> paths;
 	return new MovingPathAnimation(paths, 0);
 }
+
+//------------------------ Medium Birds -------------------------------------------------
 
 MovingPathAnimation* AI::createMediumBrownBirdAnimation() {
 	std::list<PathEntry> paths;
@@ -130,6 +132,8 @@ MovingPathAnimation* AI::createMediumYellowBirdAnimation() {
 	std::list<PathEntry> paths;
 	return new MovingPathAnimation(paths, 0);
 }
+
+//------------------------ Small Birds --------------------------------------------------
 
 MovingPathAnimation* AI::createSmallGreenBirdAnimation() {
 	std::list<PathEntry> paths;

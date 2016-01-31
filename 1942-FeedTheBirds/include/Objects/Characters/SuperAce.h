@@ -34,16 +34,12 @@ public:
 	void startTakeOff(void);
 	void die(void);
 	void explode(void);
-	static bool deathCompleted(void);
 	bool isSuperAceDead();
 	unsigned long injuredTime;
 	unsigned long explosionTime;
 	unsigned long loopTime;
 	unsigned long landingTime;
 
-	bool isInvincible;
-	bool isLanding;
-	void setInvincibility(bool _inv) { isInvincible = _inv; };
 
 	void displayAll();
 	virtual void collisionAction(Sprite* s);
@@ -54,6 +50,14 @@ public:
 	FrameRangeAnimation *takeOffAnimation;
 	FrameRangeAnimator *takeOffAnimator;
 	AnimationFilm* film;
+
+	bool isInvincible;
+	bool isLanding;
+	bool isInjured;
+	bool isLooping;
+	bool isExploding;
+
+	void setInvincibility(bool _inv) { isInvincible = _inv; };
 
 private:
 	vector<Bird*> *birds;
