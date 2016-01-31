@@ -10,7 +10,7 @@ AnimationFilm::AnimationFilm(ALLEGRO_BITMAP *b,
 }
 
 byte AnimationFilm::getTotalFrames(void) const { 
-	return boxes.size(); 
+	return (byte)boxes.size();
 }
 
 ALLEGRO_BITMAP* AnimationFilm::getBitmap(void) const { 

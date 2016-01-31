@@ -3,6 +3,13 @@
 
 #include "Animation.h"
 #include <list>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+
+#define PI 3.14159
+#define XforCircle(radius) sin(i*PI / 180)*radius 
+#define YforCircle(radius) cos(i*PI / 180)*radius
 
 typedef unsigned int frame_t;
 
@@ -44,6 +51,9 @@ struct PathEntry {
 		delay(_delay) {
 	};
 };
+
+std::list<PathEntry>* createSmoothDiagonalPath(int dx, int dy);
+std::list<PathEntry>* createCircularPath(int radius, int startAngle, int endAngle);
 
 class MovingPathAnimation : public Animation {
 	std::list<PathEntry> path;

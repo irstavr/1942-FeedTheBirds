@@ -8,20 +8,11 @@
 #include "..\Terrain\Terrain.h"
 #include "..\GameLogic\GameLogic.h"
 #include "..\Utilities\Utilities.h"
-#include <sstream>
-#include <algorithm>
-#include <string>
-#include <cstdlib>
-#include <cmath>
-#include <time.h>
 
 #define BASE_ID 10000
 #define PIXELS_PER_SECOND 1000
 #define YY (*it)->getY() - gameLogic->superAce->getY()
 #define XX (*it)->getX() - (gameLogic->superAce->getX()+200)
-#define PI 3.14159
-#define XforCircle(radius) sin(i*PI / 180)*radius 
-#define YforCircle(radius) cos(i*PI / 180)*radius
 
 class AI {
 
@@ -45,10 +36,17 @@ private:
 	FrameRangeAnimator *flyAnimator;
 
 	MovingPathAnimator *birdPathAnimator;
+
 	MovingPathAnimation *smallGreenBirdAnimation;
 	MovingPathAnimation *smallBlueBirdAnimation;
 	MovingPathAnimation *smallRedBirdAnimation;
 	MovingPathAnimation *smallYellowBirdAnimation;
+
+	MovingPathAnimation *mediumYellowBirdAnimation;
+	MovingPathAnimation *mediumGreenBirdAnimation;
+	MovingPathAnimation *mediumBrownBirdAnimation;
+
+	MovingPathAnimation *bigBirdAnimation;
 
 	unsigned int lastUsedID;
 
@@ -57,6 +55,7 @@ private:
 	void handleLittleBirds();
 	void handleMediumBirds();
 	void handleBoss();
+
 	MovingPathAnimation * createbigBirdAnimation();
 	MovingPathAnimation * createMediumBrownBirdAnimation();
 	MovingPathAnimation * createMediumGreenBirdAnimation();
@@ -65,8 +64,7 @@ private:
 	MovingPathAnimation * createSmallBlueBirdAnimation();
 	MovingPathAnimation * createSmallRedBirdAnimation();
 	MovingPathAnimation * createSmallYellowBirdAnimation();
-	std::list<PathEntry>* createSmoothDiagonalPath(int dx, int dy);
-	std::list<PathEntry>* createCircularPath(int radius, int startAngle, int endAngle);
+
 };
 
 #endif
