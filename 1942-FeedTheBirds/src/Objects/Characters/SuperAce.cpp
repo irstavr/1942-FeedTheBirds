@@ -128,7 +128,7 @@ void SuperAce::startLanding(void) {
 	this->isLanding = true;
 	this->landingTime = getCurrTime();
 	this->disableMovement();
-	this->setX(100);
+	this->setX(x);
 	this->setY(285);
 	landAnimator->start(this, landAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(landAnimator);

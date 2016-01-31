@@ -214,9 +214,9 @@ void GamePlay::initGameEngine() {
 MovingPathAnimation* GamePlay::createLandingAnimation() {
 	std::list<PathEntry> paths;
 	paths.push_back(PathEntry(20, 0, false, false, 4, 50));
-	paths.push_back(PathEntry(20, 0, false, false, 3, 100));
-	paths.push_back(PathEntry(20, 0, false, false, 2, 100));
-	paths.push_back(PathEntry(20, 0, false, false, 1, 100));
+	paths.push_back(PathEntry(40, 0, false, false, 3, 100));
+	paths.push_back(PathEntry(40, 0, false, false, 2, 100));
+	paths.push_back(PathEntry(40, 0, false, false, 1, 100));
 	return new MovingPathAnimation(paths, 1);
 }
 
