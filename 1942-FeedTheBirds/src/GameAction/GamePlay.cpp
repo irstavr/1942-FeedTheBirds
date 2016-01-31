@@ -238,6 +238,7 @@ void GamePlay::runMainLoop() {
 	while (gameState != GAME_STATE_FINISHED) {
 		currTime = getCurrTime();
 		al_wait_for_event(eventQueue, &alEvent);
+
 		/* read from local input event queue */
 		inputManagement(alEvent);
 		if (alEvent.timer.source == lpsTimer) {
@@ -245,7 +246,8 @@ void GamePlay::runMainLoop() {
 			updateGameState();
 		}
 		/* draw screen */
-		if(alEvent.timer.source==fpsTimer) render(currTime);
+		if(alEvent.timer.source==fpsTimer) 
+			render(currTime);
 	}
 }
 
