@@ -22,7 +22,14 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 		loopAnimation(_loopAnimation),
 		loopAnimator(_loopAnimator),
 		birds(_birds),
-		film(film)
+		film(film),
+		injuredTime(-1),
+		loopTime(-1),
+		explosionTime(-1),
+		isInjured(false),
+		isLooping(false),
+		isExploding(false),
+		isLanding(false)
 {
 	isDead = false;
 	isInvincible = false;
@@ -58,7 +65,6 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 
 	injuredAnimation = new FlashingAnimation(10, 200, 200, 0);
 	injuredAnimator = new FlashingAnimator();
-
 }
 
 SuperAce::~SuperAce(void) {
@@ -100,6 +106,7 @@ void SuperAce::twist(void) {
 	// and only if super ace is not invisible 
 	// (hes not already in a twist)
 	if (playerProfile->getLoops() != 0 && !this->isInvincible) {
+		this->isLooping = true;
 		this->setInvincibility(true);
 		// our trick ! oho ho ho
 		loopTime = getCurrTime();
@@ -118,8 +125,8 @@ void SuperAce::startTakeOff(void) {
 }
 
 void SuperAce::startLanding(void) {
-	landingTime = getCurrTime();
 	this->isLanding = true;
+	this->landingTime = getCurrTime();
 	this->disableMovement();
 	this->setX(100);
 	this->setY(285);
@@ -197,7 +204,8 @@ void SuperAce::displayAll() {
 }
 
 void SuperAce::explode() {
-	cerr << "Explosion!\n";
+	isExploding = true;
+
 	this->setInvincibility(true);
 	explosionTime = getCurrTime();
 
@@ -215,9 +223,10 @@ void SuperAce::die() {
 }
 
 void SuperAce::injured(){
-	isInvincible = true;
-	injuredTime = getCurrTime();
-	cerr << "injuredTime = " << injuredTime;
+	this->isInjured = true;
+	this->isInvincible = true;
+
+	this->injuredTime = getCurrTime();
 	startFlashing();
 }
 
@@ -250,14 +259,10 @@ void SuperAce::moveSideFighters(int dx, int dy)
 
 void SuperAce::collisionAction(Sprite* s) {
 	if (!isInvincible) {
-		cerr << "COLLISION! SUPER ACE!\n";
-		/*if (playerProfile->getLives() == 5) {
-			// GameOver
-			this->die();
-		}*/
 
 		// collision super ace with a bird
 		if (Bird* v = dynamic_cast<Bird*>(s)) {
+			cerr << "COLLISION! SUPER ACE with bird!\n";
 			// kill Bird
 			v->removeLife();
 			if (v->getLives() == 0) {
@@ -266,7 +271,6 @@ void SuperAce::collisionAction(Sprite* s) {
 
 			// super ace loses a life
 			playerProfile->decrLives();
-			cerr << "lifes: " << playerProfile->getLives() << "\n";
 
 			// flash super Ace
 			injured();
@@ -300,6 +304,8 @@ void SuperAce::collisionAction(Sprite* s) {
 	
 	// collision super ace with a POW POW
 	if (PowerUp* v = dynamic_cast<PowerUp*>(s)) {
+		cerr << "COLLISION! SUPER ACE with POW!\n";
+
 		if (!v->isExhausted()) {
 			switch (v->getType())
 			{

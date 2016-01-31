@@ -359,24 +359,30 @@ void GamePlay::updateGameState() {
 }
 
 void GamePlay::checkAnimationFlags() {
-	if (currentGame->superAce->isInvincible) {
 
-		cerr << "injuredTime = " << currentGame->superAce->injuredTime;
-		if (currentGame->superAce->injuredTime + 3000<getCurrTime()) {
+	if (currentGame->superAce->isInjured) {
+		if (currentGame->superAce->injuredTime + 3000 < getCurrTime()) {
 			currentGame->superAce->isInvincible = false;
+			currentGame->superAce->isInjured = false;
 		}
-		cerr << "loopTime = " << currentGame->superAce->loopTime;
-		if (currentGame->superAce->loopTime + 2000<getCurrTime()) {
+	}
+
+	if (currentGame->superAce->isLooping) {
+		if (currentGame->superAce->loopTime + 2000 < getCurrTime()) {
 			currentGame->superAce->isInvincible = false;
+			currentGame->superAce->isLooping = false;
 		}
-		cerr << "explosionTime = " << currentGame->superAce->explosionTime;
-		if (currentGame->superAce->explosionTime + 1000<getCurrTime()) {
+	}
+
+	if (currentGame->superAce->isExploding) {
+		if (currentGame->superAce->explosionTime + 1000 < getCurrTime()) {
 			currentGame->superAce->setVisibility(false);
+			currentGame->superAce->isExploding = false;
 		}
 	}
 
 	if (currentGame->superAce->isLanding) {
-		if (currentGame->superAce->landingTime + 1000<getCurrTime()) {
+		if (currentGame->superAce->landingTime + 1000 < getCurrTime()) {
 			gameFinished();
 		}
 	}
