@@ -354,7 +354,6 @@ void GamePlay::updateGameState() {
 			gameOver(getCurrTime());
 		}
 		CollisionChecker::getInstance()->check();
-
 	}
 }
 

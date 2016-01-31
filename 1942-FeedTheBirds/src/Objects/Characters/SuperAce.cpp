@@ -29,13 +29,13 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 		isInjured(false),
 		isLooping(false),
 		isExploding(false),
-		isLanding(false)
+		isLanding(false),
+		isDead(false),
+		isInvincible(false),
+		isShooting(false),
+		hasQuadGun(false)
 {
-	isDead = false;
-	isInvincible = false;
-	isShooting = false;
 	fishes = new vector<Fish*>();
-	hasQuadGun = false;
 
 	this->explosion = new Sprite(this->x-10, this->y,
 		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("bambam"));
@@ -68,9 +68,20 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 }
 
 SuperAce::~SuperAce(void) {
+	injuredTime = -1;
+	loopTime = -1;
+	explosionTime = -1;
+
+	isInjured = false;
+	isLooping = false;
+	isExploding = false;
+	isLanding = false;
 	isInvincible = false;
 	isShooting = false;
-	isDead = true;
+
+	hasQuadGun = false;
+
+	isDead = false;
 }
 
 void SuperAce::moveUp() {

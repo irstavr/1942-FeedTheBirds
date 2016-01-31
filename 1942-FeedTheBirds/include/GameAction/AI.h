@@ -21,16 +21,15 @@ public:
 	~AI();
 
 	void eventAtX(int x);
-	void startTakingOff();
 
 private:
 	GameLogic *gameLogic;
 
 	std::vector<Bird*> *birds;
 	std::vector<MovingPathAnimator*> *smallBirds;
-	std::vector<Bird*> *mediumBirds;
-	std::vector<Bird*> *largeBirds;
-	std::vector<Bird*> *bonusBirds;
+	std::vector<MovingPathAnimator*> *mediumBirds;
+	std::vector<MovingPathAnimator*> *largeBirds;
+	std::vector<MovingPathAnimator*> *bonusBirds;
 
 	FrameRangeAnimation *flyAnimation;
 	FrameRangeAnimator *flyAnimator;
@@ -51,6 +50,7 @@ private:
 	unsigned int lastUsedID;
 
 	void addSmallBird(int x, int y, char * id, MovingPathAnimation * visVitalis);
+	void addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis);
 
 	void handleLittleBirds();
 	void handleMediumBirds();
