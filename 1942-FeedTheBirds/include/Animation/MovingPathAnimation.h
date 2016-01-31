@@ -52,8 +52,8 @@ struct PathEntry {
 	};
 };
 
-std::list<PathEntry>* createSmoothDiagonalPath(int dx, int dy);
-std::list<PathEntry>* createCircularPath(int radius, int startAngle, int endAngle);
+std::list<PathEntry>* createSmoothDiagonalPath(int dx, int dy, delay_t delay);
+std::list<PathEntry>* createCircularPath(int radius, int startAngle, int endAngle, delay_t delay);
 
 class MovingPathAnimation : public Animation {
 	std::list<PathEntry> path;

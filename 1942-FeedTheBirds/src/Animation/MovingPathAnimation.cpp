@@ -27,7 +27,7 @@ MovingPathAnimation* MovingPathAnimation::clone(animid_t newId) const {
 	return new MovingPathAnimation(path, newId);
 }
 
-std::list<PathEntry>* createSmoothDiagonalPath(int dx, int dy) {//close enough
+std::list<PathEntry>* createSmoothDiagonalPath(int dx, int dy, delay_t delay) {//close enough
 	std::list<PathEntry> *paths = new std::list<PathEntry>;
 	int sumx, sumy, absx, absy;
 	sumx = 0;
@@ -37,25 +37,25 @@ std::list<PathEntry>* createSmoothDiagonalPath(int dx, int dy) {//close enough
 
 	if (absx > absy) {
 		for (;sumx<absx;) {
-			paths->push_back(PathEntry((dx < 0 ? -1 : 1), (int)(dy < 0 ? -1 : 1), false, false, 0, 12));
+			paths->push_back(PathEntry((dx < 0 ? -1 : 1), (int)(dy < 0 ? -1 : 1), false, false, 0, delay));
 			//cout << "1Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
 			sumy++;
 			sumx++;
 		}
 		for (;sumy < absy;sumy++) {
-			paths->push_back(PathEntry(0, (dy < 0 ? -1 : 1), false, false, 0, 12));
+			paths->push_back(PathEntry(0, (dy < 0 ? -1 : 1), false, false, 0, delay));
 			//cout << "3Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
 		}
 	}
 	else {
 		for (;sumy<absy;) {
-			paths->push_back(PathEntry((dx < 0 ? -1 : 1), (dy < 0 ? -1 : 1), false, false, 0, 12));
+			paths->push_back(PathEntry((dx < 0 ? -1 : 1), (dy < 0 ? -1 : 1), false, false, 0, delay));
 			//cout << "4Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
 			sumx++;
 			sumy++;
 		}
 		for (;sumx < absx;sumx++) {
-			paths->push_back(PathEntry((dx < 0 ? -1 : 1), 0, false, false, 0, 12));
+			paths->push_back(PathEntry((dx < 0 ? -1 : 1), 0, false, false, 0, delay));
 			//cout << "6Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
 		}
 	}
@@ -66,7 +66,7 @@ std::list<PathEntry>* createSmoothDiagonalPath(int dx, int dy) {//close enough
 	return paths;
 }
 
-std::list<PathEntry>* createCircularPath(int radius, int startAngle, int endAngle) {
+std::list<PathEntry>* createCircularPath(int radius, int startAngle, int endAngle, delay_t delay) {
 	std::list<PathEntry> *paths = new std::list<PathEntry>;
 	int lastx, lasty, i;
 	i = startAngle - 1;
@@ -78,7 +78,7 @@ std::list<PathEntry>* createCircularPath(int radius, int startAngle, int endAngl
 			PathEntry(
 				XforCircle(radius) - lastx,
 				-(YforCircle(radius) - lasty),
-				false, false, 0, 25));
+				false, false, 0, delay));
 		lastx = XforCircle(radius);
 		lasty = YforCircle(radius);
 		//cout << "Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;

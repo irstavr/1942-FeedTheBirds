@@ -64,6 +64,9 @@ private:
 	MovingPathAnimation * createSmallBlueBirdAnimation();
 	MovingPathAnimation * createSmallRedBirdAnimation();
 	MovingPathAnimation * createSmallYellowBirdAnimation();
+	MovingPathAnimation * createSmallBlueGreyBirdAnimation();
+	MovingPathAnimation * createSmallGreenGreyBirdAnimation();
+	MovingPathAnimation * createSmallYellowGreyBirdAnimation();
 
 };
 
