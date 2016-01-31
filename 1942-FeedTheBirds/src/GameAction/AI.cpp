@@ -40,6 +40,24 @@ void AI::eventAtX(int x)
 }
 
 void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis) {
+	if (filmId == "smallGreenBird") {
+
+	}
+	else if (filmId == "smallYellowBird") {
+
+	}
+	else if (filmId == "smallBlueBird") {
+
+	}
+	else if (filmId == "smallGreenBirdGrey") {
+
+	}
+	else if (filmId == "smallYellowBirdGrey") {
+
+	}
+	else if (filmId == "smallBlueBirdGrey") {
+
+	}
 	this->smallBirds->push_back(birdPathAnimator->clone());
 	this->smallBirds->back()->setHandleFrames(false);
 	AnimatorHolder::markAsRunning(this->smallBirds->back());
@@ -58,6 +76,7 @@ void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitali
 				visVitalisCloned, 
 				getCurrTime());
 }
+
 
 
 void AI::handleLittleBirds()
