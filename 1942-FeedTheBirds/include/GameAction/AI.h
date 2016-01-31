@@ -9,8 +9,9 @@
 #include "..\GameLogic\GameLogic.h"
 #include "..\Utilities\Utilities.h"
 #include <sstream>
+#include <algorithm>
 #include <string>
-#include <stdlib.h>
+#include <cstdlib>
 #include <cmath>
 #include <time.h>
 
@@ -56,6 +57,10 @@ private:
 	void handleLittleBirds();
 	void handleMediumBirds();
 	void handleBoss();
+	MovingPathAnimation * createbigBirdAnimation();
+	MovingPathAnimation * createMediumBrownBirdAnimation();
+	MovingPathAnimation * createMediumGreenBirdAnimation();
+	MovingPathAnimation * createMediumYellowBirdAnimation();
 	MovingPathAnimation * createSmallGreenBirdAnimation();
 	MovingPathAnimation * createSmallBlueBirdAnimation();
 	MovingPathAnimation * createSmallRedBirdAnimation();

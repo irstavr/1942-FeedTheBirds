@@ -86,6 +86,26 @@ void AI::handleBoss() {
 
 }
 
+MovingPathAnimation* AI::createbigBirdAnimation() {
+	std::list<PathEntry> paths;
+	return new MovingPathAnimation(paths, 0);
+}
+
+MovingPathAnimation* AI::createMediumBrownBirdAnimation() {
+	std::list<PathEntry> paths;
+	return new MovingPathAnimation(paths, 0);
+}
+
+MovingPathAnimation* AI::createMediumGreenBirdAnimation() {
+	std::list<PathEntry> paths;
+	return new MovingPathAnimation(paths, 0);
+}
+
+MovingPathAnimation* AI::createMediumYellowBirdAnimation() {
+	std::list<PathEntry> paths;
+	return new MovingPathAnimation(paths, 0);
+}
+
 MovingPathAnimation* AI::createSmallGreenBirdAnimation() {
 	std::list<PathEntry> paths;
 	//todo appropriately
@@ -124,61 +144,40 @@ MovingPathAnimation* AI::createSmallYellowBirdAnimation() {
 
 std::list<PathEntry>* AI::createSmoothDiagonalPath(int dx, int dy) {//close enough
 	std::list<PathEntry> *paths = new std::list<PathEntry>;
-	int sumx, sumy, absx, absy, ratio,  diff;
+	int sumx, sumy, absx, absy;
 	sumx = 0;
 	sumy = 0;
 	absx = (dx < 0 ? -dx : dx);
 	absy = (dy < 0 ? -dy : dy);
+	
 	if (absx > absy) {
-		ratio = (int)round((double)(((double)absx) / ((double)absy)));
-		for (;sumx<absx;) {
-			if ( absy && sumy<absy &&
-				!((sumx - sumy) % ratio)
-				){
-				diff = (int)round(((double)1 / (double)ratio*sumx - sumy));
-				paths->push_back(PathEntry((dx < 0 ? -2: 2), (int)(dy < 0 ? -diff: diff), false, false, 0, 12));
-				//cout << "1Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
-				sumy+= diff;
+		for (;sumx<absx;) {			
+			paths->push_back(PathEntry((dx < 0 ? -1: 1), (int)(dy < 0 ? -1: 1), false, false, 0, 12));
+			//cout << "1Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
+				sumy++;
 				sumx++;
-			}
-			else {
-				paths->push_back(PathEntry((dx < 0 ? -1 : 1), 0, false, false, 0, 12));
-				//cout << "2Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
-			}
-			sumx++;
 		}
-		if (sumy < absy) {
-			for (;sumy < absy;sumy++) {
-				paths->push_back(PathEntry(0, (dy < 0 ? -1 : 1), false, false, 0, 12));
-				//cout << "3Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
-			}
+		for (;sumy < absy;sumy++) {
+			paths->push_back(PathEntry(0, (dy < 0 ? -1 : 1), false, false, 0, 12));
+			//cout << "3Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
 		}
 	}
 	else {
-		ratio = (int)round((double)(((double)absy) / ((double)absx)));
 		for (;sumy<absy;) {
-			if (absx && sumx<absx &&
-				!((sumy - sumx) % ratio)
-				) {
-				diff = (int)round(((double)1 / (double)ratio*sumy - sumx));
-				paths->push_back(PathEntry((dx < 0 ? - diff: diff), (dy < 0 ? -2 : 2), false, false, 0, 12));
-				//cout << "4Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
-				sumx+= diff;
-				sumy++;
-			}
-			else {
-				paths->push_back(PathEntry(0, (dy < 0 ? -1 : 1), false, false, 0, 12));
-				//cout << "5Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
-			}
+			paths->push_back(PathEntry((dx < 0 ? - 1: 1), (dy < 0 ? -1 : 1), false, false, 0, 12));
+			//cout << "4Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
+			sumx++;
 			sumy++;
 		}
-		if (sumx < absx) {
-			for (;sumx < absx;sumx++) {
-				paths->push_back(PathEntry((dx < 0 ? -1 : 1), 0, false, false, 0, 12));
-				//cout << "6Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
-			}
+		for (;sumx < absx;sumx++) {
+			paths->push_back(PathEntry((dx < 0 ? -1 : 1), 0, false, false, 0, 12));
+			//cout << "6Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
 		}
 	}
+	std::vector<PathEntry> tmpVector(paths->size());
+	copy(paths->begin(), paths->end(), tmpVector.begin());
+	std::random_shuffle(tmpVector.begin(), tmpVector.end());
+	copy(tmpVector.begin(), tmpVector.end(), paths->begin());
 	return paths;
 }
 
