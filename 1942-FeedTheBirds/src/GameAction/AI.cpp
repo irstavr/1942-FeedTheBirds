@@ -7,9 +7,9 @@ AI::AI(GameLogic *_gameLogic, FrameRangeAnimator* _flyAnimator, FrameRangeAnimat
 	lastUsedID = BASE_ID;
 	birds = gameLogic->birds;
 	smallBirds  = new std::vector<MovingPathAnimator*>;
-	mediumBirds = new std::vector<Bird*>;
-	largeBirds  = new std::vector<Bird*>;
-	bonusBirds  = new std::vector<Bird*>;
+	mediumBirds = new std::vector<MovingPathAnimator*>;
+	largeBirds  = new std::vector<MovingPathAnimator*>;
+	bonusBirds  = new std::vector<MovingPathAnimator*>;
 
 	birdPathAnimator = new MovingPathAnimator();
 
@@ -17,6 +17,10 @@ AI::AI(GameLogic *_gameLogic, FrameRangeAnimator* _flyAnimator, FrameRangeAnimat
 	smallBlueBirdAnimation = this->createSmallBlueBirdAnimation();
 	smallRedBirdAnimation = this->createSmallRedBirdAnimation();
 	smallYellowBirdAnimation = this->createSmallYellowBirdAnimation();
+
+	mediumGreenBirdAnimation = this->createMediumGreenBirdAnimation();
+	mediumBrownBirdAnimation = this->createMediumBrownBirdAnimation();
+	mediumYellowBirdAnimation = this->createMediumYellowBirdAnimation();
 }
 
 AI::~AI() {
@@ -25,11 +29,19 @@ AI::~AI() {
 void AI::eventAtX(int x)
 {
 	handleLittleBirds();
+	handleMediumBirds();
+	handleBoss();
+
 	switch (x) {
 	case 20:
 		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75, SCREEN_WINDOW_HEIGHT+10, "smallGreenBird", smallGreenBirdAnimation);
 		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+50, SCREEN_WINDOW_HEIGHT+60, "smallYellowBird", smallYellowBirdAnimation);
 		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+100, SCREEN_WINDOW_HEIGHT+200, "smallBlueBird", smallBlueBirdAnimation);
+		break;
+	case 300:
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75, SCREEN_WINDOW_HEIGHT + 10, "mediumGreenBird", mediumColoredBirdLives, mediumColoredBirdSpeed, mediumGreenBirdAnimation);
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 + 50, SCREEN_WINDOW_HEIGHT + 60, "mediumYellowBird", mediumColoredBirdLives, mediumColoredBirdSpeed, mediumYellowBirdAnimation);
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 + 100, SCREEN_WINDOW_HEIGHT + 200, "mediumBrownBird", mediumColoredBirdLives, mediumColoredBirdSpeed, mediumBrownBirdAnimation);
 		break;
 	case 1000:	// terrain length minus something : P
 		gameLogic->superAce->startLanding();
@@ -59,7 +71,26 @@ void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitali
 				getCurrTime());
 }
 
+void AI::addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis) {
+	
+	this->mediumBirds->push_back(birdPathAnimator->clone());
+	this->mediumBirds->back()->setHandleFrames(false);
+	AnimatorHolder::markAsRunning(this->mediumBirds->back());
 
+	MovingPathAnimation* visVitalisCloned = visVitalis->clone(lastUsedID++);
+
+	this->mediumBirds->back()->start(
+									gameLogic->createBird(x, y,
+														mediumBird,
+														lives,
+														speed, // TODO: TO BE USED on AI!
+														mediumBirdFire,
+														filmId,
+														flyAnimation->clone(lastUsedID++),
+														flyAnimator->clone()),
+									visVitalisCloned,
+									getCurrTime());
+}
 
 void AI::handleLittleBirds()
 {
@@ -87,6 +118,25 @@ void AI::handleLittleBirds()
 
 void AI::handleMediumBirds() {
 
+	for (auto it = this->mediumBirds->begin(); it != this->mediumBirds->end(); it++)
+	{
+		Bird* bird = (Bird*)(*it)->getSprite();
+		if (!bird->isDead()) {
+			if ((*it)->hasFinished()) {
+				bird->scare();
+			}
+			else if (
+				(bird->getY() >= gameLogic->superAce->getY()*0.9) &&
+				(bird->getY() <= gameLogic->superAce->getY()*1.1) &&
+				!(rand() % 31)
+				)//Bird is within 20% of superAce's y
+			{
+				BirdDropping* dropping = bird->shoot();
+				bird->decrFire();
+				CollisionChecker::getInstance()->registerCollisions(gameLogic->superAce, dropping);
+			}
+		}
+	}
 }
 
 void AI::handleBoss() {
