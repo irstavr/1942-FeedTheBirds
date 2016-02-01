@@ -17,7 +17,7 @@
 #define YY (*it)->getY() - gameLogic->superAce->getY()
 #define XX (*it)->getX() - (gameLogic->superAce->getX()+200)
 
-typedef vector<BirdDropping*> DROPPINGS;
+//typedef vector<BirdDropping*> DROPPINGS;
 class AI {
 
 public:
@@ -34,6 +34,9 @@ private:
 	std::vector<MovingPathAnimator*> *mediumBirds;
 	std::vector<MovingPathAnimator*> *largeBirds;
 	std::vector<MovingPathAnimator*> *bonusBirds;
+
+	std::vector<MovingPathAnimator*> *loopers;
+	std::vector<MovingAnimator*> *followers;
 
 	FrameRangeAnimation *flyAnimation;
 	FrameRangeAnimator *flyAnimator;
@@ -53,15 +56,20 @@ private:
 
 	unsigned int lastUsedID;
 
-	void addSmallBird(int x, int y, char * id, MovingPathAnimation * visVitalis);
+	void addSmallBird(int x, int y, char * id, MovingPathAnimation * visVitalis, int followsSuperAce);
 	void addSmallBirds();
 	void addMediumBirds(void);
-	void addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis);
+	void addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis, int followsSuperAce);
 	void addBoss(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis);
 
 	void handleLittleBirds();
 	void handleMediumBirds();
 	void handleBoss();
+
+	void makeBirdFollowSuperAce(Bird *bird, int loops);
+	void makeBirdShoot(Bird *bird);
+
+	MovingPathAnimation * createLooperAnimation(int loops);
 
 	Point* getRandomEntryPoint();
 
@@ -69,7 +77,7 @@ private:
 	MovingPathAnimation * createMediumBrownBirdAnimation();
 	MovingPathAnimation * createMediumGreenBirdAnimation();
 	MovingPathAnimation * createMediumYellowBirdAnimation();
-	MovingPathAnimation*  createMediumGreyBirdAnimation();
+	MovingPathAnimation * createMediumGreyBirdAnimation();
 	MovingPathAnimation * createSmallGreenBirdAnimation();
 	MovingPathAnimation * createSmallBlueBirdAnimation();
 	MovingPathAnimation * createSmallRedBirdAnimation();
@@ -77,7 +85,6 @@ private:
 	MovingPathAnimation * createSmallBlueGreyBirdAnimation();
 	MovingPathAnimation * createSmallGreenGreyBirdAnimation();
 	MovingPathAnimation * createSmallYellowGreyBirdAnimation();
-
 };
 
 #endif

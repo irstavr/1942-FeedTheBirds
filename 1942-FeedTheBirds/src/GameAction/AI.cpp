@@ -24,6 +24,9 @@ AI::AI(GameLogic *_gameLogic, FrameRangeAnimator* _flyAnimator, FrameRangeAnimat
 
 	bigBirdAnimation = this->createBigBirdAnimation();
 
+	followers = new std::vector<MovingAnimator*>;
+	loopers = new std::vector<MovingPathAnimator*>;
+
 	/* initialize random seed: */
 	srand(time(NULL));
 }
@@ -39,6 +42,7 @@ void AI::eventAtX(int x)
 
 	switch (x) {
 	case 20:
+		// action point for small birds
 		addSmallBirds();
 		break;
 	case 100:
@@ -84,6 +88,47 @@ Point* AI::getRandomEntryPoint() {
 	p->setPoint(randomEntryX, randomEntryY);
 	cout << "Entry point: x=" << p->x << " y=" << p->y << "\n";
 	return p;
+}
+
+void AI::makeBirdFollowSuperAce(Bird * bird, int loops)
+{
+	MovingAnimator *mar = new MovingAnimator();
+	MovingAnimation * man = new MovingAnimation(0, (gameLogic->superAce->getY() - bird->getY()) > 0 ? 1: -1, bird->getBirdSpeed(), true, lastUsedID++);
+	AnimatorHolder::markAsRunning(mar);
+	this->followers->push_back(mar);
+	mar->start(bird, man, getCurrTime());
+	bird->setFollowsSuperAce(false);
+
+	this->loopers->push_back(new MovingPathAnimator());
+	this->loopers->back()->setHandleFrames(false);
+	AnimatorHolder::markAsRunning(this->loopers->back());
+	
+	this->loopers->back()->start(bird, createLooperAnimation(loops), getCurrTime());
+}
+
+void AI::makeBirdShoot(Bird * bird)
+{
+	if (
+		bird->getShotsRemaining()>0 &&
+		(bird->getY() >= gameLogic->superAce->getY()*0.9) &&
+		(bird->getY() <= gameLogic->superAce->getY()*1.1) &&
+		!(rand() % 31)
+		)//Bird is within 20% of superAce's y
+	{
+		BirdDropping* dropping = bird->shoot();
+		bird->decrFire();
+		CollisionChecker::getInstance()->
+			registerCollisions(gameLogic->superAce, dropping);
+	}
+}
+
+MovingPathAnimation* AI::createLooperAnimation(int loops) {
+	std::list<PathEntry> paths;
+	std::list<PathEntry> path= *createCircularPath(SCREEN_WINDOW_HEIGHT*0.20, 270, 630, mediumColoredBirdSpeed);
+	for (int i = 0; i < loops; i++) {
+		paths.insert(paths.end(), path.begin(), path.end());
+	}
+	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 //------------------------ Boss Birds --------------------------------------------------
@@ -197,12 +242,13 @@ void AI::addMediumBirds(void) {
 	}
 	else if (iSecret == 3) {
 		// Brown Medium Birds
-		this->addMediumBird(SCREEN_WINDOW_WIDTH-300,
-							SCREEN_WINDOW_HEIGHT/2,
-							"mediumBrownBird",
-							mediumColoredBirdLives,
-							mediumColoredBirdSpeed,
-							mediumBrownBirdAnimation);
+		this->addMediumBird(SCREEN_WINDOW_WIDTH - 300,
+			SCREEN_WINDOW_HEIGHT / 2,
+			"mediumBrownBird",
+			mediumColoredBirdLives,
+			mediumColoredBirdSpeed,
+			mediumBrownBirdAnimation,
+			5);
 	}
 	else if (iSecret == 4) {
 		// Grey Medium Birds
@@ -224,25 +270,52 @@ void AI::handleMediumBirds() {
 	{
 		bird = (Bird*)(*it)->getSprite();
 		if (!bird->isDead()) {
-			if ((*it)->hasFinished()) {
+			if ((*it)->hasFinished() && (bird->getFollowsSuperAce())) {
+				makeBirdFollowSuperAce(bird, bird->getFollowsSuperAce());
+				auto tmp = it;
+				it--;
+				this->mediumBirds->erase(tmp);
+			}
+			else if ((*it)->hasFinished()) {
 				bird->scare();
+				auto tmp = it;
+				it--;
+				this->mediumBirds->erase(tmp);
 			}
-			else if (
-				(bird->getY() >= gameLogic->superAce->getY()*0.9) &&
-				(bird->getY() <= gameLogic->superAce->getY()*1.1) &&
-				!(rand() % 31)
-				)//Bird is within 20% of superAce's y
-			{
-				BirdDropping* dropping = bird->shoot();
-				bird->decrFire();
-				CollisionChecker::getInstance()->
-					registerCollisions(gameLogic->superAce, dropping);
-			}
+			else makeBirdShoot(bird);
+		}
+		else {
+			(*it)->stop();
+			auto tmp = it;
+			it--;
+			this->mediumBirds->erase(tmp);
+		}
+	}
+	for (auto it = this->followers->begin(); it != this->followers->end(); it++) {
+		bird = (Bird*)(*it)->getSprite();
+		if (!bird->isDead()) {
+			(*it)->getAnimation()->setDx(0);
+			(*it)->getAnimation()->setDy((gameLogic->superAce->getY() - bird->getY()) > 0 ? 1 : -1);
+			makeBirdShoot(bird);
+		}
+		else {
+			(*it)->stop();
+			auto tmp = it;
+			it--;
+			this->followers->erase(tmp);
+		}
+	}
+	for (auto it = this->loopers->begin(); it != this->loopers->end(); it++) {\
+		if ((*it)->hasFinished()) {
+			bird->scare();
+			auto tmp = it;
+			it--;
+			this->loopers->erase(tmp);
 		}
 	}
 }
 
-void AI::addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis) {
+void AI::addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis, int followsSuperAce) {
 
 	this->mediumBirds->push_back(birdPathAnimator->clone());
 	this->mediumBirds->back()->setHandleFrames(false);
@@ -260,6 +333,7 @@ void AI::addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed sp
 														flyAnimator->clone()),
 									visVitalisCloned,
 									getCurrTime());
+	((Bird*)this->mediumBirds->back()->getSprite())->setFollowsSuperAce(followsSuperAce);
 }
 
 // create a Brown Medium Bird
@@ -268,8 +342,8 @@ MovingPathAnimation* AI::createMediumBrownBirdAnimation() {
 	std::list<PathEntry> paths;
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 360, mediumColoredBirdSpeed));
 	//paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 360, 720, mediumColoredBirdSpeed));
-	paths.splice(paths.end(), *createSmoothDiagonalPath(SCREEN_WINDOW_WIDTH, 0, mediumColoredBirdSpeed));
-	return new MovingPathAnimation(paths, 0);
+	//paths.splice(paths.end(), *createSmoothDiagonalPath(SCREEN_WINDOW_WIDTH, 0, mediumColoredBirdSpeed));
+	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 // apo to katw meros ki anevainoun
@@ -279,7 +353,7 @@ MovingPathAnimation* AI::createMediumGreenBirdAnimation() {
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, mediumColoredBirdSpeed));
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, mediumColoredBirdSpeed));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, mediumColoredBirdSpeed));
-	return new MovingPathAnimation(paths, 0);
+	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 // se smhnos (ki ap tis 2 pleures) 
@@ -289,7 +363,7 @@ MovingPathAnimation* AI::createMediumYellowBirdAnimation() {
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, mediumColoredBirdSpeed));
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, mediumColoredBirdSpeed));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, mediumColoredBirdSpeed));
-	return new MovingPathAnimation(paths, 0);
+	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 // idia kinisi apla me megalutero speed
@@ -299,7 +373,7 @@ MovingPathAnimation* AI::createMediumGreyBirdAnimation() {
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, mediumGreyBirdSpeed));
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, mediumGreyBirdSpeed));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, mediumGreyBirdSpeed));
-	return new MovingPathAnimation(paths, 0);
+	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 //------------------------ Small Birds --------------------------------------------------
@@ -311,20 +385,20 @@ void AI::addSmallBirds() {
 	this->addSmallBird(randomEntryPoint->x,
 		randomEntryPoint->y,
 		"smallGreenBird",
-		smallGreenBirdAnimation);
+		smallGreenBirdAnimation,0);
 	randomEntryPoint = getRandomEntryPoint();
 	this->addSmallBird(randomEntryPoint->x,
 		randomEntryPoint->y,
 		"smallYellowBird",
-		smallYellowBirdAnimation);
+		smallYellowBirdAnimation,0);
 	randomEntryPoint = getRandomEntryPoint();
 	this->addSmallBird(randomEntryPoint->x,
 		randomEntryPoint->y,
 		"smallBlueBird",
-		smallBlueBirdAnimation);
+		smallBlueBirdAnimation,0);
 }
 
-void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis) {
+void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis, int followsSuperAce) {
 	this->smallBirds->push_back(birdPathAnimator->clone());
 	this->smallBirds->back()->setHandleFrames(false);
 	AnimatorHolder::markAsRunning(this->smallBirds->back());
@@ -342,6 +416,7 @@ void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitali
 										flyAnimator->clone()),
 									visVitalisCloned,
 									getCurrTime());
+	((Bird*)this->smallBirds->back()->getSprite())->setFollowsSuperAce(followsSuperAce);
 }
 
 void AI::handleLittleBirds()
@@ -354,16 +429,8 @@ void AI::handleLittleBirds()
 			if ((*it)->hasFinished()) {
 				bird->scare();
 			}
-			else if (
-				(bird->getY() >= gameLogic->superAce->getY()*0.9) &&
-				(bird->getY() <= gameLogic->superAce->getY()*1.1) &&
-				!(rand() % 31)
-				)//Bird is within 20% of superAce's y
-			{
-				BirdDropping* dropping = bird->shoot();
-				bird->decrFire();
-				CollisionChecker::getInstance()->registerCollisions(gameLogic->superAce, dropping);
-			}
+			else
+				makeBirdShoot(bird);
 		}
 	}
 }
@@ -376,7 +443,7 @@ MovingPathAnimation* AI::createSmallGreenBirdAnimation() {
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, littleBirdSpeed));
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, littleBirdSpeed));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, littleBirdSpeed));
-	return new MovingPathAnimation(paths, 0);
+	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 //kanoun perissoterous kukloys
@@ -388,7 +455,7 @@ MovingPathAnimation* AI::createSmallBlueBirdAnimation() {
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.15, 180, 720, littleBirdSpeed));
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.14, 180, 360, littleBirdSpeed));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, littleBirdSpeed));
-	return new MovingPathAnimation(paths, 0);
+	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 //bonus bird
@@ -398,7 +465,7 @@ MovingPathAnimation* AI::createSmallRedBirdAnimation() {
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, littleBirdSpeed));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, littleBirdSpeed));
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.17, 180, 720, littleBirdSpeed));
-	return new MovingPathAnimation(paths, 0);
+	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 //megalyteres kampyles, apeutheias epitheseis
@@ -408,7 +475,7 @@ MovingPathAnimation* AI::createSmallYellowBirdAnimation() {
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.30, 180, 360, littleBirdSpeed));
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 720, littleBirdSpeed));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, littleBirdSpeed));
-	return new MovingPathAnimation(paths, 0);
+	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 //erxontai katheta (apo ta deksia) kai sto telos plisiazoun ton SuperAce
@@ -419,7 +486,7 @@ MovingPathAnimation* AI::createSmallGreenGreyBirdAnimation() {
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, littleBirdSpeed));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, littleBirdSpeed));
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.17, 180, 720, littleBirdSpeed));
-	return new MovingPathAnimation(paths, 0);
+	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 MovingPathAnimation* AI::createSmallBlueGreyBirdAnimation() {
@@ -428,7 +495,7 @@ MovingPathAnimation* AI::createSmallBlueGreyBirdAnimation() {
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, littleBirdSpeed));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, littleBirdSpeed));
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.17, 180, 720, littleBirdSpeed));
-	return new MovingPathAnimation(paths, 0);
+	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 MovingPathAnimation* AI::createSmallYellowGreyBirdAnimation() {
@@ -437,5 +504,5 @@ MovingPathAnimation* AI::createSmallYellowGreyBirdAnimation() {
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, littleBirdSpeed));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, littleBirdSpeed));
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.17, 180, 720, littleBirdSpeed));
-	return new MovingPathAnimation(paths, 0);
+	return new MovingPathAnimation(paths, lastUsedID++);
 }
