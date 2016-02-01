@@ -66,7 +66,7 @@ void AI::eventAtX(int x)
 	case 500:
 		// action point for boss
 		break;
-	case 3200:	// TODO: change to terrain length minus something : P
+	case 3480:	// TODO: change to terrain length minus something : P
 		gameLogic->superAce->startLanding();
 		break;
 	default:
@@ -94,14 +94,16 @@ MovingPathAnimation* AI::createBigBirdAnimation() {
 // in every run we use a rand to generate a different case
 void AI::addMediumBirds(void) {
 
-	// generate secret number between 1 and 3
-	// used to generate different medium bird
-	int iSecret = rand() % 3 + 1;
+	// generate secret number between 1 and 4
+	// used to generate different kind of medium bird
+	int iSecret = rand() % 4 + 1;
+	iSecret = 3; //TODO: just for debugging! ! !
 
 	// random num of birds each time (max 10)
 	int birdsNum = rand() % 10;	// TODO: to be used inside ifs
 
 	if (iSecret == 1) {
+		// Green Medium Bird
 		/*
 		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75,
 		SCREEN_WINDOW_HEIGHT + 10,
@@ -112,6 +114,7 @@ void AI::addMediumBirds(void) {
 		*/
 	}
 	else if (iSecret == 2) {
+		// Yellow Medium Bird
 		/*
 		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 + 50,
 		SCREEN_WINDOW_HEIGHT + 60,
@@ -122,12 +125,24 @@ void AI::addMediumBirds(void) {
 		*/
 	}
 	else if (iSecret == 3) {
-		this->addMediumBird(SCREEN_WINDOW_WIDTH,
-							SCREEN_WINDOW_HEIGHT / 2,
+		// Brown Medium Birds
+		this->addMediumBird(SCREEN_WINDOW_WIDTH-300,
+							SCREEN_WINDOW_HEIGHT/2,
 							"mediumBrownBird",
 							mediumColoredBirdLives,
 							mediumColoredBirdSpeed,
 							mediumBrownBirdAnimation);
+	}
+	else if (iSecret == 4) {
+		// Grey Medium Birds
+		/*
+		this->addMediumBird(SCREEN_WINDOW_WIDTH,
+			SCREEN_WINDOW_HEIGHT / 2,
+			"mediumBrownBird",
+			mediumColoredBirdLives,
+			mediumColoredBirdSpeed,
+			mediumBrownBirdAnimation);
+		*/
 	}
 
 }
@@ -176,13 +191,13 @@ void AI::addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed sp
 									getCurrTime());
 }
 
+// create a Brown Medium Bird
 //apo to panw meros ths othonis kanoun ena kuklo k sunexizoun na mas vroun
 MovingPathAnimation* AI::createMediumBrownBirdAnimation() {
 	std::list<PathEntry> paths;
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 0, 360, mediumColoredBirdSpeed));
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.30, 180, 360, mediumColoredBirdSpeed));
-	//paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, mediumColoredBirdSpeed));
-	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 360, mediumColoredBirdSpeed));
+	//paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 360, 720, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(SCREEN_WINDOW_WIDTH, 0, mediumColoredBirdSpeed));
 	return new MovingPathAnimation(paths, 0);
 }
 
@@ -226,16 +241,16 @@ void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitali
 	MovingPathAnimation* visVitalisCloned = visVitalis->clone(lastUsedID++);
 
 	this->smallBirds->back()->start(
-		gameLogic->createBird(x, y,
-			littleBird,
-			littleBirdLives,
-			littleBirdSpeed, // TODO: TO BE USED on AI!
-			littleBirdFire,
-			filmId,
-			flyAnimation->clone(lastUsedID++),
-			flyAnimator->clone()),
-		visVitalisCloned,
-		getCurrTime());
+									gameLogic->createBird(x, y,
+										littleBird,
+										littleBirdLives,
+										littleBirdSpeed, // TODO: TO BE USED on AI!
+										littleBirdFire,
+										filmId,
+										flyAnimation->clone(lastUsedID++),
+										flyAnimator->clone()),
+									visVitalisCloned,
+									getCurrTime());
 }
 
 void AI::handleLittleBirds()

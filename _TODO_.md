@@ -65,11 +65,10 @@
 	gameOver
 	loopSound
 	collisionSound
-    
 
 # FIX:
-- bug with flipping
-- bug with looping
+- bug with flipping -- DONE
+- bug with looping -- DONE
 - add audio sounds
 - add birdFire on bird constructor -- DONE
 

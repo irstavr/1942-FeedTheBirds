@@ -498,9 +498,9 @@ void GamePlay::gameFinished() {
 
 void GamePlay::displayGameOver(unsigned long now) {
 	terrain->drawBackground(ScoreBoard::getInstance().getScore(),
-		ScoreBoard::getInstance().getHighScore(),
-		currentGame->profile->getLives(),
-		currentGame->profile->getLoops());
+							ScoreBoard::getInstance().getHighScore(),
+							currentGame->profile->getLives(),
+							currentGame->profile->getLoops());
 	currentGame->superAce->displayAll();
 	if (gameOverButton->isSpriteVisible()) {
 		gameOverButton->setX(400);
@@ -518,9 +518,9 @@ void GamePlay::displayGameOver(unsigned long now) {
 
 void GamePlay::displayPauseGame(unsigned long now) {
 	terrain->drawBackground(ScoreBoard::getInstance().getScore(),
-		ScoreBoard::getInstance().getHighScore(),
-		currentGame->profile->getLives(),
-		currentGame->profile->getLoops());
+							ScoreBoard::getInstance().getHighScore(),
+							currentGame->profile->getLives(),
+							currentGame->profile->getLoops());
 
 	if (pauseButton->isSpriteVisible()) {
 		pauseButton->setX(600);
