@@ -67,6 +67,7 @@ public:
 	void setFollowsSuperAce(int b);
 	int getFollowsSuperAce();
 	BirdSpeed getBirdSpeed();
+	BirdFire getShotsRemaining();
 	void displayAll();
 	int getLives();
 	void removeLife(void);

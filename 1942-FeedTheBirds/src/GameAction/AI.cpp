@@ -46,7 +46,7 @@ void AI::eventAtX(int x)
 		this->addSmallBird(randomEntryPoint->x,
 							randomEntryPoint->y,
 							"smallGreenBird", 
-							smallGreenBirdAnimation);
+							smallGreenBirdAnimation, 0);
 		/*this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+50, 
 							SCREEN_WINDOW_HEIGHT+60, 
 							"smallYellowBird", 
@@ -109,6 +109,22 @@ void AI::makeBirdFollowSuperAce(Bird * bird, int loops)
 	AnimatorHolder::markAsRunning(this->loopers->back());
 	
 	this->loopers->back()->start(bird, createLooperAnimation(loops), getCurrTime());
+}
+
+void AI::makeBirdShoot(Bird * bird)
+{
+	if (
+		bird->getShotsRemaining()>0 &&
+		(bird->getY() >= gameLogic->superAce->getY()*0.9) &&
+		(bird->getY() <= gameLogic->superAce->getY()*1.1) &&
+		!(rand() % 31)
+		)//Bird is within 20% of superAce's y
+	{
+		BirdDropping* dropping = bird->shoot();
+		bird->decrFire();
+		CollisionChecker::getInstance()->
+			registerCollisions(gameLogic->superAce, dropping);
+	}
 }
 
 MovingPathAnimation* AI::createLooperAnimation(int loops) {
@@ -212,17 +228,7 @@ void AI::handleMediumBirds() {
 				it--;
 				this->mediumBirds->erase(tmp);
 			}
-			else if (
-				(bird->getY() >= gameLogic->superAce->getY()*0.9) &&
-				(bird->getY() <= gameLogic->superAce->getY()*1.1) &&
-				!(rand() % 31)
-				)//Bird is within 20% of superAce's y
-			{
-				BirdDropping* dropping = bird->shoot();
-				bird->decrFire();
-				CollisionChecker::getInstance()->
-					registerCollisions(gameLogic->superAce, dropping);
-			}
+			else makeBirdShoot(bird);
 		}
 		else {
 			(*it)->stop();
@@ -236,17 +242,7 @@ void AI::handleMediumBirds() {
 		if (!bird->isDead()) {
 			(*it)->getAnimation()->setDx(0);
 			(*it)->getAnimation()->setDy((gameLogic->superAce->getY() - bird->getY()) > 0 ? 1 : -1);
-			if (
-				(bird->getY() >= gameLogic->superAce->getY()*0.9) &&
-				(bird->getY() <= gameLogic->superAce->getY()*1.1) &&
-				!(rand() % 31)
-				)//Bird is within 20% of superAce's y
-			{
-				BirdDropping* dropping = bird->shoot();
-				bird->decrFire();
-				CollisionChecker::getInstance()->
-					registerCollisions(gameLogic->superAce, dropping);
-			}
+			makeBirdShoot(bird);
 		}
 		else {
 			(*it)->stop();
@@ -328,7 +324,7 @@ MovingPathAnimation* AI::createMediumGreyBirdAnimation() {
 
 //------------------------ Small Birds --------------------------------------------------
 
-void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis) {
+void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis, int followsSuperAce) {
 	this->smallBirds->push_back(birdPathAnimator->clone());
 	this->smallBirds->back()->setHandleFrames(false);
 	AnimatorHolder::markAsRunning(this->smallBirds->back());
@@ -346,6 +342,7 @@ void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitali
 										flyAnimator->clone()),
 									visVitalisCloned,
 									getCurrTime());
+	((Bird*)this->smallBirds->back()->getSprite())->setFollowsSuperAce(followsSuperAce);
 }
 
 void AI::handleLittleBirds()
@@ -358,16 +355,8 @@ void AI::handleLittleBirds()
 			if ((*it)->hasFinished()) {
 				bird->scare();
 			}
-			else if (
-				(bird->getY() >= gameLogic->superAce->getY()*0.9) &&
-				(bird->getY() <= gameLogic->superAce->getY()*1.1) &&
-				!(rand() % 31)
-				)//Bird is within 20% of superAce's y
-			{
-				BirdDropping* dropping = bird->shoot();
-				bird->decrFire();
-				CollisionChecker::getInstance()->registerCollisions(gameLogic->superAce, dropping);
-			}
+			else
+				makeBirdShoot(bird);
 		}
 	}
 }

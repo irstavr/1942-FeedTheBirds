@@ -55,7 +55,7 @@ private:
 
 	unsigned int lastUsedID;
 
-	void addSmallBird(int x, int y, char * id, MovingPathAnimation * visVitalis);
+	void addSmallBird(int x, int y, char * id, MovingPathAnimation * visVitalis, int followsSuperAce);
 	
 	void addMediumBirds(void);
 	void addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis, int followsSuperAce);
@@ -65,6 +65,7 @@ private:
 	void handleBoss();
 
 	void makeBirdFollowSuperAce(Bird *bird, int loops);
+	void makeBirdShoot(Bird *bird);
 
 	MovingPathAnimation * createLooperAnimation(int loops);
 
