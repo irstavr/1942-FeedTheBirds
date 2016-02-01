@@ -363,7 +363,7 @@ void GamePlay::updateGameState() {
 void GamePlay::checkAnimationFlags() {
 
 	if (currentGame->superAce->isInjured) {
-		if (currentGame->superAce->injuredTime + 3000 < getCurrTime()) {
+		if (currentGame->superAce->injuredTime + 2500 < getCurrTime()) {
 			currentGame->superAce->isInvincible = false;
 			currentGame->superAce->isInjured = false;
 		}

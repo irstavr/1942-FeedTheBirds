@@ -24,7 +24,7 @@ Bird::~Bird(void) {
 }
 
 BirdDropping* Bird::shoot() {
-	MovingAnimation* bulletAnimation = new MovingAnimation(-5, 0, 20, true, 4);
+	MovingAnimation* bulletAnimation = new MovingAnimation(-5, 0, 10, true, 4);
 	MovingAnimator* bulletAnimator = new MovingAnimator();
 
 	AnimatorHolder::animRegister(bulletAnimator);
