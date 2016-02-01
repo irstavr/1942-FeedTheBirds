@@ -22,6 +22,8 @@ AI::AI(GameLogic *_gameLogic, FrameRangeAnimator* _flyAnimator, FrameRangeAnimat
 	mediumBrownBirdAnimation = this->createMediumBrownBirdAnimation();
 	mediumYellowBirdAnimation = this->createMediumYellowBirdAnimation();
 
+	followers = new std::vector<MovingAnimator*>;
+
 	/* initialize random seed: */
 	srand(time(NULL));
 }
@@ -92,6 +94,16 @@ Point* AI::getRandomEntryPoint() {
 	return p;
 }
 
+void AI::makeBirdFollowSuperAce(Bird * bird)
+{
+	MovingAnimator *mar = new MovingAnimator();
+	MovingAnimation *  man = new MovingAnimation(0, (gameLogic->superAce->getY() - bird->getY()) > 0 ? 1: -1, bird->getBirdSpeed(), true, lastUsedID++);
+	AnimatorHolder::markAsRunning(mar);
+	this->followers->push_back(mar);
+	mar->start(bird, man, getCurrTime());
+	bird->setFollowsSuperAce(false);
+}
+
 //------------------------ Boss Birds --------------------------------------------------
 
 void AI::handleBoss() {
@@ -144,12 +156,13 @@ void AI::addMediumBirds(void) {
 	}
 	else if (iSecret == 3) {
 		// Brown Medium Birds
-		this->addMediumBird(SCREEN_WINDOW_WIDTH-300,
-							SCREEN_WINDOW_HEIGHT/2,
-							"mediumBrownBird",
-							mediumColoredBirdLives,
-							mediumColoredBirdSpeed,
-							mediumBrownBirdAnimation);
+		this->addMediumBird(SCREEN_WINDOW_WIDTH - 300,
+			SCREEN_WINDOW_HEIGHT / 2,
+			"mediumBrownBird",
+			mediumColoredBirdLives,
+			mediumColoredBirdSpeed,
+			mediumBrownBirdAnimation,
+			true);
 	}
 	else if (iSecret == 4) {
 		// Grey Medium Birds
@@ -171,7 +184,13 @@ void AI::handleMediumBirds() {
 	{
 		bird = (Bird*)(*it)->getSprite();
 		if (!bird->isDead()) {
-			if ((*it)->hasFinished()) {
+			if ((*it)->hasFinished() && (bird->getFollowsSuperAce())) {
+				makeBirdFollowSuperAce(bird);
+				auto tmp = it;
+				it--;
+				this->mediumBirds->erase(tmp);
+			}
+			else if ((*it)->hasFinished()) {
 				bird->scare();
 			}
 			else if (
@@ -186,10 +205,29 @@ void AI::handleMediumBirds() {
 					registerCollisions(gameLogic->superAce, dropping);
 			}
 		}
+		else {
+			(*it)->stop();
+		}
+	}
+	for (auto it = this->followers->begin(); it != this->followers->end(); it++) {
+		bird = (Bird*)(*it)->getSprite();
+		(*it)->getAnimation()->setDx(0);
+		(*it)->getAnimation()->setDy((gameLogic->superAce->getY() - bird->getY()) > 0 ? 1 : -1);
+		if (
+			(bird->getY() >= gameLogic->superAce->getY()*0.9) &&
+			(bird->getY() <= gameLogic->superAce->getY()*1.1) &&
+			!(rand() % 31)
+			)//Bird is within 20% of superAce's y
+		{
+			BirdDropping* dropping = bird->shoot();
+			bird->decrFire();
+			CollisionChecker::getInstance()->
+				registerCollisions(gameLogic->superAce, dropping);
+		}
 	}
 }
 
-void AI::addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis) {
+void AI::addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis, bool followsSuperAce) {
 
 	this->mediumBirds->push_back(birdPathAnimator->clone());
 	this->mediumBirds->back()->setHandleFrames(false);
@@ -207,6 +245,7 @@ void AI::addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed sp
 														flyAnimator->clone()),
 									visVitalisCloned,
 									getCurrTime());
+	((Bird*)this->mediumBirds->back()->getSprite())->setFollowsSuperAce(followsSuperAce);
 }
 
 // create a Brown Medium Bird
@@ -215,7 +254,7 @@ MovingPathAnimation* AI::createMediumBrownBirdAnimation() {
 	std::list<PathEntry> paths;
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 360, mediumColoredBirdSpeed));
 	//paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 360, 720, mediumColoredBirdSpeed));
-	paths.splice(paths.end(), *createSmoothDiagonalPath(SCREEN_WINDOW_WIDTH, 0, mediumColoredBirdSpeed));
+	//paths.splice(paths.end(), *createSmoothDiagonalPath(SCREEN_WINDOW_WIDTH, 0, mediumColoredBirdSpeed));
 	return new MovingPathAnimation(paths, 0);
 }
 

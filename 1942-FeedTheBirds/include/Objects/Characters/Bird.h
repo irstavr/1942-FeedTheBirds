@@ -61,7 +61,12 @@ public:
 	BirdDropping* shoot();
 	FrameRangeAnimation *flyAnimation;
 	FrameRangeAnimator *flyAnimator;
+	
 
+
+	void setFollowsSuperAce(bool b);
+	bool getFollowsSuperAce();
+	BirdSpeed getBirdSpeed();
 	void displayAll();
 	int getLives();
 	void removeLife(void);
@@ -78,10 +83,10 @@ private:
 	BirdLives birdLives;
 	BirdSpeed birdSpeed;
 	BirdFire birdFire;
-
 	bool releasesPowerUp;
 	bool isGrey;
 	bool isAlive;
+	bool followsSuperAce;
 
 	TickAnimation *tickAnimation;
 	TimerTickAnimator *timerTick;

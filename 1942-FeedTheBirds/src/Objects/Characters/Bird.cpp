@@ -17,6 +17,7 @@ Bird::Bird(Dim _x, Dim _y,
 		birdFire(birdFire),
 		isAlive(true) {
 	droppings = new vector<BirdDropping*>();
+	this->followsSuperAce = false;
 }
 
 Bird::~Bird(void) {
@@ -37,6 +38,21 @@ BirdDropping* Bird::shoot() {
 	droppings->push_back(dropping);
 	dropping->startMoving();
 	return dropping;
+}
+
+void Bird::setFollowsSuperAce(bool b)
+{
+	this->followsSuperAce = b;
+}
+
+bool Bird::getFollowsSuperAce()
+{
+	return this->followsSuperAce;
+}
+
+BirdSpeed Bird::getBirdSpeed()
+{
+	return this->birdSpeed;
 }
 
 void Bird::displayAll() {

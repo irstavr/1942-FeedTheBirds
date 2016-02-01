@@ -33,6 +33,7 @@ private:
 	std::vector<MovingPathAnimator*> *mediumBirds;
 	std::vector<MovingPathAnimator*> *largeBirds;
 	std::vector<MovingPathAnimator*> *bonusBirds;
+	std::vector<MovingAnimator*> *followers;
 
 	FrameRangeAnimation *flyAnimation;
 	FrameRangeAnimator *flyAnimator;
@@ -55,11 +56,13 @@ private:
 	void addSmallBird(int x, int y, char * id, MovingPathAnimation * visVitalis);
 	
 	void addMediumBirds(void);
-	void addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis);
+	void addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis, bool followsSuperAce);
 
 	void handleLittleBirds();
 	void handleMediumBirds();
 	void handleBoss();
+
+	void makeBirdFollowSuperAce(Bird *bird);
 
 	Point* getRandomEntryPoint();
 
@@ -75,7 +78,6 @@ private:
 	MovingPathAnimation * createSmallBlueGreyBirdAnimation();
 	MovingPathAnimation * createSmallGreenGreyBirdAnimation();
 	MovingPathAnimation * createSmallYellowGreyBirdAnimation();
-
 };
 
 #endif
