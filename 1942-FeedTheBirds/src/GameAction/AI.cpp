@@ -47,13 +47,14 @@ void AI::eventAtX(int x)
 							"smallBlueBird", 
 							smallBlueBirdAnimation);
 		break;
-	case 300:
+	case 100:
 		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75, 
 							SCREEN_WINDOW_HEIGHT + 10, 
 							"mediumGreenBird", 
 							mediumColoredBirdLives, 
 							mediumColoredBirdSpeed, 
 							mediumGreenBirdAnimation);
+		/*
 		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 + 50, 
 							SCREEN_WINDOW_HEIGHT + 60, 
 							"mediumYellowBird", 
@@ -66,6 +67,7 @@ void AI::eventAtX(int x)
 							mediumColoredBirdLives, 
 							mediumColoredBirdSpeed, 
 							mediumBrownBirdAnimation);
+		*/
 		break;
 	case 1000:	// TODO: change to terrain length minus something : P
 		gameLogic->superAce->startLanding();
@@ -89,10 +91,10 @@ MovingPathAnimation* AI::createBigBirdAnimation() {
 //------------------------ Medium Birds -------------------------------------------------
 
 void AI::handleMediumBirds() {
-
+	Bird* bird;
 	for (auto it = this->mediumBirds->begin(); it != this->mediumBirds->end(); it++)
 	{
-		Bird* bird = (Bird*)(*it)->getSprite();
+		bird = (Bird*)(*it)->getSprite();
 		if (!bird->isDead()) {
 			if ((*it)->hasFinished()) {
 				bird->scare();
@@ -120,17 +122,16 @@ void AI::addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed sp
 
 	MovingPathAnimation* visVitalisCloned = visVitalis->clone(lastUsedID++);
 
-	this->mediumBirds->back()->start(
-		gameLogic->createBird(x, y,
-			mediumBird,
-			lives,
-			speed, // TODO: TO BE USED on AI!
-			mediumBirdFire,
-			filmId,
-			flyAnimation->clone(lastUsedID++),
-			flyAnimator->clone()),
-		visVitalisCloned,
-		getCurrTime());
+	this->mediumBirds->back()->start(gameLogic->createBird(x, y,
+														mediumBird,
+														lives,
+														speed, // TODO: TO BE USED on AI!
+														mediumBirdFire,
+														filmId,
+														flyAnimation->clone(lastUsedID++),
+														flyAnimator->clone()),
+									visVitalisCloned,
+									getCurrTime());
 }
 
 //apo to panw meros ths othonis kanoun ena kuklo k sunexizoun na mas vroun
@@ -146,18 +147,30 @@ MovingPathAnimation* AI::createMediumBrownBirdAnimation() {
 // apo to katw meros ki anevainoun
 MovingPathAnimation* AI::createMediumGreenBirdAnimation() {
 	std::list<PathEntry> paths;
+	//todo appropriately
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, mediumColoredBirdSpeed));
 	return new MovingPathAnimation(paths, 0);
 }
 
 // se smhnos (ki ap tis 2 pleures) 
 MovingPathAnimation* AI::createMediumYellowBirdAnimation() {
 	std::list<PathEntry> paths;
+	//todo appropriately
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, mediumColoredBirdSpeed));
 	return new MovingPathAnimation(paths, 0);
 }
 
 // idia kinisi apla me megalutero speed
 MovingPathAnimation* AI::createMediumGreyBirdAnimation() {
 	std::list<PathEntry> paths;
+	//todo appropriately
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, mediumGreyBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, mediumGreyBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, mediumGreyBirdSpeed));
 	return new MovingPathAnimation(paths, 0);
 }
 
