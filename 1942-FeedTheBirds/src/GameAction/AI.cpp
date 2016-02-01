@@ -1,4 +1,4 @@
-#include "..\..\include\GameAction\AI.h"
+﻿#include "..\..\include\GameAction\AI.h"
 
 AI::AI(GameLogic *_gameLogic, FrameRangeAnimator* _flyAnimator, FrameRangeAnimation *_flyAnimation):
 			gameLogic(_gameLogic),
@@ -34,16 +34,40 @@ void AI::eventAtX(int x)
 
 	switch (x) {
 	case 20:
-		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75, SCREEN_WINDOW_HEIGHT+10, "smallGreenBird", smallGreenBirdAnimation);
-		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+50, SCREEN_WINDOW_HEIGHT+60, "smallYellowBird", smallYellowBirdAnimation);
-		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+100, SCREEN_WINDOW_HEIGHT+200, "smallBlueBird", smallBlueBirdAnimation);
+		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75, 
+							SCREEN_WINDOW_HEIGHT+10, 
+							"smallGreenBird", 
+							smallGreenBirdAnimation);
+		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+50, 
+							SCREEN_WINDOW_HEIGHT+60, 
+							"smallYellowBird", 
+							smallYellowBirdAnimation);
+		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+100, 
+							SCREEN_WINDOW_HEIGHT+200, 
+							"smallBlueBird", 
+							smallBlueBirdAnimation);
 		break;
 	case 300:
-		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75, SCREEN_WINDOW_HEIGHT + 10, "mediumGreenBird", mediumColoredBirdLives, mediumColoredBirdSpeed, mediumGreenBirdAnimation);
-		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 + 50, SCREEN_WINDOW_HEIGHT + 60, "mediumYellowBird", mediumColoredBirdLives, mediumColoredBirdSpeed, mediumYellowBirdAnimation);
-		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 + 100, SCREEN_WINDOW_HEIGHT + 200, "mediumBrownBird", mediumColoredBirdLives, mediumColoredBirdSpeed, mediumBrownBirdAnimation);
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75, 
+							SCREEN_WINDOW_HEIGHT + 10, 
+							"mediumGreenBird", 
+							mediumColoredBirdLives, 
+							mediumColoredBirdSpeed, 
+							mediumGreenBirdAnimation);
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 + 50, 
+							SCREEN_WINDOW_HEIGHT + 60, 
+							"mediumYellowBird", 
+							mediumColoredBirdLives, 
+							mediumColoredBirdSpeed, 
+							mediumYellowBirdAnimation);
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 + 100, 
+							SCREEN_WINDOW_HEIGHT + 200, 
+							"mediumBrownBird", 
+							mediumColoredBirdLives, 
+							mediumColoredBirdSpeed, 
+							mediumBrownBirdAnimation);
 		break;
-	case 1000:	// terrain length minus something : P
+	case 1000:	// TODO: change to terrain length minus something : P
 		gameLogic->superAce->startLanding();
 		break;
 	default:
@@ -51,70 +75,18 @@ void AI::eventAtX(int x)
 	}
 }
 
-void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis) {
-	this->smallBirds->push_back(birdPathAnimator->clone());
-	this->smallBirds->back()->setHandleFrames(false);
-	AnimatorHolder::markAsRunning(this->smallBirds->back());
+//------------------------ Boss Birds -------------------------------------------------
 
-	MovingPathAnimation* visVitalisCloned = visVitalis->clone(lastUsedID++);
+void AI::handleBoss() {
 
-	this->smallBirds->back()->start(
-				gameLogic->createBird(x, y, 
-									littleBird,
-									littleBirdLives,
-									littleBirdSpeed, // TODO: TO BE USED on AI!
-									littleBirdFire,
-									filmId,
-									flyAnimation->clone(lastUsedID++),
-									flyAnimator->clone()),
-				visVitalisCloned, 
-				getCurrTime());
 }
 
-void AI::addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis) {
-	
-	this->mediumBirds->push_back(birdPathAnimator->clone());
-	this->mediumBirds->back()->setHandleFrames(false);
-	AnimatorHolder::markAsRunning(this->mediumBirds->back());
-
-	MovingPathAnimation* visVitalisCloned = visVitalis->clone(lastUsedID++);
-
-	this->mediumBirds->back()->start(
-									gameLogic->createBird(x, y,
-														mediumBird,
-														lives,
-														speed, // TODO: TO BE USED on AI!
-														mediumBirdFire,
-														filmId,
-														flyAnimation->clone(lastUsedID++),
-														flyAnimator->clone()),
-									visVitalisCloned,
-									getCurrTime());
+MovingPathAnimation* AI::createBigBirdAnimation() {
+	std::list<PathEntry> paths;
+	return new MovingPathAnimation(paths, 0);
 }
 
-void AI::handleLittleBirds()
-{
-	Bird* bird;
-	for (auto it = this->smallBirds->begin(); it != this->smallBirds->end();it++)
-	{
-		bird = (Bird*)(*it)->getSprite();
-		if (!bird->isDead()) {
-			if ((*it)->hasFinished()) {
-				bird->scare();
-			}
-			else if(
-				(bird->getY() >= gameLogic->superAce->getY()*0.9) &&
-				(bird->getY() <= gameLogic->superAce->getY()*1.1) &&
-				!(rand()%31)
-				)//Bird is within 20% of superAce's y
-			{
-				BirdDropping* dropping = bird->shoot();
-				bird->decrFire();
-				CollisionChecker::getInstance()->registerCollisions(gameLogic->superAce, dropping);
-			}
-		}
-	}
-}
+//------------------------ Medium Birds -------------------------------------------------
 
 void AI::handleMediumBirds() {
 
@@ -133,39 +105,107 @@ void AI::handleMediumBirds() {
 			{
 				BirdDropping* dropping = bird->shoot();
 				bird->decrFire();
-				CollisionChecker::getInstance()->registerCollisions(gameLogic->superAce, dropping);
+				CollisionChecker::getInstance()->
+					registerCollisions(gameLogic->superAce, dropping);
 			}
 		}
 	}
 }
 
-void AI::handleBoss() {
+void AI::addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis) {
 
+	this->mediumBirds->push_back(birdPathAnimator->clone());
+	this->mediumBirds->back()->setHandleFrames(false);
+	AnimatorHolder::markAsRunning(this->mediumBirds->back());
+
+	MovingPathAnimation* visVitalisCloned = visVitalis->clone(lastUsedID++);
+
+	this->mediumBirds->back()->start(
+		gameLogic->createBird(x, y,
+			mediumBird,
+			lives,
+			speed, // TODO: TO BE USED on AI!
+			mediumBirdFire,
+			filmId,
+			flyAnimation->clone(lastUsedID++),
+			flyAnimator->clone()),
+		visVitalisCloned,
+		getCurrTime());
 }
 
-MovingPathAnimation* AI::createBigBirdAnimation() {
-	std::list<PathEntry> paths;
-	return new MovingPathAnimation(paths, 0);
-}
-
-//------------------------ Medium Birds -------------------------------------------------
-
+//apo to panw meros ths othonis kanoun ena kuklo k sunexizoun na mas vroun
 MovingPathAnimation* AI::createMediumBrownBirdAnimation() {
 	std::list<PathEntry> paths;
+	//todo appropriately
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, mediumColoredBirdSpeed));
 	return new MovingPathAnimation(paths, 0);
 }
 
+// apo to katw meros ki anevainoun
 MovingPathAnimation* AI::createMediumGreenBirdAnimation() {
 	std::list<PathEntry> paths;
 	return new MovingPathAnimation(paths, 0);
 }
 
+// se smhnos (ki ap tis 2 pleures) 
 MovingPathAnimation* AI::createMediumYellowBirdAnimation() {
 	std::list<PathEntry> paths;
 	return new MovingPathAnimation(paths, 0);
 }
 
+// idia kinisi apla me megalutero speed
+MovingPathAnimation* AI::createMediumGreyBirdAnimation() {
+	std::list<PathEntry> paths;
+	return new MovingPathAnimation(paths, 0);
+}
+
 //------------------------ Small Birds --------------------------------------------------
+
+void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis) {
+	this->smallBirds->push_back(birdPathAnimator->clone());
+	this->smallBirds->back()->setHandleFrames(false);
+	AnimatorHolder::markAsRunning(this->smallBirds->back());
+
+	MovingPathAnimation* visVitalisCloned = visVitalis->clone(lastUsedID++);
+
+	this->smallBirds->back()->start(
+		gameLogic->createBird(x, y,
+			littleBird,
+			littleBirdLives,
+			littleBirdSpeed, // TODO: TO BE USED on AI!
+			littleBirdFire,
+			filmId,
+			flyAnimation->clone(lastUsedID++),
+			flyAnimator->clone()),
+		visVitalisCloned,
+		getCurrTime());
+}
+
+void AI::handleLittleBirds()
+{
+	Bird* bird;
+	for (auto it = this->smallBirds->begin(); it != this->smallBirds->end(); it++)
+	{
+		bird = (Bird*)(*it)->getSprite();
+		if (!bird->isDead()) {
+			if ((*it)->hasFinished()) {
+				bird->scare();
+			}
+			else if (
+				(bird->getY() >= gameLogic->superAce->getY()*0.9) &&
+				(bird->getY() <= gameLogic->superAce->getY()*1.1) &&
+				!(rand() % 31)
+				)//Bird is within 20% of superAce's y
+			{
+				BirdDropping* dropping = bird->shoot();
+				bird->decrFire();
+				CollisionChecker::getInstance()->registerCollisions(gameLogic->superAce, dropping);
+			}
+		}
+	}
+}
 
 //erxontai apo ta plagia, kanoun tyxaious kykloys kai feygoyn
 MovingPathAnimation* AI::createSmallGreenBirdAnimation() {
@@ -176,6 +216,7 @@ MovingPathAnimation* AI::createSmallGreenBirdAnimation() {
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, littleBirdSpeed));
 	return new MovingPathAnimation(paths, 0);
 }
+
 //kanoun perissoterous kukloys
 MovingPathAnimation* AI::createSmallBlueBirdAnimation() {
 	std::list<PathEntry> paths;
@@ -187,6 +228,7 @@ MovingPathAnimation* AI::createSmallBlueBirdAnimation() {
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, littleBirdSpeed));
 	return new MovingPathAnimation(paths, 0);
 }
+
 //bonus bird
 MovingPathAnimation* AI::createSmallRedBirdAnimation() {
 	std::list<PathEntry> paths;
@@ -196,6 +238,7 @@ MovingPathAnimation* AI::createSmallRedBirdAnimation() {
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.17, 180, 720, littleBirdSpeed));
 	return new MovingPathAnimation(paths, 0);
 }
+
 //megalyteres kampyles, apeutheias epitheseis
 MovingPathAnimation* AI::createSmallYellowBirdAnimation() {
 	std::list<PathEntry> paths;
@@ -205,6 +248,7 @@ MovingPathAnimation* AI::createSmallYellowBirdAnimation() {
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, littleBirdSpeed));
 	return new MovingPathAnimation(paths, 0);
 }
+
 //erxontai katheta (apo ta deksia) kai sto telos plisiazoun ton SuperAce
 //erxontai diagwnia pros ton superAce kai otan plisiasoun apomakrynontai
 MovingPathAnimation* AI::createSmallGreenGreyBirdAnimation() {
