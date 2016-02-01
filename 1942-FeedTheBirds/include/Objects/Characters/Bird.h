@@ -59,6 +59,7 @@ public:
 	
 	DROPPINGS *droppings;
 	BirdDropping* shoot();
+	DROPPINGS * bossShoot();
 	FrameRangeAnimation *flyAnimation;
 	FrameRangeAnimator *flyAnimator;
 

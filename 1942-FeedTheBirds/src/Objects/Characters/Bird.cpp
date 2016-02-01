@@ -39,6 +39,49 @@ BirdDropping* Bird::shoot() {
 	return dropping;
 }
 
+DROPPINGS* Bird::bossShoot() {
+	MovingAnimation* bullet1Animation = new MovingAnimation(-7, -2, 10, true, 4);
+	MovingAnimator* bullet1Animator = new MovingAnimator();
+	MovingAnimation* bullet2Animation = new MovingAnimation(-7, 0, 10, true, 5);
+	MovingAnimator* bullet2Animator = new MovingAnimator();
+	MovingAnimation* bullet3Animation = new MovingAnimation(-7, 2, 10, true, 6);
+	MovingAnimator* bullet3Animator = new MovingAnimator();
+
+	AnimatorHolder::animRegister(bullet1Animator);
+	AnimatorHolder::animRegister(bullet2Animator);
+	AnimatorHolder::animRegister(bullet3Animator);
+
+	DROPPINGS* bossDroppings = new vector<BirdDropping*>();
+	BirdDropping* dropping1 = new BirdDropping(x - 70, y - 30,
+		(AnimationFilm*)
+		AnimationFilmHolder::getSingleton()->
+		getFilm("birdshit"),
+		bullet1Animation,
+		bullet1Animator);
+	BirdDropping* dropping2 = new BirdDropping(x - 70, y - 30,
+		(AnimationFilm*)
+		AnimationFilmHolder::getSingleton()->
+		getFilm("birdshit"),
+		bullet2Animation,
+		bullet2Animator);
+	BirdDropping* dropping3 = new BirdDropping(x - 70, y - 30,
+		(AnimationFilm*)
+		AnimationFilmHolder::getSingleton()->
+		getFilm("birdshit"),
+		bullet3Animation,
+		bullet3Animator);
+	droppings->push_back(dropping1);
+	droppings->push_back(dropping2);
+	droppings->push_back(dropping3);
+	bossDroppings->push_back(dropping1);
+	bossDroppings->push_back(dropping2);
+	bossDroppings->push_back(dropping3);
+	dropping1->startMoving();
+	dropping2->startMoving();
+	dropping3->startMoving();
+	return bossDroppings;
+}
+
 void Bird::displayAll() {
 	if (isSpriteVisible()) {
 		this->display(Rect(0, 0, 0, 0));

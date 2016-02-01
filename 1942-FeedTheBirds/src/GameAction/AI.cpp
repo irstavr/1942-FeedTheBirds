@@ -22,6 +22,8 @@ AI::AI(GameLogic *_gameLogic, FrameRangeAnimator* _flyAnimator, FrameRangeAnimat
 	mediumBrownBirdAnimation = this->createMediumBrownBirdAnimation();
 	mediumYellowBirdAnimation = this->createMediumYellowBirdAnimation();
 
+	bigBirdAnimation = this->createBigBirdAnimation();
+
 	/* initialize random seed: */
 	srand(time(NULL));
 }
@@ -35,23 +37,9 @@ void AI::eventAtX(int x)
 	handleMediumBirds();
 	handleBoss();
 
-	Point* randomEntryPoint;
 	switch (x) {
 	case 20:
-		// action point for small birds
-		randomEntryPoint = getRandomEntryPoint();
-		this->addSmallBird(randomEntryPoint->x,
-							randomEntryPoint->y,
-							"smallGreenBird", 
-							smallGreenBirdAnimation);
-		/*this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+50, 
-							SCREEN_WINDOW_HEIGHT+60, 
-							"smallYellowBird", 
-							smallYellowBirdAnimation);
-		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+100, 
-							SCREEN_WINDOW_HEIGHT+200, 
-							"smallBlueBird", 
-							smallBlueBirdAnimation);*/
+		addSmallBirds();
 		break;
 	case 100:
 		// action points for medium birds
@@ -67,8 +55,14 @@ void AI::eventAtX(int x)
 		break;
 	case 500:
 		// action point for boss
+		this->addBoss(-10,
+			400,
+			"bigBird",
+			ColoredBossLives,
+			ColoredBossSpeed,
+			bigBirdAnimation);
 		break;
-	case 3480:	// TODO: change to terrain length minus something : P
+	case 3400:	// TODO: change to terrain length minus something : P
 		gameLogic->superAce->startLanding();
 		break;
 	default:
@@ -95,12 +89,71 @@ Point* AI::getRandomEntryPoint() {
 //------------------------ Boss Birds --------------------------------------------------
 
 void AI::handleBoss() {
-	
+	Bird* bird;
+	for (auto it = this->largeBirds->begin(); it != this->largeBirds->end(); it++)
+	{
+		bird = (Bird*)(*it)->getSprite();
+		if (!bird->isDead()) {
+			/*if ((*it)->hasFinished()) {
+				bird->scare();
+			}*/
+			if (
+				(bird->getY() >= gameLogic->superAce->getY()*0.9) &&
+				(bird->getY() <= gameLogic->superAce->getY()*1.1) &&
+				!(rand() % 31)
+				)//Bird is within 20% of superAce's y
+			{
+			DROPPINGS* droppings = bird->bossShoot();
+			//bird->decrFire();
+			for (auto dr = droppings->begin(); dr != droppings->end(); dr++)
+			{
+				CollisionChecker::getInstance()->
+					registerCollisions(gameLogic->superAce, *dr);
+			}
+			}
+		}
+	} 
+}
+
+void AI::addBoss(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis) {
+	this->largeBirds->push_back(birdPathAnimator->clone());
+	this->largeBirds->back()->setHandleFrames(false);
+	AnimatorHolder::markAsRunning(this->largeBirds->back());
+
+	MovingPathAnimation* visVitalisCloned = visVitalis->clone(lastUsedID++);
+
+	this->largeBirds->back()->start(gameLogic->createBird(x, y,
+		bossBird,
+		lives,
+		speed, // TODO: TO BE USED on AI!
+		bossBirdFire,
+		filmId,
+		flyAnimation->clone(lastUsedID++),
+		flyAnimator->clone()),
+		visVitalisCloned,
+		getCurrTime());
 }
 
 MovingPathAnimation* AI::createBigBirdAnimation() {
 	std::list<PathEntry> paths;
-	return new MovingPathAnimation(paths, 0);
+	paths.splice(paths.end(), *createSmoothDiagonalPath(100, 0, ColoredBossSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(100, -1, ColoredBossSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(100, 0, ColoredBossSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(100, -1, ColoredBossSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(100, 0, ColoredBossSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(100, -1, ColoredBossSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(100, 0, ColoredBossSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(100, -1, ColoredBossSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(0, -100, ColoredBossSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(0, -100, ColoredBossSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(0, -100, ColoredBossSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(0, 0, ColoredBossSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(0, 0, ColoredBossSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(0, 0, ColoredBossSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(0, 100, ColoredBossSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(0, 100, ColoredBossSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(0, 100, ColoredBossSpeed));
+	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 //------------------------ Medium Birds ------------------------------------------------
@@ -251,6 +304,26 @@ MovingPathAnimation* AI::createMediumGreyBirdAnimation() {
 
 //------------------------ Small Birds --------------------------------------------------
 
+void AI::addSmallBirds() {
+	// action point for small birds
+	Point* randomEntryPoint;
+	randomEntryPoint = getRandomEntryPoint();
+	this->addSmallBird(randomEntryPoint->x,
+		randomEntryPoint->y,
+		"smallGreenBird",
+		smallGreenBirdAnimation);
+	randomEntryPoint = getRandomEntryPoint();
+	this->addSmallBird(randomEntryPoint->x,
+		randomEntryPoint->y,
+		"smallYellowBird",
+		smallYellowBirdAnimation);
+	randomEntryPoint = getRandomEntryPoint();
+	this->addSmallBird(randomEntryPoint->x,
+		randomEntryPoint->y,
+		"smallBlueBird",
+		smallBlueBirdAnimation);
+}
+
 void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis) {
 	this->smallBirds->push_back(birdPathAnimator->clone());
 	this->smallBirds->back()->setHandleFrames(false);
@@ -299,6 +372,7 @@ void AI::handleLittleBirds()
 MovingPathAnimation* AI::createSmallGreenBirdAnimation() {
 	std::list<PathEntry> paths;
 	//todo appropriately
+	
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, littleBirdSpeed));
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, littleBirdSpeed));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, littleBirdSpeed));

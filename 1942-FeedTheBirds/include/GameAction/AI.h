@@ -17,6 +17,7 @@
 #define YY (*it)->getY() - gameLogic->superAce->getY()
 #define XX (*it)->getX() - (gameLogic->superAce->getX()+200)
 
+typedef vector<BirdDropping*> DROPPINGS;
 class AI {
 
 public:
@@ -53,9 +54,10 @@ private:
 	unsigned int lastUsedID;
 
 	void addSmallBird(int x, int y, char * id, MovingPathAnimation * visVitalis);
-	
+	void addSmallBirds();
 	void addMediumBirds(void);
 	void addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis);
+	void addBoss(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis);
 
 	void handleLittleBirds();
 	void handleMediumBirds();

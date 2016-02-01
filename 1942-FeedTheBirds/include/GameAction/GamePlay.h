@@ -44,7 +44,7 @@ private:
 	std::string title;
 	static float time, startTime, gamingTime, pauseTime;
 	unsigned long currTime;
-
+	bool hasWon = false;
 	const int windowHeight;
 	const int windowWidth;
 
@@ -113,6 +113,7 @@ private:
 	void displayMainScreen(unsigned long now);
 	void displayPauseGame(unsigned long now);
 	void displayGameOver(unsigned long now);
+	void displayGameFinished(unsigned long now);
 	void checkActionPoints();
 	void pauseGame(unsigned long now);
 	void gameOver(unsigned long now);
