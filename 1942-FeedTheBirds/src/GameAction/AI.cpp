@@ -272,23 +272,23 @@ void AI::handleMediumBirds() {
 		if (!bird->isDead()) {
 			if ((*it)->hasFinished() && (bird->getFollowsSuperAce())) {
 				makeBirdFollowSuperAce(bird, bird->getFollowsSuperAce());
-				auto tmp = it;
+				/*auto tmp = it;
 				it--;
-				this->mediumBirds->erase(tmp);
+				this->mediumBirds->erase(tmp);*/
 			}
 			else if ((*it)->hasFinished()) {
 				bird->scare();
-				auto tmp = it;
+				/*auto tmp = it;
 				it--;
-				this->mediumBirds->erase(tmp);
+				this->mediumBirds->erase(tmp);*/
 			}
 			else makeBirdShoot(bird);
 		}
 		else {
 			(*it)->stop();
-			auto tmp = it;
+			/*auto tmp = it;
 			it--;
-			this->mediumBirds->erase(tmp);
+			this->mediumBirds->erase(tmp);*/
 		}
 	}
 	for (auto it = this->followers->begin(); it != this->followers->end(); it++) {
@@ -300,17 +300,17 @@ void AI::handleMediumBirds() {
 		}
 		else {
 			(*it)->stop();
-			auto tmp = it;
+			/*auto tmp = it;
 			it--;
-			this->followers->erase(tmp);
+			this->followers->erase(tmp);*/
 		}
 	}
 	for (auto it = this->loopers->begin(); it != this->loopers->end(); it++) {\
 		if ((*it)->hasFinished()) {
 			bird->scare();
-			auto tmp = it;
+			/*auto tmp = it;
 			it--;
-			this->loopers->erase(tmp);
+			this->loopers->erase(tmp);*/
 		}
 	}
 }
@@ -395,7 +395,7 @@ void AI::addSmallBirds() {
 	this->addSmallBird(randomEntryPoint->x,
 		randomEntryPoint->y,
 		"smallBlueBird",
-		smallBlueBirdAnimation,0);
+		smallBlueBirdAnimation,0);  
 }
 
 void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis, int followsSuperAce) {
