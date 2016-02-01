@@ -1,10 +1,5 @@
 # 1942 - Feed The Birds
-
-1. SuperAce
-    -explosion -- DONE OK
-    -loop -- DONE OK
-    -flashing - otan xanei zwh  -- DONE! OK!
-    
+=
 2. Mikra Aeroplana
     1-2 fores purovoloun k feugoun
     ta rixnoume me 1 fish
@@ -42,22 +37,9 @@
     ta gkri -> +speed kai gia na pesoun 35 xtuphmata
                 rixnoun 5 sfaires
                 se perissoteres kateuthunseis
-                
-5. PowerUps
-    smhnos apo kokkina aeroplana
-    an ta rixei ola -> POW
-    
-    7 power ups
-    
-6. Arxh kai telos pistas
-    scaling animator 
-        beginning -- DONE
-        end  -- DONE
 
-7. Options
-    fps
-	
-8. Sounds
+# FIX:
+- add audio sounds
 	start sound
 	shootFish sound
 	birdTwitting
@@ -65,15 +47,18 @@
 	gameOver
 	loopSound
 	collisionSound
-
-# FIX:
-- add audio sounds
-
+    
 - AI
     handle birds move
+    boss bird
+    medium birds
+    add rotating-flipping
+    shooting
     
 - PowerUp
     - create power ups on terrain
-
+    - test all of them
+    
 - Main window initial position on screen
         
+- change bitmap of birdshit
