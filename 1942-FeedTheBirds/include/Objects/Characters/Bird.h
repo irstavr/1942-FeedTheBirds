@@ -64,8 +64,8 @@ public:
 	
 
 
-	void setFollowsSuperAce(bool b);
-	bool getFollowsSuperAce();
+	void setFollowsSuperAce(int b);
+	int getFollowsSuperAce();
 	BirdSpeed getBirdSpeed();
 	void displayAll();
 	int getLives();
@@ -86,7 +86,7 @@ private:
 	bool releasesPowerUp;
 	bool isGrey;
 	bool isAlive;
-	bool followsSuperAce;
+	int followsSuperAce;
 
 	TickAnimation *tickAnimation;
 	TimerTickAnimator *timerTick;

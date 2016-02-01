@@ -40,12 +40,12 @@ BirdDropping* Bird::shoot() {
 	return dropping;
 }
 
-void Bird::setFollowsSuperAce(bool b)
+void Bird::setFollowsSuperAce(int b)
 {
 	this->followsSuperAce = b;
 }
 
-bool Bird::getFollowsSuperAce()
+int Bird::getFollowsSuperAce()
 {
 	return this->followsSuperAce;
 }

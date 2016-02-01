@@ -95,10 +95,10 @@ Point* AI::getRandomEntryPoint() {
 	return p;
 }
 
-void AI::makeBirdFollowSuperAce(Bird * bird)
+void AI::makeBirdFollowSuperAce(Bird * bird, int loops)
 {
 	MovingAnimator *mar = new MovingAnimator();
-	MovingAnimation *  man = new MovingAnimation(0, (gameLogic->superAce->getY() - bird->getY()) > 0 ? 1: -1, bird->getBirdSpeed(), true, lastUsedID++);
+	MovingAnimation * man = new MovingAnimation(0, (gameLogic->superAce->getY() - bird->getY()) > 0 ? 1: -1, bird->getBirdSpeed(), true, lastUsedID++);
 	AnimatorHolder::markAsRunning(mar);
 	this->followers->push_back(mar);
 	mar->start(bird, man, getCurrTime());
@@ -108,14 +108,13 @@ void AI::makeBirdFollowSuperAce(Bird * bird)
 	this->loopers->back()->setHandleFrames(false);
 	AnimatorHolder::markAsRunning(this->loopers->back());
 	
-	this->loopers->back()->start(bird, createLooperAnimation(), getCurrTime());
+	this->loopers->back()->start(bird, createLooperAnimation(loops), getCurrTime());
 }
 
-// apo to katw meros ki anevainoun
-MovingPathAnimation* AI::createLooperAnimation() {
+MovingPathAnimation* AI::createLooperAnimation(int loops) {
 	std::list<PathEntry> paths;
 	std::list<PathEntry> path= *createCircularPath(SCREEN_WINDOW_HEIGHT*0.20, 270, 630, mediumColoredBirdSpeed);
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < loops; i++) {
 		paths.insert(paths.end(), path.begin(), path.end());
 	}
 	return new MovingPathAnimation(paths, lastUsedID++);
@@ -179,7 +178,7 @@ void AI::addMediumBirds(void) {
 			mediumColoredBirdLives,
 			mediumColoredBirdSpeed,
 			mediumBrownBirdAnimation,
-			true);
+			5);
 	}
 	else if (iSecret == 4) {
 		// Grey Medium Birds
@@ -202,13 +201,16 @@ void AI::handleMediumBirds() {
 		bird = (Bird*)(*it)->getSprite();
 		if (!bird->isDead()) {
 			if ((*it)->hasFinished() && (bird->getFollowsSuperAce())) {
-				makeBirdFollowSuperAce(bird);
+				makeBirdFollowSuperAce(bird, bird->getFollowsSuperAce());
 				auto tmp = it;
 				it--;
 				this->mediumBirds->erase(tmp);
 			}
 			else if ((*it)->hasFinished()) {
 				bird->scare();
+				auto tmp = it;
+				it--;
+				this->mediumBirds->erase(tmp);
 			}
 			else if (
 				(bird->getY() >= gameLogic->superAce->getY()*0.9) &&
@@ -253,9 +255,17 @@ void AI::handleMediumBirds() {
 			this->followers->erase(tmp);
 		}
 	}
+	for (auto it = this->loopers->begin(); it != this->loopers->end(); it++) {\
+		if ((*it)->hasFinished()) {
+			bird->scare();
+			auto tmp = it;
+			it--;
+			this->loopers->erase(tmp);
+		}
+	}
 }
 
-void AI::addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis, bool followsSuperAce) {
+void AI::addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis, int followsSuperAce) {
 
 	this->mediumBirds->push_back(birdPathAnimator->clone());
 	this->mediumBirds->back()->setHandleFrames(false);

@@ -58,15 +58,15 @@ private:
 	void addSmallBird(int x, int y, char * id, MovingPathAnimation * visVitalis);
 	
 	void addMediumBirds(void);
-	void addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis, bool followsSuperAce);
+	void addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis, int followsSuperAce);
 
 	void handleLittleBirds();
 	void handleMediumBirds();
 	void handleBoss();
 
-	void makeBirdFollowSuperAce(Bird *bird);
+	void makeBirdFollowSuperAce(Bird *bird, int loops);
 
-	MovingPathAnimation * createLooperAnimation();
+	MovingPathAnimation * createLooperAnimation(int loops);
 
 	Point* getRandomEntryPoint();
 
@@ -74,7 +74,7 @@ private:
 	MovingPathAnimation * createMediumBrownBirdAnimation();
 	MovingPathAnimation * createMediumGreenBirdAnimation();
 	MovingPathAnimation * createMediumYellowBirdAnimation();
-	MovingPathAnimation*  createMediumGreyBirdAnimation();
+	MovingPathAnimation * createMediumGreyBirdAnimation();
 	MovingPathAnimation * createSmallGreenBirdAnimation();
 	MovingPathAnimation * createSmallBlueBirdAnimation();
 	MovingPathAnimation * createSmallRedBirdAnimation();
