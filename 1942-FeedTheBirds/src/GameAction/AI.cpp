@@ -48,7 +48,7 @@ void AI::eventAtX(int x)
 							"smallBlueBird", 
 							smallBlueBirdAnimation);
 		break;
-	case 40:
+	case 100:
 		// action points for medium birds
 		/*
 		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75,
@@ -75,7 +75,7 @@ void AI::eventAtX(int x)
 	case 500:
 		// action point for boss
 		break;
-	case 1000:	// TODO: change to terrain length minus something : P
+	case 3200:	// TODO: change to terrain length minus something : P
 		gameLogic->superAce->startLanding();
 		break;
 	default:
@@ -83,10 +83,10 @@ void AI::eventAtX(int x)
 	}
 }
 
-//------------------------ Boss Birds -------------------------------------------------
+//------------------------ Boss Birds --------------------------------------------------
 
 void AI::handleBoss() {
-
+	
 }
 
 MovingPathAnimation* AI::createBigBirdAnimation() {
@@ -94,7 +94,7 @@ MovingPathAnimation* AI::createBigBirdAnimation() {
 	return new MovingPathAnimation(paths, 0);
 }
 
-//------------------------ Medium Birds -------------------------------------------------
+//------------------------ Medium Birds ------------------------------------------------
 
 void AI::handleMediumBirds() {
 	Bird* bird;
