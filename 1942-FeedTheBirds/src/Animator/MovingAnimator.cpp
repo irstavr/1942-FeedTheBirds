@@ -36,7 +36,7 @@ void MovingAnimator::progress(unsigned long currTime) {
 			if (sprite->isSpriteVisible()) {
 				sprite->move(anim->getDx(), anim->getDy());
 			}
-			progress(currTime);  // Recursion (make it a loop)
+			progress(currTime);
 		}
 	}
 }

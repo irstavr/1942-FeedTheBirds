@@ -158,7 +158,7 @@ void GamePlay::initGameEngine() {
 	FlashingAnimator *flashAnimator = new FlashingAnimator();
 	AnimatorHolder::animRegister(flashAnimator); 
 	
-	startButton = new Button(150,
+	startButton = new Button(160,
 							 420, 
 							(AnimationFilm *) 
 								AnimationFilmHolder::getSingleton()->
@@ -174,21 +174,29 @@ void GamePlay::initGameEngine() {
 							flashAnimation,
 							flashAnimator);
 
-	gameOverButton = new Button(500, 
-								380, 
+	gameOverButton = new Button(380, 
+								350, 
 								(AnimationFilm *)
 									AnimationFilmHolder::getSingleton()->
 										getFilm("GameOverButton"),
 								flashAnimation, 
 								flashAnimator);
 
-	replayButton = new Button(300,
+	replayButton = new Button(380,
 								440,
 								(AnimationFilm *)
 								AnimationFilmHolder::getSingleton()->
 								getFilm("ReplayButton"),
 								flashAnimation->clone(0),
 								flashAnimator->clone());
+
+	winButton = new Button(400,
+							350,
+							(AnimationFilm *)
+							AnimationFilmHolder::getSingleton()->
+							getFilm("WinButton"),
+							flashAnimation->clone(1),
+							flashAnimator->clone());
 
 	// Characters - Items:
 
@@ -334,6 +342,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				if (gameState == GAME_STATE_GAMEOVER) {
 					InputManager::onKeyEnter(gameState, display, startButton, gameOverButton);
 					cleanGamePlay();
+					hasWon = false;
 				}
 				break;
 				/* O:  Just for our debugging*/
@@ -450,7 +459,8 @@ void GamePlay::render(unsigned long timestamp) {
 		displayMainScreen(timestamp);
 	}
 	if (gameState == GAME_STATE_GAMEOVER) {
-		displayGameOver(timestamp);
+		if(!hasWon)displayGameOver(timestamp);
+		else displayGameFinished(timestamp);
 	}
 	if (gameState == GAME_STATE_PAUSED) {
 		displayPauseGame(currTime);
@@ -529,27 +539,39 @@ void GamePlay::gameOver(unsigned long now) {
 void GamePlay::gameFinished() {
 	if (gameState != GAME_STATE_GAMEOVER) {
 		gameState = GAME_STATE_GAMEOVER;
+		hasWon = true;
 		// TODO
 		// show score
 		// win picture
 		// statistics
 		// new level ?
+		winButton->setVisibility(true);
+		currentGame->gameRunning = false;
 	}
+}
+
+void GamePlay::displayGameFinished(unsigned long now) {
+	terrain->drawBackground(ScoreBoard::getInstance().getScore(),
+		ScoreBoard::getInstance().getHighScore(),
+		currentGame->profile->getLives(),
+		currentGame->profile->getLoops());
+	currentGame->superAce->displayAll();
+	winButton->display(Rect(0, 0, 0, 0));
+	replayButton->display(Rect(0, 0, 0, 0));
+
+	al_flip_display();
+	al_clear_to_color(al_map_rgb(0, 0, 0));
 }
 
 void GamePlay::displayGameOver(unsigned long now) {
 	terrain->drawBackground(ScoreBoard::getInstance().getScore(),
-							ScoreBoard::getInstance().getHighScore(),
-							currentGame->profile->getLives(),
-							currentGame->profile->getLoops());
+		ScoreBoard::getInstance().getHighScore(),
+		currentGame->profile->getLives(),
+		currentGame->profile->getLoops());
 	currentGame->superAce->displayAll();
 	if (gameOverButton->isSpriteVisible()) {
-		gameOverButton->setX(400);
-		gameOverButton->setY(300);
 		gameOverButton->display(Rect(0, 0, 0, 0));
 	}
-	replayButton->setX(400);
-	replayButton->setY(400);
 	replayButton->display(Rect(0, 0, 0, 0));
 
 	al_flip_display();
@@ -559,9 +581,9 @@ void GamePlay::displayGameOver(unsigned long now) {
 
 void GamePlay::displayPauseGame(unsigned long now) {
 	terrain->drawBackground(ScoreBoard::getInstance().getScore(),
-							ScoreBoard::getInstance().getHighScore(),
-							currentGame->profile->getLives(),
-							currentGame->profile->getLoops());
+		ScoreBoard::getInstance().getHighScore(),
+		currentGame->profile->getLives(),
+		currentGame->profile->getLoops());
 
 	if (pauseButton->isSpriteVisible()) {
 		pauseButton->setX(600);
