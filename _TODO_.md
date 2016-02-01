@@ -67,10 +67,7 @@
 	collisionSound
 
 # FIX:
-- bug with flipping -- DONE
-- bug with looping -- DONE
 - add audio sounds
-- add birdFire on bird constructor -- DONE
 
 - AI
     handle birds move
@@ -79,10 +76,4 @@
     - create power ups on terrain
 
 - Main window initial position on screen
-
-- New screen when player finishes game! 
-    show score
-    show winning picture
-    button for new game
         
-- New Levels ?

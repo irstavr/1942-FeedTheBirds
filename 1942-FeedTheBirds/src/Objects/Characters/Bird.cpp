@@ -15,7 +15,8 @@ Bird::Bird(Dim _x, Dim _y,
 		birdLives(birdLives),
 		birdSpeed(birdSpeed),
 		birdFire(birdFire),
-		isAlive(true) {
+		isAlive(true),
+		isFed(false)  {
 	droppings = new vector<BirdDropping*>();
 }
 
@@ -96,8 +97,6 @@ void Bird::collisionAction(Sprite* s) {
 	cerr << "COLLISION! fish with bird \n";
 
 	Fish* fish = (Fish*) s;
-
-	removeLife();
 	fish->setVisibility(false);
 	fish->disableMovement();
 	fish->setDead();
@@ -105,17 +104,23 @@ void Bird::collisionAction(Sprite* s) {
 	if (birdID == littleBird) {
 		ScoreBoard::getInstance().incrScore(100);
 	}
+	else if (birdID == bonusBird) {
+		ScoreBoard::getInstance().incrScore(100);
+	}
 	else if (birdID == mediumBird) {
-		ScoreBoard::getInstance().incrScore(300);
+		ScoreBoard::getInstance().incrScore(200);
 	}
 	else if (birdID == bossBird) {
-		ScoreBoard::getInstance().incrScore(1000);
+		ScoreBoard::getInstance().incrScore(300);
 	}
 
+	this->removeLife();
+
 	// kill fish sprite
-	if (birdLives == 0) {
-		cout << "BIRD DEAD!\n";
-		leaveScreen();
+	if (this->birdLives == 0) {
+		cerr << "BIRD DEAD!\n";
+		this->leaveScreen();
 		this->isAlive = false;
+		this->isFed = true;
 	}
 }

@@ -10,9 +10,29 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 					  MovingPathAnimator* loopAnimator) {
 	gameRunning = true;
 	superAceKilled = false;
+	checkQuadGun = false;
+	checkEnemyCrash = false;
+	checkSideFighter = false;
+	checkExtraLife = false;
+	checkNoEnemyBullets = false;
+	checkExtraLoop = false;
+	check1000Points = false;
+
+	// bonuses
+	// used to inform game play to show the POW
+	showQuadGun = false;
+	showEnemyCrash = false;
+	showSideFighter = false;
+	showExtraLife = false;
+	showNoEnemyBullets = false;
+	showExtraLoop = false;
+	show1000Points = false;
+
 	profile = new PlayerProfile(std::make_pair(0,0));
 
 	birds = new vector<Bird*>();
+	bonusBirds = new vector<Bird*>;
+
 	superAce = new SuperAce(profile,
 							100,
 							285,
@@ -49,16 +69,15 @@ Bird* GameLogic::createBird(Dim _x, Dim _y,
 						  birdSpeed,
 						  birdFire,
 						  (AnimationFilm*)
-								AnimationFilmHolder::getSingleton()->
-									getFilm(filmId),
-										flyAnimation,
-										flyAnimator);
+							AnimationFilmHolder::getSingleton()->
+								getFilm(filmId),
+								flyAnimation,
+								flyAnimator);
 
 	birds->push_back(bird);
 	bird->startMoving();
 
-	CollisionChecker::getInstance()->
-					registerCollisions(superAce, bird);
+	CollisionChecker::getInstance()->registerCollisions(superAce, bird);
 
 	return bird;
 }
@@ -67,6 +86,27 @@ bool GameLogic::isRunning() const {
 	return gameRunning;
 }
 
-int GameLogic::solveCollision() {
-	return 0;
+bool GameLogic::showBonus(BonusID bonus) {
+	int counter = 0;
+	for (unsigned i = 0; i < bonusBirds->size(); i++) {
+		Bird* bird = bonusBirds->at(i);
+		if (bird->isFed) {
+			counter++;
+		}
+	}
+	if (counter == 5) {
+		return true;
+	/*
+		switch (bonus) {
+		case quadGun:
+		case enemyCrash:
+		case sideFighter:
+		case extraLife:
+		case noEnemyBullets:
+		case extraLoop:
+		case points1000:
+		}
+	*/
+	}
+	return false;
 }

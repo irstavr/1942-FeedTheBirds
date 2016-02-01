@@ -1,5 +1,20 @@
 #include "..\..\..\include\Objects\Items\PowerUp.h"
 
+PowerUp::PowerUp(
+	Dim _x,
+	Dim _y,
+	AnimationFilm * film,
+	MovingAnimation * _flyAnimation,
+	MovingAnimator * _flyAnimator) :
+	Sprite(_x, _y, film),
+	flyAnimation(_flyAnimation),
+	flyAnimator(_flyAnimator)
+{
+	this->exhasted = false;
+	this->setVisibility(true);
+	this->speedx = 10;
+}
+
 PowerUpType_t PowerUp::getType()
 {
 	return this->type;
@@ -38,17 +53,3 @@ void PowerUp::startMoving()
 	AnimatorHolder::markAsRunning(flyAnimator);
 }
 
-PowerUp::PowerUp(
-	Dim _x, 
-	Dim _y, 
-	AnimationFilm * film, 
-	MovingAnimation * _flyAnimation,
-	MovingAnimator * _flyAnimator) :
-	Sprite(_x, _y, film),
-	flyAnimation(_flyAnimation),
-	flyAnimator(_flyAnimator)
-{
-	this->exhasted = false;
-	this->setVisibility(true);
-	this->speedx = 10;
-}

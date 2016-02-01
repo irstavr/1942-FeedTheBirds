@@ -366,6 +366,7 @@ void GamePlay::updateGameState() {
 		// etc 
 		//
 		checkAnimationFlags();
+		checkBonuses();
 
 		if (currentGame->superAce->isSuperAceDead()) {
 			gameOver(getCurrTime());
@@ -403,6 +404,38 @@ void GamePlay::checkAnimationFlags() {
 		if (currentGame->superAce->landingTime + 1000 < getCurrTime()) {
 			gameFinished();
 		}
+	}
+}
+
+void GamePlay::checkBonuses() {
+
+	if (currentGame->checkQuadGun) {
+		if (currentGame->showBonus(quadGun)) {
+			// show bitmap of POW
+
+
+			currentGame->bonusBirds->clear();
+			currentGame->checkQuadGun = false;
+			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW\n";
+		}
+	}
+	if (currentGame->checkEnemyCrash) {
+
+	}
+	if (currentGame->checkSideFighter) {
+
+	}
+	if (currentGame->checkExtraLife) {
+
+	}
+	if (currentGame->checkNoEnemyBullets) {
+
+	}
+	if (currentGame->checkExtraLoop) {
+
+	}
+	if (currentGame->check1000Points) {
+
 	}
 }
 

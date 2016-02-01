@@ -114,12 +114,12 @@ private:
 	void displayPauseGame(unsigned long now);
 	void displayGameOver(unsigned long now);
 	void checkActionPoints();
+	void checkBonuses();
 	void pauseGame(unsigned long now);
 	void gameOver(unsigned long now);
 	void resumeGame(void);
 	void gameFinished(void);
 
-	MovingPathAnimation* createSmallBirdAnimation();
 	MovingPathAnimation *createLoopAnimation(void);
 };
 #endif

@@ -15,6 +15,7 @@ typedef vector<BirdDropping*> DROPPINGS;
 // and count user's score when feeds them
 enum BirdID {
 	littleBird = 0,
+	bonusBird,
 	mediumBird,
 	bossBird
 };
@@ -61,6 +62,8 @@ public:
 	BirdDropping* shoot();
 	FrameRangeAnimation *flyAnimation;
 	FrameRangeAnimator *flyAnimator;
+
+	bool isFed;
 
 	void displayAll();
 	int getLives();

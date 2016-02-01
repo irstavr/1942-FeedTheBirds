@@ -28,7 +28,7 @@ public:
 private:
 	GameLogic *gameLogic;
 
-	std::vector<Bird*> *birds;
+	std::vector<Bird*> *bonusBirdsList;
 	std::vector<MovingPathAnimator*> *smallBirds;
 	std::vector<MovingPathAnimator*> *mediumBirds;
 	std::vector<MovingPathAnimator*> *largeBirds;
@@ -51,9 +51,9 @@ private:
 	MovingPathAnimation *bigBirdAnimation;
 
 	unsigned int lastUsedID;
-
+	void addBonusBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis);
 	void addSmallBird(int x, int y, char * id, MovingPathAnimation * visVitalis);
-	
+	void addBonusBirds(void);
 	void addMediumBirds(void);
 	void addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis);
 

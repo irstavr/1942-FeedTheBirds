@@ -5,7 +5,7 @@ AI::AI(GameLogic *_gameLogic, FrameRangeAnimator* _flyAnimator, FrameRangeAnimat
 			flyAnimator(_flyAnimator),
 			flyAnimation(_flyAnimation) {
 	lastUsedID = BASE_ID;
-	birds = gameLogic->birds;
+	
 	smallBirds  = new std::vector<MovingPathAnimator*>;
 	mediumBirds = new std::vector<MovingPathAnimator*>;
 	largeBirds  = new std::vector<MovingPathAnimator*>;
@@ -27,6 +27,10 @@ AI::AI(GameLogic *_gameLogic, FrameRangeAnimator* _flyAnimator, FrameRangeAnimat
 }
 
 AI::~AI() {
+	delete smallBirds;
+	delete mediumBirds;
+	delete largeBirds;
+	delete bonusBirds;
 }
 
 void AI::eventAtX(int x)
@@ -65,7 +69,27 @@ void AI::eventAtX(int x)
 		// action points for medium birds
 		addMediumBirds();
 		break;
+	//next cases for 1st bonus: QuadGun ! ! !
+	case 220:
+		addBonusBirds();
+		break;
+	case 240:
+		addBonusBirds();
+		break;
+	case 260:
+		addBonusBirds();
+		break;
+	case 280:
+		addBonusBirds();
+		break;
+	case 300:
+		addBonusBirds();
+		gameLogic->checkQuadGun = true;
+		break;
+	case 370:
+		break;  
 	case 500:
+
 		// action point for boss
 		break;
 	case 3480:	// TODO: change to terrain length minus something : P
@@ -117,8 +141,8 @@ void AI::addMediumBirds(void) {
 	int iSecret = rand() % 4 + 1;
 	iSecret = 3; //TODO: just for debugging! ! !
 
-	// random num of birds each time (max 10)
-	int birdsNum = rand() % 10;	// TODO: to be used inside ifs
+	// random num of birds each time (max 5)
+	int birdsNum = rand() % 5+1;	// TODO: to be used inside ifs
 
 	if (iSecret == 1) {
 		// Green Medium Bird
@@ -210,12 +234,12 @@ void AI::addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed sp
 }
 
 // create a Brown Medium Bird
-//apo to panw meros ths othonis kanoun ena kuklo k sunexizoun na mas vroun
+// apo to panw meros ths othonis kanoun ena kuklo k sunexizoun na mas vroun
 MovingPathAnimation* AI::createMediumBrownBirdAnimation() {
 	std::list<PathEntry> paths;
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 360, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 90, 360, mediumColoredBirdSpeed));
 	//paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 360, 720, mediumColoredBirdSpeed));
-	paths.splice(paths.end(), *createSmoothDiagonalPath(SCREEN_WINDOW_WIDTH, 0, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-SCREEN_WINDOW_WIDTH / 2, -SCREEN_WINDOW_HEIGHT, mediumColoredBirdSpeed));
 	return new MovingPathAnimation(paths, 0);
 }
 
@@ -247,6 +271,39 @@ MovingPathAnimation* AI::createMediumGreyBirdAnimation() {
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, mediumGreyBirdSpeed));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, mediumGreyBirdSpeed));
 	return new MovingPathAnimation(paths, 0);
+}
+
+//------------------------ Bonus Birds --------------------------------------------------
+
+void AI::addBonusBirds(void)
+{
+	this->addBonusBird(SCREEN_WINDOW_WIDTH*0.75 + 100,
+						SCREEN_WINDOW_HEIGHT + 200,
+						"smallRedBird",
+						smallRedBirdAnimation);
+	
+}
+
+void AI::addBonusBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis) {
+	this->bonusBirds->push_back(birdPathAnimator->clone());
+	this->bonusBirds->back()->setHandleFrames(false);
+	AnimatorHolder::markAsRunning(this->bonusBirds->back());
+
+	// create a bonus bird on logic instance
+	Bird* bird = gameLogic->createBird(x, y,
+										bonusBird,
+										littleBirdLives,
+										littleBirdSpeed,
+										littleBirdFire,
+										filmId,
+										flyAnimation->clone(lastUsedID++),
+										flyAnimator->clone());
+	//update bonus birds list on Game Logic
+	gameLogic->bonusBirds->push_back(bird);
+
+	MovingPathAnimation* visVitalisCloned = visVitalis->clone(lastUsedID++);
+
+	this->bonusBirds->back()->start(bird, visVitalisCloned, getCurrTime());
 }
 
 //------------------------ Small Birds --------------------------------------------------
@@ -320,10 +377,11 @@ MovingPathAnimation* AI::createSmallBlueBirdAnimation() {
 //bonus bird
 MovingPathAnimation* AI::createSmallRedBirdAnimation() {
 	std::list<PathEntry> paths;
-	//todo appropriately
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, littleBirdSpeed));
-	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, littleBirdSpeed));
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.17, 180, 720, littleBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -10, littleBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.15, 180, 720, littleBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.14, 180, 360, littleBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, littleBirdSpeed)); 
 	return new MovingPathAnimation(paths, 0);
 }
 

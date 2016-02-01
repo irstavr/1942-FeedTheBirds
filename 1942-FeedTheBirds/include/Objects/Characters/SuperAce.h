@@ -24,6 +24,10 @@ public:
 	SuperAce(PlayerProfile * playerProfile, Dim _x, Dim _y, AnimationFilm * film, FrameRangeAnimation * _takeOffAnimation, FrameRangeAnimator * _takeOffAnimator, MovingPathAnimation * _landAnimation, MovingPathAnimator * _landAnimator, FrameRangeAnimation * _deathAnimation, FrameRangeAnimator * _deathAnimator, MovingPathAnimation * _loopAnimation, MovingPathAnimator * _loopAnimator, vector<Bird*>* _birds);
 	~SuperAce(void);
 
+	FrameRangeAnimation *takeOffAnimation;
+	FrameRangeAnimator *takeOffAnimator;
+	AnimationFilm* film;
+
 	void shoot(vector<Bird*>* birds);
 	void moveUp();
 	void moveDown();
@@ -35,29 +39,36 @@ public:
 	void die(void);
 	void explode(void);
 	bool isSuperAceDead();
-	unsigned long injuredTime;
-	unsigned long explosionTime;
-	unsigned long loopTime;
-	unsigned long landingTime;
-
-
 	void displayAll();
 	virtual void collisionAction(Sprite* s);
 	void injured();
 	void startFlashing(void);
 	void stopFlashing(void);
 	void fetchSideFighters();
-	FrameRangeAnimation *takeOffAnimation;
-	FrameRangeAnimator *takeOffAnimator;
-	AnimationFilm* film;
 
+	// flags
 	bool isInvincible;
 	bool isLanding;
 	bool isInjured;
 	bool isLooping;
 	bool isExploding;
 
+	// hacking use
+	unsigned long injuredTime;
+	unsigned long explosionTime;
+	unsigned long loopTime;
+	unsigned long landingTime;
+
 	void setInvincibility(bool _inv) { isInvincible = _inv; };
+
+	// bonuses
+	bool hasQuadGun;
+	bool hasEnemyCrash;
+	bool hasSideFighter;
+	bool hasExtraLife;
+	bool hasNoEnemyBullets;
+	bool hasExtraLoop;
+	bool has1000Points;
 
 private:
 	vector<Bird*> *birds;
@@ -70,8 +81,6 @@ private:
 
 	bool isDead;
 	bool isShooting;
-	bool hasSideFighter;
-	bool hasQuadGun;
 	void moveSideFighters(int dx, int dy);
 
 	PlayerProfile* playerProfile;
@@ -88,9 +97,6 @@ private:
 	FlashingAnimator* injuredAnimator;
 	MovingPathAnimation* landAnimation;
 	MovingPathAnimator* landAnimator;
-
-	static void shootingCompleted(Animator*, void *closure);
-	static void invinsibilityEnded(Animator *, void *closure); 
 	
 };
 #endif
