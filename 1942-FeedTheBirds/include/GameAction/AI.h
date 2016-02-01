@@ -61,6 +61,8 @@ private:
 	void handleMediumBirds();
 	void handleBoss();
 
+	Point* getRandomEntryPoint();
+
 	MovingPathAnimation * createBigBirdAnimation();
 	MovingPathAnimation * createMediumBrownBirdAnimation();
 	MovingPathAnimation * createMediumGreenBirdAnimation();

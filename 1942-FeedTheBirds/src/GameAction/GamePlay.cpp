@@ -273,16 +273,20 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 			switch (alEvent.keyboard.keycode)
 			{
 			case ALLEGRO_KEY_UP:
-				keys[UP] = false;
+				if (gameState == GAME_STATE_MAINGAME)
+					keys[UP] = false;
 				break;
 			case ALLEGRO_KEY_DOWN:
-				keys[DOWN] = false;
+				if (gameState == GAME_STATE_MAINGAME)
+					keys[DOWN] = false;
 				break;
 			case ALLEGRO_KEY_RIGHT:
-				keys[RIGHT] = false;
+				if (gameState == GAME_STATE_MAINGAME)
+					keys[RIGHT] = false;
 				break;
 			case ALLEGRO_KEY_LEFT:
-				keys[LEFT] = false;
+				if (gameState == GAME_STATE_MAINGAME)
+					keys[LEFT] = false;
 				break;
 			case ALLEGRO_KEY_ESCAPE:
 				gameState = GAME_STATE_FINISHED;
@@ -293,16 +297,20 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 			switch (alEvent.keyboard.keycode) 
 			{
 			case ALLEGRO_KEY_UP:
-				keys[UP] = true;
+				if (gameState == GAME_STATE_MAINGAME)
+					keys[UP] = true;
 				break;
 			case ALLEGRO_KEY_DOWN:
-				keys[DOWN] = true;
+				if (gameState == GAME_STATE_MAINGAME)
+					keys[DOWN] = true;
 				break;
 			case ALLEGRO_KEY_RIGHT:
-				keys[RIGHT] = true;
+				if (gameState == GAME_STATE_MAINGAME)
+					keys[RIGHT] = true;
 				break;
 			case ALLEGRO_KEY_LEFT:
-				keys[LEFT] = true;
+				if (gameState == GAME_STATE_MAINGAME)
+					keys[LEFT] = true;
 				break;
 			case ALLEGRO_KEY_SPACE:
 				if (gameState == GAME_STATE_MAINGAME)

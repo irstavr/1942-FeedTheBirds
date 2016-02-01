@@ -35,21 +35,23 @@ void AI::eventAtX(int x)
 	handleMediumBirds();
 	handleBoss();
 
+	Point* randomEntryPoint;
 	switch (x) {
 	case 20:
 		// action point for small birds
-		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75, 
-							SCREEN_WINDOW_HEIGHT+10, 
+		randomEntryPoint = getRandomEntryPoint();
+		this->addSmallBird(randomEntryPoint->x,
+							randomEntryPoint->y,
 							"smallGreenBird", 
 							smallGreenBirdAnimation);
-		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+50, 
+		/*this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+50, 
 							SCREEN_WINDOW_HEIGHT+60, 
 							"smallYellowBird", 
 							smallYellowBirdAnimation);
 		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75+100, 
 							SCREEN_WINDOW_HEIGHT+200, 
 							"smallBlueBird", 
-							smallBlueBirdAnimation);
+							smallBlueBirdAnimation);*/
 		break;
 	case 100:
 		// action points for medium birds
@@ -72,6 +74,22 @@ void AI::eventAtX(int x)
 	default:
 		break;
 	}
+}
+
+Point* AI::getRandomEntryPoint() {
+	Point* p = new Point();
+	float randomEntryX, randomEntryY;
+	randomEntryX = ((float)(rand() % 5 + 5) / 10)*SCREEN_WINDOW_WIDTH;
+	randomEntryY = rand() % 2;
+	if (randomEntryY == 0) {
+		randomEntryY = SCREEN_WINDOW_HEIGHT + 10;
+	}
+	else {
+		randomEntryY = -10;
+	}
+	p->setPoint(randomEntryX, randomEntryY);
+	cout << "Entry point: x=" << p->x << " y=" << p->y << "\n";
+	return p;
 }
 
 //------------------------ Boss Birds --------------------------------------------------
