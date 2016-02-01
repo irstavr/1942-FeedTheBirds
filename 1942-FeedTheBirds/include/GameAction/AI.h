@@ -9,6 +9,9 @@
 #include "..\GameLogic\GameLogic.h"
 #include "..\Utilities\Utilities.h"
 
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+
 #define BASE_ID 10000
 #define PIXELS_PER_SECOND 1000
 #define YY (*it)->getY() - gameLogic->superAce->getY()
@@ -50,6 +53,8 @@ private:
 	unsigned int lastUsedID;
 
 	void addSmallBird(int x, int y, char * id, MovingPathAnimation * visVitalis);
+	
+	void addMediumBirds(void);
 	void addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis);
 
 	void handleLittleBirds();

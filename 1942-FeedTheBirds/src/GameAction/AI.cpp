@@ -21,6 +21,9 @@ AI::AI(GameLogic *_gameLogic, FrameRangeAnimator* _flyAnimator, FrameRangeAnimat
 	mediumGreenBirdAnimation = this->createMediumGreenBirdAnimation();
 	mediumBrownBirdAnimation = this->createMediumBrownBirdAnimation();
 	mediumYellowBirdAnimation = this->createMediumYellowBirdAnimation();
+
+	/* initialize random seed: */
+	srand(time(NULL));
 }
 
 AI::~AI() {
@@ -50,27 +53,15 @@ void AI::eventAtX(int x)
 		break;
 	case 100:
 		// action points for medium birds
-		/*
-		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75,
-							SCREEN_WINDOW_HEIGHT + 10, 
-							"mediumGreenBird", 
-							mediumColoredBirdLives, 
-							mediumColoredBirdSpeed, 
-							mediumGreenBirdAnimation);
-		
-		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 + 50, 
-							SCREEN_WINDOW_HEIGHT + 60, 
-							"mediumYellowBird", 
-							mediumColoredBirdLives, 
-							mediumColoredBirdSpeed, 
-							mediumYellowBirdAnimation);
-		*/
-		this->addMediumBird(SCREEN_WINDOW_WIDTH,
-							SCREEN_WINDOW_HEIGHT/2, 
-							"mediumBrownBird", 
-							mediumColoredBirdLives, 
-							mediumColoredBirdSpeed, 
-							mediumBrownBirdAnimation);
+		addMediumBirds();
+		break;
+	case 150:
+		// action points for medium birds
+		addMediumBirds();
+		break;
+	case 200:
+		// action points for medium birds
+		addMediumBirds();
 		break;
 	case 500:
 		// action point for boss
@@ -95,6 +86,51 @@ MovingPathAnimation* AI::createBigBirdAnimation() {
 }
 
 //------------------------ Medium Birds ------------------------------------------------
+
+// We need to generate medium birds that either:
+// go on circles and approach super ace (brown)
+// come from the side and attack ()
+// 
+// in every run we use a rand to generate a different case
+void AI::addMediumBirds(void) {
+
+	// generate secret number between 1 and 3
+	// used to generate different medium bird
+	int iSecret = rand() % 3 + 1;
+
+	// random num of birds each time (max 10)
+	int birdsNum = rand() % 10;	// TODO: to be used inside ifs
+
+	if (iSecret == 1) {
+		/*
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75,
+		SCREEN_WINDOW_HEIGHT + 10,
+		"mediumGreenBird",
+		mediumColoredBirdLives,
+		mediumColoredBirdSpeed,
+		mediumGreenBirdAnimation);
+		*/
+	}
+	else if (iSecret == 2) {
+		/*
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 + 50,
+		SCREEN_WINDOW_HEIGHT + 60,
+		"mediumYellowBird",
+		mediumColoredBirdLives,
+		mediumColoredBirdSpeed,
+		mediumYellowBirdAnimation);
+		*/
+	}
+	else if (iSecret == 3) {
+		this->addMediumBird(SCREEN_WINDOW_WIDTH,
+							SCREEN_WINDOW_HEIGHT / 2,
+							"mediumBrownBird",
+							mediumColoredBirdLives,
+							mediumColoredBirdSpeed,
+							mediumBrownBirdAnimation);
+	}
+
+}
 
 void AI::handleMediumBirds() {
 	Bird* bird;
