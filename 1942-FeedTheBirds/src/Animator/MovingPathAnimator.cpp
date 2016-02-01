@@ -35,8 +35,8 @@ void MovingPathAnimator::setHandleFrames(bool b)
 void MovingPathAnimator::progress(unsigned long currTime) {
 
 	while (currTime > lastTime && currTime - lastTime >= currEntry->delay) {
-		sprite->setFlipH(currEntry->h_flip);
-		sprite->setFlipV(currEntry->v_flip);
+		if(handleFrames) sprite->setFlipH(currEntry->h_flip);
+		if(handleFrames) sprite->setFlipV(currEntry->v_flip);
 		if(handleFrames) sprite->setFrame(currEntry->frame);
 		sprite->move(currEntry->dx, currEntry->dy);
 		lastTime += currEntry->delay;
