@@ -33,6 +33,8 @@ private:
 	std::vector<MovingPathAnimator*> *mediumBirds;
 	std::vector<MovingPathAnimator*> *largeBirds;
 	std::vector<MovingPathAnimator*> *bonusBirds;
+
+	std::vector<MovingPathAnimator*> *loopers;
 	std::vector<MovingAnimator*> *followers;
 
 	FrameRangeAnimation *flyAnimation;
@@ -63,6 +65,8 @@ private:
 	void handleBoss();
 
 	void makeBirdFollowSuperAce(Bird *bird);
+
+	MovingPathAnimation * createLooperAnimation();
 
 	Point* getRandomEntryPoint();
 
