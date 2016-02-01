@@ -17,7 +17,7 @@ public:
 	delay_t getHideDelay(void) const;
 	void setShowDelay(delay_t d);
 	delay_t getShowDelay(void) const;
-	Animation* clone(animid_t newId) const;
+	FlashingAnimation* clone(animid_t newId) const;
 };
 
 #endif

@@ -37,3 +37,7 @@ void FlashingAnimator::start(Sprite* s, FlashingAnimation* a, unsigned long t) {
 	lastTime = t;
 	state = ANIMATOR_RUNNING;
 }
+
+FlashingAnimator* FlashingAnimator::clone() const {
+	return new FlashingAnimator();
+}

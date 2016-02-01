@@ -61,7 +61,7 @@ private:
 	clock_t wait;
 
 	/* for graphics */
-	Button *startButton, *pauseButton, *winButton, *gameOverButton;
+	Button *startButton, *pauseButton, *winButton, *gameOverButton, *replayButton;
 
 	bool keys[4] = { false, false, false, false };
 	unsigned int actionPoint;

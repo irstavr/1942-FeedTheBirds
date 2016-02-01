@@ -182,6 +182,14 @@ void GamePlay::initGameEngine() {
 								flashAnimation, 
 								flashAnimator);
 
+	replayButton = new Button(300,
+								440,
+								(AnimationFilm *)
+								AnimationFilmHolder::getSingleton()->
+								getFilm("ReplayButton"),
+								flashAnimation->clone(0),
+								flashAnimator->clone());
+
 	// Characters - Items:
 
 	// SuperAce
@@ -495,10 +503,13 @@ void GamePlay::displayGameOver(unsigned long now) {
 		currentGame->profile->getLoops());
 	currentGame->superAce->displayAll();
 	if (gameOverButton->isSpriteVisible()) {
-		gameOverButton->setX(600);
+		gameOverButton->setX(400);
 		gameOverButton->setY(300);
 		gameOverButton->display(Rect(0, 0, 0, 0));
 	}
+	replayButton->setX(400);
+	replayButton->setY(400);
+	replayButton->display(Rect(0, 0, 0, 0));
 
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));

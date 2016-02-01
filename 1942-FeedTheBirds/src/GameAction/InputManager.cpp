@@ -65,7 +65,6 @@ void InputManager::onKeyEnter(int &gameState, ALLEGRO_DISPLAY* &display, Button*
 	if (gameState == GAME_STATE_GAMEOVER) {
 		al_resize_display(display, START_SCREEN_WINDOW_WIDTH, START_SCREEN_WINDOW_HEIGHT);
 		al_set_new_window_position(0, 0);
-
 		gameOverButton->stopFlashing();
 		gameState = GAME_STATE_INTRO;
 

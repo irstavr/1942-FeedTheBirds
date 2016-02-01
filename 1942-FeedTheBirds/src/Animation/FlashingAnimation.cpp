@@ -34,6 +34,6 @@ delay_t FlashingAnimation::getShowDelay(void) const {
 	return showDelay; 
 }
 
-Animation* FlashingAnimation::clone(animid_t newId) const {
+FlashingAnimation* FlashingAnimation::clone(animid_t newId) const {
 	return new FlashingAnimation(repetitions, hideDelay, showDelay, newId);
 }

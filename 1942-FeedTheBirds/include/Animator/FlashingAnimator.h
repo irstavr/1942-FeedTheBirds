@@ -18,6 +18,7 @@ public:
 
 	void progress(unsigned long currTime);
 	void start(Sprite* s, FlashingAnimation* a, unsigned long t);
+	FlashingAnimator* clone() const;
 	
 };
 
