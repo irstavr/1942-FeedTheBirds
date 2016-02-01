@@ -27,10 +27,10 @@
 #define GAME_STATE_GAMEOVER 3
 #define GAME_STATE_FINISHED 4
 
-#define TERRAIN_IMAGE_WIDTH 9270*3
+#define TERRAIN_IMAGE_WIDTH 3873*3
 #define TERRAIN_IMAGE_HEIGHT 669
 
-#define FPS 120
+#define FPS 60
 #define LPS 200
 
 typedef int Dim;
