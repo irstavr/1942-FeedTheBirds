@@ -350,10 +350,13 @@ void GamePlay::updateGameState() {
 		// etc 
 		//
 		checkAnimationFlags();
+
 		if (currentGame->superAce->isSuperAceDead()) {
 			gameOver(getCurrTime());
 		}
+
 		CollisionChecker::getInstance()->check();
+
 	}
 }
 
@@ -418,11 +421,11 @@ void GamePlay::displayMainScreen(unsigned long now) {
 		for (size_t i = 0; i < currentGame->birds->size(); i++) {
 			currentGame->birds->at(i)->displayAll();
 		}
-		
+
 		al_flip_display();
 		al_clear_to_color(al_map_rgb(0, 0, 0));
 		terrain->updateBackground();
-
+		
 		checkActionPoints();
 	}
 }

@@ -34,6 +34,7 @@ void AI::eventAtX(int x)
 
 	switch (x) {
 	case 20:
+		// action point for small birds
 		this->addSmallBird(SCREEN_WINDOW_WIDTH*0.75, 
 							SCREEN_WINDOW_HEIGHT+10, 
 							"smallGreenBird", 
@@ -47,27 +48,32 @@ void AI::eventAtX(int x)
 							"smallBlueBird", 
 							smallBlueBirdAnimation);
 		break;
-	case 100:
-		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75, 
+	case 40:
+		// action points for medium birds
+		/*
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75,
 							SCREEN_WINDOW_HEIGHT + 10, 
 							"mediumGreenBird", 
 							mediumColoredBirdLives, 
 							mediumColoredBirdSpeed, 
 							mediumGreenBirdAnimation);
-		/*
+		
 		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 + 50, 
 							SCREEN_WINDOW_HEIGHT + 60, 
 							"mediumYellowBird", 
 							mediumColoredBirdLives, 
 							mediumColoredBirdSpeed, 
 							mediumYellowBirdAnimation);
-		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 + 100, 
-							SCREEN_WINDOW_HEIGHT + 200, 
+		*/
+		this->addMediumBird(SCREEN_WINDOW_WIDTH,
+							SCREEN_WINDOW_HEIGHT/2, 
 							"mediumBrownBird", 
 							mediumColoredBirdLives, 
 							mediumColoredBirdSpeed, 
 							mediumBrownBirdAnimation);
-		*/
+		break;
+	case 500:
+		// action point for boss
 		break;
 	case 1000:	// TODO: change to terrain length minus something : P
 		gameLogic->superAce->startLanding();
@@ -137,9 +143,9 @@ void AI::addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed sp
 //apo to panw meros ths othonis kanoun ena kuklo k sunexizoun na mas vroun
 MovingPathAnimation* AI::createMediumBrownBirdAnimation() {
 	std::list<PathEntry> paths;
-	//todo appropriately
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, mediumColoredBirdSpeed));
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 0, 360, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.30, 180, 360, mediumColoredBirdSpeed));
+	//paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, mediumColoredBirdSpeed));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, mediumColoredBirdSpeed));
 	return new MovingPathAnimation(paths, 0);
 }

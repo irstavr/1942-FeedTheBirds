@@ -81,7 +81,6 @@ std::list<PathEntry>* createCircularPath(int radius, int startAngle, int endAngl
 				false, false, 0, delay));
 		lastx = XforCircle(radius);
 		lasty = YforCircle(radius);
-		//cout << "Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
 	}
 	paths->push_back(PathEntry(0, 0, false, false, 0, 0));
 	return paths;

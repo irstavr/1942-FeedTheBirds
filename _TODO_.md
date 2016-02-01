@@ -22,7 +22,7 @@
     ligotera suxna apo ta mikra
     gia na pesoun 4 xtuphmata
     
-    apo to panw meros ths othonhs kanoun ena kuklo k sunexizoun na mas vroun
+    apo to panw meros ths othonhs kanoun ena kuklo k sunexizoun na mas vroun (BROWN BIRDS)
     h
     apo to katw meros ki anevainoun
     h

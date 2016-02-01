@@ -28,7 +28,6 @@ enum BirdLives {
 	GreyBossLives = 35
 };
 
-// TODO: to be used on AI 
 // TODO: change values
 // Adds different action speed on every bird
 enum BirdSpeed {
