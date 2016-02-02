@@ -1,29 +1,32 @@
 #ifndef _POWERUP_H
 #define _POWERUP_H
 #include "../../Sprites/Sprite.h"
-#include "../../Animator/MovingAnimator.h"
+#include "../../Animator/FlashingAnimator.h"
 #include "../../Animator/AnimatorHolder.h"
 
-typedef enum PowerUpType {QuadGun, EnemyCrash, SideFighters, ExtraLife, NoEnemyBullets, ExtraLoop, Points1000} PowerUpType_t;
+typedef enum PowerUpType {
+	quadGun, 
+	enemyCrash, 
+	sideFighters, 
+	extraLife, 
+	noEnemyBullets, 
+	extraLoop, 
+	points1000
+} PowerUpType_t;
 
-class PowerUp:public Sprite {
-private:
-	int speedx;
-	PowerUpType_t type;
-	MovingAnimator *flyAnimator;
-	MovingAnimation *flyAnimation;
-	bool exhasted;
+class PowerUp : public Sprite {
+
 public:
 	PowerUpType_t getType();
-	void setType(PowerUpType_t _type);
-	void exhaust();
+	void setExhausted();
 	bool isExhausted();
-	void move(int x, int y);
-	void move();
-	void startMoving();
-	PowerUp(Dim _x, Dim _y, AnimationFilm* film,
-		MovingAnimation *_Animation, MovingAnimator *_Animator);
-};
 
+	PowerUp(Dim _x, Dim _y, PowerUpType_t type, AnimationFilm* film);
+
+private:
+	PowerUpType_t type;
+	bool exhasted;
+
+};
 
 #endif

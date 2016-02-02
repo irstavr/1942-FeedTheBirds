@@ -5,6 +5,7 @@ GamePlay::GamePlay() :
 	gameState(GAME_STATE_INTRO),
 	windowHeight(START_SCREEN_WINDOW_HEIGHT), 
 	windowWidth(START_SCREEN_WINDOW_WIDTH) {
+	powerUp = nullptr;
 	//musicOn(false),  {
 }
 
@@ -154,8 +155,8 @@ void GamePlay::initGameEngine() {
 	CollisionChecker::getInstance()->initialize();
 
 	// Add start game button
-	FlashingAnimation *flashAnimation = new FlashingAnimation(1, 500, 500, 0);
-	FlashingAnimator *flashAnimator = new FlashingAnimator();
+	flashAnimation = new FlashingAnimation(1, 500, 500, 0);
+	flashAnimator = new FlashingAnimator();
 	AnimatorHolder::animRegister(flashAnimator); 
 	
 	startButton = new Button(160,
@@ -171,23 +172,23 @@ void GamePlay::initGameEngine() {
 							(AnimationFilm *)
 								AnimationFilmHolder::getSingleton()->
 								getFilm("PauseButton"),
-							flashAnimation,
-							flashAnimator);
+							flashAnimation->clone(0),
+							flashAnimator->clone());
 
 	gameOverButton = new Button(380, 
 								350, 
 								(AnimationFilm *)
 									AnimationFilmHolder::getSingleton()->
 										getFilm("GameOverButton"),
-								flashAnimation, 
-								flashAnimator);
+								flashAnimation->clone(1), 
+								flashAnimator->clone());
 
 	replayButton = new Button(380,
 								440,
 								(AnimationFilm *)
 								AnimationFilmHolder::getSingleton()->
 								getFilm("ReplayButton"),
-								flashAnimation->clone(0),
+								flashAnimation->clone(2),
 								flashAnimator->clone());
 
 	winButton = new Button(400,
@@ -195,7 +196,7 @@ void GamePlay::initGameEngine() {
 							(AnimationFilm *)
 							AnimationFilmHolder::getSingleton()->
 							getFilm("WinButton"),
-							flashAnimation->clone(1),
+							flashAnimation->clone(3),
 							flashAnimator->clone());
 
 	// Characters - Items:
@@ -421,29 +422,65 @@ void GamePlay::checkBonuses() {
 	if (currentGame->checkQuadGun) {
 		if (currentGame->showBonus(quadGun)) {
 			// show bitmap of POW
-
+			displayPowerUp(quadGun);
 
 			currentGame->bonusBirds->clear();
 			currentGame->checkQuadGun = false;
-			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW\n";
+			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW quadGun\n";
 		}
 	}
 	if (currentGame->checkEnemyCrash) {
+		// show bitmap of POW
+		displayPowerUp(enemyCrash);
+
+		currentGame->bonusBirds->clear();
+		currentGame->checkEnemyCrash = false;
+		cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW enemyCrash \n";
 
 	}
 	if (currentGame->checkSideFighter) {
+		// show bitmap of POW
+		displayPowerUp(sideFighters);
+
+		currentGame->bonusBirds->clear();
+		currentGame->checkSideFighter = false;
+		cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW sideFighter \n";
 
 	}
 	if (currentGame->checkExtraLife) {
+		// show bitmap of POW
+		displayPowerUp(extraLife);
+
+		currentGame->bonusBirds->clear();
+		currentGame->checkExtraLife = false;
+		cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW extraLife\n";
 
 	}
 	if (currentGame->checkNoEnemyBullets) {
+		// show bitmap of POW
+		displayPowerUp(noEnemyBullets);
+
+		currentGame->bonusBirds->clear();
+		currentGame->checkNoEnemyBullets = false;
+		cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW noEnemyBullets\n";
 
 	}
 	if (currentGame->checkExtraLoop) {
+		// show bitmap of POW
+		displayPowerUp(extraLoop);
+
+		currentGame->bonusBirds->clear();
+		currentGame->checkExtraLoop = false;
+		cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW extraLoop\n";
 
 	}
 	if (currentGame->check1000Points) {
+		// show bitmap of POW
+		displayPowerUp(points1000);
+
+		currentGame->bonusBirds->clear();
+		currentGame->check1000Points = false;
+		cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW points1000\n";
 
 	}
 }
@@ -477,6 +514,10 @@ void GamePlay::displayMainScreen(unsigned long now) {
 
 		currentGame->superAce->displayAll();
 
+		if (powerUp && powerUp->isSpriteVisible()) {
+			powerUp->display(Rect(0, 0, 0, 0));
+		}
+
 		for (size_t i = 0; i < currentGame->birds->size(); i++) {
 			currentGame->birds->at(i)->displayAll();
 		}
@@ -486,12 +527,14 @@ void GamePlay::displayMainScreen(unsigned long now) {
 		terrain->updateBackground();
 		
 		checkActionPoints();
+
 	}
 }
 
 /* show first window with start screen */
 void GamePlay::displayStartScreen(unsigned long now) {
 	TerrainStartScreen::getInstance().drawBackground();
+
 	if (startButton->isSpriteVisible()) {
 		startButton->display(Rect(0, 0, 0, 0));
 	}
@@ -547,6 +590,32 @@ void GamePlay::gameFinished() {
 		// new level ?
 		winButton->setVisibility(true);
 		currentGame->gameRunning = false;
+	}
+}
+
+void GamePlay::displayPowerUp(PowerUpType_t powerUpID)
+{
+	powerUp = new PowerUp(400, 200, powerUpID,
+						  (AnimationFilm *)
+							AnimationFilmHolder::getSingleton()->
+								getFilm(powerUpToString(powerUpID)));
+	CollisionChecker::getInstance()->
+					registerCollisions(currentGame->superAce, powerUp);
+	powerUp->setVisibility(true);
+}
+
+inline std::string GamePlay::powerUpToString(PowerUpType_t v)
+{
+	switch (v)
+	{
+	case quadGun:   return "quadGun";
+	case enemyCrash:   return "enemyCrash";
+	case sideFighters: return "sideFighters";
+	case extraLife:   return "extraLife";
+	case noEnemyBullets:   return "noEnemyBullets";
+	case extraLoop: return "extraLoop";
+	case points1000: return "points1000";
+	default:  return "[Unknown PowerUpType]";
 	}
 }
 

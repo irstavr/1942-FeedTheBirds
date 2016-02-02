@@ -9,20 +9,9 @@
 #include "..\Objects\Items\Fish.h"
 #include "..\Objects\Characters\Bird.h"
 #include "..\Objects\Characters\SuperAce.h"
+#include "..\Objects\Items\PowerUp.h"
 
 typedef vector<Bird*> BIRDS;
-
-// used in order to discriminate birds
-// and count user's score when feeds them
-enum BonusID {
-	quadGun = 0,
-	enemyCrash,
-	sideFighter,
-	extraLife,
-	noEnemyBullets,
-	extraLoop,
-	points1000
-};
 
 class GameLogic {
 public:
@@ -77,7 +66,7 @@ public:
 	bool showExtraLoop;
 	bool show1000Points;
 
-	bool showBonus(BonusID bonus);
+	bool showBonus(PowerUpType_t bonus);
 
 private:
 	/*return if the game is still running*/

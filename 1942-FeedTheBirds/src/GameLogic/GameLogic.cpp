@@ -86,7 +86,7 @@ bool GameLogic::isRunning() const {
 	return gameRunning;
 }
 
-bool GameLogic::showBonus(BonusID bonus) {
+bool GameLogic::showBonus(PowerUpType_t bonus) {
 	int counter = 0;
 	for (unsigned i = 0; i < bonusBirds->size(); i++) {
 		Bird* bird = bonusBirds->at(i);

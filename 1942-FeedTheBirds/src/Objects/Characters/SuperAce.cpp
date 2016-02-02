@@ -318,30 +318,33 @@ void SuperAce::collisionAction(Sprite* s) {
 		cerr << "COLLISION! SUPER ACE with POW!\n";
 
 		if (!v->isExhausted()) {
+			v->setExhausted();
+			v->setVisibility(false);
+
 			switch (v->getType())
 			{
-			case QuadGun:
+			case quadGun:
 				this->hasQuadGun = true;
 				break;
-			case EnemyCrash:
+			case enemyCrash:
 				for (std::vector<Bird*>::iterator it = this->birds->begin(); it != this->birds->end();it++)
 				{
 					if (!(*it)->isDead()) (*it)->scare();
 				}
 				break;
-			case SideFighters:
+			case sideFighters:
 				this->fetchSideFighters();
 				break;
-			case ExtraLife:
+			case extraLife:
 				playerProfile->incrLives();
 				break;
-			case NoEnemyBullets:
+			case noEnemyBullets:
 				//todo
 				break;
-			case ExtraLoop:
+			case extraLoop:
 				playerProfile->incrLoops();
 				break;
-			case Points1000:
+			case points1000:
 				ScoreBoard::getInstance().incrScore(1000);
 				break;
 			default:

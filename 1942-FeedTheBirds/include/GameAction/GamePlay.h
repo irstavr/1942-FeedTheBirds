@@ -28,6 +28,7 @@ public:
 	~GamePlay();
 
 	GameLogic *currentGame;
+	PowerUp* powerUp;
 
 	/* holds state of game (if in intro, game, gameover, exit) */
 	int gameState;
@@ -65,6 +66,8 @@ private:
 
 	bool keys[4] = { false, false, false, false };
 	unsigned int actionPoint;
+	FlashingAnimation *flashAnimation;
+	FlashingAnimator *flashAnimator;
 	FrameRangeAnimation *takeOffAnimation;
 	FrameRangeAnimator *takeOffAnimator;
 	FrameRangeAnimation *deathAnimation;
@@ -120,7 +123,10 @@ private:
 	void gameOver(unsigned long now);
 	void resumeGame(void);
 	void gameFinished(void);
+	void displayPowerUp(PowerUpType_t powerUpID);
 
 	MovingPathAnimation *createLoopAnimation(void);
+
+	inline std::string powerUpToString(PowerUpType_t v);
 };
 #endif

@@ -9,8 +9,11 @@
 #include "..\Items\Fish.h"
 #include "./Bird.h"
 #include "../../Utilities/Utilities.h"
+
 typedef vector<Fish*> FISHES;
+
 class SideFighter : public Sprite {
+
 private:
 	int lives;
 	FrameRangeAnimation *takeOffAnimation, *landAnimation, *deathAnimation;
