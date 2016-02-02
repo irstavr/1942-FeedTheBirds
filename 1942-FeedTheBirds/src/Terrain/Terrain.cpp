@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Terrain::Terrain() :
+	Terrain::Terrain() :
 	font_file("1942-FeedTheBirds\\data\\Fonts\\karmatic_arcade_font.ttf"),
 	width(TERRAIN_IMAGE_WIDTH),
 	height(TERRAIN_IMAGE_HEIGHT),
