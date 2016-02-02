@@ -419,11 +419,13 @@ void GamePlay::checkAnimationFlags() {
 	// get here when super ace gets the pow 'no enemies bullets'
 	if (currentGame->superAce->noEnemiesBullets) {
 		if (currentGame->superAce->noEnemyBulletsTime + 1000 < getCurrTime()) {
+
+			currentGame->superAce->noEnemiesBullets = false;
+
 			for (std::vector<Bird*>::iterator it = currentGame->superAce->birds->begin(); it != currentGame->superAce->birds->end(); it++)
 			{
 				if (!(*it)->isDead())
 					(*it)->canShoot = true;
-					currentGame->superAce->noEnemiesBullets = false;
 			}
 		}
 	}
