@@ -49,15 +49,15 @@
 	collisionSound
     
 - AI
-    handle birds move
-    boss bird
-    medium birds
+    boss bird -- DONE
+    medium birds   -- ONLY BROWN ARE DONE 
+    little birds -- improve path / initialized points
     add rotating-flipping
     shooting
     
-- PowerUp
-    - create power ups on terrain  -- DONE
-    - test all of them
+ SOS ! ! !
+- gets slow when sidefighters are fetched
+- gets slow when bigbird appears
     
 - Main window initial position on screen
         

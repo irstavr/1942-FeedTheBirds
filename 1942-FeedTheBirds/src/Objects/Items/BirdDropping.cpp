@@ -1,6 +1,5 @@
 #include "..\..\..\include\Objects\Items\BirdDropping.h"
 
-
 BirdDropping::BirdDropping(Dim _x, Dim _y, AnimationFilm* film,
 	MovingAnimation *_flyAnimation, MovingAnimator *_flyAnimator) :
 	Sprite(_x, _y, film),

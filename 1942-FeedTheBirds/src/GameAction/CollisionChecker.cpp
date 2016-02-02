@@ -1,9 +1,7 @@
 #include "..\..\include\GameAction\CollisionChecker.h"
 #include <algorithm>
-//#include "PowsHolder.h"
 
 using namespace std;
-
 CollisionChecker *CollisionChecker::collisionChecker;
 
 CollisionChecker::CollisionChecker(void) {
@@ -30,23 +28,6 @@ void CollisionChecker::registerCollisions (Sprite* s1, Sprite* s2) {
 	p.first = s1;
 	p.second = s2;
 	pairs.push_back(p);
-}
-
-void CollisionChecker::registerCollisionsWithPows(Sprite* superAce) {
-	/*
-	Pair p;
-	p.second = superAce;
-	std::list<Pows *>powsList = PowsHolder::getHeartList();
-	std::list<Pows *>::iterator i = powsList.begin();
-	advance(i, PowsHolder::inForCheck);
-
-	while (i != powsList.end()) {
-		p.first = (*i);
-		pairs.push_back(p);
-		++i;
-		++PowsHolder::inForCheck;
-	}
-	*/
 }
 
 void CollisionChecker::cancel(Sprite* s1, Sprite* s2) {

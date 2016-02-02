@@ -31,7 +31,6 @@ public:
 		MovingAnimator *_disappearAnimator,
 		FISHES *_fishes);
 
-
 	void move(int dx, int dy);
 	void startMoving();
 	void stopMoving();
@@ -49,7 +48,6 @@ public:
 	void displayAll();
 
 	bool attached;
-
 };
 
 #endif

@@ -728,7 +728,7 @@ MovingPathAnimation* AI::createSmallRedBirdAnimation() {
 	paths.splice(paths.end(), *createSmoothDiagonalPath(0, -200, littleBirdSpeed));
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.15, 180, 360, littleBirdSpeed));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, littleBirdSpeed));
-	//paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.17, 180, 720, littleBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.17, 180, 720, littleBirdSpeed));
 	return new MovingPathAnimation(paths, lastUsedID++);
 }
 

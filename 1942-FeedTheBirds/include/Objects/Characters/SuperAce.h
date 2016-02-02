@@ -48,8 +48,7 @@ public:
 	void stopFlashing(void);
 	void fetchSideFighters();
 	void removeSideFighters();
-	// raise when SuperAce gets the pow 'no enemy bullets'
-	void disarmEnemies();
+	void displayFishes();
 
 	// flags
 	bool isInvincible;
