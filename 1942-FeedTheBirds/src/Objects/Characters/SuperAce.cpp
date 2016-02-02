@@ -34,8 +34,9 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 		isInvincible(false),
 		isShooting(false),
 		hasQuadGun(false),
-		hasSideFighter(false)
-
+		hasSideFighter(false),
+		noEnemiesBullets(false),
+		noEnemyBulletsTime(-1)
 {
 	fishes = new vector<Fish*>();
 
@@ -387,7 +388,14 @@ void SuperAce::collisionAction(Sprite* s) {
 				playerProfile->incrLives();
 				break;
 			case noEnemyBullets:
-				//todo
+				this->noEnemiesBullets = true;
+				noEnemyBulletsTime = getCurrTime();
+
+				for (std::vector<Bird*>::iterator it = this->birds->begin(); it != this->birds->end(); it++)
+				{
+					if (!(*it)->isDead())
+						(*it)->canShoot = false;
+				}
 				break;
 			case extraLoop:
 				playerProfile->incrLoops();

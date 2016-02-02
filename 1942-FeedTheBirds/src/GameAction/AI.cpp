@@ -53,10 +53,6 @@ void AI::eventAtX(int x)
 		// action points for medium birds
 		addMediumBirds();
 		break;
-	case 120:
-		// action points for side fighter
-		gameLogic->superAce->fetchSideFighters();
-		break;
 	case 150:
 		// action points for medium birds
 		addMediumBirds();
@@ -65,7 +61,8 @@ void AI::eventAtX(int x)
 		// action points for medium birds
 		addMediumBirds();
 		break;
-	//next cases for 1st bonus: QuadGun ! ! !
+
+	//POWER UP action point for QuadGun ! ! ! POW1
 	case 220:
 		addBonusBirds();
 		break;
@@ -80,12 +77,11 @@ void AI::eventAtX(int x)
 		break;
 	case 300:
 		addBonusBirds();
-		gameLogic->checkSideFighter = true;
+		gameLogic->checkQuadGun = true;
 		break;
 	case 370:
 		break;  
 	case 500:
-
 		// action point for boss
 		this->addBoss(-10,
 			400,
@@ -94,6 +90,115 @@ void AI::eventAtX(int x)
 			ColoredBossSpeed,
 			bigBirdAnimation);
 		break;
+
+	//POWER UP action point: enemy crash ! ! ! POW2
+	case 520:
+		addBonusBirds();
+		break;
+	case 540:
+		addBonusBirds();
+		break;
+	case 560:
+		addBonusBirds();
+		break;
+	case 580:
+		addBonusBirds();
+		break;
+	case 600:
+		addBonusBirds();
+		gameLogic->checkEnemyCrash = true;
+		break;
+
+	//POWER UP action point: SIDE FIGHTERS ! ! POW3
+	case 1020:
+		addBonusBirds();
+		break;
+	case 1040:
+		addBonusBirds();
+		break;
+	case 1060:
+		addBonusBirds();
+		break;
+	case 1080:
+		addBonusBirds();
+		break;
+	case 1100:
+		addBonusBirds();
+		gameLogic->checkSideFighter = true;
+		break;
+
+	//POWER UP action point: extra life! ! POW4
+	case 1520:
+		addBonusBirds();
+		break;
+	case 1540:
+		addBonusBirds();
+		break;
+	case 1560:
+		addBonusBirds();
+		break;
+	case 1580:
+		addBonusBirds();
+		break;
+	case 1600:
+		addBonusBirds();
+		gameLogic->checkExtraLife = true;
+		break;
+
+	//POWER UP action point: no enemies bullets! ! POW5
+	case 2020:
+		addBonusBirds();
+		break;
+	case 2040:
+		addBonusBirds();
+		break;
+	case 2060:
+		addBonusBirds();
+		break;
+	case 2080:
+		addBonusBirds();
+		break;
+	case 2100:
+		addBonusBirds();
+		gameLogic->checkNoEnemyBullets = true;
+		break;
+
+	//POWER UP action point: extra loop ! ! POW6
+	case 2620:
+		addBonusBirds();
+		break;
+	case 2640:
+		addBonusBirds();
+		break;
+	case 2660:
+		addBonusBirds();
+		break;
+	case 2680:
+		addBonusBirds();
+		break;
+	case 2700:
+		addBonusBirds();
+		gameLogic->checkExtraLoop = true;
+		break;
+
+	//POWER UP action point: 1000 points ! ! POW7
+	case 3020:
+		addBonusBirds();
+		break;
+	case 3040:
+		addBonusBirds();
+		break;
+	case 3060:
+		addBonusBirds();
+		break;
+	case 3080:
+		addBonusBirds();
+		break;
+	case 3100:
+		addBonusBirds();
+		gameLogic->check1000Points = true;
+		break;
+
 	case 3400:	// TODO: change to terrain length minus something : P
 		gameLogic->superAce->startLanding();
 		break;

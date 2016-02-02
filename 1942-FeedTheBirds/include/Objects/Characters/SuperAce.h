@@ -24,6 +24,8 @@ public:
 	SuperAce(PlayerProfile * playerProfile, Dim _x, Dim _y, AnimationFilm * film, FrameRangeAnimation * _takeOffAnimation, FrameRangeAnimator * _takeOffAnimator, MovingPathAnimation * _landAnimation, MovingPathAnimator * _landAnimator, FrameRangeAnimation * _deathAnimation, FrameRangeAnimator * _deathAnimator, MovingPathAnimation * _loopAnimation, MovingPathAnimator * _loopAnimator, vector<Bird*>* _birds);
 	~SuperAce(void);
 
+	vector<Bird*> *birds;
+
 	FrameRangeAnimation *takeOffAnimation;
 	FrameRangeAnimator *takeOffAnimator;
 	AnimationFilm* film;
@@ -46,6 +48,8 @@ public:
 	void stopFlashing(void);
 	void fetchSideFighters();
 	void removeSideFighters();
+	// raise when SuperAce gets the pow 'no enemy bullets'
+	void disarmEnemies();
 
 	// flags
 	bool isInvincible;
@@ -53,7 +57,7 @@ public:
 	bool isInjured;
 	bool isLooping;
 	bool isExploding;
-
+	
 	// hacking use
 	unsigned long injuredTime;
 	unsigned long explosionTime;
@@ -70,9 +74,11 @@ public:
 	bool hasNoEnemyBullets;
 	bool hasExtraLoop;
 	bool has1000Points;
+	
+	bool noEnemiesBullets;
+	unsigned long noEnemyBulletsTime;
 
 private:
-	vector<Bird*> *birds;
 	float dx, dy;
 	float speedx, speedy;
 	FISHES *fishes;

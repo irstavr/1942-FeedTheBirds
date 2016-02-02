@@ -16,7 +16,8 @@ Bird::Bird(Dim _x, Dim _y,
 		birdSpeed(birdSpeed),
 		birdFire(birdFire),
 		isAlive(true),
-		isFed(false)  {
+		isFed(false),
+		canShoot(true) {
 	droppings = new vector<BirdDropping*>();
 	this->followsSuperAce = 0;
 }
@@ -26,19 +27,21 @@ Bird::~Bird(void) {
 }
 
 BirdDropping* Bird::shoot() {
-	MovingAnimation* bulletAnimation = new MovingAnimation(-5, 0, 10, true, 4);
-	MovingAnimator* bulletAnimator = new MovingAnimator();
+	if (canShoot) {
+		MovingAnimation* bulletAnimation = new MovingAnimation(-5, 0, 10, true, 4);
+		MovingAnimator* bulletAnimator = new MovingAnimator();
 
-	AnimatorHolder::animRegister(bulletAnimator);
-	BirdDropping* dropping = new BirdDropping(x - 70, y - 30,
-											(AnimationFilm*)
-												AnimationFilmHolder::getSingleton()->
-												getFilm("birdshit"),
-											bulletAnimation,
-											bulletAnimator);
-	droppings->push_back(dropping);
-	dropping->startMoving();
-	return dropping;
+		AnimatorHolder::animRegister(bulletAnimator);
+		BirdDropping* dropping = new BirdDropping(x - 70, y - 30,
+			(AnimationFilm*)
+			AnimationFilmHolder::getSingleton()->
+			getFilm("birdshit"),
+			bulletAnimation,
+			bulletAnimator);
+		droppings->push_back(dropping);
+		dropping->startMoving();
+		return dropping;
+	}
 }
 
 DROPPINGS* Bird::bossShoot() {

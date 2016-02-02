@@ -64,7 +64,7 @@ public:
 	FrameRangeAnimation *flyAnimation;
 	FrameRangeAnimator *flyAnimator;
 	
-
+	bool canShoot;
 	bool isFed;
 	void setFollowsSuperAce(int b);
 	int getFollowsSuperAce();
