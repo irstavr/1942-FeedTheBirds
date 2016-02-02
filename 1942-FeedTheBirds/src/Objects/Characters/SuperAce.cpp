@@ -33,35 +33,15 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 		isDead(false),
 		isInvincible(false),
 		isShooting(false),
-		hasQuadGun(false)
+		hasQuadGun(false),
+		hasSideFighter(false)
+
 {
 	fishes = new vector<Fish*>();
 
 	this->explosion = new Sprite(this->x-10, this->y,
 		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("bambam"));
 	this->explosion->setVisibility(false);
-
-	this->sf1 = new SideFighter(this->x, this->y-110, 
-								(AnimationFilm*)
-									AnimationFilmHolder::getSingleton()
-									->getFilm("sidefighter"),
-								new FrameRangeAnimation(1, 3, 0, 0, 200, false, 21),
-								new FrameRangeAnimator(),
-								new FrameRangeAnimation(1, 3, 0, 0, 200, false, 22),
-								new FrameRangeAnimator(),
-								new FrameRangeAnimation(1, 6, 0, 0, 200, false, 23),
-								new FrameRangeAnimator(), 
-								this->fishes);
-
-	this->sf2 = new SideFighter(this->x, this->y+110, 
-								(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("sidefighter"), 
-								new FrameRangeAnimation(1, 3, 0, 0, 200, false, 24),
-								new FrameRangeAnimator(),
-								new FrameRangeAnimation(1, 3, 0, 0, 200, false, 25),
-								new FrameRangeAnimator(),
-								new FrameRangeAnimation(1, 6, 0, 0, 200, false, 26),
-								new FrameRangeAnimator(), 
-								this->fishes);
 
 	injuredAnimation = new FlashingAnimation(10, 200, 200, 0);
 	injuredAnimator = new FlashingAnimator();
@@ -82,6 +62,54 @@ SuperAce::~SuperAce(void) {
 	hasQuadGun = false;
 
 	isDead = false;
+}
+
+void SuperAce::fetchSideFighters() {
+	this->disableMovement();
+	MovingAnimation* appear_sf1Animation = new MovingAnimation(0, 2, 5, true, 500);
+	MovingAnimator* appear_sf1Animator = new MovingAnimator();
+	MovingAnimation* appear_sf2Animation = new MovingAnimation(0, -2, 5, true, 501);
+	MovingAnimator* appear_sf2Animator = new MovingAnimator();
+	MovingAnimation* disappear_sf1Animation = new MovingAnimation(0, -2, 5, true, 502);
+	MovingAnimator* disappear_sf1Animator = new MovingAnimator();
+	MovingAnimation* disappear_sf2Animation = new MovingAnimation(0, 2, 5, true, 503);
+	MovingAnimator* disappear_sf2Animator = new MovingAnimator();
+
+
+	this->sf1 = new SideFighter(this->x-50, -50,
+		(AnimationFilm*)
+		AnimationFilmHolder::getSingleton()
+		->getFilm("sidefighter"),
+		appear_sf1Animation,
+		appear_sf1Animator,
+		disappear_sf1Animation,
+		disappear_sf1Animator,
+		this->fishes);
+
+	this->sf2 = new SideFighter(this->x-50, SCREEN_WINDOW_HEIGHT+40,
+		(AnimationFilm*)AnimationFilmHolder::getSingleton()
+		->getFilm("sidefighter"),
+		appear_sf2Animation,
+		appear_sf2Animator,
+		disappear_sf2Animation,
+		disappear_sf2Animator,
+		this->fishes);
+
+	AnimatorHolder::animRegister(appear_sf1Animator);
+	AnimatorHolder::animRegister(appear_sf2Animator);
+	AnimatorHolder::animRegister(disappear_sf1Animator);
+	AnimatorHolder::animRegister(disappear_sf2Animator);
+	sf1->startMoving();
+	sf2->startMoving();
+
+	hasSideFighter = true;
+	this->sf1->setLives(1);
+	this->sf2->setLives(1);
+}
+
+void SuperAce::removeSideFighters() {
+	sf1->disappearSideFighter();
+	sf2->disappearSideFighter();
 }
 
 void SuperAce::moveUp() {
@@ -168,8 +196,10 @@ void SuperAce::shoot(vector<Bird*>* birds) {
 					registerCollisions(birds->at(i), fish);
 			}
 		}
-		this->sf1->shoot(birds);
-		this->sf2->shoot(birds);
+		if (hasSideFighter) {
+			this->sf1->shoot(birds);
+			this->sf2->shoot(birds);
+		}
 
 		if (this->hasQuadGun) {
 			// Fish (aka. bullets)
@@ -205,13 +235,27 @@ void SuperAce::displayAll() {
 			if (fishes->at(i)->isSpriteVisible())
 				fishes->at(i)->display(Rect(0, 0, 0, 0));
 		}
-		this->sf1->displayAll();
-		this->sf2->displayAll();
-	}
-		if (this->explosion->isSpriteVisible()) {
-			this->explosion->display(Rect(0, 0, 0, 0));
+		if (hasSideFighter) {
+			this->sf1->displayAll();
+			this->sf2->displayAll();
+			if (sf1->y > this->y - 80) sf1->stopMoving();
+			if (sf2->y < this->y + 20) sf2->stopMoving();
+			//when out of screen
+			if (sf1->y < -80) {
+				hasSideFighter = false;
+				sf1->die();
+			}
+			if (sf2->y > SCREEN_WINDOW_HEIGHT + 80) {
+				hasSideFighter = false;
+				sf2->die();
+			}
+			this->enableMovement();
 		}
-	//}
+	}
+	if (this->explosion->isSpriteVisible()) {
+		this->explosion->display(Rect(0, 0, 0, 0));
+	}
+	
 }
 
 void SuperAce::explode() {
@@ -256,16 +300,12 @@ void SuperAce::stopFlashing(void) {
 	this->setVisibility(true);
 }
 
-void SuperAce::fetchSideFighters()
-{
-	this->sf1->setLives(1);
-	this->sf2->setLives(1);
-}
-
 void SuperAce::moveSideFighters(int dx, int dy)
 {
-	this->sf1->move(dx, dy);
-	this->sf2->move(dx, dy);
+	if (hasSideFighter) {
+		this->sf1->move(dx, dy);
+		this->sf2->move(dx, dy);
+	}
 }
 
 void SuperAce::collisionAction(Sprite* s) {
@@ -275,21 +315,23 @@ void SuperAce::collisionAction(Sprite* s) {
 		if (Bird* v = dynamic_cast<Bird*>(s)) {
 			cerr << "COLLISION! SUPER ACE with bird!\n";
 			// kill Bird
-			v->removeLife();
-			if (v->getLives() == 0) {
-				v->setVisibility(false);
+			if (!hasSideFighter) {
+				v->removeLife();
+				if (v->getLives() == 0) {
+					v->setVisibility(false);
+				}
+				// super ace loses a life
+				playerProfile->decrLives();
+				// flash super Ace
+				injured();
+				//check if game is over
+				if (playerProfile->getLives() == 0) {
+					// GameOver
+					this->explode();
+				}
 			}
-
-			// super ace loses a life
-			playerProfile->decrLives();
-
-			// flash super Ace
-			injured();
-
-			//check if game is over
-			if (playerProfile->getLives() == 0) {
-				// GameOver
-				this->explode();
+			else {
+				removeSideFighters();
 			}
 		}
 
@@ -299,16 +341,21 @@ void SuperAce::collisionAction(Sprite* s) {
 			//remove bird
 			v->setVisibility(false);
 
-			//superAce loses life
-			playerProfile->decrLives();
-			
-			// flash super Ace
-			injured();
+			if (!hasSideFighter) {
+				//superAce loses life
+				playerProfile->decrLives();
 
-			//check if game is over
-			if (playerProfile->isDead()) {
-				// GameOver
-				this->die();
+				// flash super Ace
+				injured();
+
+				//check if game is over
+				if (playerProfile->isDead()) {
+					// GameOver
+					this->die();
+				}
+			}
+			else {
+				removeSideFighters();
 			}
 		}
 	}

@@ -3,29 +3,24 @@
 SideFighter::SideFighter(
 		Dim _x, Dim _y, 
 		AnimationFilm * film, 
-		FrameRangeAnimation * _takeOffAnimation, 
-		FrameRangeAnimator * _takeOffAnimator, 
-		FrameRangeAnimation * _landAnimation, 
-		FrameRangeAnimator * _landAnimator, 
-		FrameRangeAnimation * _deathAnimation, 
-		FrameRangeAnimator * _deathAnimator,
+		MovingAnimation *_appearAnimation,
+		MovingAnimator *_appearAnimator,
+		MovingAnimation *_disappearAnimation,
+		MovingAnimator *_disappearAnimator,
 		FISHES *_fishes) :
 	Sprite(_x, _y, film),
-	takeOffAnimation(_takeOffAnimation),
-	takeOffAnimator(_takeOffAnimator),
-	landAnimation(_landAnimation),
-	landAnimator(_landAnimator),
-	deathAnimation(_deathAnimation),
-	deathAnimator(_deathAnimator),
+	appearAnimation(_appearAnimation),
+	appearAnimator(_appearAnimator),
+	disappearAnimation(_disappearAnimation),
+	disappearAnimator(_disappearAnimator),
 	fishes(_fishes)
 {
-	AnimatorHolder::animRegister(landAnimator);
-	AnimatorHolder::animRegister(deathAnimator);
-	AnimatorHolder::animRegister(takeOffAnimator);
-	this->lives = 0;
-	this->setVisibility(false);
-	//this->lives = 1;
-	//this->setVisibility(true);
+	AnimatorHolder::animRegister(appearAnimator);
+	AnimatorHolder::animRegister(disappearAnimator);
+	//this->lives = 0;
+	//this->setVisibility(false);
+	this->lives = 1;
+	this->setVisibility(true);
 }
 
 void SideFighter::move(int dx, int dy)
@@ -36,6 +31,21 @@ void SideFighter::move(int dx, int dy)
 
 void SideFighter::startMoving()
 {
+	fprintf(stdout, "startMoving -> sideFighter.cpp\n");
+	appearAnimator->start(this, appearAnimation, getCurrTime());
+	AnimatorHolder::markAsRunning(appearAnimator);
+}
+
+void SideFighter::stopMoving()
+{
+	fprintf(stdout, "stopMoving -> sideFighter.cpp\n");
+	AnimatorHolder::markAsSuspended(appearAnimator);
+}
+
+void SideFighter::disappearSideFighter() {
+	fprintf(stdout, "startLeaving -> sideFighter.cpp\n");
+	disappearAnimator->start(this, disappearAnimation, getCurrTime());
+	AnimatorHolder::markAsRunning(disappearAnimator);
 }
 
 int SideFighter::getLives()
@@ -57,13 +67,14 @@ void SideFighter::incrLives()
 
 void SideFighter::decrLives()
 {
-	if (!(--this->lives)) this->die();
+	//if (!(--this->lives)) this->die();
+	--this->lives;
 }
 
 void SideFighter::die()
 {
-	//impl to come
 	this->setVisibility(false);
+	AnimatorHolder::markAsSuspended(disappearAnimator);
 }
 
 void SideFighter::shoot(vector<Bird*>* birds)
@@ -74,10 +85,10 @@ void SideFighter::shoot(vector<Bird*>* birds)
 	MovingAnimator* bulletAnimator = new MovingAnimator();
 
 	AnimatorHolder::animRegister(bulletAnimator);
-	Fish* fish = new Fish(x + 110, y + 30,
+	Fish* fish = new Fish(x + 50, y + 10,
 		(AnimationFilm*)
 		AnimationFilmHolder::getSingleton()->
-		getFilm("doubleFish"),
+		getFilm("fish"),
 		bulletAnimation,
 		bulletAnimator);
 	fishes->push_back(fish);
@@ -106,4 +117,5 @@ void SideFighter::displayAll() {
 				fishes->at(i)->display(Rect(0, 0, 0, 0));
 		}
 	}
+
 }

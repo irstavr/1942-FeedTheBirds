@@ -16,8 +16,8 @@ class SideFighter : public Sprite {
 
 private:
 	int lives;
-	FrameRangeAnimation *takeOffAnimation, *landAnimation, *deathAnimation;
-	FrameRangeAnimator *takeOffAnimator, *landAnimator, *deathAnimator;
+	MovingAnimation *appearAnimation, *disappearAnimation;
+	MovingAnimator *appearAnimator, *disappearAnimator;
 	FISHES *fishes;
 
 public:
@@ -25,17 +25,17 @@ public:
 	SideFighter(
 		Dim _x, Dim _y, 
 		AnimationFilm* film,
-		FrameRangeAnimation *_takeOffAnimation, 
-		FrameRangeAnimator *_takeOffAnimator,
-		FrameRangeAnimation *_landAnimation,
-		FrameRangeAnimator *_landAnimator,
-		FrameRangeAnimation *_deathAnimation,
-		FrameRangeAnimator *_deathAnimator, 
+		MovingAnimation *_appearAnimation,
+		MovingAnimator *_appearAnimator,
+		MovingAnimation *_disappearAnimation,
+		MovingAnimator *_disappearAnimator,
 		FISHES *_fishes);
 
 
 	void move(int dx, int dy);
 	void startMoving();
+	void stopMoving();
+	void disappearSideFighter();
 
 	int getLives();
 	void setLives(int n);

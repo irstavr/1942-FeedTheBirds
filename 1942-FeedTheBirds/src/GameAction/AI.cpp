@@ -53,6 +53,10 @@ void AI::eventAtX(int x)
 		// action points for medium birds
 		addMediumBirds();
 		break;
+	case 120:
+		// action points for side fighter
+		gameLogic->superAce->fetchSideFighters();
+		break;
 	case 150:
 		// action points for medium birds
 		addMediumBirds();

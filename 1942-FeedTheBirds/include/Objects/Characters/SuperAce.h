@@ -45,6 +45,7 @@ public:
 	void startFlashing(void);
 	void stopFlashing(void);
 	void fetchSideFighters();
+	void removeSideFighters();
 
 	// flags
 	bool isInvincible;
