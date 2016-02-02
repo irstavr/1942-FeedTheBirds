@@ -76,7 +76,7 @@ void AI::eventAtX(int x)
 		break;
 	case 300:
 		addBonusBirds();
-		gameLogic->checkQuadGun = true;
+		gameLogic->checkSideFighter = true;
 		break;
 	case 370:
 		break;  

@@ -329,7 +329,8 @@ void SuperAce::collisionAction(Sprite* s) {
 			case enemyCrash:
 				for (std::vector<Bird*>::iterator it = this->birds->begin(); it != this->birds->end();it++)
 				{
-					if (!(*it)->isDead()) (*it)->scare();
+					if (!(*it)->isDead()) 
+						(*it)->scare();
 				}
 				break;
 			case sideFighters:

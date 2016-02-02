@@ -430,58 +430,64 @@ void GamePlay::checkBonuses() {
 		}
 	}
 	if (currentGame->checkEnemyCrash) {
-		// show bitmap of POW
-		displayPowerUp(enemyCrash);
+		if (currentGame->showBonus(enemyCrash)) {
+			// show bitmap of POW
+			displayPowerUp(enemyCrash);
 
-		currentGame->bonusBirds->clear();
-		currentGame->checkEnemyCrash = false;
-		cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW enemyCrash \n";
-
+			currentGame->bonusBirds->clear();
+			currentGame->checkEnemyCrash = false;
+			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW enemyCrash \n";
+		}
 	}
 	if (currentGame->checkSideFighter) {
-		// show bitmap of POW
-		displayPowerUp(sideFighters);
+		if (currentGame->showBonus(sideFighters)) {
+			// show bitmap of POW
+			displayPowerUp(sideFighters);
 
-		currentGame->bonusBirds->clear();
-		currentGame->checkSideFighter = false;
-		cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW sideFighter \n";
-
+			currentGame->bonusBirds->clear();
+			currentGame->checkSideFighter = false;
+			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW sideFighter \n";
+		}
 	}
 	if (currentGame->checkExtraLife) {
-		// show bitmap of POW
-		displayPowerUp(extraLife);
+		if (currentGame->showBonus(extraLife)) {
+			// show bitmap of POW
+			displayPowerUp(extraLife);
 
-		currentGame->bonusBirds->clear();
-		currentGame->checkExtraLife = false;
-		cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW extraLife\n";
-
+			currentGame->bonusBirds->clear();
+			currentGame->checkExtraLife = false;
+			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW extraLife\n";
+		}
 	}
 	if (currentGame->checkNoEnemyBullets) {
-		// show bitmap of POW
-		displayPowerUp(noEnemyBullets);
+		if (currentGame->showBonus(noEnemyBullets)) {
+			// show bitmap of POW
+			displayPowerUp(noEnemyBullets);
 
-		currentGame->bonusBirds->clear();
-		currentGame->checkNoEnemyBullets = false;
-		cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW noEnemyBullets\n";
-
+			currentGame->bonusBirds->clear();
+			currentGame->checkNoEnemyBullets = false;
+			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW noEnemyBullets\n";
+		}
 	}
 	if (currentGame->checkExtraLoop) {
-		// show bitmap of POW
-		displayPowerUp(extraLoop);
+		if (currentGame->showBonus(extraLoop)) {
+			// show bitmap of POW
+			displayPowerUp(extraLoop);
 
-		currentGame->bonusBirds->clear();
-		currentGame->checkExtraLoop = false;
-		cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW extraLoop\n";
-
+			currentGame->bonusBirds->clear();
+			currentGame->checkExtraLoop = false;
+			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW extraLoop\n";
+		}
 	}
 	if (currentGame->check1000Points) {
-		// show bitmap of POW
-		displayPowerUp(points1000);
+		if (currentGame->showBonus(points1000)) {
+			// show bitmap of POW
+			displayPowerUp(points1000);
 
-		currentGame->bonusBirds->clear();
-		currentGame->check1000Points = false;
-		cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW points1000\n";
-
+			currentGame->bonusBirds->clear();
+			currentGame->check1000Points = false;
+			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW points1000\n";
+		}
 	}
 }
 

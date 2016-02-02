@@ -56,7 +56,7 @@
     shooting
     
 - PowerUp
-    - create power ups on terrain
+    - create power ups on terrain  -- DONE
     - test all of them
     
 - Main window initial position on screen
