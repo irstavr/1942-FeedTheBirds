@@ -34,29 +34,49 @@ std::list<PathEntry>* createSmoothDiagonalPath(int dx, int dy, delay_t delay) {/
 	sumy = 0;
 	absx = (dx < 0 ? -dx : dx);
 	absy = (dy < 0 ? -dy : dy);
-
 	if (absx > absy) {
-		for (;sumx<absx;) {
-			paths->push_back(PathEntry((dx < 0 ? -1 : 1), (int)(dy < 0 ? -1 : 1), false, false, 0, delay));
-			//cout << "1Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
+		for (; sumx < absx;) {
+			if (absy != 0) {
+				paths->push_back(PathEntry((dx < 0 ? -1 : 1), (int)(dy < 0 ? -1 : 1), false, false, 0, delay));
+				//cout << "1Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
+			}
+			else {
+				paths->push_back(PathEntry((dx < 0 ? -1 : 1), 0, false, false, 0, delay));
+
+			}
 			sumy++;
 			sumx++;
 		}
-		for (;sumy < absy;sumy++) {
-			paths->push_back(PathEntry(0, (dy < 0 ? -1 : 1), false, false, 0, delay));
-			//cout << "3Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
+		for (; sumy < absy; sumy++) {
+			if (absy != 0) {
+				paths->push_back(PathEntry(0,(dy < 0 ? -1 : 1), false, false, 0, delay));
+				//cout << "6Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
+			}
+			else {
+				paths->push_back(PathEntry(0, 0, false, false, 0, delay));
+			}
 		}
 	}
 	else {
 		for (;sumy<absy;) {
-			paths->push_back(PathEntry((dx < 0 ? -1 : 1), (dy < 0 ? -1 : 1), false, false, 0, delay));
-			//cout << "4Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
+			if (absx != 0) {
+				paths->push_back(PathEntry((dx < 0 ? -1 : 1), (dy < 0 ? -1 : 1), false, false, 0, delay));
+				//cout << "4Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
+			}
+			else {
+				paths->push_back(PathEntry(0, (dy < 0 ? -1 : 1), false, false, 0, delay));
+			}
 			sumx++;
 			sumy++;
 		}
 		for (;sumx < absx;sumx++) {
-			paths->push_back(PathEntry((dx < 0 ? -1 : 1), 0, false, false, 0, delay));
-			//cout << "6Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
+			if (absx != 0) {
+				paths->push_back(PathEntry((dx < 0 ? -1 : 1), 0, false, false, 0, delay));
+				//cout << "6Just added dx=" << paths->back().dx << " dy=" << paths->back().dy << endl;
+			}
+			else {
+				paths->push_back(PathEntry(0, 0, false, false, 0, delay));
+			}
 		}
 	}
 	std::vector<PathEntry> tmpVector(paths->size());

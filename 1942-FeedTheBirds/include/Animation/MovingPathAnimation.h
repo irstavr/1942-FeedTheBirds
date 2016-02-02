@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
+#include <iostream>
 
 #define PI 3.14159
 #define XforCircle(radius) sin(i*PI / 180)*radius 
