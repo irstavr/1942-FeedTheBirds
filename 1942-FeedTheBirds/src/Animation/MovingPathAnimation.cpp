@@ -42,7 +42,6 @@ std::list<PathEntry>* createSmoothDiagonalPath(int dx, int dy, delay_t delay) {/
 			}
 			else {
 				paths->push_back(PathEntry((dx < 0 ? -1 : 1), 0, false, false, 0, delay));
-
 			}
 			sumy++;
 			sumx++;

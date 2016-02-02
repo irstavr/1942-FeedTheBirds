@@ -192,7 +192,7 @@ void SuperAce::shoot(vector<Bird*>* birds) {
 
 		for (unsigned int i = 0; i < birds->size(); i++) {
 			if (!birds->at(i)->isDead()) {
-				//cerr << "REGISTER COLLISION! BIRD" << i << " WITH FISH!\n";
+				cerr << "REGISTER COLLISION! BIRD" << birds->at(i)->getBirdID() << " WITH FISH!\n";
 				CollisionChecker::getInstance()->
 					registerCollisions(birds->at(i), fish);
 			}
@@ -239,18 +239,21 @@ void SuperAce::displayAll() {
 		if (hasSideFighter) {
 			this->sf1->displayAll();
 			this->sf2->displayAll();
-			if (sf1->y > this->y - 80) sf1->stopMoving();
-			if (sf2->y < this->y + 20) sf2->stopMoving();
-			//when out of screen
-			if (sf1->y < -80) {
-				hasSideFighter = false;
-				sf1->die();
+			if (!sf1->attached||!sf2->attached) {
+				cout << "-------check sf position \n";
+				if (sf1->y > this->y - 90) sf1->stopMoving();
+				if (sf2->y < this->y + 30) sf2->stopMoving();
+				//when out of screen
+				if (sf1->y < -80) {
+					hasSideFighter = false;
+					sf1->die();
+				}
+				if (sf2->y > SCREEN_WINDOW_HEIGHT + 80) {
+					hasSideFighter = false;
+					sf2->die();
+				}
+				this->enableMovement();
 			}
-			if (sf2->y > SCREEN_WINDOW_HEIGHT + 80) {
-				hasSideFighter = false;
-				sf2->die();
-			}
-			this->enableMovement();
 		}
 	}
 	if (this->explosion->isSpriteVisible()) {

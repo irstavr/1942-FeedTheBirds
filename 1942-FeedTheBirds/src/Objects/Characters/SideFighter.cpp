@@ -13,7 +13,8 @@ SideFighter::SideFighter(
 	appearAnimator(_appearAnimator),
 	disappearAnimation(_disappearAnimation),
 	disappearAnimator(_disappearAnimator),
-	fishes(_fishes)
+	fishes(_fishes),
+	attached(false)
 {
 	AnimatorHolder::animRegister(appearAnimator);
 	AnimatorHolder::animRegister(disappearAnimator);
@@ -38,14 +39,18 @@ void SideFighter::startMoving()
 
 void SideFighter::stopMoving()
 {
-	fprintf(stdout, "stopMoving -> sideFighter.cpp\n");
-	AnimatorHolder::markAsSuspended(appearAnimator);
+	if (!attached) {
+		attached = true;
+		fprintf(stdout, "stopMoving -> sideFighter.cpp\n");
+		AnimatorHolder::markAsSuspended(appearAnimator);
+	}
 }
 
 void SideFighter::disappearSideFighter() {
 	fprintf(stdout, "startLeaving -> sideFighter.cpp\n");
 	disappearAnimator->start(this, disappearAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(disappearAnimator);
+	attached = false;
 }
 
 int SideFighter::getLives()

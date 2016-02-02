@@ -48,6 +48,7 @@ public:
 
 	void displayAll();
 
+	bool attached;
 
 };
 

@@ -14,6 +14,9 @@ AI::AI(GameLogic *_gameLogic, FrameRangeAnimator* _flyAnimator, FrameRangeAnimat
 	birdPathAnimator = new MovingPathAnimator();
 
 	smallGreenBirdAnimation = this->createSmallGreenBirdAnimation();
+	smallGreenBirdAnimationFromAbove = this->createSmallGreenBirdAnimationFromAbove();
+	smallBlueBirdAnimationFromAbove = this->createSmallBlueBirdAnimationFromAbove();
+	smallYellowBirdAnimationFromAbove = this->createSmallYellowBirdAnimationFromAbove();
 	smallBlueBirdAnimation = this->createSmallBlueBirdAnimation();
 	smallRedBirdAnimation = this->createSmallRedBirdAnimation();
 	smallYellowBirdAnimation = this->createSmallYellowBirdAnimation();
@@ -45,7 +48,11 @@ void AI::eventAtX(int x)
 	handleBoss();
 
 	switch (x) {
-	case 20:
+	case 30:
+		// action point for small birds
+		addSmallBirds();
+		break;
+	case 80:
 		// action point for small birds
 		addSmallBirds();
 		break;
@@ -56,6 +63,14 @@ void AI::eventAtX(int x)
 	case 150:
 		// action points for medium birds
 		addMediumBirds();
+		break;
+	case 160:
+		// action point for small birds
+		addSmallBirds();
+		break;
+	case 190:
+		// action point for small birds
+		addSmallBirds();
 		break;
 	case 200:
 		// action points for medium birds
@@ -83,13 +98,13 @@ void AI::eventAtX(int x)
 		break;  
 	case 500:
 		// action point for boss
-		this->addBoss(-10,
+	/*	this->addBoss(-10,
 			400,
 			"bigBird",
 			ColoredBossLives,
 			ColoredBossSpeed,
 			bigBirdAnimation);
-		break;
+		break;*/
 
 	//POWER UP action point: enemy crash ! ! ! POW2
 	case 520:
@@ -567,23 +582,61 @@ void AI::addBonusBird(int x, int y, char* filmId, MovingPathAnimation* visVitali
 
 void AI::addSmallBirds() {
 	// action point for small birds
+	addBlueSmallBird();
+
+	addGreenSmallBird();
+
+	addYellowSmallBird();
+}
+
+void AI::addGreenSmallBird() {
 	Point* randomEntryPoint;
 	randomEntryPoint = getRandomEntryPoint();
+	MovingPathAnimation* anim;
+	if (randomEntryPoint->y < 0) {
+		anim = smallGreenBirdAnimationFromAbove->clone(lastUsedID++);
+	}
+	else {
+		anim = smallGreenBirdAnimation->clone(lastUsedID++);
+	}
 	this->addSmallBird(randomEntryPoint->x,
 		randomEntryPoint->y,
 		"smallGreenBird",
-		smallGreenBirdAnimation,0);
+		anim, 0);
+}
+
+void AI::addBlueSmallBird() {
+	Point* randomEntryPoint;
 	randomEntryPoint = getRandomEntryPoint();
-	this->addSmallBird(randomEntryPoint->x,
-		randomEntryPoint->y,
-		"smallYellowBird",
-		smallYellowBirdAnimation,0);
-	randomEntryPoint = getRandomEntryPoint();
+	MovingPathAnimation* anim;
+	if (randomEntryPoint->y < 0) {
+		anim = smallBlueBirdAnimationFromAbove->clone(lastUsedID++);
+	}
+	else {
+		anim = smallBlueBirdAnimation->clone(lastUsedID++);
+	}
 	this->addSmallBird(randomEntryPoint->x,
 		randomEntryPoint->y,
 		"smallBlueBird",
-		smallBlueBirdAnimation,0);  
+		anim, 0);
 }
+
+void AI::addYellowSmallBird() {
+	Point* randomEntryPoint;
+	randomEntryPoint = getRandomEntryPoint();
+	MovingPathAnimation* anim;
+	if (randomEntryPoint->y < 0) {
+		anim = smallYellowBirdAnimationFromAbove->clone(lastUsedID++);
+	}
+	else {
+		anim = smallYellowBirdAnimation->clone(lastUsedID++);
+	}
+	this->addSmallBird(randomEntryPoint->x,
+		randomEntryPoint->y,
+		"smallYellowBird",
+		anim, 0);
+}
+
 
 void AI::addSmallBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis, int followsSuperAce) {
 	this->smallBirds->push_back(birdPathAnimator->clone());
@@ -622,7 +675,7 @@ void AI::handleLittleBirds()
 	}
 }
 
-//erxontai apo ta plagia, kanoun tyxaious kykloys kai feygoyn
+//erxontai apo katw, kanoun tyxaious kykloys kai feygoyn
 MovingPathAnimation* AI::createSmallGreenBirdAnimation() {
 	std::list<PathEntry> paths;
 	//todo appropriately
@@ -630,6 +683,18 @@ MovingPathAnimation* AI::createSmallGreenBirdAnimation() {
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, littleBirdSpeed));
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, littleBirdSpeed));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, littleBirdSpeed));
+	return new MovingPathAnimation(paths, lastUsedID++);
+}
+
+//erxontai apo panw, kanoun tyxaious kykloys kai feygoyn
+MovingPathAnimation* AI::createSmallGreenBirdAnimationFromAbove() {
+	std::list<PathEntry> paths;
+	//todo appropriately
+
+	paths.splice(paths.end(), *createSmoothDiagonalPath(10, 200, littleBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, littleBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-300, 0, littleBirdSpeed));
+	//paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, littleBirdSpeed));
 	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
@@ -645,12 +710,25 @@ MovingPathAnimation* AI::createSmallBlueBirdAnimation() {
 	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
+MovingPathAnimation* AI::createSmallBlueBirdAnimationFromAbove() {
+	std::list<PathEntry> paths;
+	//todo appropriately
+	paths.splice(paths.end(), *createSmoothDiagonalPath(0, 200, littleBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, littleBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(200, 10, littleBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.15, 180, 720, littleBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.14, 180, 360, littleBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(100, -10, littleBirdSpeed));
+	return new MovingPathAnimation(paths, lastUsedID++);
+}
+
 //bonus bird
 MovingPathAnimation* AI::createSmallRedBirdAnimation() {
-	std::list<PathEntry> paths;
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, littleBirdSpeed));
+	std::list<PathEntry> paths; 
+	paths.splice(paths.end(), *createSmoothDiagonalPath(0, -200, littleBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.15, 180, 360, littleBirdSpeed));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, littleBirdSpeed));
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.17, 180, 720, littleBirdSpeed));
+	//paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.17, 180, 720, littleBirdSpeed));
 	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
@@ -658,9 +736,22 @@ MovingPathAnimation* AI::createSmallRedBirdAnimation() {
 MovingPathAnimation* AI::createSmallYellowBirdAnimation() {
 	std::list<PathEntry> paths;
 	//todo appropriately
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-200, -100, littleBirdSpeed));
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.30, 180, 360, littleBirdSpeed));
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 720, littleBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, 5, littleBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 270, littleBirdSpeed));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, littleBirdSpeed));
+	return new MovingPathAnimation(paths, lastUsedID++);
+}
+
+MovingPathAnimation* AI::createSmallYellowBirdAnimationFromAbove() {
+	std::list<PathEntry> paths;
+	//todo appropriately
+	paths.splice(paths.end(), *createSmoothDiagonalPath(0, 300, littleBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.30, 180, 360, littleBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, 5, littleBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 270, littleBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-300, -100, littleBirdSpeed));
 	return new MovingPathAnimation(paths, lastUsedID++);
 }
 

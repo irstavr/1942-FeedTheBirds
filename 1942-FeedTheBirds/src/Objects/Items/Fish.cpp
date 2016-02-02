@@ -54,7 +54,7 @@ void Fish::setDead(void) {
 }
 
 void Fish::startMoving(void) {
-	fprintf(stdout, "startMoving -> Fish.cpp\n");
+	//fprintf(stdout, "startMoving -> Fish.cpp\n");
 	flyAnimator->start(this, flyAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(flyAnimator);
 }
