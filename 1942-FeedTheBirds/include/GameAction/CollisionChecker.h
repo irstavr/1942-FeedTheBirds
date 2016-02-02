@@ -41,7 +41,6 @@ public:
 	static CollisionChecker *getInstance(void);
 	static void cleanUp();
 	bool collidesWithBorders(Sprite *s);
-	void registerCollisionsWithPows(Sprite* s1);
 	void registerCollisions(Sprite* s1, Sprite* s2);
 	void cancel(Sprite* s1, Sprite* s2);
 	void check(void) const;

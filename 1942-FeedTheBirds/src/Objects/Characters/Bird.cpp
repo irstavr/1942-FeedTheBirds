@@ -17,9 +17,9 @@ Bird::Bird(Dim _x, Dim _y,
 		birdFire(birdFire),
 		isAlive(true),
 		isFed(false),
-		canShoot(true) {
+		canShoot(true),
+		followsSuperAce(0) {
 	droppings = new vector<BirdDropping*>();
-	this->followsSuperAce = 0;
 }
 
 Bird::~Bird(void) {
@@ -27,7 +27,7 @@ Bird::~Bird(void) {
 }
 
 BirdDropping* Bird::shoot() {
-	if (canShoot) {
+	if (this->canShoot && this->isAlive) {
 		MovingAnimation* bulletAnimation = new MovingAnimation(-5, 0, 10, true, 4);
 		MovingAnimator* bulletAnimator = new MovingAnimator();
 
@@ -45,46 +45,49 @@ BirdDropping* Bird::shoot() {
 }
 
 DROPPINGS* Bird::bossShoot() {
-	MovingAnimation* bullet1Animation = new MovingAnimation(-7, -2, 10, true, 4);
-	MovingAnimator* bullet1Animator = new MovingAnimator();
-	MovingAnimation* bullet2Animation = new MovingAnimation(-7, 0, 10, true, 5);
-	MovingAnimator* bullet2Animator = new MovingAnimator();
-	MovingAnimation* bullet3Animation = new MovingAnimation(-7, 2, 10, true, 6);
-	MovingAnimator* bullet3Animator = new MovingAnimator();
 
-	AnimatorHolder::animRegister(bullet1Animator);
-	AnimatorHolder::animRegister(bullet2Animator);
-	AnimatorHolder::animRegister(bullet3Animator);
+	if (this->isAlive) {
+		MovingAnimation* bullet1Animation = new MovingAnimation(-7, -2, 10, true, 4);
+		MovingAnimator* bullet1Animator = new MovingAnimator();
+		MovingAnimation* bullet2Animation = new MovingAnimation(-7, 0, 10, true, 5);
+		MovingAnimator* bullet2Animator = new MovingAnimator();
+		MovingAnimation* bullet3Animation = new MovingAnimation(-7, 2, 10, true, 6);
+		MovingAnimator* bullet3Animator = new MovingAnimator();
 
-	DROPPINGS* bossDroppings = new vector<BirdDropping*>();
-	BirdDropping* dropping1 = new BirdDropping(x - 70, y - 30,
-		(AnimationFilm*)
-		AnimationFilmHolder::getSingleton()->
-		getFilm("birdshit"),
-		bullet1Animation,
-		bullet1Animator);
-	BirdDropping* dropping2 = new BirdDropping(x - 70, y - 30,
-		(AnimationFilm*)
-		AnimationFilmHolder::getSingleton()->
-		getFilm("birdshit"),
-		bullet2Animation,
-		bullet2Animator);
-	BirdDropping* dropping3 = new BirdDropping(x - 70, y - 30,
-		(AnimationFilm*)
-		AnimationFilmHolder::getSingleton()->
-		getFilm("birdshit"),
-		bullet3Animation,
-		bullet3Animator);
-	droppings->push_back(dropping1);
-	droppings->push_back(dropping2);
-	droppings->push_back(dropping3);
-	bossDroppings->push_back(dropping1);
-	bossDroppings->push_back(dropping2);
-	bossDroppings->push_back(dropping3);
-	dropping1->startMoving();
-	dropping2->startMoving();
-	dropping3->startMoving();
-	return bossDroppings;
+		AnimatorHolder::animRegister(bullet1Animator);
+		AnimatorHolder::animRegister(bullet2Animator);
+		AnimatorHolder::animRegister(bullet3Animator);
+
+		DROPPINGS* bossDroppings = new vector<BirdDropping*>();
+		BirdDropping* dropping1 = new BirdDropping(x - 70, y - 30,
+			(AnimationFilm*)
+			AnimationFilmHolder::getSingleton()->
+			getFilm("birdshit"),
+			bullet1Animation,
+			bullet1Animator);
+		BirdDropping* dropping2 = new BirdDropping(x - 70, y - 30,
+			(AnimationFilm*)
+			AnimationFilmHolder::getSingleton()->
+			getFilm("birdshit"),
+			bullet2Animation,
+			bullet2Animator);
+		BirdDropping* dropping3 = new BirdDropping(x - 70, y - 30,
+			(AnimationFilm*)
+			AnimationFilmHolder::getSingleton()->
+			getFilm("birdshit"),
+			bullet3Animation,
+			bullet3Animator);
+		droppings->push_back(dropping1);
+		droppings->push_back(dropping2);
+		droppings->push_back(dropping3);
+		bossDroppings->push_back(dropping1);
+		bossDroppings->push_back(dropping2);
+		bossDroppings->push_back(dropping3);
+		dropping1->startMoving();
+		dropping2->startMoving();
+		dropping3->startMoving();
+		return bossDroppings;
+	}
 }
 
 void Bird::setFollowsSuperAce(int b)
@@ -108,6 +111,7 @@ BirdFire Bird::getShotsRemaining()
 }
 
 void Bird::displayAll() {
+
 	if (isSpriteVisible()) {
 		this->display(Rect(0, 0, 0, 0));
 
@@ -119,7 +123,6 @@ void Bird::displayAll() {
 }
 
 void Bird::startMoving(void) {
-	cerr << __FUNCTION__ << "\n";
 	flyAnimator->start(this, flyAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(flyAnimator);
 }
@@ -140,19 +143,30 @@ void Bird::decrFire() {
 }
 
 void Bird::leaveScreen() {
-	flyAnimation->setNewOffsets(5, -20);
-	flyAnimation->setDelay(50);
+	this->flyAnimation->setNewOffsets(5, -20);
+	this->flyAnimation->setDelay(50);
 	this->setFlipH(true);
+	this->isAlive = false;
+	this->birdLives = static_cast<BirdLives>(0);
+	this->canShoot = false;
+	this->canMove = false;
 }
 
 bool Bird::isDead(void) {
-	return !isAlive;
+	if (this->birdLives == 0) {
+		isAlive = false;
+		return true;
+	}
+	else {
+		isAlive = true;
+		return false;
+	}
 }
 
 void Bird::scare() {
-	birdLives = static_cast<BirdLives>(0);
-	leaveScreen();
-	isAlive = false;
+	this->birdLives = static_cast<BirdLives>(0);
+	this->leaveScreen();
+	this->isAlive = false;
 }
 
 int Bird::getBirdID() {
@@ -161,33 +175,36 @@ int Bird::getBirdID() {
 
 // Called when Bird collides with Fish
 void Bird::collisionAction(Sprite* s) {
-	cerr << "COLLISION! fish with bird \n";
 
-	Fish* fish = (Fish*) s;
-	fish->setVisibility(false);
-	fish->disableMovement();
-	fish->setDead();
+	if (this->birdLives>0) {
+		cerr << "COLLISION! fish with bird \n";
+		
+		if (Fish* fish = dynamic_cast<Fish*>(s)) {
+			fish->setVisibility(false);
+			fish->disableMovement();
+			fish->setDead();
 
-	if (birdID == littleBird) {
-		ScoreBoard::getInstance().incrScore(100);
-	}
-	else if (birdID == bonusBird) {
-		ScoreBoard::getInstance().incrScore(100);
-	}
-	else if (birdID == mediumBird) {
-		ScoreBoard::getInstance().incrScore(200);
-	}
-	else if (birdID == bossBird) {
-		ScoreBoard::getInstance().incrScore(300);
-	}
+			if (birdID == littleBird) {
+				ScoreBoard::getInstance().incrScore(100);
+			}
+			else if (birdID == bonusBird) {
+				ScoreBoard::getInstance().incrScore(100);
+			}
+			else if (birdID == mediumBird) {
+				ScoreBoard::getInstance().incrScore(200);
+			}
+			else if (birdID == bossBird) {
+				ScoreBoard::getInstance().incrScore(300);
+			}
 
-	this->removeLife();
+			this->removeLife();
 
-	// kill fish sprite
-	if (this->birdLives == 0) {
-		cerr << "BIRD DEAD!\n";
-		this->leaveScreen();
-		this->isAlive = false;
-		this->isFed = true;
+			// Kill fish sprite
+			if (this->birdLives == 0) {
+				cerr << "BIRD DEAD!\n";
+				this->leaveScreen();
+				this->isFed = true;
+			}
+		}
 	}
 }

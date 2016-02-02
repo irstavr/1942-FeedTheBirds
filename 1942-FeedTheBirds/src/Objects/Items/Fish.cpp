@@ -1,25 +1,5 @@
 #include "..\..\..\include\Objects\Items\Fish.h"
 
-/*
-Fish::Fish(int d, int t) : direction(d) {
-	//set speed according to type
-	switch (t) {
-		case 1:
-			speedX = 1;
-			speedY = d == -1 ? 700 : 350;
-			break;
-		case 2:
-			speedX = 150;
-			speedY = 350;
-			break;
-		case 3:
-			speedX = -150;
-			speedY = 350;
-			break;
-	}
-}
-*/
-
 // TODO: if bonuses change bullets
 // add another field for advancing speed
 Fish::Fish(Dim _x, Dim _y, AnimationFilm* film,
@@ -54,7 +34,7 @@ void Fish::setDead(void) {
 }
 
 void Fish::startMoving(void) {
-	fprintf(stdout, "startMoving -> Fish.cpp\n");
+	cerr << "startMoving -> Fish.cpp\n";
 	flyAnimator->start(this, flyAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(flyAnimator);
 }

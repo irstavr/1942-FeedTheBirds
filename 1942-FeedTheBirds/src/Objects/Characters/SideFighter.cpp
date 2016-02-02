@@ -17,8 +17,6 @@ SideFighter::SideFighter(
 {
 	AnimatorHolder::animRegister(appearAnimator);
 	AnimatorHolder::animRegister(disappearAnimator);
-	//this->lives = 0;
-	//this->setVisibility(false);
 	this->lives = 1;
 	this->setVisibility(true);
 }
@@ -31,19 +29,19 @@ void SideFighter::move(int dx, int dy)
 
 void SideFighter::startMoving()
 {
-	fprintf(stdout, "startMoving -> sideFighter.cpp\n");
+	//cerr << "startMoving -> sideFighter.cpp\n";
 	appearAnimator->start(this, appearAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(appearAnimator);
 }
 
 void SideFighter::stopMoving()
 {
-	fprintf(stdout, "stopMoving -> sideFighter.cpp\n");
+	//cerr << "stopMoving -> sideFighter.cpp\n";
 	AnimatorHolder::markAsSuspended(appearAnimator);
 }
 
 void SideFighter::disappearSideFighter() {
-	fprintf(stdout, "startLeaving -> sideFighter.cpp\n");
+	//cerr << "startLeaving -> sideFighter.cpp\n";
 	disappearAnimator->start(this, disappearAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(disappearAnimator);
 }
@@ -74,6 +72,7 @@ void SideFighter::decrLives()
 void SideFighter::die()
 {
 	this->setVisibility(false);
+	this->lives = 0;
 	AnimatorHolder::markAsSuspended(disappearAnimator);
 }
 
@@ -96,7 +95,7 @@ void SideFighter::shoot(vector<Bird*>* birds)
 
 	for (unsigned int i = 0; i < birds->size(); i++) {
 		if (!birds->at(i)->isDead()) {
-			cout << "REGISTER COLLISION! BIRD" << i << " WITH FISH!\n";
+			cerr << "REGISTER COLLISION! BIRD" << i << " WITH FISH!\n";
 			CollisionChecker::getInstance()->
 				registerCollisions(birds->at(i), fish);
 		}
@@ -106,7 +105,6 @@ void SideFighter::shoot(vector<Bird*>* birds)
 void SideFighter::collisionAction(Sprite * s)
 {
 	//todo
-
 }
 
 void SideFighter::displayAll() {
@@ -117,5 +115,4 @@ void SideFighter::displayAll() {
 				fishes->at(i)->display(Rect(0, 0, 0, 0));
 		}
 	}
-
 }

@@ -76,7 +76,6 @@ void SuperAce::fetchSideFighters() {
 	MovingAnimation* disappear_sf2Animation = new MovingAnimation(0, 2, 5, true, 503);
 	MovingAnimator* disappear_sf2Animator = new MovingAnimator();
 
-
 	this->sf1 = new SideFighter(this->x-50, -50,
 		(AnimationFilm*)
 		AnimationFilmHolder::getSingleton()
@@ -192,11 +191,12 @@ void SuperAce::shoot(vector<Bird*>* birds) {
 
 		for (unsigned int i = 0; i < birds->size(); i++) {
 			if (!birds->at(i)->isDead()) {
-				//cerr << "REGISTER COLLISION! BIRD" << i << " WITH FISH!\n";
+				cerr << "REGISTER COLLISION! BIRD" << i << " WITH FISH!\n";
 				CollisionChecker::getInstance()->
 					registerCollisions(birds->at(i), fish);
 			}
 		}
+
 		if (hasSideFighter) {
 			this->sf1->shoot(birds);
 			this->sf2->shoot(birds);
@@ -232,10 +232,8 @@ void SuperAce::displayAll() {
 	if (this->isSpriteVisible()) {
 		this->display(Rect(0, 0, 0, 0));
 
-		for (unsigned int i = 0; i < fishes->size(); i++) {
-			if (fishes->at(i)->isSpriteVisible())
-				fishes->at(i)->display(Rect(0, 0, 0, 0));
-		}
+		displayFishes();
+
 		if (hasSideFighter) {
 			this->sf1->displayAll();
 			this->sf2->displayAll();
@@ -256,7 +254,26 @@ void SuperAce::displayAll() {
 	if (this->explosion->isSpriteVisible()) {
 		this->explosion->display(Rect(0, 0, 0, 0));
 	}
-	
+}
+
+void SuperAce::displayFishes()
+{
+	for (unsigned int i = 0; i < fishes->size(); i++) {
+
+		// dont display if out of terrain
+		if ((fishes->at(i)->getX() - 10 < LEFT_BORDER) ||
+			(fishes->at(i)->getX() + 10 > RIGHT_BORDER) ||
+			(fishes->at(i)->getY() + 10 > UP_BORDER) ||
+			(fishes->at(i)->getY() + 10 > DOWN_BORDER)) {
+			// set it dead !
+			fishes->at(i)->setDead();
+			//return;
+		}
+		// show fish if visible and alive
+		if (fishes->at(i)->isSpriteVisible()) {
+			fishes->at(i)->display(Rect(0, 0, 0, 0));
+		}
+	}
 }
 
 void SuperAce::explode() {

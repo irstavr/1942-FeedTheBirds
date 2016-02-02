@@ -31,7 +31,6 @@ public:
 		MovingAnimator *_disappearAnimator,
 		FISHES *_fishes);
 
-
 	void move(int dx, int dy);
 	void startMoving();
 	void stopMoving();
@@ -47,8 +46,6 @@ public:
 	virtual void collisionAction(Sprite* s);
 
 	void displayAll();
-
-
 };
 
 #endif
