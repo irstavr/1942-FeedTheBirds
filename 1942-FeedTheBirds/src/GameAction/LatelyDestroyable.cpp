@@ -3,7 +3,9 @@
 
 std::list<LatelyDestroyable*> DestructionManager::dead;
 
-bool LatelyDestroyable::isAlive(void) const { return alive; }
+bool LatelyDestroyable::isAlive(void) const { 
+	return alive; 
+}
 
 void LatelyDestroyable::destroy(void) {
 	if (alive) {
@@ -14,7 +16,8 @@ void LatelyDestroyable::destroy(void) {
 
 void LatelyDestroyable::Delete::operator()(LatelyDestroyable* o) const
 {
-	o->inDestruction = true; delete o;
+	o->inDestruction = true; 
+	delete o;
 }
 
 void DestructionManager::Register(LatelyDestroyable* o) {

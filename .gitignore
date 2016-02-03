@@ -215,3 +215,7 @@ ModelManifest.xml
 1942-FeedTheBirds.vcxproj
 1942-FeedTheBirds.vcxproj
 *.db
+1942-FeedTheBirds.sln
+1942-FeedTheBirds.sln
+allegro-5.0.10-monolith-md-debug.dll
+*.dll
