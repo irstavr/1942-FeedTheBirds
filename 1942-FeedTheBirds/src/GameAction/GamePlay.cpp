@@ -204,7 +204,7 @@ void GamePlay::initGameEngine() {
 	// SuperAce
 	// add take off, landing, explosion(?) bbs
 	//int total_frames = AnimationFilmHolder::getSingleton()->getFilm("bonusBird")->getTotalFrames();
-	takeOffAnimation = new FrameRangeAnimation(1, 7, 80, 0, 300, false, 2);
+	takeOffAnimation = new FrameRangeAnimation(1, 7, 30, 0, 300, false, 2);
 	takeOffAnimator = new FrameRangeAnimator();
 	deathAnimation = new FrameRangeAnimation(1, 8, 0, 0, 150, false, 4);
 	deathAnimator = new FrameRangeAnimator();
@@ -216,6 +216,7 @@ void GamePlay::initGameEngine() {
 
 	loopAnimation = createLoopAnimation();
 	loopAnimator = new MovingPathAnimator();
+	loopAnimator->setHandleFrames(true);
 
 	AnimatorHolder::animRegister(loopAnimator);
 	AnimatorHolder::animRegister(landingAnimator);
@@ -243,11 +244,7 @@ MovingPathAnimation* GamePlay::createLandingAnimation() {
 // loop animation for super ace when pressing A
 MovingPathAnimation* GamePlay::createLoopAnimation() {
 	std::list<PathEntry> paths;
-	paths.push_back(PathEntry(0,	0,  false,	false, 6, 50));
-	paths.push_back(PathEntry(50, -50, false,	false, 6, 150));
-	paths.push_back(PathEntry(-50, -50, true,	false, 6, 150));
-	paths.push_back(PathEntry(-50, 50, true,	false, 6, 150));
-	paths.push_back(PathEntry(50, 50 , false,	false, 6, 150));
+	paths.splice(paths.end(), *createLoopCircularPath(SCREEN_WINDOW_WIDTH*0.10, 0, 360, littleGreyBirdSpeed, 6));
 	return new MovingPathAnimation(paths, 1);
 }
 

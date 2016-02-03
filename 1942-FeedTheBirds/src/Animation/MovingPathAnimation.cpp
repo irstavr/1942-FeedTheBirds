@@ -101,3 +101,23 @@ std::list<PathEntry>* createCircularPath(int radius, int startAngle, int endAngl
 	paths->push_back(PathEntry(0, 0, false, false, 0, 0));
 	return paths;
 }
+
+std::list<PathEntry>* createLoopCircularPath(int radius, int startAngle, int endAngle, delay_t delay, frame_t frame) {
+	std::list<PathEntry> *paths = new std::list<PathEntry>;
+	int lastx, lasty, i;
+	i = startAngle - 1;
+	lastx = XforCircle(radius);
+	lasty = YforCircle(radius);
+	paths->push_back(PathEntry(0, 0, false, false, frame, delay));
+	for (int i = startAngle; i < endAngle; i += 1) {
+		paths->push_back(
+			PathEntry(
+				XforCircle(radius) - lastx,
+				-(YforCircle(radius) - lasty),
+				false, false, frame, delay));
+		lastx = XforCircle(radius);
+		lasty = YforCircle(radius);
+	}
+	paths->push_back(PathEntry(0, 0, false, false, frame, delay));
+	return paths;
+}
