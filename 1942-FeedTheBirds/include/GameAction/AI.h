@@ -35,6 +35,7 @@ private:
 	std::vector<MovingPathAnimator*> *bonusBirds;
 
 	std::vector<MovingPathAnimator*> *loopers;
+	std::vector<MovingPathAnimator*> *crap;
 	std::vector<MovingAnimator*> *followers;
 
 	FrameRangeAnimation *flyAnimation;

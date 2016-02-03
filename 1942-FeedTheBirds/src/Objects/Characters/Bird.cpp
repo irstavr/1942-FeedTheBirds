@@ -30,6 +30,7 @@ BirdDropping* Bird::shoot() {
 	if (this->canShoot && this->isAlive) {
 		MovingAnimation* bulletAnimation = new MovingAnimation(-5, 0, 10, true, 4);
 		MovingAnimator* bulletAnimator = new MovingAnimator();
+		//AudioHolder::changeToSound("shoot");
 
 		AnimatorHolder::animRegister(bulletAnimator);
 		BirdDropping* dropping = new BirdDropping(x - 70, y - 30,
@@ -57,6 +58,7 @@ DROPPINGS* Bird::bossShoot() {
 		AnimatorHolder::animRegister(bullet1Animator);
 		AnimatorHolder::animRegister(bullet2Animator);
 		AnimatorHolder::animRegister(bullet3Animator);
+		//AudioHolder::changeToSound("shoot");
 
 		DROPPINGS* bossDroppings = new vector<BirdDropping*>();
 		BirdDropping* dropping1 = new BirdDropping(x - 70, y - 30,
@@ -201,6 +203,7 @@ void Bird::collisionAction(Sprite* s) {
 
 			// Kill fish sprite
 			if (this->birdLives == 0) {
+				AudioHolder::changeToSound("scared");
 				cerr << "BIRD DEAD!\n";
 				this->leaveScreen();
 				this->isFed = true;
