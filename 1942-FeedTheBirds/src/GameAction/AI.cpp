@@ -52,7 +52,6 @@ void AI::eventAtX(int x)
 	handleMediumBirds();
 	handleBoss();
 
-	cout << "X is " << x<< endl;
 	switch (x) {
 	case 30:
 		// action point for small birds

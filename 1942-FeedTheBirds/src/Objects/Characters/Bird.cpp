@@ -201,7 +201,6 @@ void Bird::collisionAction(Sprite* s) {
 
 			// Kill fish sprite
 			if (this->birdLives == 0) {
-				cerr << "BIRD DEAD!\n";
 				this->leaveScreen();
 				this->isFed = true;
 			}

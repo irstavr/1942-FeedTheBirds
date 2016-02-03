@@ -1,10 +1,6 @@
 #include "../../include/Animation/Animation.h"
 
-// TODO: enable latelyDestroyable
-Animation::Animation(animid_t _id) :
-	/*LatelyDestroyable(),*/ 
-	id(_id) 
-{
+Animation::Animation(animid_t _id) : id(_id) {
 	assert(_id>=0);
 }
 

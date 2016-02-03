@@ -108,12 +108,6 @@
     <ClCompile Include="1942-FeedTheBirds\src\GameAction\InputManager.cpp">
       <Filter>Source Files\GameAction</Filter>
     </ClCompile>
-    <ClCompile Include="1942-FeedTheBirds\src\GameAction\SoundAPI.cpp">
-      <Filter>Source Files\GameAction</Filter>
-    </ClCompile>
-    <ClCompile Include="1942-FeedTheBirds\src\GameAction\StageManager.cpp">
-      <Filter>Source Files\GameAction</Filter>
-    </ClCompile>
     <ClCompile Include="1942-feedthebirds\src\1942-FeedTheBirdsMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -208,9 +202,6 @@
       <Filter>Source Files\GameLogic</Filter>
     </ClCompile>
     <ClCompile Include="1942-FeedTheBirds\src\GameAction\AudioHolder.cpp">
-      <Filter>Source Files\GameAction</Filter>
-    </ClCompile>
-    <ClCompile Include="1942-FeedTheBirds\src\GameAction\LatelyDestroyable.cpp">
       <Filter>Source Files\GameAction</Filter>
     </ClCompile>
   </ItemGroup>

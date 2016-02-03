@@ -1,7 +1,5 @@
 #include "..\..\..\include\Objects\Items\Fish.h"
 
-// TODO: if bonuses change bullets
-// add another field for advancing speed
 Fish::Fish(Dim _x, Dim _y, AnimationFilm* film,
 	MovingAnimation *_flyAnimation, MovingAnimator *_flyAnimator) :
 	Sprite(_x, _y, film),
@@ -22,7 +20,7 @@ bool Fish::inRange(float x, float y, float num) {
 }
 
 void Fish::move(float dt, float &x, float&y) {
-	x += speedX;// *dt;
+	x += speedX;
 }
 
 bool Fish::isDead(void) {
