@@ -1,4 +1,6 @@
 # 1942 - Feed The Birds
+
+
 # FIX:
 
 - add audio sounds  
@@ -16,3 +18,8 @@
 - LANDING ANIMATOR     !
 
 - change positions of landing/taking off ! ! ! ! ! ! ! ! ! !
+
+- start screen
+
+#BUGS
+- escape button doesnt work
