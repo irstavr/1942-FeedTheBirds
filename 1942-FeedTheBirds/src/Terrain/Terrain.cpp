@@ -4,11 +4,11 @@ using namespace std;
 
 	Terrain::Terrain() :
 	font_file("1942-FeedTheBirds\\data\\Fonts\\karmatic_arcade_font.ttf"),
-	width(TERRAIN_IMAGE_WIDTH),
-	height(TERRAIN_IMAGE_HEIGHT),
+	width(SCREEN_WINDOW_WIDTH),
+	height(SCREEN_WINDOW_WIDTH),
 	x(0), y(0), velX(3), velY(0), dirX(-1), dirY(1)
 {
-	bgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\level1_terrain.bmp");
+	bgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\background5.png");
 	remainingLivesImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\life.png");
 	remainingLoopsImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\loop.png");
 	scoreImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\ScoreBitmap.png");
@@ -38,11 +38,19 @@ void Terrain::updateBackground() {
 }
 
 void Terrain::drawBackground(int score, int highscore, int lives, int loops) {
-	al_draw_scaled_bitmap(bgImage, 0, 0, width, height, x, y, width * 3, height * 3, 0);
+	//al_draw_scaled_bitmap(bgImage, 0, 0, width, height, x, y, width * 3, height * 3, 0);
+	
+
+	al_draw_bitmap(this->bgImage, this->x, this->y, 0);
+
+	if (this->x + this->width < SCREEN_WINDOW_WIDTH)
+		al_draw_bitmap(this->bgImage, this->x+this->width, this->y, 0);
+
+	//al_draw_bitmap(this->bgImage, x, y, false);
 	al_draw_bitmap(scoreImage, 40, 10, false);
-	al_draw_text(font2, bright_green, 220, 10, ALLEGRO_ALIGN_CENTER, to_string(score).c_str());
+	//al_draw_text(font2, bright_green, 220, 10, ALLEGRO_ALIGN_CENTER, to_string(score).c_str());
 	al_draw_bitmap(highScoreImage, 420, 10, false);
-	al_draw_text(font1, bright_green, 700, 10, ALLEGRO_ALIGN_CENTER, to_string(highscore).c_str());
+	//al_draw_text(font1, bright_green, 700, 10, ALLEGRO_ALIGN_CENTER, to_string(highscore).c_str());
 
 	int livesImgWidth = al_get_bitmap_width(remainingLivesImage);
 

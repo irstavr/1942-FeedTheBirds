@@ -15,7 +15,7 @@ void FlashingAnimator::progress(unsigned long currTime) {
 					anim->getHideDelay() : anim->getShowDelay();
 	bool show = sprite->isSpriteVisible() ? false : true;
 	while (currTime > lastTime && currTime - lastTime >= delay) {
-		cout << "repetitions = " << repetitions << "\n";
+		//cout << "repetitions = " << repetitions << "\n";
 		sprite->setVisibility(show);
 		repetitions++;
 		lastTime += delay;
