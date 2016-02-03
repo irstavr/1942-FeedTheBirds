@@ -24,19 +24,6 @@
     
     ta gkri antexoun 6 xtuphmata + megalutero speed
     
-4. Megala Aeroplana
-    to boss
-    thn kaluterh amuna
-    apo to katw meros
-    stamatane kapou pshla k arxizoun na kinountai pros ta plagia
-    
-    ta prasina -> rixnoun 3 sfaires tautoxrona
-                   gia na pesei 25 xtuphmata
-    
-    ta gkri -> +speed kai gia na pesoun 35 xtuphmata
-                rixnoun 5 sfaires
-                se perissoteres kateuthunseis
-
 # FIX:
 - add audio sounds
 	start sound -- DONE
@@ -64,15 +51,16 @@
 		grey birds
 
  
-    
+   
 - Main window initial position on screen
         
-- change bitmap of birdshit
-
-
 - FIX shooting 
     remove rand from shooting
 
-- change action points
+- change action points ON AI
+    ADD GREY BOSS BIRD
+
+- TAKING OFF ANIMATOR
+- LANDING ANIMATOR
 
 - change positions of landing/taking off
