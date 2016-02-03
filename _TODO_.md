@@ -55,10 +55,12 @@
     add rotating-flipping
     shooting
     
- SOS ! ! !
-- gets slow when sidefighters are fetched
-- gets slow when bigbird appears
     
 - Main window initial position on screen
         
-- change bitmap of birdshit
+		
+		fix SuperAce loop
+		landing, takeOff
+		bitmaps
+		grey birds
+		

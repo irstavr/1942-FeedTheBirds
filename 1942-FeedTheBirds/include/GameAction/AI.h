@@ -44,12 +44,15 @@ private:
 	MovingPathAnimator *birdPathAnimator;
 
 	MovingPathAnimation *smallGreenBirdAnimation;
+	MovingPathAnimation *smallGreenGreyBirdAnimation;
 	MovingPathAnimation *smallGreenBirdAnimationFromAbove;
 	MovingPathAnimation *smallBlueBirdAnimation;
 	MovingPathAnimation *smallBlueBirdAnimationFromAbove;
 	MovingPathAnimation *smallRedBirdAnimation;
 	MovingPathAnimation *smallYellowBirdAnimation;
 	MovingPathAnimation *smallYellowBirdAnimationFromAbove;
+	MovingPathAnimation *smallBlueGreyBirdAnimation;
+	MovingPathAnimation *smallYellowGreyBirdAnimation;
 
 	MovingPathAnimation *mediumYellowBirdAnimation;
 	MovingPathAnimation *mediumGreenBirdAnimation;
@@ -65,6 +68,9 @@ private:
 	void addGreenSmallBird();
 	void addBlueSmallBird();
 	void addYellowSmallBird();
+	void addGreenGreySmallBird();
+	void addBlueGreySmallBird();
+	void addYellowGreySmallBird();
 	void addMediumBirds(void);
 	void addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis, int followsSuperAce);
 	void addBoss(int x, int y, char* filmId, BirdLives lives, BirdSpeed speed, MovingPathAnimation* visVitalis);

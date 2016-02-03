@@ -33,6 +33,7 @@ enum BirdLives {
 // Adds different action speed on every bird
 enum BirdSpeed {
 	littleBirdSpeed = 10,
+	littleGreyBirdSpeed = 2,
 	mediumColoredBirdSpeed,
 	mediumGreyBirdSpeed,
 	ColoredBossSpeed,

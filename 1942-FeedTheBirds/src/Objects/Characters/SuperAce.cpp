@@ -240,7 +240,7 @@ void SuperAce::displayAll() {
 			this->sf2->displayAll();
 			if (!sf1->attached||!sf2->attached) {
 				cout << "-------check sf position \n";
-				if (sf1->y > this->y - 90) sf1->stopMoving();
+				if (sf1->y > this->y - 80) sf1->stopMoving();
 				if (sf2->y < this->y + 30) sf2->stopMoving();
 				//when out of screen
 				if (sf1->y < -80) {
