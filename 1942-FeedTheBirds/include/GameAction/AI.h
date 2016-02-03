@@ -59,8 +59,8 @@ private:
 	MovingPathAnimation *bigBirdAnimation;
 
 	unsigned int lastUsedID;
-	void addBonusBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis);
-	void addBonusBirds(void);
+	void addBonusBird(PowerUpType_t powID, int x, int y, char* filmId, MovingPathAnimation* visVitalis);
+	void addBonusBird(PowerUpType_t powID);
 	void addSmallBird(int x, int y, char * id, MovingPathAnimation * visVitalis, int followsSuperAce);
 	void addSmallBirds();
 	void addGreenSmallBird();

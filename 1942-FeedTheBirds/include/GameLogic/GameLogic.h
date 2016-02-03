@@ -35,7 +35,14 @@ public:
 					FrameRangeAnimator * flyAnimator);
 
 	BIRDS *birds;
-	BIRDS *bonusBirds;	//used to release the POWS
+
+	BIRDS *bonusPow1Birds;	//used to release the POW1
+	BIRDS *bonusPow2Birds;	//used to release the POW2
+	BIRDS *bonusPow3Birds;	//used to release the POW3
+	BIRDS *bonusPow4Birds;	//used to release the POW4
+	BIRDS *bonusPow5Birds;	//used to release the POW5
+	BIRDS *bonusPow6Birds;	//used to release the POW6
+	BIRDS *bonusPow7Birds;	//used to release the POW7
 
 	PlayerProfile* profile;
 	SuperAce* superAce;
@@ -66,7 +73,8 @@ public:
 	bool showExtraLoop;
 	bool show1000Points;
 
-	bool showBonus(PowerUpType_t bonus);
+	bool showBonus(PowerUpType_t bonus, BIRDS* &bonusBirds);
+	void addBonusBirdToList(PowerUpType_t powID, Bird* &bird);
 
 private:
 	/*return if the game is still running*/

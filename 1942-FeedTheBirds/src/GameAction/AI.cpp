@@ -9,7 +9,7 @@ AI::AI(GameLogic *_gameLogic, FrameRangeAnimator* _flyAnimator, FrameRangeAnimat
 	smallBirds  = new std::vector<MovingPathAnimator*>;
 	mediumBirds = new std::vector<MovingPathAnimator*>;
 	largeBirds  = new std::vector<MovingPathAnimator*>;
-
+		
 	bonusBirds  = new std::vector<MovingPathAnimator*>;
 
 	birdPathAnimator = new MovingPathAnimator();
@@ -82,19 +82,19 @@ void AI::eventAtX(int x)
 
 	//POWER UP action point for QuadGun ! ! ! POW1
 	case 220:
-		addBonusBirds();
+		addBonusBird(quadGun);
 		break;
 	case 240:
-		addBonusBirds();
+		addBonusBird(quadGun);
 		break;
 	case 260:
-		addBonusBirds();
+		addBonusBird(quadGun);
 		break;
 	case 280:
-		addBonusBirds();
+		addBonusBird(quadGun);
 		break;
 	case 300:
-		addBonusBirds();
+		addBonusBird(quadGun);
 		gameLogic->checkQuadGun = true;
 		break;
 	case 370:
@@ -111,109 +111,109 @@ void AI::eventAtX(int x)
 
 	//POWER UP action point: enemy crash ! ! ! POW2
 	case 520:
-		addBonusBirds();
+		addBonusBird(enemyCrash);
 		break;
 	case 540:
-		addBonusBirds();
+		addBonusBird(enemyCrash);
 		break;
 	case 560:
-		addBonusBirds();
+		addBonusBird(enemyCrash);
 		break;
 	case 580:
-		addBonusBirds();
+		addBonusBird(enemyCrash);
 		break;
 	case 600:
-		addBonusBirds();
+		addBonusBird(enemyCrash);
 		gameLogic->checkEnemyCrash = true;
 		break;
 
 	//POWER UP action point: SIDE FIGHTERS ! ! POW3
 	case 1020:
-		addBonusBirds();
+		addBonusBird(sideFighters);
 		break;
 	case 1040:
-		addBonusBirds();
+		addBonusBird(sideFighters);
 		break;
 	case 1060:
-		addBonusBirds();
+		addBonusBird(sideFighters);
 		break;
 	case 1080:
-		addBonusBirds();
+		addBonusBird(sideFighters);
 		break;
 	case 1100:
-		addBonusBirds();
+		addBonusBird(sideFighters);
 		gameLogic->checkSideFighter = true;
 		break;
 
 	//POWER UP action point: extra life! ! POW4
 	case 1520:
-		addBonusBirds();
+		addBonusBird(extraLife);
 		break;
 	case 1540:
-		addBonusBirds();
+		addBonusBird(extraLife);
 		break;
 	case 1560:
-		addBonusBirds();
+		addBonusBird(extraLife);
 		break;
 	case 1580:
-		addBonusBirds();
+		addBonusBird(extraLife);
 		break;
 	case 1600:
-		addBonusBirds();
+		addBonusBird(extraLife);
 		gameLogic->checkExtraLife = true;
 		break;
 
 	//POWER UP action point: no enemies bullets! ! POW5
 	case 2020:
-		addBonusBirds();
+		addBonusBird(noEnemyBullets);
 		break;
 	case 2040:
-		addBonusBirds();
+		addBonusBird(noEnemyBullets);
 		break;
 	case 2060:
-		addBonusBirds();
+		addBonusBird(noEnemyBullets);
 		break;
 	case 2080:
-		addBonusBirds();
+		addBonusBird(noEnemyBullets);
 		break;
 	case 2100:
-		addBonusBirds();
+		addBonusBird(noEnemyBullets);
 		gameLogic->checkNoEnemyBullets = true;
 		break;
 
 	//POWER UP action point: extra loop ! ! POW6
 	case 2620:
-		addBonusBirds();
+		addBonusBird(extraLoop);
 		break;
 	case 2640:
-		addBonusBirds();
+		addBonusBird(extraLoop);
 		break;
 	case 2660:
-		addBonusBirds();
+		addBonusBird(extraLoop);
 		break;
 	case 2680:
-		addBonusBirds();
+		addBonusBird(extraLoop);
 		break;
 	case 2700:
-		addBonusBirds();
+		addBonusBird(extraLoop);
 		gameLogic->checkExtraLoop = true;
 		break;
 
 	//POWER UP action point: 1000 points ! ! POW7
 	case 3020:
-		addBonusBirds();
+		addBonusBird(points1000);
 		break;
 	case 3040:
-		addBonusBirds();
+		addBonusBird(points1000);
 		break;
 	case 3060:
-		addBonusBirds();
+		addBonusBird(points1000);
 		break;
 	case 3080:
-		addBonusBirds();
+		addBonusBird(points1000);
 		break;
 	case 3100:
-		addBonusBirds();
+		addBonusBird(points1000);
 		gameLogic->check1000Points = true;
 		break;
 
@@ -577,16 +577,17 @@ MovingPathAnimation* AI::createMediumGreyBirdAnimation() {
 
 //------------------------ Bonus Birds --------------------------------------------------
 
-void AI::addBonusBirds(void)
+void AI::addBonusBird(PowerUpType_t powID)
 {
-	this->addBonusBird(SCREEN_WINDOW_WIDTH*0.75 + 100,
+	this->addBonusBird(powID,
+						SCREEN_WINDOW_WIDTH*0.75 + 100,
 						SCREEN_WINDOW_HEIGHT + 200,
 						"smallRedBird",
 						smallRedBirdAnimation);
 	
 }
 
-void AI::addBonusBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis) 
+void AI::addBonusBird(PowerUpType_t powID, int x, int y, char* filmId, MovingPathAnimation* visVitalis)
 {
 	this->bonusBirds->push_back(birdPathAnimator->clone());
 	this->bonusBirds->back()->setHandleFrames(false);
@@ -601,8 +602,8 @@ void AI::addBonusBird(int x, int y, char* filmId, MovingPathAnimation* visVitali
 										filmId,
 										flyAnimation->clone(lastUsedID++),
 										flyAnimator->clone());
-	//update bonus birds list on Game Logic
-	gameLogic->bonusBirds->push_back(bird);
+	// update bonus birds list on Game Logic
+	gameLogic->addBonusBirdToList(powID, bird);
 
 	MovingPathAnimation* visVitalisCloned = visVitalis->clone(lastUsedID++);
 

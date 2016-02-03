@@ -210,6 +210,9 @@
     <ClCompile Include="1942-FeedTheBirds\src\GameAction\AudioHolder.cpp">
       <Filter>Source Files\GameAction</Filter>
     </ClCompile>
+    <ClCompile Include="1942-FeedTheBirds\src\GameAction\LatelyDestroyable.cpp">
+      <Filter>Source Files\GameAction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="1942-FeedTheBirds\data\Bitmaps\1942_sprite_sheet.png">
@@ -401,6 +404,9 @@
       <Filter>Header Files\GameLogic</Filter>
     </ClInclude>
     <ClInclude Include="1942-FeedTheBirds\include\GameAction\AudioHolder.h">
+      <Filter>Header Files\GameAction</Filter>
+    </ClInclude>
+    <ClInclude Include="1942-FeedTheBirds\include\GameAction\LatelyDestroyable.h">
       <Filter>Header Files\GameAction</Filter>
     </ClInclude>
   </ItemGroup>
