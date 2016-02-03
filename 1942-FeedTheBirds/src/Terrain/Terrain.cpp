@@ -59,7 +59,7 @@ void Terrain::drawBackground(int score, int highscore, int lives, int loops) {
 
 	for (int i = 0; i < lives; i++) {
 		//al_draw_scaled_bitmap(remainingLivesImage, 0, 0, livesImgWidth, livesImgWidth, 20+(i*51), 600, 50, 50, 0);
-		al_draw_bitmap(remainingLivesImage, 20 + (i * 81), 600, 0);
+		al_draw_bitmap(remainingLivesImage, 20 + (i * 81), 610, 0);
 	}
 
 	// TODO: change PHOTO for loops

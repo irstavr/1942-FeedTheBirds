@@ -25,11 +25,14 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 		film(film),
 		injuredTime(-1),
 		loopTime(-1),
+		landingTime(-1),
+		takeOffTime(-1),
 		explosionTime(-1),
 		isInjured(false),
 		isLooping(false),
 		isExploding(false),
 		isLanding(false),
+		isTakingOff(false),
 		isDead(false),
 		isInvincible(false),
 		isShooting(false),
@@ -159,6 +162,9 @@ void SuperAce::twist(void) {
 }
 
 void SuperAce::startTakeOff(void) {
+	this->isTakingOff = true;
+	this->takeOffTime = getCurrTime();
+	this->disableMovement();
 	takeOffAnimator->start(this, takeOffAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(takeOffAnimator);
 }

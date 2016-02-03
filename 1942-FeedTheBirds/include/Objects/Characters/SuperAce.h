@@ -56,12 +56,14 @@ public:
 	bool isInjured;
 	bool isLooping;
 	bool isExploding;
+	bool isTakingOff;
 	
 	// hacking use
 	unsigned long injuredTime;
 	unsigned long explosionTime;
 	unsigned long loopTime;
 	unsigned long landingTime;
+	unsigned long takeOffTime;
 
 	void setInvincibility(bool _inv) { isInvincible = _inv; };
 
