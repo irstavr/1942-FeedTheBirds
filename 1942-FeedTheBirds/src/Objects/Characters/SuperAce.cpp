@@ -60,6 +60,7 @@ SuperAce::~SuperAce(void) {
 	isLooping = false;
 	isExploding = false;
 	isLanding = false;
+	isTakingOff = false;
 	isInvincible = false;
 	isShooting = false;
 
@@ -165,6 +166,8 @@ void SuperAce::startTakeOff(void) {
 	this->isTakingOff = true;
 	this->takeOffTime = getCurrTime();
 	this->disableMovement();
+	this->setX(10);
+	this->setY(300);
 	takeOffAnimator->start(this, takeOffAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(takeOffAnimator);
 }
@@ -270,15 +273,6 @@ void SuperAce::displayFishes()
 {
 	for (unsigned int i = 0; i < fishes->size(); i++) {
 
-		// dont display if out of terrain
-		if ((fishes->at(i)->getX() - 10 < LEFT_BORDER) ||
-			(fishes->at(i)->getX() + 10 > RIGHT_BORDER) ||
-			(fishes->at(i)->getY() + 10 > UP_BORDER) ||
-			(fishes->at(i)->getY() + 10 > DOWN_BORDER)) {
-			// set it dead !
-			fishes->at(i)->setDead();
-			//return;
-		}
 		// show fish if visible and alive
 		if (fishes->at(i)->isSpriteVisible()) {
 			fishes->at(i)->display(Rect(0, 0, 0, 0));

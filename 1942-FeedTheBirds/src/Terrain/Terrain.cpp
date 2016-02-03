@@ -34,7 +34,7 @@ float Terrain::getTerrainX() {
 
 void Terrain::updateBackground() {
 	this->x += this->velX * this->dirX;
-	if (this->x + this->width <= 0) {
+	if (this->x + TERRAIN_IMAGE_WIDTH <= 0) {
 		numOfScrolls++;
 		this->x = 0;
 	}

@@ -416,7 +416,7 @@ void GamePlay::checkAnimationFlags() {
 
 	if (currentGame->superAce->isTakingOff) {
 		if (currentGame->superAce->takeOffTime + 1000 < getCurrTime()) {
-			//changeSuperAceBitmap(); enablemovement();
+			//changeSuperAceBitmap();
 			currentGame->superAce->enableMovement();
 		}
 	}
