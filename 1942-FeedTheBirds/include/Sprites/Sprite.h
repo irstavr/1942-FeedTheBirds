@@ -46,7 +46,6 @@ public:
 	bool collisionCheck(Sprite* s);
 	
 	virtual void collisionAction(Sprite* s) {
-		cout << "COLLISION ! ! ! !! \n";
 	};
 	
 	void enableMovement(void);

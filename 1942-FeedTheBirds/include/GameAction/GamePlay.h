@@ -27,6 +27,11 @@ public:
 	GamePlay();
 	~GamePlay();
 
+	// deleted function to make sure they are unacceptable
+	// in order to be sure we dont get copies of the singleton
+	GamePlay(GamePlay const&) = delete;
+	void operator=(GamePlay const&) = delete;
+
 	GameLogic *currentGame;
 	PowerUp* powerUp;
 

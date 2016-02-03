@@ -17,7 +17,6 @@
 #define YY (*it)->getY() - gameLogic->superAce->getY()
 #define XX (*it)->getX() - (gameLogic->superAce->getX()+200)
 
-//typedef vector<BirdDropping*> DROPPINGS;
 class AI {
 
 public:

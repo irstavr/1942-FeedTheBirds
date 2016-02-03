@@ -1,8 +1,6 @@
 #ifndef SCORE_BOARD_H
 #define SCORE_BOARD_H
 
-//#include <stdio.h>
-//#include <allegro5/allegro.h>
 #include "../../include/Utilities/Utilities.h"
 
 typedef int Score;

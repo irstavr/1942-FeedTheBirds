@@ -20,6 +20,12 @@ private:
 
 	static std::vector<AnimationFilm> filmMem; //films allocated as array
 	std::vector<Rect> read_bboxes(const char* path, int framesNo);
+
+
+	// deleted function to make sure they are unacceptable
+	// in order to be sure we dont get copies of the singleton
+	AnimationFilmHolder(AnimationFilmHolder const&) = delete;
+	void operator=(AnimationFilmHolder const&) = delete;
 	
 protected:
 	AnimationFilmHolder(const char* path); // Decoder constructor.

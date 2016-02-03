@@ -32,7 +32,7 @@ public:
 	void destroy(void);
 	
 	LatelyDestroyable(void) : alive(true), inDestruction(false) {
-	} //savvy say it should be virtual, I beg to differ...
+	}
 };
 
 #endif

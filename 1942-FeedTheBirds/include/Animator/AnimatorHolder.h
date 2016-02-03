@@ -23,15 +23,6 @@ private:
 			if (!(a->hasFinished())) {
 				a->progress(t);
 			}
-			/*else {
-				if (FrameRangeAnimator* v = dynamic_cast<FrameRangeAnimator*>(a)) {
-					if (v->getCurrFrame() > 7) {
-						//if (SuperAce* v = dynamic_cast<FrameRangeAnimator*>(a))
-					}
-				}
-
-
-			}*/
 		}
 	};
 public:
@@ -44,6 +35,5 @@ public:
 	static void pause();
 	static void pauseAllExcept(Animator* anim);
 	static void resume(void);
-	//static void display(ALLEGRO_BITMAP* at);
 };
 #endif
