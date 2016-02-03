@@ -1,5 +1,4 @@
 # 1942 - Feed The Birds
-
 # FIX:
 
 - add audio sounds
@@ -16,6 +15,6 @@
 - change action points ON AI ! ! ! !
 
 - TAKING OFF ANIMATOR  !
-- LANDING ANIMATOR     ! 
+- LANDING ANIMATOR     !
 
-- change positions of landing/taking off ! ! ! ! !! ! ! ! !
+- change positions of landing/taking off ! ! ! ! ! ! ! ! ! !
