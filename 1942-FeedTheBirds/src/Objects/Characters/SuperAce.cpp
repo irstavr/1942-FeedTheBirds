@@ -1,16 +1,16 @@
 #include "..\..\..\include\Objects\Characters\SuperAce.h"
 
 SuperAce::SuperAce(PlayerProfile* playerProfile,
-	Dim _x, Dim _y, AnimationFilm* film,
-	MovingPathAnimation *_takeOffAnimation,
-	MovingPathAnimator *_takeOffAnimator,
-	MovingPathAnimation *_landAnimation,
-	MovingPathAnimator *_landAnimator,
-	FrameRangeAnimation *_deathAnimation,
-	FrameRangeAnimator *_deathAnimator,
-	MovingPathAnimation* _loopAnimation,
-	MovingPathAnimator* _loopAnimator,
-	vector<Bird*> *_birds) :
+					Dim _x, Dim _y, AnimationFilm* film,
+					MovingPathAnimation *_takeOffAnimation,
+					MovingPathAnimator *_takeOffAnimator,
+					MovingPathAnimation *_landAnimation,
+					MovingPathAnimator *_landAnimator,
+					FrameRangeAnimation *_deathAnimation,
+					FrameRangeAnimator *_deathAnimator,
+					MovingPathAnimation* _loopAnimation,
+					MovingPathAnimator* _loopAnimator,
+					vector<Bird*> *_birds) :
 	Sprite(_x, _y, film),
 	playerProfile(playerProfile),
 	takeOffAnimation(_takeOffAnimation),
