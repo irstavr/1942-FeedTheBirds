@@ -18,6 +18,7 @@ private:
 
 	int textAlign;
 	bool textVisible;
+	int numOfScrolls;
 
 	/* discriminate background from terrain objects */
 	float terrainWidth;
