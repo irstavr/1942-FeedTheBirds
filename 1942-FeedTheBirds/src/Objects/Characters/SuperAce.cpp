@@ -234,19 +234,19 @@ void SuperAce::shoot(vector<Bird*>* birds) {
 }
 
 void SuperAce::displayAll() {
+	displayFishes();
 	if (this->isSpriteVisible()) {
-		this->display(Rect(0, 0, 0, 0));
-
-		displayFishes();
-
 		if (hasSideFighter) {
 			this->sf1->displayAll();
+		}
+		this->display(Rect(0, 0, 0, 0));
+		if (hasSideFighter) {
 			this->sf2->displayAll();
 			if (!sf1->attached||!sf2->attached) {
-				if (sf1->y > this->y - 80) {
+				if (sf1->y > this->y - 40) {
 					sf1->stopMoving();
 				}
-				if (sf2->y < this->y + 30) {
+				if (sf2->y < this->y + 40) {
 					sf2->stopMoving();
 				}
 
