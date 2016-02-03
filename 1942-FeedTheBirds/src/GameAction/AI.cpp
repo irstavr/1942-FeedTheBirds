@@ -266,7 +266,7 @@ void AI::makeBirdShoot(Bird * bird)
 		bird->getShotsRemaining()>0 &&
 		(bird->getY() >= gameLogic->superAce->getY()*0.9) &&
 		(bird->getY() <= gameLogic->superAce->getY()*1.1) &&
-		!(rand() % 31)
+		!(rand() % 11)
 		)//Bird is within 20% of superAce's y
 	{
 		BirdDropping* dropping = bird->shoot();
@@ -299,16 +299,16 @@ void AI::handleBoss() {
 			if (
 				(bird->getY() >= gameLogic->superAce->getY()*0.9) &&
 				(bird->getY() <= gameLogic->superAce->getY()*1.1) &&
-				!(rand() % 31)
+				!(rand() % 11)
 				)//Bird is within 20% of superAce's y
 			{
-			DROPPINGS* droppings = bird->bossShoot();
-			//bird->decrFire();
-			for (auto dr = droppings->begin(); dr != droppings->end(); dr++)
-			{
-				CollisionChecker::getInstance()->
-					registerCollisions(gameLogic->superAce, *dr);
-			}
+				DROPPINGS* droppings = bird->bossShoot();
+				//bird->decrFire();
+				for (auto dr = droppings->begin(); dr != droppings->end(); dr++)
+				{
+					CollisionChecker::getInstance()->
+						registerCollisions(gameLogic->superAce, *dr);
+				}
 			}
 		}
 	} 

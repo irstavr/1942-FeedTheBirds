@@ -40,17 +40,6 @@
     little birds -- improve path / initialized points
     add rotating-flipping
     shooting
-    
-    
-- Main window initial position on screen
-        
-		
-		fix SuperAce loop
-		landing, takeOff
-		bitmaps
-		grey birds
-
- 
    
 - Main window initial position on screen
         
@@ -62,5 +51,10 @@
 
 - TAKING OFF ANIMATOR
 - LANDING ANIMATOR
+- LOOP ANIMATOR
 
 - change positions of landing/taking off
+
+- bitmaps
+- grey birds
+

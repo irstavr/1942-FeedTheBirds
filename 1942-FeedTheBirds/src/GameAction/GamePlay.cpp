@@ -589,7 +589,8 @@ void GamePlay::gameOver(unsigned long now) {
 		gameOverButton->startFlashing();
 		ScoreBoard::getInstance().setScore(0);
 		currentGame->gameRunning = false;
-		powerUp->~PowerUp();
+		if(powerUp)
+			powerUp->~PowerUp();
 	}
 }
 
