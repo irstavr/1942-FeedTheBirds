@@ -6,7 +6,8 @@ MovingAnimator::MovingAnimator(void):
 	anim((MovingAnimation*)0) {
 }
 
-MovingAnimator :: ~MovingAnimator() {
+MovingAnimator::~MovingAnimator() {
+
 }
 
 MovingAnimation* MovingAnimator::getAnimation(void) {

@@ -189,9 +189,10 @@ void SuperAce::shoot(vector<Bird*>* birds) {
 		fishes->push_back(fish);
 		fish->startMoving();
 
+		//cout << "BIRDS SIZE: " << birds->size() << "\n";
 		for (unsigned int i = 0; i < birds->size(); i++) {
 			if (!birds->at(i)->isDead()) {
-				cerr << "REGISTER COLLISION! BIRD" << birds->at(i)->getBirdID() << " WITH FISH!\n";
+				//cerr << "REGISTER COLLISION! BIRD" << birds->at(i)->getBirdID() << " WITH FISH!\n";
 				CollisionChecker::getInstance()->
 					registerCollisions(birds->at(i), fish);
 			}

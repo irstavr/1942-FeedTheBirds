@@ -204,7 +204,7 @@ void GamePlay::initGameEngine() {
 	// SuperAce
 	// add take off, landing, explosion(?) bbs
 	//int total_frames = AnimationFilmHolder::getSingleton()->getFilm("bonusBird")->getTotalFrames();
-	takeOffAnimation = new FrameRangeAnimation(1, 4, 80, 0, 300, false, 2);
+	takeOffAnimation = new FrameRangeAnimation(1, 7, 80, 0, 300, false, 2);
 	takeOffAnimator = new FrameRangeAnimator();
 	deathAnimation = new FrameRangeAnimation(1, 8, 0, 0, 150, false, 4);
 	deathAnimator = new FrameRangeAnimator();
@@ -230,21 +230,24 @@ void GamePlay::initGameEngine() {
 // loop animation for super ace when pressing A
 MovingPathAnimation* GamePlay::createLandingAnimation() {
 	std::list<PathEntry> paths;
-	paths.push_back(PathEntry(20, 0, false, false, 4, 50));
-	paths.push_back(PathEntry(40, 0, false, false, 3, 100));
-	paths.push_back(PathEntry(40, 0, false, false, 2, 100));
-	paths.push_back(PathEntry(40, 0, false, false, 1, 100));
+	paths.push_back(PathEntry(80, 0, false, false, 7, 50));
+	paths.push_back(PathEntry(80, 0, false, false, 6, 100));
+	paths.push_back(PathEntry(80, 0, false, false, 5, 100));
+	paths.push_back(PathEntry(80, 0, false, false, 4, 100));
+	paths.push_back(PathEntry(80, 0, false, false, 3, 100));
+	paths.push_back(PathEntry(80, 0, false, false, 2, 100));
+	paths.push_back(PathEntry(80, 0, false, false, 1, 100));
 	return new MovingPathAnimation(paths, 1);
 }
 
 // loop animation for super ace when pressing A
 MovingPathAnimation* GamePlay::createLoopAnimation() {
 	std::list<PathEntry> paths;
-	paths.push_back(PathEntry(0,	0,  false,	false, 3, 50));
-	paths.push_back(PathEntry(50, -50, false,	false, 3, 250));
-	paths.push_back(PathEntry(-50, -50, true,	false, 3, 250));
-	paths.push_back(PathEntry(-50, 50, true,	false, 3, 250));
-	paths.push_back(PathEntry(50, 50 , false,	false, 3, 250));
+	paths.push_back(PathEntry(0,	0,  false,	false, 6, 50));
+	paths.push_back(PathEntry(50, -50, false,	false, 6, 150));
+	paths.push_back(PathEntry(-50, -50, true,	false, 6, 150));
+	paths.push_back(PathEntry(-50, 50, true,	false, 6, 150));
+	paths.push_back(PathEntry(50, 50 , false,	false, 6, 150));
 	return new MovingPathAnimation(paths, 1);
 }
 
