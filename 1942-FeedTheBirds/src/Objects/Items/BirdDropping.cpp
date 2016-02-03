@@ -22,11 +22,10 @@ bool BirdDropping::inRange(float x, float y, float num) {
 }
 
 void BirdDropping::move(float dt, float &x, float&y) {
-	x += speedX;// *dt;
+	x += speedX;
 }
 
 void BirdDropping::startMoving(void) {
-	fprintf(stdout, "startMoving -> BirdDropping.cpp\n");
 	flyAnimator->start(this, flyAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(flyAnimator);
 }

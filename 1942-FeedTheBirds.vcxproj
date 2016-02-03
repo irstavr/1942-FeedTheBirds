@@ -128,9 +128,6 @@
     <ClCompile Include="1942-FeedTheBirds\src\GameAction\CollisionChecker.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\GameAction\GamePlay.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\GameAction\InputManager.cpp" />
-    <ClCompile Include="1942-FeedTheBirds\src\GameAction\LatelyDestroyable.cpp" />
-    <ClCompile Include="1942-FeedTheBirds\src\GameAction\SoundAPI.cpp" />
-    <ClCompile Include="1942-FeedTheBirds\src\GameAction\StageManager.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\GameLogic\GameLogic.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\GameLogic\PlayerProfile.cpp" />
     <ClCompile Include="1942-feedthebirds\src\1942-FeedTheBirdsMain.cpp" />

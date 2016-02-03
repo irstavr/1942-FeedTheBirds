@@ -57,7 +57,6 @@ void AnimatorHolder::pause() {
 	pauseTime = clock();
 
 	std::list<Animator *>::iterator it;
-	printf("size of running list = %d\n", running.size());
 
 	for (it = running.begin(); it != running.end(); ++it) {
 		 paused.push_back(*it);
@@ -69,7 +68,6 @@ void AnimatorHolder::pauseAllExcept(Animator* anim) {
 	pauseTime = clock();
 
 	std::list<Animator *>::iterator it;
-	printf("size of running list = %d\n", running.size());
 
 	for (it = running.begin(); it != running.end(); ++it) {
 			if (*it != anim) paused.push_back(*it);

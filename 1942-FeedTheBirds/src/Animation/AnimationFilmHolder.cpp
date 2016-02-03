@@ -17,8 +17,6 @@ AnimationFilmHolder::AnimationFilmHolder(const char* path) {
 			std::cerr << bitmap << " " << id << " " << frames << " " << bboxes << " " << endl;
 			AnimationFilm* anim_f = new AnimationFilm(bitmapLoader.load(bitmap), read_bboxes(bboxes, frames), id);
 			filmMap[id] = anim_f;
-			cerr << "bitmap=" << bitmap << " id= " << id << " frames=" << frames
-				 << " bboxes=" << bboxes << "\n";
 		}
 		else {
 			cfg.ignore(1412, '\n');
@@ -27,8 +25,6 @@ AnimationFilmHolder::AnimationFilmHolder(const char* path) {
 		if (ch == ' ') break;
 	}
 	cfg.close();
-	//AnimationFilm* anim_f = new AnimationFilm(bitmapLoader.load("1942-FeedTheBirds\\data\\Bitmaps\\superAce.png"), read_bboxes(bboxes, frames), "superAceAF");
-	//filmMap["superAceAF"] = anim_f;
 }
 
 AnimationFilmHolder::~AnimationFilmHolder() {

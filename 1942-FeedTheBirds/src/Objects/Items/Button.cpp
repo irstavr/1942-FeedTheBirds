@@ -8,7 +8,6 @@ Button::Button(int _x, int _y,
 }
 
 void Button::startFlashing(void) {
-	fprintf(stdout, "startFlashing -> Button.cpp\n");
 	anim->setRepetitions(0);
 	animator->start(this, anim, getCurrTime());
 	AnimatorHolder::markAsRunning(animator);

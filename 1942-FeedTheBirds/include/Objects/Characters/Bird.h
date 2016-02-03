@@ -3,6 +3,7 @@
 
 #include "..\..\Animation\AnimationFilmHolder.h"
 #include "..\..\GameAction\CollisionChecker.h"
+#include "..\..\GameAction\AudioHolder.h"
 #include "..\..\Animator\FrameRangeAnimator.h"
 #include "..\..\GameLogic\PlayerProfile.h"
 #include "..\..\GameLogic\ScoreBoard.h"

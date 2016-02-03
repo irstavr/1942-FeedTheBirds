@@ -6,7 +6,6 @@ GamePlay::GamePlay() :
 	windowHeight(START_SCREEN_WINDOW_HEIGHT), 
 	windowWidth(START_SCREEN_WINDOW_WIDTH) {
 	powerUp = nullptr;
-	//musicOn(false),  {
 }
 
 GamePlay *GamePlay::instance(bool newOne) {
@@ -443,45 +442,35 @@ void GamePlay::checkBonuses() {
 		if (currentGame->showBonus(quadGun)) {
 			// show bitmap of POW
 			displayPowerUp(quadGun);
-
 			currentGame->checkQuadGun = false;
-			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW quadGun\n";
 		}
 	}
 	if (currentGame->checkEnemyCrash) {
 		if (currentGame->showBonus(enemyCrash)) {
 			// show bitmap of POW
 			displayPowerUp(enemyCrash);
-
 			currentGame->checkEnemyCrash = false;
-			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW enemyCrash \n";
 		}
 	}
 	if (currentGame->checkSideFighter) {
 		if (currentGame->showBonus(sideFighters)) {
 			// show bitmap of POW
 			displayPowerUp(sideFighters);
-
 			currentGame->checkSideFighter = false;
-			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW sideFighter \n";
 		}
 	}
 	if (currentGame->checkExtraLife) {
 		if (currentGame->showBonus(extraLife)) {
 			// show bitmap of POW
 			displayPowerUp(extraLife);
-
 			currentGame->checkExtraLife = false;
-			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW extraLife\n";
 		}
 	}
 	if (currentGame->checkNoEnemyBullets) {
 		if (currentGame->showBonus(noEnemyBullets)) {
 			// show bitmap of POW
 			displayPowerUp(noEnemyBullets);
-
 			currentGame->checkNoEnemyBullets = false;
-			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW noEnemyBullets\n";
 		}
 	}
 	if (currentGame->checkExtraLoop) {
@@ -489,7 +478,6 @@ void GamePlay::checkBonuses() {
 			// show bitmap of POW
 			displayPowerUp(extraLoop);
 			currentGame->checkExtraLoop = false;
-			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW extraLoop\n";
 		}
 	}
 	if (currentGame->check1000Points) {
@@ -497,7 +485,6 @@ void GamePlay::checkBonuses() {
 			// show bitmap of POW
 			displayPowerUp(points1000);
 			currentGame->check1000Points = false;
-			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW points1000\n";
 		}
 	}
 }
@@ -562,12 +549,10 @@ void GamePlay::displayStartScreen(unsigned long now) {
 }
 
 void GamePlay::checkActionPoints() {
-	//cout << "terrainX = "<< Terrain::getInstance().getTerrainX()<<" \n";
 	ai->eventAtX(this->terrain->getTerrainX());
 }
 
 void GamePlay::pauseGame(unsigned long now) {
-	//TODO: display message with GAME PAUSED
 	if (gameState == GAME_STATE_MAINGAME) {
 		gameState = GAME_STATE_PAUSED;
 		AnimatorHolder::pause();
@@ -584,9 +569,7 @@ void GamePlay::resumeGame(void) {
 }
 
 void GamePlay::gameOver(unsigned long now) {
-	//TODO: display message to play again
 	if (gameState != GAME_STATE_GAMEOVER) {
-		cout << "GAME OVER FILARAKI";
 		gameState = GAME_STATE_GAMEOVER;
 		currentGame->superAce->explode();
 		AnimatorHolder::pauseAllExcept(deathAnimator);
@@ -602,11 +585,6 @@ void GamePlay::gameFinished() {
 	if (gameState != GAME_STATE_GAMEOVER) {
 		gameState = GAME_STATE_GAMEOVER;
 		hasWon = true;
-		// TODO
-		// show score
-		// win picture
-		// statistics
-		// new level ?
 		winButton->setVisibility(true);
 		currentGame->gameRunning = false;
 		powerUp->~PowerUp();

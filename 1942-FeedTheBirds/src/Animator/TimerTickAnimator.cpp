@@ -14,7 +14,6 @@ TickAnimation* TimerTickAnimator::getAnimation(void) {
 
 void TimerTickAnimator::start(unsigned long time) {
 	assert(time >= 0);
-	fprintf(stdout, "tickTimer started\n");
 	lastTime = time;
 	state = ANIMATOR_RUNNING;
 }

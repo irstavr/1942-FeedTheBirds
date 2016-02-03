@@ -30,7 +30,6 @@ void SideFighter::move(int dx, int dy)
 
 void SideFighter::startMoving()
 {
-	//cerr << "startMoving -> sideFighter.cpp\n";
 	appearAnimator->start(this, appearAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(appearAnimator);
 }
@@ -39,13 +38,11 @@ void SideFighter::stopMoving()
 {
 	if (!attached) {
 		attached = true;
-		cerr << "stopMoving -> sideFighter.cpp\n";
 		AnimatorHolder::markAsSuspended(appearAnimator);
 	}
 }
 
 void SideFighter::disappearSideFighter() {
-	//cerr << "startLeaving -> sideFighter.cpp\n";
 	disappearAnimator->start(this, disappearAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(disappearAnimator);
 	attached = false;

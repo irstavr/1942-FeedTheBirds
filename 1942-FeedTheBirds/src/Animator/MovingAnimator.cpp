@@ -21,12 +21,10 @@ Sprite* MovingAnimator::getSprite(void) {
 void MovingAnimator::progress(unsigned long currTime) {
 	assert(currTime >= 0);
 	assert(anim);
-	//assert(lastTime <= currTime);
 
 	while (currTime > lastTime && currTime - lastTime >= anim->getDelay()) {
 		//sprite->move(anim->getDx(), anim->getDy());
 		if (!anim->getContinuous()|| sprite->x > SCREEN_WINDOW_WIDTH+150) {
-			//fprintf(stdout, "Moving ANIMATOR_FINISHED\n");
 			state = ANIMATOR_FINISHED;
 			notifyProgressed();
 			//sprite->~Sprite();
@@ -51,7 +49,3 @@ void MovingAnimator::start(Sprite* s, MovingAnimation* a, unsigned long t) {
 	lastTime = t;
 	state = ANIMATOR_RUNNING;
 }
-
-/*void MovingAnimator::display(Rect at) {
-	sprite->display(at);
-}*/

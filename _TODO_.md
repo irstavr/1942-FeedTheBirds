@@ -11,14 +11,11 @@
 	loopSound
 	collisionSound
     
-- YELLOW MEDIUM BIRDS ! ! !
-   
 - Main window initial position on screen
 
 - change action points ON AI ! ! ! !
 
 - TAKING OFF ANIMATOR  !
 - LANDING ANIMATOR     ! 
-- LOOP ANIMATOR !!!!
 
 - change positions of landing/taking off ! ! ! ! !! ! ! ! !
