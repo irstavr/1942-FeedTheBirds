@@ -388,7 +388,7 @@ void GamePlay::updateGameState() {
 void GamePlay::checkAnimationFlags() {
 
 	if (currentGame->superAce->isInjured) {
-		if (currentGame->superAce->injuredTime + 2000 < getCurrTime()) {
+		if (currentGame->superAce->injuredTime + 1200 < getCurrTime()) {
 			currentGame->superAce->isInvincible = false;
 			currentGame->superAce->isInjured = false;
 		}
@@ -411,6 +411,13 @@ void GamePlay::checkAnimationFlags() {
 	if (currentGame->superAce->isLanding) {
 		if (currentGame->superAce->landingTime + 1000 < getCurrTime()) {
 			gameFinished();
+		}
+	}
+
+	if (currentGame->superAce->isTakingOff) {
+		if (currentGame->superAce->takeOffTime + 1000 < getCurrTime()) {
+			//changeSuperAceBitmap(); enablemovement();
+			currentGame->superAce->enableMovement();
 		}
 	}
 
