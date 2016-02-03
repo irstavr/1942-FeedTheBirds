@@ -690,7 +690,6 @@ void GamePlay::startNewGame() {
 								loopAnimation,
 								loopAnimator);
 
-
 	currentGame->superAce->takeOffAnimator->start(currentGame->superAce,
 													takeOffAnimation, 
 													getCurrTime());
@@ -707,19 +706,16 @@ void GamePlay::cleanGamePlay() {
 	// TODO: clean all instances of all the classes!
 	//
 	if (gameState != GAME_STATE_INTRO) {
-		//if (currentGame)
-		//	delete currentGame;
+		if (currentGame)
+			delete currentGame;
 
-		//BitmapLoader::~BitmapLoader();
-
+		ai->~AI();
 		CollisionChecker::getInstance()->cleanUp();
-		//AnimationFilmHolder::destroy();
-
-		//cleanAllegro();
 	}
 }
 
 void GamePlay::cleanAllegro() {
+	AnimationFilmHolder::destroy();
 	al_destroy_timer(lpsTimer);
 	al_destroy_timer(fpsTimer);
 	al_destroy_display(display);

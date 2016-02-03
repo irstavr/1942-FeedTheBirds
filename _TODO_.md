@@ -1,9 +1,5 @@
 # 1942 - Feed The Birds
 
-- remove rand from shooting
-
-
-
 2. Mikra Aeroplana
     1-2 fores purovoloun k feugoun
     ta rixnoume me 1 fish
@@ -43,21 +39,23 @@
 
 # FIX:
 - add audio sounds
-	start sound
+	start sound -- DONE
 	shootFish sound
 	birdTwitting
 	explosion
 	gameOver
 	loopSound
 	collisionSound
-    
-- AI
-    boss bird -- DONE
-    medium birds   -- ONLY BROWN ARE DONE 
-    little birds -- improve path / initialized points
-    add rotating-flipping
-    shooting
+ 
     
 - Main window initial position on screen
         
 - change bitmap of birdshit
+
+
+- FIX shooting 
+    remove rand from shooting
+
+- change action points
+
+- change positions of landing/taking off
