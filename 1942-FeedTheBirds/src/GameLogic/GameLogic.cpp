@@ -1,7 +1,7 @@
 #include "..\..\include\GameLogic\GameLogic.h"
 
-GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
-					  FrameRangeAnimator *takeOffAnimator,
+GameLogic::GameLogic (MovingPathAnimation *takeOffAnimation,
+					  MovingPathAnimator *takeOffAnimator,
 					  MovingPathAnimation *landingAnimation,
 					  MovingPathAnimator *landingAnimator,
 					  FrameRangeAnimation *deathAnimation,
@@ -45,10 +45,10 @@ GameLogic::GameLogic (FrameRangeAnimation *takeOffAnimation,
 
 	superAce = new SuperAce(profile,
 							100,
-							285,
+							600,
 							(AnimationFilm*)
 								AnimationFilmHolder::getSingleton()->
-									getFilm("takeOff"),
+									getFilm("superAce"),
 							takeOffAnimation,
 							takeOffAnimator,
 							landingAnimation,

@@ -15,10 +15,10 @@ typedef vector<Bird*> BIRDS;
 
 class GameLogic {
 public:
-	GameLogic(FrameRangeAnimation *takeOffAnimation,
-			FrameRangeAnimator *takeOffAnimator,
-			MovingPathAnimation *landingAnimation,
-			MovingPathAnimator *landingAnimator,
+	GameLogic(MovingPathAnimation *takeOffAnimation,
+			MovingPathAnimator *takeOffAnimator,
+				MovingPathAnimation *landingAnimation,
+		MovingPathAnimator *landingAnimator,
 			FrameRangeAnimation *deathAnimation,
 			FrameRangeAnimator *deathAnimator,
 			MovingPathAnimation* loopAnimation,

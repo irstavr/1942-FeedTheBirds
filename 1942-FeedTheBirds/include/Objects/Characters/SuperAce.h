@@ -21,13 +21,23 @@ typedef vector<Fish*> FISHES;
 
 class SuperAce : public Sprite {
 public:
-	SuperAce(PlayerProfile * playerProfile, Dim _x, Dim _y, AnimationFilm * film, FrameRangeAnimation * _takeOffAnimation, FrameRangeAnimator * _takeOffAnimator, MovingPathAnimation * _landAnimation, MovingPathAnimator * _landAnimator, FrameRangeAnimation * _deathAnimation, FrameRangeAnimator * _deathAnimator, MovingPathAnimation * _loopAnimation, MovingPathAnimator * _loopAnimator, vector<Bird*>* _birds);
+	SuperAce(PlayerProfile * playerProfile,
+		Dim _x, Dim _y, AnimationFilm * film,
+		MovingPathAnimation * _takeOffAnimation,
+		MovingPathAnimator * _takeOffAnimator,
+		MovingPathAnimation * _landAnimation,
+		MovingPathAnimator * _landAnimator,
+		FrameRangeAnimation * _deathAnimation,
+		FrameRangeAnimator * _deathAnimator,
+		MovingPathAnimation * _loopAnimation,
+		MovingPathAnimator * _loopAnimator,
+		vector<Bird*>* _birds);
 	~SuperAce(void);
 
 	vector<Bird*> *birds;
 
-	FrameRangeAnimation *takeOffAnimation;
-	FrameRangeAnimator *takeOffAnimator;
+	MovingPathAnimation *takeOffAnimation;
+	MovingPathAnimator *takeOffAnimator;
 	AnimationFilm* film;
 
 	void shoot(vector<Bird*>* birds);

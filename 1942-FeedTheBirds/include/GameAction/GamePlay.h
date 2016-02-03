@@ -73,8 +73,8 @@ private:
 	unsigned int actionPoint;
 	FlashingAnimation *flashAnimation;
 	FlashingAnimator *flashAnimator;
-	FrameRangeAnimation *takeOffAnimation;
-	FrameRangeAnimator *takeOffAnimator;
+	MovingPathAnimation *takeOffAnimation;
+	MovingPathAnimator *takeOffAnimator;
 	FrameRangeAnimation *deathAnimation;
 	FrameRangeAnimator *deathAnimator;
 	FrameRangeAnimation *flyAnimation;
@@ -131,6 +131,7 @@ private:
 	void displayPowerUp(PowerUpType_t powerUpID);
 
 	MovingPathAnimation *createLoopAnimation(void);
+	MovingPathAnimation *createTakeOffAnimation(void);
 
 	inline std::string powerUpToString(PowerUpType_t v);
 };

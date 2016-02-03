@@ -1,52 +1,52 @@
 #include "..\..\..\include\Objects\Characters\SuperAce.h"
 
 SuperAce::SuperAce(PlayerProfile* playerProfile,
-					Dim _x, Dim _y, AnimationFilm* film,
-					FrameRangeAnimation *_takeOffAnimation,
-					FrameRangeAnimator *_takeOffAnimator,
-					MovingPathAnimation *_landAnimation,
-					MovingPathAnimator *_landAnimator,
-					FrameRangeAnimation *_deathAnimation,
-					FrameRangeAnimator *_deathAnimator,
-					MovingPathAnimation* _loopAnimation,
-					MovingPathAnimator* _loopAnimator,
-					vector<Bird*> *_birds) :
-		Sprite(_x, _y, film),
-		playerProfile(playerProfile),
-		takeOffAnimation(_takeOffAnimation),
-		takeOffAnimator(_takeOffAnimator),
-		landAnimation(_landAnimation),
-		landAnimator(_landAnimator),
-		deathAnimation(_deathAnimation),
-		deathAnimator(_deathAnimator),
-		loopAnimation(_loopAnimation),
-		loopAnimator(_loopAnimator),
-		birds(_birds),
-		film(film),
-		injuredTime(-1),
-		loopTime(-1),
-		landingTime(-1),
-		takeOffTime(-1),
-		explosionTime(-1),
-		isInjured(false),
-		isLooping(false),
-		isExploding(false),
-		isLanding(false),
-		isTakingOff(false),
-		isDead(false),
-		isInvincible(false),
-		isShooting(false),
-		hasQuadGun(false),
-		hasSideFighter(false),
-		noEnemiesBullets(false),
-		noEnemyBulletsTime(-1)
+	Dim _x, Dim _y, AnimationFilm* film,
+	MovingPathAnimation *_takeOffAnimation,
+	MovingPathAnimator *_takeOffAnimator,
+	MovingPathAnimation *_landAnimation,
+	MovingPathAnimator *_landAnimator,
+	FrameRangeAnimation *_deathAnimation,
+	FrameRangeAnimator *_deathAnimator,
+	MovingPathAnimation* _loopAnimation,
+	MovingPathAnimator* _loopAnimator,
+	vector<Bird*> *_birds) :
+	Sprite(_x, _y, film),
+	playerProfile(playerProfile),
+	takeOffAnimation(_takeOffAnimation),
+	takeOffAnimator(_takeOffAnimator),
+	landAnimation(_landAnimation),
+	landAnimator(_landAnimator),
+	deathAnimation(_deathAnimation),
+	deathAnimator(_deathAnimator),
+	loopAnimation(_loopAnimation),
+	loopAnimator(_loopAnimator),
+	birds(_birds),
+	film(film),
+	injuredTime(-1),
+	loopTime(-1),
+	landingTime(-1),
+	takeOffTime(-1),
+	explosionTime(-1),
+	isInjured(false),
+	isLooping(false),
+	isExploding(false),
+	isLanding(false),
+	isTakingOff(false),
+	isDead(false),
+	isInvincible(false),
+	isShooting(false),
+	hasQuadGun(false),
+	hasSideFighter(false),
+	noEnemiesBullets(false),
+	noEnemyBulletsTime(-1)
 {
 	fishes = new vector<Fish*>();
 
 	this->explosion = new Sprite(this->x-10, this->y,
 		(AnimationFilm*)AnimationFilmHolder::getSingleton()->getFilm("bambam"));
 	this->explosion->setVisibility(false);
-
+	canMove = true;
 	injuredAnimation = new FlashingAnimation(10, 200, 200, 0);
 	injuredAnimator = new FlashingAnimator();
 }
@@ -165,9 +165,9 @@ void SuperAce::twist(void) {
 void SuperAce::startTakeOff(void) {
 	this->isTakingOff = true;
 	this->takeOffTime = getCurrTime();
-	this->disableMovement();
-	this->setX(10);
-	this->setY(300);
+	//this->disableMovement();
+	this->setX(100);
+	this->setY(600);
 	takeOffAnimator->start(this, takeOffAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(takeOffAnimator);
 }

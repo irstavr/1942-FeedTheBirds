@@ -203,19 +203,19 @@ void GamePlay::initGameEngine() {
 	// SuperAce
 	// add take off, landing, explosion(?) bbs
 	//int total_frames = AnimationFilmHolder::getSingleton()->getFilm("bonusBird")->getTotalFrames();
-	takeOffAnimation = new FrameRangeAnimation(1, 7, 30, 0, 300, false, 2);
-	takeOffAnimator = new FrameRangeAnimator();
+	
 	deathAnimation = new FrameRangeAnimation(1, 8, 0, 0, 150, false, 4);
 	deathAnimator = new FrameRangeAnimator();
 	flyAnimation = new FrameRangeAnimation(1, 3, 0, 0, 100, true, 3);
 	flyAnimator = new FrameRangeAnimator();
 
+	takeOffAnimation = createTakeOffAnimation();
+	takeOffAnimator = new MovingPathAnimator();
 	landingAnimation = createLandingAnimation();
 	landingAnimator = new MovingPathAnimator();
 
 	loopAnimation = createLoopAnimation();
 	loopAnimator = new MovingPathAnimator();
-	loopAnimator->setHandleFrames(true);
 
 	AnimatorHolder::animRegister(loopAnimator);
 	AnimatorHolder::animRegister(landingAnimator);
@@ -230,20 +230,22 @@ void GamePlay::initGameEngine() {
 // loop animation for super ace when pressing A
 MovingPathAnimation* GamePlay::createLandingAnimation() {
 	std::list<PathEntry> paths;
-	paths.push_back(PathEntry(80, 0, false, false, 7, 50));
-	paths.push_back(PathEntry(80, 0, false, false, 6, 100));
-	paths.push_back(PathEntry(80, 0, false, false, 5, 100));
-	paths.push_back(PathEntry(80, 0, false, false, 4, 100));
-	paths.push_back(PathEntry(80, 0, false, false, 3, 100));
-	paths.push_back(PathEntry(80, 0, false, false, 2, 100));
-	paths.push_back(PathEntry(80, 0, false, false, 1, 100));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.30, 0, 90, 25));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(50, 0, 10));
+	return new MovingPathAnimation(paths, 1);
+}
+
+MovingPathAnimation* GamePlay::createTakeOffAnimation() {
+	std::list<PathEntry> paths;
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.30, 270, 360, 25));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(50, 0, 10));
 	return new MovingPathAnimation(paths, 1);
 }
 
 // loop animation for super ace when pressing A
 MovingPathAnimation* GamePlay::createLoopAnimation() {
 	std::list<PathEntry> paths;
-	paths.splice(paths.end(), *createLoopCircularPath(SCREEN_WINDOW_WIDTH*0.10, 0, 360, littleGreyBirdSpeed, 6));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 0, 360, littleGreyBirdSpeed));
 	return new MovingPathAnimation(paths, 1);
 }
 
@@ -414,8 +416,9 @@ void GamePlay::checkAnimationFlags() {
 	}
 
 	if (currentGame->superAce->isTakingOff) {
-		if (currentGame->superAce->takeOffTime + 1000 < getCurrTime()) {
+		if (currentGame->superAce->takeOffTime + 500 < getCurrTime()) {
 			//changeSuperAceBitmap();
+			currentGame->superAce->takeOffTime = -1;
 			currentGame->superAce->enableMovement();
 		}
 	}
@@ -673,10 +676,7 @@ void GamePlay::startNewGame() {
 								loopAnimation,
 								loopAnimator);
 
-	currentGame->superAce->takeOffAnimator->start(currentGame->superAce,
-													takeOffAnimation, 
-													getCurrTime());
-	AnimatorHolder::markAsRunning(takeOffAnimator);
+	currentGame->superAce->startTakeOff();
 
 	terrain = new Terrain();
 	ScoreBoard::getInstance().setScore(0);
