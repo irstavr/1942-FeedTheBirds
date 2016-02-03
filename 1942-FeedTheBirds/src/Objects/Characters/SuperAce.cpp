@@ -63,9 +63,7 @@ SuperAce::~SuperAce(void) {
 	isTakingOff = false;
 	isInvincible = false;
 	isShooting = false;
-
 	hasQuadGun = false;
-
 	isDead = false;
 }
 
@@ -165,7 +163,7 @@ void SuperAce::twist(void) {
 void SuperAce::startTakeOff(void) {
 	this->isTakingOff = true;
 	this->takeOffTime = getCurrTime();
-	//this->disableMovement();
+	this->disableMovement();
 	this->setX(100);
 	this->setY(600);
 	takeOffAnimator->start(this, takeOffAnimation, getCurrTime());
@@ -309,7 +307,6 @@ void SuperAce::injured(){
 }
 
 void SuperAce::startFlashing(void) {
-	//injuredAnimation->setRepetitions(5);
 	injuredAnimator->start(this, injuredAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(injuredAnimator);
 }

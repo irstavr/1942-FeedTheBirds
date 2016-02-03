@@ -1,8 +1,7 @@
 # 1942 - Feed The Birds
-
 # FIX:
 
-- add audio sounds
+- add audio sounds  
 	start sound -- DONE
 	shootFish sound
 	birdTwitting
@@ -11,11 +10,9 @@
 	loopSound
 	collisionSound
     
-- Main window initial position on screen
-
 - change action points ON AI ! ! ! !
 
 - TAKING OFF ANIMATOR  !
-- LANDING ANIMATOR     ! 
+- LANDING ANIMATOR     !
 
-- change positions of landing/taking off ! ! ! ! !! ! ! ! !
+- change positions of landing/taking off ! ! ! ! ! ! ! ! ! !
