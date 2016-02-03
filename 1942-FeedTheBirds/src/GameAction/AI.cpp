@@ -136,6 +136,11 @@ void AI::eventAtX(int x)
 		gameLogic->checkEnemyCrash = true;
 		break;
 
+	case 2500:
+		addSmallBirds();
+		addMediumBirds();
+		break;
+
 	//POWER UP action point: SIDE FIGHTERS ! ! POW3
 	case 3020:
 		addBonusBird(sideFighters);
@@ -152,6 +157,16 @@ void AI::eventAtX(int x)
 	case 3100:
 		addBonusBird(sideFighters);
 		gameLogic->checkSideFighter = true;
+		break;
+
+	case 3500:
+		addSmallBirds();
+		addMediumBirds();
+		break;
+
+	case 4000:
+		addSmallBirds();
+		addMediumBirds();
 		break;
 
 	//POWER UP action point: extra life! ! POW4
@@ -172,6 +187,11 @@ void AI::eventAtX(int x)
 		gameLogic->checkExtraLife = true;
 		break;
 
+	case 5000:
+		addSmallBirds();
+		addMediumBirds();
+		break;
+
 	//POWER UP action point: no enemies bullets! ! POW5
 	case 5020:
 		addBonusBird(noEnemyBullets);
@@ -188,6 +208,16 @@ void AI::eventAtX(int x)
 	case 5100:
 		addBonusBird(noEnemyBullets);
 		gameLogic->checkNoEnemyBullets = true;
+		break;
+
+	case 5500:
+		addSmallBirds();
+		addMediumBirds();
+		break; 
+	
+	case 6000:
+		addSmallBirds();
+		addMediumBirds();
 		break;
 
 	//POWER UP action point: extra loop ! ! POW6
@@ -208,6 +238,11 @@ void AI::eventAtX(int x)
 		gameLogic->checkExtraLoop = true;
 		break;
 
+	case 7500:
+		addSmallBirds();
+		addMediumBirds();
+		break;
+
 	//POWER UP action point: 1000 points ! ! POW7
 	case 8020:
 		addBonusBird(points1000);
@@ -224,6 +259,11 @@ void AI::eventAtX(int x)
 	case 8100:
 		addBonusBird(points1000);
 		gameLogic->check1000Points = true;
+		break;
+
+	case 8500:
+		addSmallBirds();
+		addMediumBirds();
 		break;
 	
 	case 8800:
