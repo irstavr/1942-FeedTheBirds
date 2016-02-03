@@ -51,7 +51,8 @@ private:
 	MovingPathAnimation *smallYellowBirdAnimation;
 	MovingPathAnimation *smallYellowBirdAnimationFromAbove;
 
-	MovingPathAnimation *mediumYellowBirdAnimation;
+	MovingPathAnimation *mediumYellowBirdFromAboveAnimation;
+	MovingPathAnimation *mediumYellowBirdFromBelowAnimation;
 	MovingPathAnimation *mediumGreenBirdAnimation;
 	MovingPathAnimation *mediumBrownBirdAnimation;
 
@@ -83,7 +84,8 @@ private:
 	MovingPathAnimation * createBigBirdAnimation();
 	MovingPathAnimation * createMediumBrownBirdAnimation();
 	MovingPathAnimation * createMediumGreenBirdAnimation();
-	MovingPathAnimation * createMediumYellowBirdAnimation();
+	MovingPathAnimation * createMediumYellowBirdFromAboveAnimation();
+	MovingPathAnimation * createMediumYellowBirdFromBelowAnimation();
 	MovingPathAnimation * createMediumGreyBirdAnimation();
 	MovingPathAnimation * createSmallGreenBirdAnimation();
 	MovingPathAnimation * createSmallGreenBirdAnimationFromAbove();

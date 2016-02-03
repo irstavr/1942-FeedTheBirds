@@ -24,7 +24,8 @@ AI::AI(GameLogic *_gameLogic, FrameRangeAnimator* _flyAnimator, FrameRangeAnimat
 
 	mediumGreenBirdAnimation = this->createMediumGreenBirdAnimation();
 	mediumBrownBirdAnimation = this->createMediumBrownBirdAnimation();
-	mediumYellowBirdAnimation = this->createMediumYellowBirdAnimation();
+	mediumYellowBirdFromBelowAnimation = this->createMediumYellowBirdFromBelowAnimation();
+	mediumYellowBirdFromAboveAnimation = this->createMediumYellowBirdFromAboveAnimation();
 
 	bigBirdAnimation = this->createBigBirdAnimation();
 
@@ -48,6 +49,7 @@ void AI::eventAtX(int x)
 	handleMediumBirds();
 	handleBoss();
 
+	cout << "X is " << x<< endl;
 	switch (x) {
 	case 30:
 		// action point for small birds
@@ -382,32 +384,62 @@ void AI::addMediumBirds(void) {
 	// generate secret number between 1 and 4
 	// used to generate different kind of medium bird
 	int iSecret = rand() % 4 + 1;
-	iSecret = 3; //TODO: just for debugging! ! !
+	//iSecret = 3; //TODO: just for debugging! ! !
 
 	// random num of birds each time (max 5)
 	int birdsNum = rand() % 5+1;	// TODO: to be used inside ifs
 
 	if (iSecret == 1) {
 		// Green Medium Bird
-		/*
+		
 		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75,
 		SCREEN_WINDOW_HEIGHT + 10,
 		"mediumGreenBird",
 		mediumColoredBirdLives,
 		mediumColoredBirdSpeed,
-		mediumGreenBirdAnimation);
-		*/
+		mediumGreenBirdAnimation, 0);
+		
 	}
 	else if (iSecret == 2) {
 		// Yellow Medium Bird
-		/*
-		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 + 50,
-		SCREEN_WINDOW_HEIGHT + 60,
-		"mediumYellowBird",
-		mediumColoredBirdLives,
-		mediumColoredBirdSpeed,
-		mediumYellowBirdAnimation);
-		*/
+
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75,
+			0,
+			"mediumYellowBird",
+			mediumColoredBirdLives,
+			mediumColoredBirdSpeed,
+			mediumYellowBirdFromAboveAnimation, 0);
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75,
+			SCREEN_WINDOW_HEIGHT,
+			"mediumYellowBird",
+			mediumColoredBirdLives,
+			mediumColoredBirdSpeed,
+			mediumYellowBirdFromBelowAnimation, 0);
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 - 100,
+			-50,
+			"mediumYellowBird",
+			mediumColoredBirdLives,
+			mediumColoredBirdSpeed,
+			mediumYellowBirdFromAboveAnimation, 0);
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 - 100,
+			SCREEN_WINDOW_HEIGHT - 50,
+			"mediumYellowBird",
+			mediumColoredBirdLives,
+			mediumColoredBirdSpeed,
+			mediumYellowBirdFromBelowAnimation, 0);
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 - 200,
+			-100,
+			"mediumYellowBird",
+			mediumColoredBirdLives,
+			mediumColoredBirdSpeed,
+			mediumYellowBirdFromAboveAnimation, 0);
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 - 200,
+			SCREEN_WINDOW_HEIGHT - 100,
+			"mediumYellowBird",
+			mediumColoredBirdLives,
+			mediumColoredBirdSpeed,
+			mediumYellowBirdFromBelowAnimation, 0);
+		
 	}
 	else if (iSecret == 3) {
 		// Brown Medium Birds
@@ -421,43 +453,40 @@ void AI::addMediumBirds(void) {
 	}
 	else if (iSecret == 4) {
 		// Grey Medium Birds
-		/*
+		
 		this->addMediumBird(SCREEN_WINDOW_WIDTH,
 			SCREEN_WINDOW_HEIGHT / 2,
 			"mediumBrownBird",
 			mediumColoredBirdLives,
 			mediumColoredBirdSpeed,
-			mediumBrownBirdAnimation);
-		*/
+			mediumBrownBirdAnimation, 0);
+		
 	}
 
 }
 
 void AI::handleMediumBirds() {
 	Bird* bird;
-	for (auto it = this->mediumBirds->begin(); it != this->mediumBirds->end(); it++)
+	for (auto it = this->mediumBirds->begin(); it != this->mediumBirds->end(); )
 	{
 		bird = (Bird*)(*it)->getSprite();
 		if (!bird->isDead()) {
 			if ((*it)->hasFinished() && (bird->getFollowsSuperAce())) {
 				makeBirdFollowSuperAce(bird, bird->getFollowsSuperAce());
-				/*auto tmp = it;
-				it--;
-				this->mediumBirds->erase(tmp);*/
+				it = this->mediumBirds->erase(it);
 			}
 			else if ((*it)->hasFinished()) {
 				bird->scare();
-				/*auto tmp = it;
-				it--;
-				this->mediumBirds->erase(tmp);*/
+				it = this->mediumBirds->erase(it);
 			}
-			else makeBirdShoot(bird);
+			else {
+				makeBirdShoot(bird);
+				it++;
+			}
 		}
 		else {
 			(*it)->stop();
-			/*auto tmp = it;
-			it--;
-			this->mediumBirds->erase(tmp);*/
+			it=this->mediumBirds->erase(it);
 		}
 	}
 	for (auto it = this->followers->begin(); it != this->followers->end(); it++) {
@@ -510,39 +539,39 @@ void AI::addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed sp
 MovingPathAnimation* AI::createMediumBrownBirdAnimation() {
 	std::list<PathEntry> paths;
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 90, 360, mediumColoredBirdSpeed));
-	//paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 360, 720, mediumColoredBirdSpeed));
-
-	//paths.splice(paths.end(), *createSmoothDiagonalPath(SCREEN_WINDOW_WIDTH, 0, mediumColoredBirdSpeed));
 	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 // apo to katw meros ki anevainoun
 MovingPathAnimation* AI::createMediumGreenBirdAnimation() {
 	std::list<PathEntry> paths;
-	//todo appropriately
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, mediumColoredBirdSpeed));
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, mediumColoredBirdSpeed));
-	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_HEIGHT*0.20, 180, 360, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-60, -100, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-60, -SCREEN_WINDOW_HEIGHT*0.20, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-60, -SCREEN_WINDOW_WIDTH*0.20, mediumColoredBirdSpeed));
 	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 // se smhnos (ki ap tis 2 pleures) 
-MovingPathAnimation* AI::createMediumYellowBirdAnimation() {
+MovingPathAnimation* AI::createMediumYellowBirdFromAboveAnimation() {
 	std::list<PathEntry> paths;
-	//todo appropriately
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, mediumColoredBirdSpeed));
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, mediumColoredBirdSpeed));
-	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_HEIGHT*0.25, 0, 180, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-SCREEN_WINDOW_WIDTH, 0, mediumColoredBirdSpeed/5));
+	return new MovingPathAnimation(paths, lastUsedID++);
+}
+
+MovingPathAnimation* AI::createMediumYellowBirdFromBelowAnimation() {
+	std::list<PathEntry> paths;
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_HEIGHT*0.25, 180, 360, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-SCREEN_WINDOW_WIDTH, 0, mediumColoredBirdSpeed/5));
 	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 // idia kinisi apla me megalutero speed
 MovingPathAnimation* AI::createMediumGreyBirdAnimation() {
 	std::list<PathEntry> paths;
-	//todo appropriately
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, mediumGreyBirdSpeed));
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, mediumGreyBirdSpeed));
-	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, mediumGreyBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.25, 0, 180, mediumGreyBirdSpeed/3));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-SCREEN_WINDOW_WIDTH, 0, mediumGreyBirdSpeed/3));
 	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
