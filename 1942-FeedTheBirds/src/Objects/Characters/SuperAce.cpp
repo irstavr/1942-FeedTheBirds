@@ -209,7 +209,7 @@ void SuperAce::shoot(vector<Bird*>* birds) {
 			MovingAnimator* bulletAnimator2 = new MovingAnimator();
 
 			AnimatorHolder::animRegister(bulletAnimator2);
-			Fish* fish2 = new Fish(x + 110, y + 10,
+			Fish* fish2 = new Fish(x+20 , y +10,
 				(AnimationFilm*)
 				AnimationFilmHolder::getSingleton()->
 				getFilm("doubleFish"),

@@ -9,6 +9,7 @@ AI::AI(GameLogic *_gameLogic, FrameRangeAnimator* _flyAnimator, FrameRangeAnimat
 	smallBirds  = new std::vector<MovingPathAnimator*>;
 	mediumBirds = new std::vector<MovingPathAnimator*>;
 	largeBirds  = new std::vector<MovingPathAnimator*>;
+		
 	bonusBirds  = new std::vector<MovingPathAnimator*>;
 
 	birdPathAnimator = new MovingPathAnimator();
@@ -26,7 +27,8 @@ AI::AI(GameLogic *_gameLogic, FrameRangeAnimator* _flyAnimator, FrameRangeAnimat
 
 	mediumGreenBirdAnimation = this->createMediumGreenBirdAnimation();
 	mediumBrownBirdAnimation = this->createMediumBrownBirdAnimation();
-	mediumYellowBirdAnimation = this->createMediumYellowBirdAnimation();
+	mediumYellowBirdFromBelowAnimation = this->createMediumYellowBirdFromBelowAnimation();
+	mediumYellowBirdFromAboveAnimation = this->createMediumYellowBirdFromAboveAnimation();
 
 	bigBirdAnimation = this->createBigBirdAnimation();
 
@@ -50,6 +52,7 @@ void AI::eventAtX(int x)
 	handleMediumBirds();
 	handleBoss();
 
+	cout << "X is " << x<< endl;
 	switch (x) {
 	case 30:
 		// action point for small birds
@@ -82,19 +85,19 @@ void AI::eventAtX(int x)
 
 	//POWER UP action point for QuadGun ! ! ! POW1
 	case 220:
-		addBonusBirds();
+		addBonusBird(quadGun);
 		break;
 	case 240:
-		addBonusBirds();
+		addBonusBird(quadGun);
 		break;
 	case 260:
-		addBonusBirds();
+		addBonusBird(quadGun);
 		break;
 	case 280:
-		addBonusBirds();
+		addBonusBird(quadGun);
 		break;
 	case 300:
-		addBonusBirds();
+		addBonusBird(quadGun);
 		gameLogic->checkQuadGun = true;
 		break;
 	case 370:
@@ -111,109 +114,109 @@ void AI::eventAtX(int x)
 
 	//POWER UP action point: enemy crash ! ! ! POW2
 	case 520:
-		addBonusBirds();
+		addBonusBird(enemyCrash);
 		break;
 	case 540:
-		addBonusBirds();
+		addBonusBird(enemyCrash);
 		break;
 	case 560:
-		addBonusBirds();
+		addBonusBird(enemyCrash);
 		break;
 	case 580:
-		addBonusBirds();
+		addBonusBird(enemyCrash);
 		break;
 	case 600:
-		addBonusBirds();
+		addBonusBird(enemyCrash);
 		gameLogic->checkEnemyCrash = true;
 		break;
 
 	//POWER UP action point: SIDE FIGHTERS ! ! POW3
 	case 1020:
-		addBonusBirds();
+		addBonusBird(sideFighters);
 		break;
 	case 1040:
-		addBonusBirds();
+		addBonusBird(sideFighters);
 		break;
 	case 1060:
-		addBonusBirds();
+		addBonusBird(sideFighters);
 		break;
 	case 1080:
-		addBonusBirds();
+		addBonusBird(sideFighters);
 		break;
 	case 1100:
-		addBonusBirds();
+		addBonusBird(sideFighters);
 		gameLogic->checkSideFighter = true;
 		break;
 
 	//POWER UP action point: extra life! ! POW4
 	case 1520:
-		addBonusBirds();
+		addBonusBird(extraLife);
 		break;
 	case 1540:
-		addBonusBirds();
+		addBonusBird(extraLife);
 		break;
 	case 1560:
-		addBonusBirds();
+		addBonusBird(extraLife);
 		break;
 	case 1580:
-		addBonusBirds();
+		addBonusBird(extraLife);
 		break;
 	case 1600:
-		addBonusBirds();
+		addBonusBird(extraLife);
 		gameLogic->checkExtraLife = true;
 		break;
 
 	//POWER UP action point: no enemies bullets! ! POW5
 	case 2020:
-		addBonusBirds();
+		addBonusBird(noEnemyBullets);
 		break;
 	case 2040:
-		addBonusBirds();
+		addBonusBird(noEnemyBullets);
 		break;
 	case 2060:
-		addBonusBirds();
+		addBonusBird(noEnemyBullets);
 		break;
 	case 2080:
-		addBonusBirds();
+		addBonusBird(noEnemyBullets);
 		break;
 	case 2100:
-		addBonusBirds();
+		addBonusBird(noEnemyBullets);
 		gameLogic->checkNoEnemyBullets = true;
 		break;
 
 	//POWER UP action point: extra loop ! ! POW6
 	case 2620:
-		addBonusBirds();
+		addBonusBird(extraLoop);
 		break;
 	case 2640:
-		addBonusBirds();
+		addBonusBird(extraLoop);
 		break;
 	case 2660:
-		addBonusBirds();
+		addBonusBird(extraLoop);
 		break;
 	case 2680:
-		addBonusBirds();
+		addBonusBird(extraLoop);
 		break;
 	case 2700:
-		addBonusBirds();
+		addBonusBird(extraLoop);
 		gameLogic->checkExtraLoop = true;
 		break;
 
 	//POWER UP action point: 1000 points ! ! POW7
 	case 3020:
-		addBonusBirds();
+		addBonusBird(points1000);
 		break;
 	case 3040:
-		addBonusBirds();
+		addBonusBird(points1000);
 		break;
 	case 3060:
-		addBonusBirds();
+		addBonusBird(points1000);
 		break;
 	case 3080:
-		addBonusBirds();
+		addBonusBird(points1000);
 		break;
 	case 3100:
-		addBonusBirds();
+		addBonusBird(points1000);
 		gameLogic->check1000Points = true;
 		break;
 
@@ -384,32 +387,62 @@ void AI::addMediumBirds(void) {
 	// generate secret number between 1 and 4
 	// used to generate different kind of medium bird
 	int iSecret = rand() % 4 + 1;
-	iSecret = 3; //TODO: just for debugging! ! !
+	//iSecret = 3; //TODO: just for debugging! ! !
 
 	// random num of birds each time (max 5)
 	int birdsNum = rand() % 5+1;	// TODO: to be used inside ifs
 
 	if (iSecret == 1) {
 		// Green Medium Bird
-		/*
+		
 		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75,
 		SCREEN_WINDOW_HEIGHT + 10,
 		"mediumGreenBird",
 		mediumColoredBirdLives,
 		mediumColoredBirdSpeed,
-		mediumGreenBirdAnimation);
-		*/
+		mediumGreenBirdAnimation, 0);
+		
 	}
 	else if (iSecret == 2) {
 		// Yellow Medium Bird
-		/*
-		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 + 50,
-		SCREEN_WINDOW_HEIGHT + 60,
-		"mediumYellowBird",
-		mediumColoredBirdLives,
-		mediumColoredBirdSpeed,
-		mediumYellowBirdAnimation);
-		*/
+
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75,
+			0,
+			"mediumYellowBird",
+			mediumColoredBirdLives,
+			mediumColoredBirdSpeed,
+			mediumYellowBirdFromAboveAnimation, 0);
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75,
+			SCREEN_WINDOW_HEIGHT,
+			"mediumYellowBird",
+			mediumColoredBirdLives,
+			mediumColoredBirdSpeed,
+			mediumYellowBirdFromBelowAnimation, 0);
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 - 100,
+			-50,
+			"mediumYellowBird",
+			mediumColoredBirdLives,
+			mediumColoredBirdSpeed,
+			mediumYellowBirdFromAboveAnimation, 0);
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 - 100,
+			SCREEN_WINDOW_HEIGHT - 50,
+			"mediumYellowBird",
+			mediumColoredBirdLives,
+			mediumColoredBirdSpeed,
+			mediumYellowBirdFromBelowAnimation, 0);
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 - 200,
+			-100,
+			"mediumYellowBird",
+			mediumColoredBirdLives,
+			mediumColoredBirdSpeed,
+			mediumYellowBirdFromAboveAnimation, 0);
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 - 200,
+			SCREEN_WINDOW_HEIGHT - 100,
+			"mediumYellowBird",
+			mediumColoredBirdLives,
+			mediumColoredBirdSpeed,
+			mediumYellowBirdFromBelowAnimation, 0);
+		
 	}
 	else if (iSecret == 3) {
 		// Brown Medium Birds
@@ -423,43 +456,40 @@ void AI::addMediumBirds(void) {
 	}
 	else if (iSecret == 4) {
 		// Grey Medium Birds
-		/*
+		
 		this->addMediumBird(SCREEN_WINDOW_WIDTH,
 			SCREEN_WINDOW_HEIGHT / 2,
 			"mediumBrownBird",
 			mediumColoredBirdLives,
 			mediumColoredBirdSpeed,
-			mediumBrownBirdAnimation);
-		*/
+			mediumBrownBirdAnimation, 0);
+		
 	}
 
 }
 
 void AI::handleMediumBirds() {
 	Bird* bird;
-	for (auto it = this->mediumBirds->begin(); it != this->mediumBirds->end(); it++)
+	for (auto it = this->mediumBirds->begin(); it != this->mediumBirds->end(); )
 	{
 		bird = (Bird*)(*it)->getSprite();
 		if (!bird->isDead()) {
 			if ((*it)->hasFinished() && (bird->getFollowsSuperAce())) {
 				makeBirdFollowSuperAce(bird, bird->getFollowsSuperAce());
-				/*auto tmp = it;
-				it--;
-				this->mediumBirds->erase(tmp);*/
+				it = this->mediumBirds->erase(it);
 			}
 			else if ((*it)->hasFinished()) {
 				bird->scare();
-				/*auto tmp = it;
-				it--;
-				this->mediumBirds->erase(tmp);*/
+				it = this->mediumBirds->erase(it);
 			}
-			else makeBirdShoot(bird);
+			else {
+				makeBirdShoot(bird);
+				it++;
+			}
 		}
 		else {
 			(*it)->stop();
-			/*auto tmp = it;
-			it--;
-			this->mediumBirds->erase(tmp);*/
+			it=this->mediumBirds->erase(it);
 		}
 	}
 	for (auto it = this->followers->begin(); it != this->followers->end(); it++) {
@@ -512,54 +542,56 @@ void AI::addMediumBird(int x, int y, char* filmId, BirdLives lives, BirdSpeed sp
 MovingPathAnimation* AI::createMediumBrownBirdAnimation() {
 	std::list<PathEntry> paths;
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 90, 360, mediumColoredBirdSpeed));
-	//paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 360, 720, mediumColoredBirdSpeed));
-
-	//paths.splice(paths.end(), *createSmoothDiagonalPath(SCREEN_WINDOW_WIDTH, 0, mediumColoredBirdSpeed));
 	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 // apo to katw meros ki anevainoun
 MovingPathAnimation* AI::createMediumGreenBirdAnimation() {
 	std::list<PathEntry> paths;
-	//todo appropriately
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, mediumColoredBirdSpeed));
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, mediumColoredBirdSpeed));
-	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_HEIGHT*0.20, 180, 360, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-60, -100, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-60, -SCREEN_WINDOW_HEIGHT*0.20, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-60, -SCREEN_WINDOW_WIDTH*0.20, mediumColoredBirdSpeed));
 	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 // se smhnos (ki ap tis 2 pleures) 
-MovingPathAnimation* AI::createMediumYellowBirdAnimation() {
+MovingPathAnimation* AI::createMediumYellowBirdFromAboveAnimation() {
 	std::list<PathEntry> paths;
-	//todo appropriately
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, mediumColoredBirdSpeed));
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, mediumColoredBirdSpeed));
-	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_HEIGHT*0.25, 0, 180, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-SCREEN_WINDOW_WIDTH, 0, mediumColoredBirdSpeed/5));
+	return new MovingPathAnimation(paths, lastUsedID++);
+}
+
+MovingPathAnimation* AI::createMediumYellowBirdFromBelowAnimation() {
+	std::list<PathEntry> paths;
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_HEIGHT*0.25, 180, 360, mediumColoredBirdSpeed));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-SCREEN_WINDOW_WIDTH, 0, mediumColoredBirdSpeed/5));
 	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 // idia kinisi apla me megalutero speed
 MovingPathAnimation* AI::createMediumGreyBirdAnimation() {
 	std::list<PathEntry> paths;
-	//todo appropriately
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.20, 180, 360, mediumGreyBirdSpeed));
-	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.10, 180, 720, mediumGreyBirdSpeed));
-	paths.splice(paths.end(), *createSmoothDiagonalPath(-100, -100, mediumGreyBirdSpeed));
+	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.25, 0, 180, mediumGreyBirdSpeed/3));
+	paths.splice(paths.end(), *createSmoothDiagonalPath(-SCREEN_WINDOW_WIDTH, 0, mediumGreyBirdSpeed/3));
 	return new MovingPathAnimation(paths, lastUsedID++);
 }
 
 //------------------------ Bonus Birds --------------------------------------------------
 
-void AI::addBonusBirds(void)
+void AI::addBonusBird(PowerUpType_t powID)
 {
-	this->addBonusBird(SCREEN_WINDOW_WIDTH*0.75 + 100,
+	this->addBonusBird(powID,
+						SCREEN_WINDOW_WIDTH*0.75 + 100,
 						SCREEN_WINDOW_HEIGHT + 200,
 						"smallRedBird",
 						smallRedBirdAnimation);
 	
 }
 
-void AI::addBonusBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis) {
+void AI::addBonusBird(PowerUpType_t powID, int x, int y, char* filmId, MovingPathAnimation* visVitalis)
+{
 	this->bonusBirds->push_back(birdPathAnimator->clone());
 	this->bonusBirds->back()->setHandleFrames(false);
 	AnimatorHolder::markAsRunning(this->bonusBirds->back());
@@ -573,8 +605,8 @@ void AI::addBonusBird(int x, int y, char* filmId, MovingPathAnimation* visVitali
 										filmId,
 										flyAnimation->clone(lastUsedID++),
 										flyAnimator->clone());
-	//update bonus birds list on Game Logic
-	gameLogic->bonusBirds->push_back(bird);
+	// update bonus birds list on Game Logic
+	gameLogic->addBonusBirdToList(powID, bird);
 
 	MovingPathAnimation* visVitalisCloned = visVitalis->clone(lastUsedID++);
 

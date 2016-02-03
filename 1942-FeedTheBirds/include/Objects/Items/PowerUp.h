@@ -22,6 +22,7 @@ public:
 	bool isExhausted();
 
 	PowerUp(Dim _x, Dim _y, PowerUpType_t type, AnimationFilm* film);
+	~PowerUp();
 
 private:
 	PowerUpType_t type;

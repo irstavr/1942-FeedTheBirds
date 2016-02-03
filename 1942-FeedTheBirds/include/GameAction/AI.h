@@ -54,15 +54,16 @@ private:
 	MovingPathAnimation *smallBlueGreyBirdAnimation;
 	MovingPathAnimation *smallYellowGreyBirdAnimation;
 
-	MovingPathAnimation *mediumYellowBirdAnimation;
+	MovingPathAnimation *mediumYellowBirdFromAboveAnimation;
+	MovingPathAnimation *mediumYellowBirdFromBelowAnimation;
 	MovingPathAnimation *mediumGreenBirdAnimation;
 	MovingPathAnimation *mediumBrownBirdAnimation;
 
 	MovingPathAnimation *bigBirdAnimation;
 
 	unsigned int lastUsedID;
-	void addBonusBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis);
-	void addBonusBirds(void);
+	void addBonusBird(PowerUpType_t powID, int x, int y, char* filmId, MovingPathAnimation* visVitalis);
+	void addBonusBird(PowerUpType_t powID);
 	void addSmallBird(int x, int y, char * id, MovingPathAnimation * visVitalis, int followsSuperAce);
 	void addSmallBirds();
 	void addGreenSmallBird();
@@ -89,7 +90,8 @@ private:
 	MovingPathAnimation * createBigBirdAnimation();
 	MovingPathAnimation * createMediumBrownBirdAnimation();
 	MovingPathAnimation * createMediumGreenBirdAnimation();
-	MovingPathAnimation * createMediumYellowBirdAnimation();
+	MovingPathAnimation * createMediumYellowBirdFromAboveAnimation();
+	MovingPathAnimation * createMediumYellowBirdFromBelowAnimation();
 	MovingPathAnimation * createMediumGreyBirdAnimation();
 	MovingPathAnimation * createSmallGreenBirdAnimation();
 	MovingPathAnimation * createSmallGreenBirdAnimationFromAbove();

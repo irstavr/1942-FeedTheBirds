@@ -1,5 +1,5 @@
 # 1942 - Feed The Birds
-=
+
 2. Mikra Aeroplana
     1-2 fores purovoloun k feugoun
     ta rixnoume me 1 fish
@@ -15,7 +15,6 @@
     
 3. Mesaia Aeroplana
     ligotera suxna apo ta mikra
-    gia na pesoun 4 xtuphmata
     
     apo to panw meros ths othonhs kanoun ena kuklo k sunexizoun na mas vroun (BROWN BIRDS)
     h
@@ -40,7 +39,7 @@
 
 # FIX:
 - add audio sounds
-	start sound
+	start sound -- DONE
 	shootFish sound
 	birdTwitting
 	explosion
@@ -63,4 +62,17 @@
 		landing, takeOff
 		bitmaps
 		grey birds
-		
+
+ 
+    
+- Main window initial position on screen
+        
+- change bitmap of birdshit
+
+
+- FIX shooting 
+    remove rand from shooting
+
+- change action points
+
+- change positions of landing/taking off

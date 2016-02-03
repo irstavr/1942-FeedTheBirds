@@ -11,6 +11,11 @@ PowerUp::PowerUp(Dim _x,
 	this->setVisibility(true);
 }
 
+PowerUp::~PowerUp() {
+	this->exhasted = true;
+	this->setVisibility(false);
+}
+
 PowerUpType_t PowerUp::getType()
 {
 	return this->type;

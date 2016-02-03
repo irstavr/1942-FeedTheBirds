@@ -266,7 +266,7 @@ void GamePlay::runMainLoop() {
 			updateGameState();
 		}
 		/* draw screen */
-		if(alEvent.timer.source==fpsTimer) 
+		if(alEvent.timer.source == fpsTimer) 
 			render(currTime);
 	}
 }
@@ -384,16 +384,14 @@ void GamePlay::updateGameState() {
 		if (currentGame->superAce->isSuperAceDead()) {
 			gameOver(getCurrTime());
 		}
-
 		CollisionChecker::getInstance()->check();
-
 	}
 }
 
 void GamePlay::checkAnimationFlags() {
 
 	if (currentGame->superAce->isInjured) {
-		if (currentGame->superAce->injuredTime + 2500 < getCurrTime()) {
+		if (currentGame->superAce->injuredTime + 2000 < getCurrTime()) {
 			currentGame->superAce->isInvincible = false;
 			currentGame->superAce->isInjured = false;
 		}
@@ -442,7 +440,6 @@ void GamePlay::checkBonuses() {
 			// show bitmap of POW
 			displayPowerUp(quadGun);
 
-			currentGame->bonusBirds->clear();
 			currentGame->checkQuadGun = false;
 			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW quadGun\n";
 		}
@@ -452,7 +449,6 @@ void GamePlay::checkBonuses() {
 			// show bitmap of POW
 			displayPowerUp(enemyCrash);
 
-			currentGame->bonusBirds->clear();
 			currentGame->checkEnemyCrash = false;
 			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW enemyCrash \n";
 		}
@@ -462,7 +458,6 @@ void GamePlay::checkBonuses() {
 			// show bitmap of POW
 			displayPowerUp(sideFighters);
 
-			currentGame->bonusBirds->clear();
 			currentGame->checkSideFighter = false;
 			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW sideFighter \n";
 		}
@@ -472,7 +467,6 @@ void GamePlay::checkBonuses() {
 			// show bitmap of POW
 			displayPowerUp(extraLife);
 
-			currentGame->bonusBirds->clear();
 			currentGame->checkExtraLife = false;
 			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW extraLife\n";
 		}
@@ -482,7 +476,6 @@ void GamePlay::checkBonuses() {
 			// show bitmap of POW
 			displayPowerUp(noEnemyBullets);
 
-			currentGame->bonusBirds->clear();
 			currentGame->checkNoEnemyBullets = false;
 			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW noEnemyBullets\n";
 		}
@@ -491,8 +484,6 @@ void GamePlay::checkBonuses() {
 		if (currentGame->showBonus(extraLoop)) {
 			// show bitmap of POW
 			displayPowerUp(extraLoop);
-
-			currentGame->bonusBirds->clear();
 			currentGame->checkExtraLoop = false;
 			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW extraLoop\n";
 		}
@@ -501,8 +492,6 @@ void GamePlay::checkBonuses() {
 		if (currentGame->showBonus(points1000)) {
 			// show bitmap of POW
 			displayPowerUp(points1000);
-
-			currentGame->bonusBirds->clear();
 			currentGame->check1000Points = false;
 			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW points1000\n";
 		}
@@ -600,6 +589,7 @@ void GamePlay::gameOver(unsigned long now) {
 		gameOverButton->startFlashing();
 		ScoreBoard::getInstance().setScore(0);
 		currentGame->gameRunning = false;
+		powerUp->~PowerUp();
 	}
 }
 
@@ -614,6 +604,7 @@ void GamePlay::gameFinished() {
 		// new level ?
 		winButton->setVisibility(true);
 		currentGame->gameRunning = false;
+		powerUp->~PowerUp();
 	}
 }
 
@@ -669,7 +660,6 @@ void GamePlay::displayGameOver(unsigned long now) {
 
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));
-	//terrain->updateBackground();
 }
 
 void GamePlay::displayPauseGame(unsigned long now) {
@@ -685,7 +675,6 @@ void GamePlay::displayPauseGame(unsigned long now) {
 	}
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));
-	//terrain->updateBackground();
 }
 
 void GamePlay::startNewGame() {
@@ -701,7 +690,6 @@ void GamePlay::startNewGame() {
 								loopAnimation,
 								loopAnimator);
 
-
 	currentGame->superAce->takeOffAnimator->start(currentGame->superAce,
 													takeOffAnimation, 
 													getCurrTime());
@@ -712,26 +700,22 @@ void GamePlay::startNewGame() {
 
 	ai = new AI(currentGame, flyAnimator, flyAnimation);
 	displayMainScreen(getCurrTime());
-	
 }
 
 void GamePlay::cleanGamePlay() {
 	// TODO: clean all instances of all the classes!
 	//
 	if (gameState != GAME_STATE_INTRO) {
-		//if (currentGame)
-		//	delete currentGame;
+		if (currentGame)
+			delete currentGame;
 
-		//BitmapLoader::~BitmapLoader();
-
+		ai->~AI();
 		CollisionChecker::getInstance()->cleanUp();
-		//AnimationFilmHolder::destroy();
-
-		//cleanAllegro();
 	}
 }
 
 void GamePlay::cleanAllegro() {
+	AnimationFilmHolder::destroy();
 	al_destroy_timer(lpsTimer);
 	al_destroy_timer(fpsTimer);
 	al_destroy_display(display);
