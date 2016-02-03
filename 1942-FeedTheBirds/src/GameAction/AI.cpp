@@ -9,6 +9,7 @@ AI::AI(GameLogic *_gameLogic, FrameRangeAnimator* _flyAnimator, FrameRangeAnimat
 	smallBirds  = new std::vector<MovingPathAnimator*>;
 	mediumBirds = new std::vector<MovingPathAnimator*>;
 	largeBirds  = new std::vector<MovingPathAnimator*>;
+
 	bonusBirds  = new std::vector<MovingPathAnimator*>;
 
 	birdPathAnimator = new MovingPathAnimator();
@@ -556,7 +557,8 @@ void AI::addBonusBirds(void)
 	
 }
 
-void AI::addBonusBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis) {
+void AI::addBonusBird(int x, int y, char* filmId, MovingPathAnimation* visVitalis) 
+{
 	this->bonusBirds->push_back(birdPathAnimator->clone());
 	this->bonusBirds->back()->setHandleFrames(false);
 	AnimatorHolder::markAsRunning(this->bonusBirds->back());
