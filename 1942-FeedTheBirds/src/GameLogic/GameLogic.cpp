@@ -119,18 +119,95 @@ bool GameLogic::isRunning() const {
 	return gameRunning;
 }
 
-bool GameLogic::showBonus(PowerUpType_t bonus, BIRDS* &bonusBirds) {
-	// bonusBirds list is created by AI
-	for (unsigned i = 0; i < bonusBirds->size(); i++) {
-		// all the birds must be fed
-		if (!bonusBirds->at(i)->isFed) {
-			return false;
+bool GameLogic::showBonus(PowerUpType_t powID) {
+	
+	switch (powID) {
+	case quadGun:
+		// bonusBirds list is created by AI
+		for (unsigned i = 0; i < bonusPow1Birds->size(); i++) {
+			// all the birds must be fed
+			if (!bonusPow1Birds->at(i)->isFed) {
+				return false;
+			}
 		}
+		bonusPow1Birds->clear();
+		return true;
+		break;
+	case enemyCrash:
+		// bonusBirds list is created by AI
+		for (unsigned i = 0; i < bonusPow2Birds->size(); i++) {
+			// all the birds must be fed
+			if (!bonusPow2Birds->at(i)->isFed) {
+				return false;
+			}
+		}
+
+		bonusPow2Birds->clear();
+		return true;
+		break;
+	case sideFighters:
+		// bonusBirds list is created by AI
+		for (unsigned i = 0; i < bonusPow3Birds->size(); i++) {
+			// all the birds must be fed
+			if (!bonusPow3Birds->at(i)->isFed) {
+				return false;
+			}
+		}
+
+		bonusPow3Birds->clear();
+		return true;
+		break;
+	case extraLife:
+		// bonusBirds list is created by AI
+		for (unsigned i = 0; i < bonusPow4Birds->size(); i++) {
+			// all the birds must be fed
+			if (!bonusPow4Birds->at(i)->isFed) {
+				return false;
+			}
+		}
+
+		bonusPow4Birds->clear();
+		return true;
+		break;
+	case noEnemyBullets:
+		// bonusBirds list is created by AI
+		for (unsigned i = 0; i < bonusPow5Birds->size(); i++) {
+			// all the birds must be fed
+			if (!bonusPow5Birds->at(i)->isFed) {
+				return false;
+			}
+		}
+
+		bonusPow5Birds->clear();
+		return true;
+		break;
+	case extraLoop:
+		// bonusBirds list is created by AI
+		for (unsigned i = 0; i < bonusPow6Birds->size(); i++) {
+			// all the birds must be fed
+			if (!bonusPow6Birds->at(i)->isFed) {
+				return false;
+			}
+		}
+
+		bonusPow6Birds->clear();
+		return true;
+		break;
+	case points1000:
+		// bonusBirds list is created by AI
+		for (unsigned i = 0; i < bonusPow7Birds->size(); i++) {
+			// all the birds must be fed
+			if (!bonusPow7Birds->at(i)->isFed) {
+				return false;
+			}
+		}
+		bonusPow7Birds->clear();
+		return true;
+		break;
 	}
-	return true;
 }
 
-void GameLogic::addBonusBirdToList(PowerUpType_t powID, Bird* &bird) {
+void GameLogic::addBonusBirdToList(PowerUpType_t powID, Bird* bird) {
 	switch (powID) {
 		case quadGun:
 			this->bonusPow1Birds->push_back(bird);

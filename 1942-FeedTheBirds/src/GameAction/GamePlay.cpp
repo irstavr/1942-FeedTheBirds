@@ -436,71 +436,62 @@ void GamePlay::checkAnimationFlags() {
 void GamePlay::checkBonuses() {
 
 	if (currentGame->checkQuadGun) {
-		if (currentGame->showBonus(quadGun, currentGame->bonusPow1Birds)) {
+		if (currentGame->showBonus(quadGun)) {
 			// show bitmap of POW
 			displayPowerUp(quadGun);
 
-			currentGame->bonusPow1Birds->clear();
 			currentGame->checkQuadGun = false;
 			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW quadGun\n";
 		}
 	}
 	if (currentGame->checkEnemyCrash) {
-		if (currentGame->showBonus(enemyCrash, currentGame->bonusPow2Birds)) {
+		if (currentGame->showBonus(enemyCrash)) {
 			// show bitmap of POW
 			displayPowerUp(enemyCrash);
 
-			currentGame->bonusPow2Birds->clear();
 			currentGame->checkEnemyCrash = false;
 			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW enemyCrash \n";
 		}
 	}
 	if (currentGame->checkSideFighter) {
-		if (currentGame->showBonus(sideFighters, currentGame->bonusPow3Birds)) {
+		if (currentGame->showBonus(sideFighters)) {
 			// show bitmap of POW
 			displayPowerUp(sideFighters);
 
-			currentGame->bonusPow3Birds->clear();
 			currentGame->checkSideFighter = false;
 			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW sideFighter \n";
 		}
 	}
 	if (currentGame->checkExtraLife) {
-		if (currentGame->showBonus(extraLife, currentGame->bonusPow4Birds)) {
+		if (currentGame->showBonus(extraLife)) {
 			// show bitmap of POW
 			displayPowerUp(extraLife);
 
-			currentGame->bonusPow4Birds->clear();
 			currentGame->checkExtraLife = false;
 			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW extraLife\n";
 		}
 	}
 	if (currentGame->checkNoEnemyBullets) {
-		if (currentGame->showBonus(noEnemyBullets, currentGame->bonusPow5Birds)) {
+		if (currentGame->showBonus(noEnemyBullets)) {
 			// show bitmap of POW
 			displayPowerUp(noEnemyBullets);
 
-			currentGame->bonusPow5Birds->clear();
 			currentGame->checkNoEnemyBullets = false;
 			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW noEnemyBullets\n";
 		}
 	}
 	if (currentGame->checkExtraLoop) {
-		if (currentGame->showBonus(extraLoop, currentGame->bonusPow6Birds)) {
+		if (currentGame->showBonus(extraLoop)) {
 			// show bitmap of POW
 			displayPowerUp(extraLoop);
-
-			currentGame->bonusPow6Birds->clear();
 			currentGame->checkExtraLoop = false;
 			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW extraLoop\n";
 		}
 	}
 	if (currentGame->check1000Points) {
-		if (currentGame->showBonus(points1000, currentGame->bonusPow7Birds)) {
+		if (currentGame->showBonus(points1000)) {
 			// show bitmap of POW
 			displayPowerUp(points1000);
-
-			currentGame->bonusPow7Birds->clear();
 			currentGame->check1000Points = false;
 			cerr << " \nPOW POW POW  POW POWPOWPOW POW VV POW POW points1000\n";
 		}

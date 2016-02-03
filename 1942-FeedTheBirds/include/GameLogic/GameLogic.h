@@ -73,8 +73,8 @@ public:
 	bool showExtraLoop;
 	bool show1000Points;
 
-	bool showBonus(PowerUpType_t bonus, BIRDS* &bonusBirds);
-	void addBonusBirdToList(PowerUpType_t powID, Bird* &bird);
+	bool showBonus(PowerUpType_t bonus);
+	void addBonusBirdToList(PowerUpType_t powID, Bird* bird);
 
 private:
 	/*return if the game is still running*/

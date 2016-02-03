@@ -1,5 +1,9 @@
 # 1942 - Feed The Birds
-=
+
+- remove rand from shooting
+
+
+
 2. Mikra Aeroplana
     1-2 fores purovoloun k feugoun
     ta rixnoume me 1 fish
@@ -15,7 +19,6 @@
     
 3. Mesaia Aeroplana
     ligotera suxna apo ta mikra
-    gia na pesoun 4 xtuphmata
     
     apo to panw meros ths othonhs kanoun ena kuklo k sunexizoun na mas vroun (BROWN BIRDS)
     h
@@ -54,10 +57,6 @@
     little birds -- improve path / initialized points
     add rotating-flipping
     shooting
-    
- SOS ! ! !
-- gets slow when sidefighters are fetched
-- gets slow when bigbird appears
     
 - Main window initial position on screen
         
