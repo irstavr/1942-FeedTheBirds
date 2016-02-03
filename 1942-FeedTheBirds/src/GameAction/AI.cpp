@@ -64,23 +64,17 @@ void AI::eventAtX(int x)
 		break;
 	case 100:
 		// action points for medium birds
-		//addMediumBirds();
+		addMediumBirds();
 		break;
 	case 150:
 		// action points for medium birds
-		//addMediumBirds();
+		addMediumBirds();
 		break;
-	case 160:
-		// action point for small birds
-		addSmallBirds();
-		break;
-	case 190:
-		// action point for small birds
-		addSmallBirds();
-		break;
+
 	case 200:
 		// action points for medium birds
-		//addMediumBirds();
+		addSmallBirds();
+		addMediumBirds();
 		break;
 
 	//POWER UP action point for QuadGun ! ! ! POW1
@@ -100,126 +94,146 @@ void AI::eventAtX(int x)
 		addBonusBird(quadGun);
 		gameLogic->checkQuadGun = true;
 		break;
+
 	case 370:
+		addSmallBirds();
+		addMediumBirds();
 		break;  
-	case 500:
+
+	case 470:
+		addSmallBirds();
+		addMediumBirds();
+		break;
+	case 570:
+		addSmallBirds();
+		addMediumBirds();
+		break;
+
+	case 1000:
 		// action point for boss
-		this->addBoss(-10,
-			400,
-			"bigBird",
-			ColoredBossLives,
-			ColoredBossSpeed,
-			bigBirdAnimation);
+		this->addBoss(-10, 400,
+					  "bigBird",
+					  ColoredBossLives,
+					  ColoredBossSpeed,
+					  bigBirdAnimation);
 		break;
 
 	//POWER UP action point: enemy crash ! ! ! POW2
-	case 520:
+	case 1520:
 		addBonusBird(enemyCrash);
 		break;
-	case 540:
+	case 1540:
 		addBonusBird(enemyCrash);
 		break;
-	case 560:
+	case 1560:
 		addBonusBird(enemyCrash);
 		break;
-	case 580:
+	case 1580:
 		addBonusBird(enemyCrash);
 		break;
-	case 600:
+	case 1600:
 		addBonusBird(enemyCrash);
 		gameLogic->checkEnemyCrash = true;
 		break;
 
 	//POWER UP action point: SIDE FIGHTERS ! ! POW3
-	case 1020:
+	case 3020:
 		addBonusBird(sideFighters);
 		break;
-	case 1040:
+	case 3040:
 		addBonusBird(sideFighters);
 		break;
-	case 1060:
+	case 3060:
 		addBonusBird(sideFighters);
 		break;
-	case 1080:
+	case 3080:
 		addBonusBird(sideFighters);
 		break;
-	case 1100:
+	case 3100:
 		addBonusBird(sideFighters);
 		gameLogic->checkSideFighter = true;
 		break;
 
 	//POWER UP action point: extra life! ! POW4
-	case 1520:
+	case 4520:
 		addBonusBird(extraLife);
 		break;
-	case 1540:
+	case 4540:
 		addBonusBird(extraLife);
 		break;
-	case 1560:
+	case 4560:
 		addBonusBird(extraLife);
 		break;
-	case 1580:
+	case 4580:
 		addBonusBird(extraLife);
 		break;
-	case 1600:
+	case 4600:
 		addBonusBird(extraLife);
 		gameLogic->checkExtraLife = true;
 		break;
 
 	//POWER UP action point: no enemies bullets! ! POW5
-	case 2020:
+	case 5020:
 		addBonusBird(noEnemyBullets);
 		break;
-	case 2040:
+	case 5040:
 		addBonusBird(noEnemyBullets);
 		break;
-	case 2060:
+	case 5060:
 		addBonusBird(noEnemyBullets);
 		break;
-	case 2080:
+	case 5080:
 		addBonusBird(noEnemyBullets);
 		break;
-	case 2100:
+	case 5100:
 		addBonusBird(noEnemyBullets);
 		gameLogic->checkNoEnemyBullets = true;
 		break;
 
 	//POWER UP action point: extra loop ! ! POW6
-	case 2620:
+	case 6620:
 		addBonusBird(extraLoop);
 		break;
-	case 2640:
+	case 6640:
 		addBonusBird(extraLoop);
 		break;
-	case 2660:
+	case 6660:
 		addBonusBird(extraLoop);
 		break;
-	case 2680:
+	case 6680:
 		addBonusBird(extraLoop);
 		break;
-	case 2700:
+	case 6700:
 		addBonusBird(extraLoop);
 		gameLogic->checkExtraLoop = true;
 		break;
 
 	//POWER UP action point: 1000 points ! ! POW7
-	case 3020:
+	case 8020:
 		addBonusBird(points1000);
 		break;
-	case 3040:
+	case 8040:
 		addBonusBird(points1000);
 		break;
-	case 3060:
+	case 8060:
 		addBonusBird(points1000);
 		break;
-	case 3080:
+	case 8080:
 		addBonusBird(points1000);
 		break;
-	case 3100:
+	case 8100:
 		addBonusBird(points1000);
 		gameLogic->check1000Points = true;
 		break;
-
+	
+	case 8800:
+		// action point for boss
+		this->addBoss(-10, 400,
+					"bigBirdGrey",
+					ColoredBossLives,
+					ColoredBossSpeed,
+					bigBirdAnimation);
+		break;
 	case 9400:	// TODO: change to terrain length minus something : P
 		gameLogic->superAce->startLanding();
 		break;
@@ -387,10 +401,6 @@ void AI::addMediumBirds(void) {
 	// generate secret number between 1 and 4
 	// used to generate different kind of medium bird
 	int iSecret = rand() % 4 + 1;
-	//iSecret = 3; //TODO: just for debugging! ! !
-
-	// random num of birds each time (max 5)
-	int birdsNum = rand() % 5+1;	// TODO: to be used inside ifs
 
 	if (iSecret == 1) {
 		// Green Medium Bird
@@ -617,16 +627,37 @@ void AI::addBonusBird(PowerUpType_t powID, int x, int y, char* filmId, MovingPat
 
 void AI::addSmallBirds() {
 	// action point for small birds
-	//addBlueSmallBird();
 
-	//addGreenSmallBird();
+	// generate secret number between 1 and 8
+	// used to generate different kind of medium bird
+	int iRandomBird = rand() % 8 + 1;
 
-	//addYellowSmallBird();
-	//addBlueGreySmallBird();
-	addGreenGreySmallBird();
-	addBlueGreySmallBird();
-	addYellowGreySmallBird();
-	//addYellowGreySmallBird();
+	switch (iRandomBird) {
+	case 1:
+		addBlueSmallBird();
+		break;
+	case 2:
+		addGreenSmallBird();
+		break;
+	case 3:
+		addYellowSmallBird();
+		break;
+	case 4:
+		addBlueGreySmallBird();
+		break;
+	case 5:
+		addGreenGreySmallBird();
+		break;
+	case 6:
+		addBlueGreySmallBird();
+		break;
+	case 7:
+		addYellowGreySmallBird();
+		break;
+	case 8:
+		addYellowGreySmallBird();
+		break;
+	}
 }
 
 void AI::addGreenSmallBird() {
