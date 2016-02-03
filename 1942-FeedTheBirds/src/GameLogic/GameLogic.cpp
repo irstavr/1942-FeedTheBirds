@@ -78,14 +78,14 @@ GameLogic::~GameLogic() {
 	showExtraLoop = false;
 	show1000Points = false;
 
-	birds->clear();
-	bonusPow1Birds->clear();
-	bonusPow2Birds->clear();
-	bonusPow3Birds->clear();
-	bonusPow4Birds->clear();
-	bonusPow5Birds->clear();
-	bonusPow6Birds->clear();
-	bonusPow7Birds->clear();
+	if (birds) birds->clear();
+	if (bonusPow1Birds) bonusPow1Birds->clear();
+	if (bonusPow2Birds) bonusPow2Birds->clear();
+	if (bonusPow3Birds) bonusPow3Birds->clear();
+	if (bonusPow4Birds) bonusPow4Birds->clear();
+	if (bonusPow5Birds) bonusPow5Birds->clear();
+	if (bonusPow6Birds) bonusPow6Birds->clear();
+	if (bonusPow7Birds) bonusPow7Birds->clear();
 }
 
 Bird* GameLogic::createBird(Dim _x, Dim _y, 

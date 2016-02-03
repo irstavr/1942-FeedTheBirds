@@ -66,8 +66,8 @@ bool GamePlay::initAllegro() {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to create lpstimer!\n", NULL, NULL);
 		return false;
 	}
-	
 
+	al_set_new_window_position(100, 100);
 	display = al_create_display(START_SCREEN_WINDOW_WIDTH, START_SCREEN_WINDOW_HEIGHT);
 	if (!display) {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to create display!\n", NULL, NULL);
@@ -75,7 +75,6 @@ bool GamePlay::initAllegro() {
 		al_destroy_timer(lpsTimer);
 		return false;
 	}
-	al_set_new_window_position(0, 0);
 
 	if (!al_install_audio()) {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to initialize audio!\n", NULL, NULL);
@@ -691,7 +690,7 @@ void GamePlay::cleanGamePlay() {
 		if (currentGame)
 			delete currentGame;
 
-		ai->~AI();
+		if (ai) ai->~AI();
 		CollisionChecker::getInstance()->cleanUp();
 	}
 }

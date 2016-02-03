@@ -40,10 +40,10 @@ AI::AI(GameLogic *_gameLogic, FrameRangeAnimator* _flyAnimator, FrameRangeAnimat
 }
 
 AI::~AI() {
-	delete smallBirds;
-	delete mediumBirds;
-	delete largeBirds;
-	delete bonusBirds;
+	if (smallBirds) delete smallBirds;
+	if (mediumBirds) delete mediumBirds;
+	if (largeBirds) delete largeBirds;
+	if (bonusBirds) delete bonusBirds;
 }
 
 void AI::eventAtX(int x)
