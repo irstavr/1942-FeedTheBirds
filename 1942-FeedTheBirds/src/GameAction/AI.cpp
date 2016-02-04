@@ -73,7 +73,7 @@ void AI::eventAtX(int x)
 		// action points for medium birds
 		addSmallBirds();
 		break;
-	case 200:
+	/*case 200:
 		// action points for medium birds
 		addSmallBirds();
 		break;
@@ -96,7 +96,7 @@ void AI::eventAtX(int x)
 	case 400:
 		// action points for medium birds
 		addMediumBirds();
-		break;
+		break;*/
 
 	case 450:
 		// action points for medium birds
@@ -137,10 +137,10 @@ void AI::eventAtX(int x)
 		addSmallBirds();
 		break;
 
-	case 800:
+	/*case 800:
 		// action points for medium birds
 		addMediumBirds();
-		break;
+		break;*/
 
 	case 850:
 		// action points for medium birds

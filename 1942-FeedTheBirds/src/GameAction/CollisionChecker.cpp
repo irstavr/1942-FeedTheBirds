@@ -8,6 +8,8 @@ CollisionChecker::CollisionChecker(void) {
 }
 
 CollisionChecker::~CollisionChecker(void) {
+	pairs.clear();
+	collisionChecker = NULL;
 }
 
 void CollisionChecker::cleanUp() {
