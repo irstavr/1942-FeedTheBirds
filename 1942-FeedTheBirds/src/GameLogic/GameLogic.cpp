@@ -45,7 +45,7 @@ GameLogic::GameLogic (MovingPathAnimation *takeOffAnimation,
 
 	superAce = new SuperAce(profile,
 							100,
-							600,
+							500,
 							(AnimationFilm*)
 								AnimationFilmHolder::getSingleton()->
 									getFilm("superAce"),

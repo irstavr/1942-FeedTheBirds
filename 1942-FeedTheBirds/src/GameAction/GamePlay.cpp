@@ -229,14 +229,14 @@ MovingPathAnimation* GamePlay::createLandingAnimation() {
 	std::list<PathEntry> paths;
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.30, 0, 90, 25));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(50, 0, 10));
-	return new MovingPathAnimation(paths, 1);
+	return new MovingPathAnimation(paths, 100);
 }
 
 MovingPathAnimation* GamePlay::createTakeOffAnimation() {
 	std::list<PathEntry> paths;
 	paths.splice(paths.end(), *createCircularPath(SCREEN_WINDOW_WIDTH*0.30, 270, 360, 25));
 	paths.splice(paths.end(), *createSmoothDiagonalPath(50, 0, 10));
-	return new MovingPathAnimation(paths, 1);
+	return new MovingPathAnimation(paths, 101);
 }
 
 // loop animation for super ace when pressing A
@@ -350,6 +350,9 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 					gameOver(currTime);
 					break;
 				}
+			case ALLEGRO_KEY_ESCAPE:
+				gameState = GAME_STATE_FINISHED;
+				break;
 			}		
 		}
 		InputManager::move(keys[UP], keys[DOWN], keys[LEFT], keys[RIGHT], currentGame->superAce);
@@ -574,7 +577,7 @@ void GamePlay::gameOver(unsigned long now) {
 		currentGame->superAce->explode();
 		AnimatorHolder::pauseAllExcept(deathAnimator);
 		gameOverButton->startFlashing();
-		ScoreBoard::getInstance().setScore(0);
+		//ScoreBoard::getInstance().setScore(0);
 		currentGame->gameRunning = false;
 		if(powerUp)
 			powerUp->~PowerUp();
@@ -673,12 +676,16 @@ void GamePlay::startNewGame() {
 								loopAnimation,
 								loopAnimator);
 
-	currentGame->superAce->startTakeOff();
 
 	terrain = new Terrain();
 	ScoreBoard::getInstance().setScore(0);
+	keys[UP] = false;
+	keys[DOWN] = false;
+	keys[LEFT] = false;
+	keys[RIGHT] = false;
 
 	ai = new AI(currentGame, flyAnimator, flyAnimation);
+	currentGame->superAce->startTakeOff();
 	displayMainScreen(getCurrTime());
 }
 

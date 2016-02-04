@@ -165,7 +165,7 @@ void SuperAce::startTakeOff(void) {
 	this->takeOffTime = getCurrTime();
 	this->disableMovement();
 	this->setX(100);
-	this->setY(600);
+	this->setY(500);
 	takeOffAnimator->start(this, takeOffAnimation, getCurrTime());
 	AnimatorHolder::markAsRunning(takeOffAnimator);
 }
