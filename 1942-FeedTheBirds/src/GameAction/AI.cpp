@@ -730,53 +730,58 @@ void AI::addMediumBirds(void) {
 		// Green Medium Bird
 		
 		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75,
-		SCREEN_WINDOW_HEIGHT + 10,
-		"mediumGreenBird",
-		mediumColoredBirdLives,
-		mediumColoredBirdSpeed,
-		mediumGreenBirdAnimation, 0);
+							SCREEN_WINDOW_HEIGHT + 10,
+							"mediumGreenBird",
+							mediumColoredBirdLives,
+							mediumColoredBirdSpeed,
+							mediumGreenBirdAnimation, 0);
 		
 	}
 	else if (iSecret == 2) {
 		// Yellow Medium Bird
 
 		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75,
-			0,
-			"mediumYellowBird",
-			mediumColoredBirdLives,
-			mediumColoredBirdSpeed,
-			mediumYellowBirdFromAboveAnimation, 0);
+							0,
+							"mediumYellowBird",
+							mediumColoredBirdLives,
+							mediumColoredBirdSpeed,
+							mediumYellowBirdFromAboveAnimation, 0);
+
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 - 100,
+							-50,
+							"mediumYellowBird",
+							mediumColoredBirdLives,
+							mediumColoredBirdSpeed,
+							mediumYellowBirdFromAboveAnimation, 0);
+
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 - 200,
+							-100,
+							"mediumYellowBird",
+							mediumColoredBirdLives,
+							mediumColoredBirdSpeed,
+							mediumYellowBirdFromAboveAnimation, 0);
+		/*
 		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75,
-			SCREEN_WINDOW_HEIGHT,
-			"mediumYellowBird",
-			mediumColoredBirdLives,
-			mediumColoredBirdSpeed,
-			mediumYellowBirdFromBelowAnimation, 0);
-		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 - 100,
-			-50,
-			"mediumYellowBird",
-			mediumColoredBirdLives,
-			mediumColoredBirdSpeed,
-			mediumYellowBirdFromAboveAnimation, 0);
-		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 - 100,
-			SCREEN_WINDOW_HEIGHT - 50,
-			"mediumYellowBird",
-			mediumColoredBirdLives,
-			mediumColoredBirdSpeed,
-			mediumYellowBirdFromBelowAnimation, 0);
-		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 - 200,
-			-100,
-			"mediumYellowBird",
-			mediumColoredBirdLives,
-			mediumColoredBirdSpeed,
-			mediumYellowBirdFromAboveAnimation, 0);
-		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 - 200,
-			SCREEN_WINDOW_HEIGHT - 100,
-			"mediumYellowBird",
-			mediumColoredBirdLives,
-			mediumColoredBirdSpeed,
-			mediumYellowBirdFromBelowAnimation, 0);
+							SCREEN_WINDOW_HEIGHT,
+							"mediumYellowBird",
+							mediumColoredBirdLives,
+							mediumColoredBirdSpeed,
+							mediumYellowBirdFromBelowAnimation, 0); 
 		
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 - 100,
+							SCREEN_WINDOW_HEIGHT - 50,
+							"mediumYellowBird",
+							mediumColoredBirdLives,
+							mediumColoredBirdSpeed,
+							mediumYellowBirdFromBelowAnimation, 0);
+
+		this->addMediumBird(SCREEN_WINDOW_WIDTH*0.75 - 200,
+							SCREEN_WINDOW_HEIGHT - 100,
+							"mediumYellowBird",
+							mediumColoredBirdLives,
+							mediumColoredBirdSpeed,
+							mediumYellowBirdFromBelowAnimation, 0);
+		*/
 	}
 	else if (iSecret == 3) {
 		// Brown Medium Birds

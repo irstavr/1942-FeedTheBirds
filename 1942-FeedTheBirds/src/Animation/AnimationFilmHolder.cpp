@@ -29,7 +29,6 @@ AnimationFilmHolder::AnimationFilmHolder(const char* path) {
 
 AnimationFilmHolder::~AnimationFilmHolder() {
 	filmMap.clear();
-	//delete[] filmMem; 
 }
 
 vector<Rect> AnimationFilmHolder::read_bboxes(const char* path, int framesNo) {
@@ -63,3 +62,7 @@ const AnimationFilm *AnimationFilmHolder::getFilm(const std::string id) const {
 	return i->second;
 }
 
+
+void AnimationFilmHolder::destroy(void) {
+	delete animationFH; 
+}

@@ -88,6 +88,36 @@ GameLogic::~GameLogic() {
 	if (bonusPow7Birds) bonusPow7Birds->clear();
 }
 
+void GameLogic::cleanUp() {
+
+	gameRunning = false;
+	superAceKilled = true;
+	checkQuadGun = false;
+	checkEnemyCrash = false;
+	checkSideFighter = false;
+	checkExtraLife = false;
+	checkNoEnemyBullets = false;
+	checkExtraLoop = false;
+	check1000Points = false;
+	showQuadGun = false;
+	showEnemyCrash = false;
+	showSideFighter = false;
+	showExtraLife = false;
+	showNoEnemyBullets = false;
+	showExtraLoop = false;
+	show1000Points = false;
+
+	if (birds) birds->clear();
+	if (bonusPow1Birds) bonusPow1Birds->clear();
+	if (bonusPow2Birds) bonusPow2Birds->clear();
+	if (bonusPow3Birds) bonusPow3Birds->clear();
+	if (bonusPow4Birds) bonusPow4Birds->clear();
+	if (bonusPow5Birds) bonusPow5Birds->clear();
+	if (bonusPow6Birds) bonusPow6Birds->clear();
+	if (bonusPow7Birds) bonusPow7Birds->clear();
+}
+
+
 Bird* GameLogic::createBird(Dim _x, Dim _y, 
 							BirdID birdID,
 							BirdLives birdLives,

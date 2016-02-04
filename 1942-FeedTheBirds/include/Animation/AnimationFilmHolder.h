@@ -33,7 +33,7 @@ protected:
 
 public:
 	static void initialize(char const *path);
-	static void destroy(void) { delete animationFH; };
+	static void destroy(void);
 	static AnimationFilmHolder *getSingleton(void);
 	const AnimationFilm *getFilm(const std::string id) const;
 };

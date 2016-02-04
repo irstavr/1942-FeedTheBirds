@@ -25,6 +25,8 @@ public:
 			MovingPathAnimator* loopAnimator);
 	~GameLogic();
 
+	void cleanUp();
+
 	Bird * createBird(Dim _x, Dim _y, 
 					BirdID birdID, 
 					BirdLives birdLives, 

@@ -663,7 +663,7 @@ void GamePlay::displayPauseGame(unsigned long now) {
 void GamePlay::startNewGame() {
 	gameState = GAME_STATE_MAINGAME;
 	AudioHolder::stop();
-
+	
 	currentGame = new GameLogic(takeOffAnimation,
 								takeOffAnimator,
 								landingAnimation,
@@ -689,8 +689,10 @@ void GamePlay::cleanGamePlay() {
 		if (currentGame)
 			delete currentGame;
 
-		if (ai) ai->~AI();
+		if (ai) 
+			ai->~AI();
 		CollisionChecker::getInstance()->cleanUp();
+		AnimatorHolder::cancel();
 	}
 }
 
