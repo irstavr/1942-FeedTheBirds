@@ -43,6 +43,7 @@ BirdDropping* Bird::shoot() {
 		dropping->startMoving();
 		return dropping;
 	}
+	return nullptr;
 }
 
 DROPPINGS* Bird::bossShoot() {
@@ -90,6 +91,7 @@ DROPPINGS* Bird::bossShoot() {
 		dropping3->startMoving();
 		return bossDroppings;
 	}
+	return nullptr;
 }
 
 void Bird::setFollowsSuperAce(int b)

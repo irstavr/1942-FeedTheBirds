@@ -234,6 +234,9 @@ bool GameLogic::showBonus(PowerUpType_t powID) {
 		bonusPow7Birds->clear();
 		return true;
 		break;
+	default:
+		return false;
+		break;
 	}
 }
 

@@ -692,7 +692,6 @@ void GamePlay::cleanGamePlay() {
 		if (ai) 
 			ai->~AI();
 		CollisionChecker::getInstance()->cleanUp();
-		AnimatorHolder::cancel();
 	}
 }
 
