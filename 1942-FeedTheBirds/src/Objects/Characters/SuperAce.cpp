@@ -26,13 +26,13 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 	injuredTime(-1),
 	loopTime(-1),
 	landingTime(-1),
-	takeOffTime(-1),
+	//takeOffTime(-1),
 	explosionTime(-1),
 	isInjured(false),
 	isLooping(false),
 	isExploding(false),
 	isLanding(false),
-	isTakingOff(false),
+	//isTakingOff(false),
 	isDead(false),
 	isInvincible(false),
 	isShooting(false),
@@ -52,6 +52,8 @@ SuperAce::SuperAce(PlayerProfile* playerProfile,
 }
 
 SuperAce::~SuperAce(void) {
+	fishes->clear();
+
 	injuredTime = -1;
 	loopTime = -1;
 	explosionTime = -1;
@@ -60,7 +62,27 @@ SuperAce::~SuperAce(void) {
 	isLooping = false;
 	isExploding = false;
 	isLanding = false;
-	isTakingOff = false;
+	//isTakingOff = false;
+	isInvincible = false;
+	isShooting = false;
+	hasQuadGun = false;
+	isDead = false;
+}
+
+void SuperAce::cleanUp() {
+	fishes->clear();
+
+	this->enableMovement();
+	injuredTime = -1;
+	loopTime = -1;
+	explosionTime = -1;
+
+	canMove = true;
+	isInjured = false;
+	isLooping = false;
+	isExploding = false;
+	isLanding = false;
+	//isTakingOff = false;
 	isInvincible = false;
 	isShooting = false;
 	hasQuadGun = false;
@@ -161,9 +183,9 @@ void SuperAce::twist(void) {
 }
 
 void SuperAce::startTakeOff(void) {
-	this->isTakingOff = true;
-	this->takeOffTime = getCurrTime();
-	this->disableMovement();
+	//this->isTakingOff = true;
+	//this->takeOffTime = getCurrTime();
+	//this->disableMovement();
 	this->setX(100);
 	this->setY(600);
 	takeOffAnimator->start(this, takeOffAnimation, getCurrTime());

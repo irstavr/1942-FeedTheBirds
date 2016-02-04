@@ -28,7 +28,7 @@ GameLogic::GameLogic (MovingPathAnimation *takeOffAnimation,
 	showExtraLoop = false;
 	show1000Points = false;
 
-	profile = new PlayerProfile(std::make_pair(0,0));
+	profile = new PlayerProfile();
 
 	birds = new vector<Bird*>();
 
@@ -140,7 +140,8 @@ Bird* GameLogic::createBird(Dim _x, Dim _y,
 	birds->push_back(bird);
 	bird->startMoving();
 
-	CollisionChecker::getInstance()->registerCollisions(superAce, bird);
+	CollisionChecker::getInstance()->
+		registerCollisions(superAce, bird);
 
 	return bird;
 }

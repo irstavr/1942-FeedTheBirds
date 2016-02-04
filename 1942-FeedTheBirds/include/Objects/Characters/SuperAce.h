@@ -34,6 +34,8 @@ public:
 		vector<Bird*>* _birds);
 	~SuperAce(void);
 
+	void cleanUp();
+
 	vector<Bird*> *birds;
 
 	MovingPathAnimation *takeOffAnimation;
@@ -66,14 +68,14 @@ public:
 	bool isInjured;
 	bool isLooping;
 	bool isExploding;
-	bool isTakingOff;
+	//bool isTakingOff;
 	
 	// hacking use
 	unsigned long injuredTime;
 	unsigned long explosionTime;
 	unsigned long loopTime;
 	unsigned long landingTime;
-	unsigned long takeOffTime;
+	//unsigned long takeOffTime;
 
 	void setInvincibility(bool _inv) { isInvincible = _inv; };
 

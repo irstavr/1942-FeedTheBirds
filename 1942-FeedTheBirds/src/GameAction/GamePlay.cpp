@@ -249,6 +249,7 @@ MovingPathAnimation* GamePlay::createLoopAnimation() {
 void GamePlay::runMainLoop() {
 	startButton->setVisibility(true);
 	startButton->startFlashing();
+
 	/* finish == exit of game */
 	while (gameState != GAME_STATE_FINISHED) {
 		currTime = getCurrTime();
@@ -411,15 +412,15 @@ void GamePlay::checkAnimationFlags() {
 			gameFinished();
 		}
 	}
-
+	/*
 	if (currentGame->superAce->isTakingOff) {
 		if (currentGame->superAce->takeOffTime + 500 < getCurrTime()) {
 			//changeSuperAceBitmap();
-			currentGame->superAce->takeOffTime = -1;
+			currentGame->superAce->takeOffTime = 0;
 			currentGame->superAce->enableMovement();
 		}
 	}
-
+	*/
 	// get here when super ace gets the pow 'no enemies bullets'
 	if (currentGame->superAce->noEnemiesBullets) {
 		if (currentGame->superAce->noEnemyBulletsTime + 1000 < getCurrTime()) {
@@ -686,11 +687,10 @@ void GamePlay::cleanGamePlay() {
 	// TODO: clean all instances of all the classes!
 	//
 	if (gameState != GAME_STATE_INTRO) {
-		if (currentGame)
-			delete currentGame;
 
-		if (ai) 
-			ai->~AI();
+		currentGame->cleanUp();
+		currentGame->superAce->cleanUp();
+		ai->cleanUp();
 		CollisionChecker::getInstance()->cleanUp();
 	}
 }

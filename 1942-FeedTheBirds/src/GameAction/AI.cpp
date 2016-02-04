@@ -46,6 +46,14 @@ AI::~AI() {
 	if (bonusBirds) delete bonusBirds;
 }
 
+void AI::cleanUp() {
+	if (smallBirds) delete smallBirds;
+	if (mediumBirds) delete mediumBirds;
+	if (largeBirds) delete largeBirds;
+	if (bonusBirds) delete bonusBirds;
+}
+
+
 void AI::eventAtX(int x)
 {
 	handleLittleBirds();

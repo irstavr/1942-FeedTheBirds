@@ -23,6 +23,8 @@ public:
 	AI(GameLogic *_gameLogic, FrameRangeAnimator *_flyAnimator, FrameRangeAnimation *_flyAnimation);
 	~AI();
 
+	void cleanUp();
+
 	void eventAtX(int x);
 
 private:
