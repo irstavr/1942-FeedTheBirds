@@ -13,7 +13,8 @@ CollisionChecker::~CollisionChecker(void) {
 }
 
 void CollisionChecker::cleanUp() {
-	delete collisionChecker;
+	if (collisionChecker)
+		delete collisionChecker;
 }
 
 void CollisionChecker::initialize(void) {

@@ -32,7 +32,7 @@ void GamePlay::initGamePlay() {
 	// Main loop 
 	runMainLoop();
 	// Cleaning
-	cleanGamePlay();
+	//cleanGamePlay();
 	cleanAllegro();
 }
 
@@ -296,9 +296,11 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				if (gameState == GAME_STATE_MAINGAME)
 					keys[LEFT] = false;
 				break;
-			case ALLEGRO_KEY_ESCAPE:
+			/*case ALLEGRO_KEY_ESCAPE:
+				cerr << "ESCAPE!!!!!!!!!!\n";
+				while (1);
 				gameState = GAME_STATE_FINISHED;
-				break;
+				break;*/
 			}
 			break;
 		case ALLEGRO_EVENT_KEY_DOWN:
@@ -344,6 +346,9 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 					startNewGame();
 				}
 				break;
+			case ALLEGRO_KEY_X:
+				gameState = GAME_STATE_FINISHED;
+				break;
 			case ALLEGRO_KEY_ENTER:
 				if (gameState == GAME_STATE_GAMEOVER) {
 					InputManager::onKeyEnter(gameState, display, startButton, gameOverButton);
@@ -354,12 +359,12 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				/* O:  Just for our debugging*/
 			case ALLEGRO_KEY_O:
 				if (gameState == GAME_STATE_MAINGAME) {
-					gameOver(currTime);
-					break;
+					gameOver(currTime);					
 				}
-			case ALLEGRO_KEY_ESCAPE:
-				gameState = GAME_STATE_FINISHED;
 				break;
+			/*case ALLEGRO_KEY_ESCAPE:
+				gameState = GAME_STATE_FINISHED;
+				break;*/
 			}		
 		}
 		InputManager::move(keys[UP], keys[DOWN], keys[LEFT], keys[RIGHT], currentGame->superAce);
@@ -699,11 +704,16 @@ void GamePlay::startNewGame() {
 void GamePlay::cleanGamePlay() {
 	// TODO: clean all instances of all the classes!
 	//
-	if (gameState != GAME_STATE_INTRO) {
-
-		currentGame->cleanUp();
-		currentGame->superAce->cleanUp();
-		ai->cleanUp();
+	if (gameState != GAME_STATE_INTRO &&	
+		gameState != GAME_STATE_FINISHED) {	//pressed X while playing
+		if (currentGame) {
+			if(currentGame->superAce)
+				currentGame->superAce->cleanUp();
+			currentGame->cleanUp();
+		}
+		if (ai) {
+			ai->cleanUp();
+		}
 		CollisionChecker::getInstance()->cleanUp();
 	}
 }

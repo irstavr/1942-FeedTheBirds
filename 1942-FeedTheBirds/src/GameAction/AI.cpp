@@ -47,10 +47,10 @@ AI::~AI() {
 }
 
 void AI::cleanUp() {
-	if (smallBirds) delete smallBirds;
-	if (mediumBirds) delete mediumBirds;
-	if (largeBirds) delete largeBirds;
-	if (bonusBirds) delete bonusBirds;
+	if (smallBirds->size()!=0) delete smallBirds;
+	if (mediumBirds->size() != 0) delete mediumBirds;
+	if (largeBirds->size() != 0) delete largeBirds;
+	if (bonusBirds->size() != 0) delete bonusBirds;
 }
 
 
