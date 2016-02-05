@@ -165,24 +165,24 @@ void GamePlay::initGameEngine() {
 							flashAnimation,
 							flashAnimator);
 
-	pauseButton = new Button(200,
-							420,
+	pauseButton = new Button(400,
+							200,
 							(AnimationFilm *)
 								AnimationFilmHolder::getSingleton()->
 								getFilm("PauseButton"),
 							flashAnimation->clone(0),
 							flashAnimator->clone());
 
-	gameOverButton = new Button(380, 
-								350, 
+	gameOverButton = new Button(400, 
+								200, 
 								(AnimationFilm *)
 									AnimationFilmHolder::getSingleton()->
 										getFilm("GameOverButton"),
 								flashAnimation->clone(1), 
 								flashAnimator->clone());
 
-	replayButton = new Button(380,
-								440,
+	replayButton = new Button(400,
+								300,
 								(AnimationFilm *)
 								AnimationFilmHolder::getSingleton()->
 								getFilm("ReplayButton"),
@@ -190,11 +190,19 @@ void GamePlay::initGameEngine() {
 								flashAnimator->clone());
 
 	winButton = new Button(400,
-							350,
+							200,
 							(AnimationFilm *)
 							AnimationFilmHolder::getSingleton()->
 							getFilm("WinButton"),
 							flashAnimation->clone(3),
+							flashAnimator->clone());
+
+	resumeButton = new Button(400,
+							300,
+							(AnimationFilm *)
+							AnimationFilmHolder::getSingleton()->
+							getFilm("ResumeButton"),
+							flashAnimation->clone(2),
 							flashAnimator->clone());
 
 	// Characters - Items:
@@ -353,7 +361,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				break;
 			case ALLEGRO_KEY_ENTER:
 				if (gameState == GAME_STATE_GAMEOVER) {
-					InputManager::onKeyEnter(gameState, display, startButton, gameOverButton);
+					InputManager::onKeyEnter(gameState, display, startButton, gameOverButton, winButton);
 					cleanGamePlay();
 					hasWon = false;
 				}
@@ -602,9 +610,10 @@ void GamePlay::gameFinished() {
 	if (gameState != GAME_STATE_GAMEOVER) {
 		gameState = GAME_STATE_GAMEOVER;
 		hasWon = true;
-		winButton->setVisibility(true);
+		winButton->startFlashing();
+		//winButton->setVisibility(true);
 		currentGame->gameRunning = false;
-		powerUp->~PowerUp();
+		if (powerUp) powerUp->~PowerUp();
 	}
 }
 
@@ -640,8 +649,10 @@ void GamePlay::displayGameFinished(unsigned long now) {
 		currentGame->profile->getLives(),
 		currentGame->profile->getLoops());
 	currentGame->superAce->displayAll();
-	winButton->display(Rect(0, 0, 0, 0));
-	replayButton->display(Rect(0, 0, 0, 0));
+	if (winButton->isSpriteVisible()) {
+		winButton->display(Rect(0, 0, 0, 0));
+		replayButton->display(Rect(0, 0, 0, 0));
+	}
 
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -655,8 +666,8 @@ void GamePlay::displayGameOver(unsigned long now) {
 	currentGame->superAce->displayAll();
 	if (gameOverButton->isSpriteVisible()) {
 		gameOverButton->display(Rect(0, 0, 0, 0));
+		replayButton->display(Rect(0, 0, 0, 0));
 	}
-	replayButton->display(Rect(0, 0, 0, 0));
 
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -669,10 +680,10 @@ void GamePlay::displayPauseGame(unsigned long now) {
 		currentGame->profile->getLoops());
 
 	if (pauseButton->isSpriteVisible()) {
-		pauseButton->setX(600);
-		pauseButton->setY(300);
 		pauseButton->display(Rect(0, 0, 0, 0));
+		resumeButton->display(Rect(0, 0, 0, 0));
 	}
+
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 }

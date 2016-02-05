@@ -29,7 +29,6 @@ GameLogic::GameLogic (MovingPathAnimation *takeOffAnimation,
 	show1000Points = false;
 
 	profile = new PlayerProfile();
-
 	birds = new vector<Bird*>();
 
 	// lists that hold bonus birds 
@@ -45,7 +44,7 @@ GameLogic::GameLogic (MovingPathAnimation *takeOffAnimation,
 
 	superAce = new SuperAce(profile,
 							100,
-							500,
+							600,
 							(AnimationFilm*)
 								AnimationFilmHolder::getSingleton()->
 									getFilm("superAce"),

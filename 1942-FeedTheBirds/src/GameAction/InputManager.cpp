@@ -61,11 +61,12 @@ void InputManager::onKeyS(int &gameState, ALLEGRO_DISPLAY* &display, Button* &st
 	}
 }
 
-void InputManager::onKeyEnter(int &gameState, ALLEGRO_DISPLAY* &display, Button* &startButton, Button* &gameOverButton) {
+void InputManager::onKeyEnter(int &gameState, ALLEGRO_DISPLAY* &display, Button* &startButton, Button* &gameOverButton, Button* &winButton) {
 	if (gameState == GAME_STATE_GAMEOVER) {
 		al_resize_display(display, START_SCREEN_WINDOW_WIDTH, START_SCREEN_WINDOW_HEIGHT);
 		al_set_new_window_position(0, 0);
-		gameOverButton->stopFlashing();
+		if(gameOverButton)gameOverButton->stopFlashing();
+		else if (winButton)winButton->stopFlashing();
 		gameState = GAME_STATE_INTRO;
 
 		startButton->startFlashing();

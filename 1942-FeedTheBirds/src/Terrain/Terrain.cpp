@@ -47,10 +47,11 @@ void Terrain::drawBackground(int score, int highscore, int lives, int loops) {
 	if (this->x + this->width < SCREEN_WINDOW_WIDTH) {
 		al_draw_bitmap(this->bgImage, this->x + this->width, this->y, 0);
 	}
-	al_draw_bitmap(scoreImage, 40, 10, false);
+	al_draw_bitmap(scoreImage, 40, 12, false);
 	al_draw_text(font2, bright_green, 220, 10, ALLEGRO_ALIGN_CENTER, to_string(score).c_str());
-	al_draw_bitmap(highScoreImage, 420, 10, false);
+	al_draw_bitmap(highScoreImage, 420, 12, false);
 	al_draw_text(font1, bright_green, 700, 10, ALLEGRO_ALIGN_CENTER, to_string(highscore).c_str());
+	//al_draw_text(font1, bright_green, 1000, 10, ALLEGRO_ALIGN_CENTER, "YOU WON!");
 
 	int livesImgWidth = al_get_bitmap_width(remainingLivesImage);
 

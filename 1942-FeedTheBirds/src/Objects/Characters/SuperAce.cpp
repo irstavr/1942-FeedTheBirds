@@ -356,24 +356,26 @@ void SuperAce::collisionAction(Sprite* s) {
 
 		// collision super ace with a bird
 		if (Bird* v = dynamic_cast<Bird*>(s)) {
-			// kill Bird
-			if (!hasSideFighter) {
-				v->removeLife();
-				if (v->getLives() == 0) {
-					v->setVisibility(false);
+			if (!v->isDead()) {
+				// kill Bird
+				if (!hasSideFighter) {
+					v->removeLife();
+					if (v->getLives() == 0) {
+						v->setVisibility(false);
+					}
+					// super ace loses a life
+					playerProfile->decrLives();
+					// flash super Ace
+					injured();
+					//check if game is over
+					if (playerProfile->getLives() == 0) {
+						// GameOver
+						this->explode();
+					}
 				}
-				// super ace loses a life
-				playerProfile->decrLives();
-				// flash super Ace
-				injured();
-				//check if game is over
-				if (playerProfile->getLives() == 0) {
-					// GameOver
-					this->explode();
+				else {
+					removeSideFighters();
 				}
-			}
-			else {
-				removeSideFighters();
 			}
 		}
 
