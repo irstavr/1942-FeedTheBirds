@@ -23,6 +23,6 @@ int main()
 		//delete game;
 		//game = GamePlay::instance(true);
 	}
-	delete game;
+	//delete game;
 	return 0;
 }

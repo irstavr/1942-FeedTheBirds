@@ -274,6 +274,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 		switch (alEvent.type) {
 
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
+			cleanGamePlay();
 			gameState = GAME_STATE_FINISHED;
 			break;
 		
@@ -347,6 +348,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				}
 				break;
 			case ALLEGRO_KEY_X:
+				cleanGamePlay();
 				gameState = GAME_STATE_FINISHED;
 				break;
 			case ALLEGRO_KEY_ENTER:
