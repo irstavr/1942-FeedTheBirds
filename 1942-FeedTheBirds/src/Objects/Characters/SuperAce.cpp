@@ -193,13 +193,16 @@ void SuperAce::startTakeOff(void) {
 }
 
 void SuperAce::startLanding(void) {
-	this->isLanding = true;
-	this->landingTime = getCurrTime();
-	this->disableMovement();
-	this->setX(x);
-	this->setY(285);
-	landAnimator->start(this, landAnimation, getCurrTime());
-	AnimatorHolder::markAsRunning(landAnimator);
+	// land only if he still has lives
+	if (playerProfile->getLives() > 0) {
+		this->isLanding = true;
+		this->landingTime = getCurrTime();
+		this->disableMovement();
+		this->setX(x);
+		this->setY(185);
+		landAnimator->start(this, landAnimation, getCurrTime());
+		AnimatorHolder::markAsRunning(landAnimator);
+	}
 }
 
 void SuperAce::shoot(vector<Bird*>* birds) {

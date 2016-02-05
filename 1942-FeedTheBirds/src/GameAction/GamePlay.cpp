@@ -327,6 +327,12 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 			case ALLEGRO_KEY_A:
 				if (gameState == GAME_STATE_MAINGAME)
 					InputManager::twist(currentGame->superAce);
+				break; 
+			case ALLEGRO_KEY_L:
+				// OUR CHEAT ! ! ! ! ! ! ! ! !!  !!
+				if (gameState == GAME_STATE_MAINGAME)
+					currentGame->profile->incrLives();
+				//InputManager::pause(gameState);
 				break;
 			case ALLEGRO_KEY_P:
 				pauseGame(currTime);
