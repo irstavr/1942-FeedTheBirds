@@ -1,8 +1,6 @@
 # 1942 - Feed The Birds
 
-
 # FIX:
-
 - add audio sounds  
 	start sound -- DONE
 	shootFish sound
@@ -11,17 +9,14 @@
 	gameOver
 	loopSound
 	collisionSound
-    
-- change action points ON AI ! ! ! !
-
-- TAKING OFF ANIMATOR  !
-- LANDING ANIMATOR     !
-
-- change positions of landing/taking off ! ! ! ! ! ! ! ! ! !
 
 - start screen
+    CSD UOC
+    new bg ?
+
+- replace "explosion" bitmaps with "koutsoulies"
+    
 
 #BUGS
 - escape button doesnt work
--
--
+- memory corruption
