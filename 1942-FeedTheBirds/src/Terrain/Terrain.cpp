@@ -1,12 +1,12 @@
-#include "..\..\include\Terrain\Terrain.h"
+﻿#include "..\..\include\Terrain\Terrain.h"
 
 using namespace std;
 
-	Terrain::Terrain() :
+Terrain::Terrain() :
 	font_file("1942-FeedTheBirds\\data\\Fonts\\karmatic_arcade_font.ttf"),
 	width(SCREEN_WINDOW_WIDTH),
 	height(SCREEN_WINDOW_WIDTH),
-	x(0), y(0), velX(1), velY(0), dirX(-1), dirY(1), numOfScrolls(0)
+	x(0), y(0), velX(2), velY(0), dirX(-1), dirY(1), numOfScrolls(0)
 {
 	bgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\background5.png");
 	remainingLivesImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\life.png");
@@ -25,6 +25,13 @@ using namespace std;
 }
 
 Terrain::~Terrain() {
+	delete bgImage;
+	delete remainingLivesImage;
+	delete remainingLoopsImage;
+	delete scoreImage;
+	delete highScoreImage;
+	delete font1;
+	delete font2;
 }
 
 float Terrain::getTerrainX() {
@@ -43,25 +50,23 @@ void Terrain::updateBackground() {
 void Terrain::drawBackground(int score, int highscore, int lives, int loops) {
 	
 	al_draw_bitmap(this->bgImage, this->x, this->y, 0);
-
 	if (this->x + this->width < SCREEN_WINDOW_WIDTH) {
 		al_draw_bitmap(this->bgImage, this->x + this->width, this->y, 0);
 	}
+
 	al_draw_bitmap(scoreImage, 40, 12, false);
 	al_draw_text(font2, bright_green, 220, 10, ALLEGRO_ALIGN_CENTER, to_string(score).c_str());
 	al_draw_bitmap(highScoreImage, 420, 12, false);
 	al_draw_text(font1, bright_green, 700, 10, ALLEGRO_ALIGN_CENTER, to_string(highscore).c_str());
-	//al_draw_text(font1, bright_green, 1000, 10, ALLEGRO_ALIGN_CENTER, "YOU WON!");
 
 	int livesImgWidth = al_get_bitmap_width(remainingLivesImage);
-
-	for (int i = 0; i < lives; i++) {
+	int i;
+	for (i = 0; i < lives; i++) {
 		al_draw_bitmap(remainingLivesImage, 20 + (i * 81), 610, 0);
 	}
 
 	int loopsImgWidth = al_get_bitmap_width(remainingLoopsImage);
-
-	for (int j = 0; j < loops; j++) {
-		al_draw_scaled_bitmap(remainingLoopsImage, 0, 0, loopsImgWidth, loopsImgWidth, 1220-(j*45), 600, 40, 40, 0);
+	for (i = 0; i < loops; i++) {
+		al_draw_scaled_bitmap(remainingLoopsImage, 0, 0, loopsImgWidth, loopsImgWidth, 1220-(i*45), 600, 40, 40, 0);
 	}
 }

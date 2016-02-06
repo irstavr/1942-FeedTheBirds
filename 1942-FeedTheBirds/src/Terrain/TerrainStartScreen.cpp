@@ -32,6 +32,7 @@ void TerrainStartScreen::updateBackground() {
 void TerrainStartScreen::drawBackground() {
 	al_draw_bitmap(this->bgImage, this->x, this->y, 0);
 
+	// to achieve scrollable bg
 	if (this->y + this->height < START_SCREEN_WINDOW_HEIGHT)
 		al_draw_bitmap(this->bgImage, this->x, this->y + this->height, 0);
 	
