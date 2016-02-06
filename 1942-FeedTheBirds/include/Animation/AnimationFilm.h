@@ -4,7 +4,6 @@
 #include "allegro5\allegro.h"
 #include <vector>
 #include "windows.h"
-
 #include "..\Objects\Object.h"
 
 class AnimationFilm {
@@ -16,7 +15,10 @@ public:
 	AnimationFilm(ALLEGRO_BITMAP *, const std::vector<Rect>, const std::string&);
 
 	~AnimationFilm() {
-		delete bitmap;
+		boxes.clear();
+		// only bitmap loader can delte a bitmap !!!!
+		bitmap = (ALLEGRO_BITMAP*)0;
+		id.clear();
 	}
 
 	byte getTotalFrames(void) 	const;

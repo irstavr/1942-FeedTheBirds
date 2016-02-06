@@ -9,6 +9,13 @@
 *      Author: Papadaki Eleni
 *      Author: Stavrakantonaki Irini
 */
+
+// for our use only 
+// to find memory leaks using the CRT library
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
 #include <stdio.h>
 #include <cstdlib>
 #include "..\include\GameAction\GamePlay.h"
@@ -23,6 +30,7 @@ int main()
 		//delete game;
 		//game = GamePlay::instance(true);
 	}
-	//delete game;
+	delete game;
+	_CrtDumpMemoryLeaks();
 	return 0;
 }

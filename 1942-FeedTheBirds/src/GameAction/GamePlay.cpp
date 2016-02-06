@@ -32,7 +32,6 @@ void GamePlay::initGamePlay() {
 	// Main loop 
 	runMainLoop();
 	// Cleaning
-	//cleanGamePlay();
 	cleanAllegro();
 }
 
@@ -147,9 +146,8 @@ void GamePlay::initGameEngine() {
 	TerrainStartScreen::getInstance();
 	ScoreBoard::getInstance();
 
-	AnimationFilmHolder::initialize("1942-FeedTheBirds\\data\\films.ini");
-	AnimationFilmHolder *animFH = AnimationFilmHolder::getSingleton();
-
+	AnimationFilmHolder::singletonCreate("1942-FeedTheBirds\\data\\films.ini");
+	
 	CollisionChecker::getInstance()->initialize();
 
 	// Add start game button
@@ -205,28 +203,27 @@ void GamePlay::initGameEngine() {
 							flashAnimation->clone(2),
 							flashAnimator->clone());
 
-	// Characters - Items:
-
-	// SuperAce
+	// Standard animations used for SuperAce:
 
 	deathAnimation = new FrameRangeAnimation(1, 8, 0, 0, 150, false, 4);
 	deathAnimator = new FrameRangeAnimator();
+	AnimatorHolder::animRegister(deathAnimator);
+	
 	flyAnimation = new FrameRangeAnimation(1, 3, 0, 0, 100, true, 3);
 	flyAnimator = new FrameRangeAnimator();
+	AnimatorHolder::animRegister(flyAnimator);
 
 	takeOffAnimation = createTakeOffAnimation();
 	takeOffAnimator = new MovingPathAnimator();
+	AnimatorHolder::animRegister(takeOffAnimator);
+
 	landingAnimation = createLandingAnimation();
 	landingAnimator = new MovingPathAnimator();
+	AnimatorHolder::animRegister(landingAnimator);
 
 	loopAnimation = createLoopAnimation();
 	loopAnimator = new MovingPathAnimator();
-
 	AnimatorHolder::animRegister(loopAnimator);
-	AnimatorHolder::animRegister(landingAnimator);
-	AnimatorHolder::animRegister(deathAnimator);
-	AnimatorHolder::animRegister(takeOffAnimator);
-	AnimatorHolder::animRegister(flyAnimator);
 
 	AudioHolder::initialize();
 	AudioHolder::changeToSound("intro");
@@ -436,15 +433,7 @@ void GamePlay::checkAnimationFlags() {
 			gameFinished();
 		}
 	}
-	/*
-	if (currentGame->superAce->isTakingOff) {
-		if (currentGame->superAce->takeOffTime + 500 < getCurrTime()) {
-			//changeSuperAceBitmap();
-			currentGame->superAce->takeOffTime = 0;
-			currentGame->superAce->enableMovement();
-		}
-	}
-	*/
+
 	// get here when super ace gets the pow 'no enemies bullets'
 	if (currentGame->superAce->noEnemiesBullets) {
 		if (currentGame->superAce->noEnemyBulletsTime + 1000 < getCurrTime()) {
@@ -556,7 +545,6 @@ void GamePlay::displayMainScreen(unsigned long now) {
 		terrain->updateBackground();
 		
 		checkActionPoints();
-
 	}
 }
 
@@ -714,26 +702,26 @@ void GamePlay::startNewGame() {
 	displayMainScreen(getCurrTime());
 }
 
+// clean all instances of game
+// when gameover/win/press X
 void GamePlay::cleanGamePlay() {
-	// TODO: clean all instances of all the classes!
-	//
-	if (gameState != GAME_STATE_INTRO &&	
-		gameState != GAME_STATE_FINISHED) {	//pressed X while playing
+
+	if (gameState != GAME_STATE_INTRO) {
 		if (currentGame) {
-			if(currentGame->superAce)
+			if (currentGame->superAce)
 				currentGame->superAce->cleanUp();
 			currentGame->cleanUp();
 		}
 		if (ai) {
 			ai->cleanUp();
 		}
+		
+		AnimationFilmHolder::singletonDestroy();
 		CollisionChecker::getInstance()->cleanUp();
 	}
 }
 
 void GamePlay::cleanAllegro() {
-	AnimationFilmHolder::destroy();
-	al_destroy_timer(lpsTimer);
 	al_destroy_timer(fpsTimer);
 	al_destroy_display(display);
 	al_destroy_event_queue(eventQueue);
