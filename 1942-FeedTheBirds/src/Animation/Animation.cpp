@@ -1,7 +1,7 @@
 #include "../../include/Animation/Animation.h"
 
-Animation::Animation(animid_t _id) : id(_id) {
-	assert(_id>=0);
+Animation::Animation(animid_t _id) : 
+		id(_id) {
 }
 
 animid_t Animation::getId(void) {

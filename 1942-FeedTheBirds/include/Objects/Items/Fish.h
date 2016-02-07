@@ -20,16 +20,13 @@ private:
 
 	MovingAnimation *flyAnimation;
 	MovingAnimator *flyAnimator;
-	TickAnimation *tickAnimation;
-	TimerTickAnimator *timerTick;
 
 	bool isInvisible;
 	bool isMetWithBird;
 	bool isAlive;
 
 public:
-
-	Fish::Fish(Dim _x, Dim _y, AnimationFilm* film,
+	Fish(Dim _x, Dim _y, AnimationFilm* film,
 		MovingAnimation *_flyAnimation, MovingAnimator *_flyAnimator);
 	~Fish(void);
 

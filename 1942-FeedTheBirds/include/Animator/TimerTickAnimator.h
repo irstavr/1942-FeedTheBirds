@@ -12,7 +12,7 @@ private:
 	TickAnimation*	tick;
 	byte			repetitions;
 public:
-	TimerTickAnimator(TickAnimation* _tick);
+	explicit TimerTickAnimator(TickAnimation* _tick);
 	~TimerTickAnimator(void);
 
 	TickAnimation* getAnimation(void);

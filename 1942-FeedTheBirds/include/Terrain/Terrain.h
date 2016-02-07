@@ -8,27 +8,12 @@
 
 class Terrain {
 private:
-
-	// bg image is scrollable
-	int offsetBg;
-
 	ALLEGRO_FONT titleFont;
 	std::string titleText;
 	ALLEGRO_COLOR titleColor;
-
-	int textAlign;
-	bool textVisible;
 	int numOfScrolls;
 
-	/* discriminate background from terrain objects */
-	float terrainWidth;
-	float terrainHeight;
-	float viewWinWidth;	//height==terrain height
-	std::list<Sprite*> terrainObjects;	//init at beginning
-	float startYPos; // for view window (initially: terrainHeight - viewWinHeight)
-
 public:
-
 	Terrain();
 	~Terrain();
 

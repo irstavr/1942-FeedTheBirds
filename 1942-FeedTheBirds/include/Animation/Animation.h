@@ -13,7 +13,7 @@ private:
 	animid_t id;
 
 public:
-	Animation(animid_t _id);
+	explicit Animation(animid_t _id);
 	virtual ~Animation();
 	animid_t getId(void);
 	virtual Animation* clone(animid_t newId) const = 0;

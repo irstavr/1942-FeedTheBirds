@@ -7,10 +7,10 @@ Fish::Fish(Dim _x, Dim _y, AnimationFilm* film,
 	flyAnimator(_flyAnimator) {
 	isInvisible = false;
 	isMetWithBird = false;
+	isAlive = true;
 }
 
-Fish::~Fish()
-{
+Fish::~Fish() {
 	AnimatorHolder::markAsSuspended(flyAnimator);
 	isInvisible = true;
 }

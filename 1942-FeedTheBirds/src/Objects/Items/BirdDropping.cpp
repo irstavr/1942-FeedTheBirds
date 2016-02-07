@@ -1,20 +1,17 @@
 #include "..\..\..\include\Objects\Items\BirdDropping.h"
 
 BirdDropping::BirdDropping(Dim _x, Dim _y, AnimationFilm* film,
-	MovingAnimation *_flyAnimation, MovingAnimator *_flyAnimator) :
-	Sprite(_x, _y, film),
-	flyAnimation(_flyAnimation),
-	flyAnimator(_flyAnimator) {
+							MovingAnimation *_flyAnimation, MovingAnimator *_flyAnimator) :
+		Sprite(_x, _y, film),
+		flyAnimation(_flyAnimation),
+		flyAnimator(_flyAnimator) {
 	isInvisible = false;
 	isMetWithBird = false;
 }
 
-BirdDropping::~BirdDropping()
-{
+BirdDropping::~BirdDropping() {
 	delete flyAnimation;
 	delete flyAnimator;
-	delete tickAnimation;
-	delete timerTick;
 }
 
 bool BirdDropping::inRange(float x, float y, float num) {

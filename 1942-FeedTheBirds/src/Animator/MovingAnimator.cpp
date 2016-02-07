@@ -19,7 +19,6 @@ Sprite* MovingAnimator::getSprite(void) {
 }
 
 void MovingAnimator::progress(unsigned long currTime) {
-	assert(currTime >= 0);
 	assert(anim);
 
 	while (currTime > lastTime && currTime - lastTime >= anim->getDelay()) {
@@ -43,7 +42,6 @@ void MovingAnimator::progress(unsigned long currTime) {
 void MovingAnimator::start(Sprite* s, MovingAnimation* a, unsigned long t) {
 	assert(s);
 	assert(a);
-	assert(t >= 0);
 	sprite = s;
 	anim = a;
 	lastTime = t;

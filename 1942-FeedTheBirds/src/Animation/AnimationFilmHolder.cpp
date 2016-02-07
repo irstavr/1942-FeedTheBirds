@@ -42,7 +42,7 @@ AnimationFilmHolder *AnimationFilmHolder::getSingleton(void) {
 }
 
 AnimationFilmHolder::AnimationFilmHolder(const char* path) {
-	char buff[1412], ch = ' ', bitmap[500], bboxes[500], id[500];
+	char buff[1412], bitmap[500], bboxes[500], id[500];
 	int frames;
 	//BitmapLoader bitmapLoader;
 	BitmapLoader::singletonCreate();
@@ -50,10 +50,10 @@ AnimationFilmHolder::AnimationFilmHolder(const char* path) {
 	ifstream cfg(path);
 
 	while (!cfg.eof()) {
-		ch = cfg.peek();
+		char ch = cfg.peek();
 		if (ch != '#' && ch != '\n') {
 			cfg.getline(buff, 1412);
-			sscanf(buff, "bitmap=%s id=%s frames=%d bboxes=%s", bitmap, id, &frames, bboxes);
+			sscanf(buff, "bitmap=%499s id=%499s frames=%3d bboxes=%499s", bitmap, id, &frames, bboxes);
 			std::cerr << bitmap << " " << id << " " << frames << " " << bboxes << " " << endl;
 			
 			ALLEGRO_BITMAP* b_bitmap = BitmapLoader::load(bitmap);
@@ -71,7 +71,7 @@ AnimationFilmHolder::AnimationFilmHolder(const char* path) {
 }
 
 vector<Rect> AnimationFilmHolder::read_bboxes(const char* path, int framesNo) {
-	char buff[512], ch = ' ';
+	char buff[512];
 	int x, y, w, h;
 	vector<Rect> vect;
 	ifstream cfg(path);
@@ -85,7 +85,7 @@ vector<Rect> AnimationFilmHolder::read_bboxes(const char* path, int framesNo) {
 	return vect;
 }
 
-const AnimationFilm *AnimationFilmHolder::getFilm(const std::string id) const {
+const AnimationFilm *AnimationFilmHolder::getFilm(const std::string &id) const {
 	FilmMap::const_iterator i = filmMap.find(id);
 	//assert(i != filmMap.end());
 	return i->second;

@@ -16,6 +16,7 @@ Terrain::Terrain() :
 
 	font1 = al_load_ttf_font(font_file, 28, 0);
 	font2 = al_load_ttf_font(font_file, -28, 0);
+	font3 = al_load_ttf_font(font_file, 16, 0);
 	if (!font1 || !font2) {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to load font file!\n", NULL, NULL);
 		return;
@@ -59,7 +60,7 @@ void Terrain::drawBackground(int score, int highscore, int lives, int loops) {
 	al_draw_bitmap(highScoreImage, 420, 12, false);
 	al_draw_text(font1, bright_green, 700, 10, ALLEGRO_ALIGN_CENTER, to_string(highscore).c_str());
 
-	int livesImgWidth = al_get_bitmap_width(remainingLivesImage);
+	//int livesImgWidth = al_get_bitmap_width(remainingLivesImage);
 	int i;
 	for (i = 0; i < lives; i++) {
 		al_draw_bitmap(remainingLivesImage, 20 + (i * 81), 610, 0);

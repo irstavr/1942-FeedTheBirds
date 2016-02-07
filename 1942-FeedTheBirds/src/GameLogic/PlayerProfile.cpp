@@ -1,11 +1,12 @@
 #include "../../include/GameLogic/PlayerProfile.h"
 
 // constructors
-PlayerProfile::PlayerProfile() {
-	startXY = std::make_pair(0, 0);
-	lives = _STARTING_LIFES;
-	birdsFeeded = 0;
-	loops = 3;
+PlayerProfile::PlayerProfile() :
+	startXY(std::make_pair(0, 0)),
+	lives(_STARTING_LIFES),
+	birdsFeeded(0),
+	loops(3),
+	isAlive(true) {
 }
 
 // destructor
@@ -13,6 +14,7 @@ PlayerProfile::~PlayerProfile() {
 	lives = 0;
 	loops = 0;
 	birdsFeeded = 0;
+	isAlive = false;
 }
 
 // lifes

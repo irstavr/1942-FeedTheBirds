@@ -12,7 +12,9 @@ class AnimationFilm {
 	std::string	id;
 
 public:
-	AnimationFilm(ALLEGRO_BITMAP *, const std::vector<Rect>, const std::string&);
+	AnimationFilm(ALLEGRO_BITMAP *, 
+				const std::vector<Rect>&, 
+				const std::string&);
 
 	~AnimationFilm() {
 		boxes.clear();

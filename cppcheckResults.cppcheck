@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="1">
+    <includedir>
+        <dir name="1942-FeedTheBirds/include/"/>
+    </includedir>
+    <paths>
+        <dir name="C:/Users/Irini/Documents/Visual Studio 2015/Projects/1942-FeedTheBirds/1942-FeedTheBirds/src"/>
+    </paths>
+    <libraries>
+        <library>windows</library>
+    </libraries>
+</project>

@@ -1,10 +1,12 @@
 #include "../../include/Animation/AnimationFilm.h"
 
 AnimationFilm::AnimationFilm(ALLEGRO_BITMAP *b, 
-							const std::vector<Rect> bx, 
+							const std::vector<Rect>& bx, 
 							const std::string& _id) :
-								bitmap(b), boxes(bx), id(_id) {
-
+		bitmap(b), 
+		boxes(bx), 
+		id(_id) 
+{
 	frameWidth = al_get_bitmap_width(bitmap)/boxes.size();
 	frameHeight = al_get_bitmap_height(bitmap);
 }
@@ -32,7 +34,6 @@ const Rect AnimationFilm::getBoundingBox(byte frameNo) const {
 		frameNo = 0; //reset
 	return boxes[frameNo];
 }
-
 
 void AnimationFilm::displayFrame(const Point& at, byte frameNo, bool flip_h, bool flip_v) const {
 	if (frameNo >= 0) {

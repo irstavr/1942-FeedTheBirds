@@ -18,7 +18,10 @@ private:
 	class ProgressFunctor : public std::unary_function<Animator*, void> {
 		unsigned long t;
 	public:
-		ProgressFunctor(unsigned long _t) :  t(_t) {}
+		explicit ProgressFunctor(unsigned long _t) : 
+				t(_t) {
+		}
+		
 		void operator()(Animator* a) const { 
 			if (!(a->hasFinished())) {
 				a->progress(t);

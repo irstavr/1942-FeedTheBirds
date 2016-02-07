@@ -20,15 +20,13 @@ private:
 
 	MovingAnimation *flyAnimation;
 	MovingAnimator *flyAnimator;
-	TickAnimation *tickAnimation;
-	TimerTickAnimator *timerTick;
 
 	bool isInvisible;
 	bool isMetWithBird;
 
 public:
 
-	BirdDropping::BirdDropping(Dim _x, Dim _y, AnimationFilm* film,
+	BirdDropping(Dim _x, Dim _y, AnimationFilm* film,
 		MovingAnimation *_flyAnimation, MovingAnimator *_flyAnimator);
 	~BirdDropping(void);
 

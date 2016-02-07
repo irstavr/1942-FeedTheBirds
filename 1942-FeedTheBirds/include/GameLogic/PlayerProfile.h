@@ -27,7 +27,6 @@ public:
 	void incrLoops();
 	void decrLoops();
 	
-
 private:
 	COORDS startXY;
 	Lives lives;

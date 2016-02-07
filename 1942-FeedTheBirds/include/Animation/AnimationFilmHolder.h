@@ -17,10 +17,10 @@ typedef std::map<std::string, AnimationFilm*> FilmMap;
 class AnimationFilmHolder {
 
 public:
-	static void singletonCreate(char const *path);
+	static void singletonCreate(const char *path);
 	static void singletonDestroy(void);
 	static AnimationFilmHolder *getSingleton(void);
-	const AnimationFilm *getFilm(const std::string id) const;
+	const AnimationFilm *getFilm(const std::string &id) const;
 
 private:
 	static AnimationFilmHolder *animationFH; //singleton instance
@@ -34,7 +34,7 @@ private:
 	AnimationFilmHolder(AnimationFilmHolder const&) = delete;
 	void operator=(AnimationFilmHolder const&) = delete;
 
-	AnimationFilmHolder(const char* path);
+	explicit AnimationFilmHolder(const char* path);
 	~AnimationFilmHolder();
 
 };
