@@ -43,7 +43,7 @@ void CollisionChecker::cancel(Sprite* s1, Sprite* s2) {
 	oldSize = pairs.size();	
 
 	std::list<Pair>::iterator it = pairs.begin();
-	for (int i = 1; i <= oldSize; i++) {
+	for (unsigned int i = 1; i <= oldSize; i++) {
 
 		std::advance(it, i);
 
