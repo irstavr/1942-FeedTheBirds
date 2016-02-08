@@ -573,7 +573,7 @@ Point* AI::getRandomEntryPoint() {
 		randomEntryY = -10;
 	}
 	p->setPoint(randomEntryX, randomEntryY);
-	cout << "Entry point: x=" << p->x << " y=" << p->y << "\n";
+	//cout << "Entry point: x=" << p->x << " y=" << p->y << "\n";
 	return p;
 }
 

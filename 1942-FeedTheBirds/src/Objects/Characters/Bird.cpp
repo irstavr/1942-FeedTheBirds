@@ -181,7 +181,7 @@ int Bird::getBirdID() {
 void Bird::collisionAction(Sprite* s) {
 
 	if (this->birdLives>0) {
-		cerr << "COLLISION! fish with bird \n";
+		//cerr << "COLLISION! fish with bird \n";
 		
 		if (Fish* fish = dynamic_cast<Fish*>(s)) {
 			fish->setVisibility(false);

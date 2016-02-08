@@ -54,7 +54,7 @@ AnimationFilmHolder::AnimationFilmHolder(const char* path) {
 		if (ch != '#' && ch != '\n') {
 			cfg.getline(buff, 1412);
 			sscanf(buff, "bitmap=%499s id=%499s frames=%3d bboxes=%499s", bitmap, id, &frames, bboxes);
-			std::cerr << bitmap << " " << id << " " << frames << " " << bboxes << " " << endl;
+			//std::cerr << bitmap << " " << id << " " << frames << " " << bboxes << " " << endl;
 			
 			ALLEGRO_BITMAP* b_bitmap = BitmapLoader::load(bitmap);
 			assert(bitmap);

@@ -6,7 +6,7 @@ Terrain::Terrain() :
 	font_file("1942-FeedTheBirds\\data\\Fonts\\karmatic_arcade_font.ttf"),
 	width(SCREEN_WINDOW_WIDTH),
 	height(SCREEN_WINDOW_WIDTH),
-	x(0), y(0), velX(2), velY(0), dirX(-1), dirY(1), numOfScrolls(0)
+	x(0), y(0), velX(1), velY(0), dirX(-1), dirY(1), numOfScrolls(0)
 {
 	bgImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\terrain\\background5.png");
 	remainingLivesImage = al_load_bitmap("1942-FeedTheBirds\\data\\Bitmaps\\life.png");

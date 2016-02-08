@@ -29,7 +29,6 @@ void main()
 	//OnlyInstallUnhandeldExceptionFilter();
 
 	InitAllocCheck();
-	_CrtSetAllocHook(0);
 
 	// block that makes sure that the deconstructors are called
 	// before the 
@@ -44,6 +43,6 @@ void main()
 		delete game;
 	}
 
-	DeInitAllocCheck();
 	_CrtDumpMemoryLeaks();
+	DeInitAllocCheck();
 }

@@ -720,9 +720,10 @@ void GamePlay::cleanGamePlay() {
 }
 
 void GamePlay::cleanAllegro() {
-	al_destroy_timer(fpsTimer);
-	al_destroy_display(display);
-	al_destroy_event_queue(eventQueue);
+	AudioHolder::stop();
+	//al_destroy_timer(fpsTimer);
+	//al_destroy_display(display);
+	//al_destroy_event_queue(eventQueue);
 }
 
 void GamePlay::reset() {
