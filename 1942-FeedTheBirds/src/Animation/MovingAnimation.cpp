@@ -1,8 +1,15 @@
 #include "../../include/Animation/MovingAnimation.h"
 
-MovingAnimation::MovingAnimation(offset_t _dx, offset_t _dy, delay_t _delay, bool c, animid_t _id)
-	: dx(_dx), dy(_dy), delay(_delay), continuous(c), Animation(_id) {
-
+MovingAnimation::MovingAnimation(offset_t _dx, 
+								offset_t _dy, 
+								delay_t _delay, 
+								bool c, 
+								animid_t _id) : 
+	dx(_dx), 
+	dy(_dy), 
+	delay(_delay), 
+	continuous(c), 
+	Animation(_id) {
 }
 
 MovingAnimation ::~MovingAnimation() {

@@ -208,6 +208,7 @@ void Bird::collisionAction(Sprite* s) {
 				AudioHolder::changeToSound("scared");
 				this->leaveScreen();
 				this->isFed = true;
+				//CollisionChecker::getInstance()->cancel(this, s);
 			}
 		}
 	}

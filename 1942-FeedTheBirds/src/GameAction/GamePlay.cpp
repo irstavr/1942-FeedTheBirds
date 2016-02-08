@@ -148,7 +148,7 @@ void GamePlay::initGameEngine() {
 
 	AnimationFilmHolder::singletonCreate("1942-FeedTheBirds\\data\\films.ini");
 	
-	CollisionChecker::getInstance()->initialize();
+	CollisionChecker::getInstance()->singletonCreate();
 
 	// Add start game button
 	flashAnimation = new FlashingAnimation(1, 500, 500, 0);
@@ -302,11 +302,6 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				if (gameState == GAME_STATE_MAINGAME)
 					keys[LEFT] = false;
 				break;
-			/*case ALLEGRO_KEY_ESCAPE:
-				cerr << "ESCAPE!!!!!!!!!!\n";
-				while (1);
-				gameState = GAME_STATE_FINISHED;
-				break;*/
 			}
 			break;
 		case ALLEGRO_EVENT_KEY_DOWN:
@@ -635,9 +630,9 @@ inline std::string GamePlay::powerUpToString(PowerUpType_t v)
 
 void GamePlay::displayGameFinished(unsigned long now) {
 	terrain->drawBackground(ScoreBoard::getInstance().getScore(),
-		ScoreBoard::getInstance().getHighScore(),
-		currentGame->profile->getLives(),
-		currentGame->profile->getLoops());
+							ScoreBoard::getInstance().getHighScore(),
+							currentGame->profile->getLives(),
+							currentGame->profile->getLoops());
 	currentGame->superAce->displayAll();
 	if (winButton->isSpriteVisible()) {
 		winButton->display(Rect(0, 0, 0, 0));
@@ -650,9 +645,9 @@ void GamePlay::displayGameFinished(unsigned long now) {
 
 void GamePlay::displayGameOver(unsigned long now) {
 	terrain->drawBackground(ScoreBoard::getInstance().getScore(),
-		ScoreBoard::getInstance().getHighScore(),
-		currentGame->profile->getLives(),
-		currentGame->profile->getLoops());
+							ScoreBoard::getInstance().getHighScore(),
+							currentGame->profile->getLives(),
+							currentGame->profile->getLoops());
 	currentGame->superAce->displayAll();
 	if (gameOverButton->isSpriteVisible()) {
 		gameOverButton->display(Rect(0, 0, 0, 0));
@@ -665,9 +660,9 @@ void GamePlay::displayGameOver(unsigned long now) {
 
 void GamePlay::displayPauseGame(unsigned long now) {
 	terrain->drawBackground(ScoreBoard::getInstance().getScore(),
-		ScoreBoard::getInstance().getHighScore(),
-		currentGame->profile->getLives(),
-		currentGame->profile->getLoops());
+							ScoreBoard::getInstance().getHighScore(),
+							currentGame->profile->getLives(),
+							currentGame->profile->getLoops());
 
 	if (pauseButton->isSpriteVisible()) {
 		pauseButton->display(Rect(0, 0, 0, 0));
@@ -719,7 +714,7 @@ void GamePlay::cleanGamePlay() {
 		}
 		
 		AnimationFilmHolder::singletonDestroy();
-		CollisionChecker::getInstance()->cleanUp();
+		CollisionChecker::getInstance()->singletonDestroy();
 	}
 }
 

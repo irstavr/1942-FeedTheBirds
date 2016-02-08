@@ -8,18 +8,22 @@ CollisionChecker::CollisionChecker(void) {
 }
 
 CollisionChecker::~CollisionChecker(void) {
-	pairs.clear();
-	collisionChecker = NULL;
+	CollisionChecker::pairs.clear();
+	assert(pairs.size() == 0);
 }
 
-void CollisionChecker::cleanUp() {
+void CollisionChecker::singletonCreate(void) {
+	if (collisionChecker == NULL)
+		collisionChecker = new CollisionChecker();
+}
+
+void CollisionChecker::singletonDestroy(void) {
 	if (collisionChecker)
 		delete collisionChecker;
 }
 
-void CollisionChecker::initialize(void) {
-	if (collisionChecker == NULL)
-		collisionChecker = new CollisionChecker();
+void CollisionChecker::clear(void) { 
+	CollisionChecker::pairs.clear();
 }
 
 CollisionChecker *CollisionChecker::getInstance(void) {
@@ -34,6 +38,29 @@ void CollisionChecker::registerCollisions (Sprite* s1, Sprite* s2) {
 }
 
 void CollisionChecker::cancel(Sprite* s1, Sprite* s2) {
+	assert(s1); assert(s2);
+	unsigned int oldSize;
+	oldSize = pairs.size();	
+
+	std::list<Pair>::iterator it = pairs.begin();
+	for (int i = 1; i <= oldSize; i++) {
+
+		std::advance(it, i);
+
+		if (find(*it, s1, s2)) {
+			pairs.erase(it);
+			assert(pairs.size() == oldSize - 1);
+			break;
+		}
+	}
+}
+
+bool CollisionChecker::find(Pair pair, Sprite* s1, Sprite* s2) {
+	if ((pair.first == s1 && pair.second == s2) ||
+		(pair.first == s2 && pair.second == s1)) {
+		return true;
+	}
+	return false;
 }
 
 void CollisionChecker::check(void) const {

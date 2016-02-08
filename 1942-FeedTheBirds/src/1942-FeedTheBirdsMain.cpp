@@ -6,31 +6,44 @@
 *
 *  Created on: 
 *      Author: Christoulakis Nikos
-*      Author: Papadaki Eleni
+*      Author: Papadaki Eleni	
 *      Author: Stavrakantonaki Irini
 */
 
 // for our use only 
 // to find memory leaks using the CRT library
 #define _CRTDBG_MAP_ALLOC
+#include <windows.h>
+#include "Stackwalker.h"
+
 #include <stdlib.h>
 #include <crtdbg.h>
-
 #include <stdio.h>
 #include <cstdlib>
 #include "..\include\GameAction\GamePlay.h"
 #include "..\include\Utilities\Utilities.h"
 
-int main()
+void main()
 {
-	fprintf(stdout, "Game Started\n");
-	GamePlay *game = GamePlay::instance();
-	while (game->gameState != GAME_STATE_FINISHED) {
-		game->start();
-		//delete game;
-		//game = GamePlay::instance(true);
+	//just for us to use the memory leaks tester
+	//OnlyInstallUnhandeldExceptionFilter();
+
+	InitAllocCheck();
+	_CrtSetAllocHook(0);
+
+	// block that makes sure that the deconstructors are called
+	// before the 
+	{
+		fprintf(stdout, "Game Started\n");
+		GamePlay *game = GamePlay::instance();
+		while (game->gameState != GAME_STATE_FINISHED) {
+			game->start();
+			//delete game;
+			//game = GamePlay::instance(true);
+		}
+		delete game;
 	}
-	delete game;
+
+	DeInitAllocCheck();
 	_CrtDumpMemoryLeaks();
-	return 0;
 }

@@ -26,13 +26,13 @@ Terrain::Terrain() :
 }
 
 Terrain::~Terrain() {
-	delete bgImage;
+	/*delete bgImage;
 	delete remainingLivesImage;
 	delete remainingLoopsImage;
 	delete scoreImage;
 	delete highScoreImage;
 	delete font1;
-	delete font2;
+	delete font2;*/
 }
 
 float Terrain::getTerrainX() {

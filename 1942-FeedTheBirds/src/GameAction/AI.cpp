@@ -964,9 +964,7 @@ void AI::addBonusBird(PowerUpType_t powID, int x, int y, char* filmId, MovingPat
 	// update bonus birds list on Game Logic
 	gameLogic->addBonusBirdToList(powID, bird);
 
-	MovingPathAnimation* visVitalisCloned = visVitalis->clone(lastUsedID++);
-
-	this->bonusBirds->back()->start(bird, visVitalisCloned, getCurrTime());
+	this->bonusBirds->back()->start(bird, visVitalis->clone(lastUsedID++), getCurrTime());
 }
 
 //------------------------ Small Birds --------------------------------------------------

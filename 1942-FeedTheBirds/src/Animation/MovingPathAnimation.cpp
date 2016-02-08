@@ -7,6 +7,7 @@ MovingPathAnimation::MovingPathAnimation(const std::list<PathEntry>& _path,
 
 MovingPathAnimation::~MovingPathAnimation(void) {
 	path.clear();
+	path = (std::list<PathEntry>) 0;
 }
 
 std::list<PathEntry>::iterator 

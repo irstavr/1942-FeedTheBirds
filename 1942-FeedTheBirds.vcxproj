@@ -141,6 +141,7 @@
     <ClCompile Include="1942-FeedTheBirds\src\Objects\Items\PowerUp.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Objects\Object.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Sprites\Sprite.cpp" />
+    <ClCompile Include="1942-FeedTheBirds\src\Stackwalker.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Terrain\Terrain.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Terrain\TerrainStartScreen.cpp" />
     <ClCompile Include="1942-FeedTheBirds\src\Utilities\Utilities.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="1942-FeedTheBirds\include\Terrain\Terrain.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Terrain\TerrainStartScreen.h" />
     <ClInclude Include="1942-FeedTheBirds\include\Utilities\Utilities.h" />
+    <ClInclude Include="1942-FeedTheBirds\src\Stackwalker.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="1942-FeedTheBirds\data\Fonts\arial.ttf" />
