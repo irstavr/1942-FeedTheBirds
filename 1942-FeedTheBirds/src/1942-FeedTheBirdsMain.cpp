@@ -26,19 +26,15 @@
 void main()
 {
 	//just for us to use the memory leaks tester
-	//OnlyInstallUnhandeldExceptionFilter();
-
 	InitAllocCheck();
 
 	// block that makes sure that the deconstructors are called
 	// before the 
 	{
-		fprintf(stdout, "Game Started\n");
+		cerr << "Game Started\n";
 		GamePlay *game = GamePlay::instance();
 		while (game->gameState != GAME_STATE_FINISHED) {
 			game->start();
-			//delete game;
-			//game = GamePlay::instance(true);
 		}
 		delete game;
 	}

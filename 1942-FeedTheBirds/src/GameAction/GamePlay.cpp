@@ -23,16 +23,14 @@ void GamePlay::start() {
 }
 
 void GamePlay::initGamePlay() {
-	// init allegro
 	if (!initAllegro()) {
 		return;
 	}
-	// init game engine
 	initGameEngine();
-	// Main loop 
 	runMainLoop();
-	// Cleaning
 	cleanAllegro();
+	cerr << "GAME FINISHED!\n";
+	gameState = GAME_STATE_FINISHED;
 }
 
 bool GamePlay::initAllegro() {
@@ -721,9 +719,9 @@ void GamePlay::cleanGamePlay() {
 
 void GamePlay::cleanAllegro() {
 	AudioHolder::stop();
-	//al_destroy_timer(fpsTimer);
-	//al_destroy_display(display);
-	//al_destroy_event_queue(eventQueue);
+	al_destroy_timer(fpsTimer);
+	al_destroy_display(display);
+	al_destroy_event_queue(eventQueue);
 }
 
 void GamePlay::reset() {
