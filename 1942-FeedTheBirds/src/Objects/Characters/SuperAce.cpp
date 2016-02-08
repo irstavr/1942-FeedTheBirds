@@ -356,6 +356,7 @@ void SuperAce::collisionAction(Sprite* s) {
 
 		// collision super ace with a bird
 		if (Bird* v = dynamic_cast<Bird*>(s)) {
+			AudioHolder::changeToSound("damage");
 			if (!v->isDead()) {
 				// kill Bird
 				if (!hasSideFighter) {
@@ -381,6 +382,7 @@ void SuperAce::collisionAction(Sprite* s) {
 
 		// collision super ace with a koutsoulia :P
 		if (BirdDropping* v = dynamic_cast<BirdDropping*>(s)) {
+			AudioHolder::changeToSound("damage");
 			//remove bird
 			v->setVisibility(false);
 

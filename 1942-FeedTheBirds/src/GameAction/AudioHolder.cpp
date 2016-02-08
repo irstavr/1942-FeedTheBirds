@@ -18,7 +18,7 @@ bool AudioHolder::initialize(void) {
 	samples.push_back(al_load_sample("1942-FeedTheBirds\\data\\Audio\\Intro.ogg"));
 	samples.push_back(al_load_sample("1942-FeedTheBirds\\data\\Audio\\mam.ogg"));
 	samples.push_back(al_load_sample("1942-FeedTheBirds\\data\\Audio\\fart.ogg"));
-	samples.push_back(al_load_sample("1942-FeedTheBirds\\data\\Audio\\splat.ogg"));
+	samples.push_back(al_load_sample("1942-FeedTheBirds\\data\\Audio\\aouts.ogg"));
 	samples.push_back(al_load_sample("1942-FeedTheBirds\\data\\Audio\\Anakins_Dark_Deeds.ogg"));
 	samples.push_back(al_load_sample("1942-FeedTheBirds\\data\\Audio\\Hail_to_the_Winner_Anakin_Skywalker.ogg"));
 	samples.push_back(al_load_sample("1942-FeedTheBirds\\data\\Audio\\Destiny_Islands.ogg"));
@@ -43,7 +43,7 @@ void AudioHolder::changeToSound(const char *mode) {
 	}
 	else if (strcmp(mode, "damage") == 0) {
 		//al_stop_samples();
-		al_play_sample(samples[3], 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, sample_id);
+		al_play_sample(samples[3], 2.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, sample_id);
 	}
 	else if (strcmp(mode, "gameover") == 0) {
 		al_stop_samples();
