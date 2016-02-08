@@ -11,10 +11,10 @@
 */
 
 // for our use only 
-// to find memory leaks using the CRT library
-#define _CRTDBG_MAP_ALLOC
-#include <windows.h>
-#include "Stackwalker.h"
+//// to find memory leaks using the CRT library
+//#define _CRTDBG_MAP_ALLOC
+//#include <windows.h>
+//#include "Stackwalker.h"
 
 #include <stdlib.h>
 #include <crtdbg.h>
@@ -26,7 +26,7 @@
 void main()
 {
 	//just for us to use the memory leaks tester
-	InitAllocCheck();
+	//InitAllocCheck();
 
 	// block that makes sure that the deconstructors are called
 	// before the 
@@ -39,6 +39,6 @@ void main()
 		delete game;
 	}
 
-	_CrtDumpMemoryLeaks();
-	DeInitAllocCheck();
+	//_CrtDumpMemoryLeaks();
+	//DeInitAllocCheck();
 }

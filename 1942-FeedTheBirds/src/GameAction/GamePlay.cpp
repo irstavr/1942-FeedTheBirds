@@ -345,7 +345,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 					startNewGame();
 				}
 				break;
-			case ALLEGRO_KEY_X:
+			case ALLEGRO_KEY_Q:
 				cleanGamePlay();
 				gameState = GAME_STATE_FINISHED;
 				break;
