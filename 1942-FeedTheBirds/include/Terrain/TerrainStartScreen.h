@@ -21,6 +21,8 @@ private:
 	TerrainStartScreen();
 	~TerrainStartScreen();
 	ALLEGRO_BITMAP* stopWarsImage = NULL;
+	ALLEGRO_BITMAP* gameInfoImage = NULL;
+	
 
 };
 

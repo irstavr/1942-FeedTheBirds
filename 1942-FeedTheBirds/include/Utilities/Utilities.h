@@ -30,7 +30,7 @@
 #define TERRAIN_IMAGE_WIDTH 5880
 #define TERRAIN_IMAGE_HEIGHT 675
 
-#define FPS 80
+#define FPS 60
 #define LPS 200
 
 typedef int Dim;

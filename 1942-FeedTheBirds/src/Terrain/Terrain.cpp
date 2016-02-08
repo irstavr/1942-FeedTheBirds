@@ -17,12 +17,14 @@ Terrain::Terrain() :
 	font1 = al_load_ttf_font(font_file, 28, 0);
 	font2 = al_load_ttf_font(font_file, -28, 0);
 	font3 = al_load_ttf_font(font_file, 16, 0);
+
+	font4 = al_load_ttf_font(font_file, 12, 0);
 	if (!font1 || !font2) {
 		al_show_native_message_box(NULL, "Error", NULL, "failed to load font file!\n", NULL, NULL);
 		return;
 	}
 	bright_green = al_map_rgba_f(0.8, 0.0, 0.0, 1.0);
-	grey = al_map_rgba_f(0.7, 0.7, 0.7, 1.0);
+	black = al_map_rgba_f(0, 0, 0, 1.0);
 }
 
 Terrain::~Terrain() {
@@ -68,6 +70,6 @@ void Terrain::drawBackground(int score, int highscore, int lives, int loops) {
 
 	int loopsImgWidth = al_get_bitmap_width(remainingLoopsImage);
 	for (i = 0; i < loops; i++) {
-		al_draw_scaled_bitmap(remainingLoopsImage, 0, 0, loopsImgWidth, loopsImgWidth, 1220-(i*45), 600, 40, 40, 0);
+		al_draw_scaled_bitmap(remainingLoopsImage, 0, 0, loopsImgWidth, loopsImgWidth, 1220-(i*55), 600, 50, 50, 0);
 	}
 }

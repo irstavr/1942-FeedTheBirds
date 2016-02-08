@@ -31,9 +31,9 @@ public:
 	ALLEGRO_BITMAP* remainingLoopsImage = NULL;
 	ALLEGRO_BITMAP* scoreImage = NULL;
 	ALLEGRO_BITMAP* highScoreImage = NULL;
-	ALLEGRO_FONT *font1, *font2, *font3;
+	ALLEGRO_FONT *font1, *font2, *font3, *font4;
 	ALLEGRO_COLOR bright_green;
-	ALLEGRO_COLOR grey;
+	ALLEGRO_COLOR black;
 	const char* font_file;
 
 	void updateBackground();
