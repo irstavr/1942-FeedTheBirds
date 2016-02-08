@@ -43,7 +43,16 @@ void TerrainStartScreen::drawBackground() {
 
 	al_draw_text(font3, bright_green, 310, 200, ALLEGRO_ALIGN_CENTER, "CHRISTOULAKIS NIKOS");
 	al_draw_text(font3, bright_green, 310, 230, ALLEGRO_ALIGN_CENTER, "PAPADAKI ELENI");
-	al_draw_text(font3, bright_green, 310, 260, ALLEGRO_ALIGN_CENTER, "STAYRAKANTONAKI IRINI");
+	al_draw_text(font3, bright_green, 310, 260, ALLEGRO_ALIGN_CENTER, "STAVRAKANTONAKI IRINI");
 
-	al_draw_bitmap(gameInfoImage, 167, 280, 0);
+	//al_draw_bitmap(gameInfoImage, 167, 280, 0);
+
+	al_draw_text(font4, black, 310, 290, ALLEGRO_ALIGN_CENTER, "University of Crete");
+	al_draw_text(font4, black, 310, 310, ALLEGRO_ALIGN_CENTER, "Department of Computer Science");
+	al_draw_text(font4, black, 310, 330, ALLEGRO_ALIGN_CENTER, "CS-454");
+	al_draw_text(font4, black, 310, 350, ALLEGRO_ALIGN_CENTER, "Development of Intelligent Interfaces and Games");
+	al_draw_text(font4, black, 310, 370, ALLEGRO_ALIGN_CENTER, "Term Project, Fall Semester 2015");
+
+
+
 }

@@ -3,7 +3,7 @@
 using namespace std;
 
 Terrain::Terrain() :
-	font_file("1942-FeedTheBirds\\data\\Fonts\\karmatic_arcade_font.ttf"),
+	font_file("1942-FeedTheBirds\\data\\Fonts\\fat.ttf"),
 	width(SCREEN_WINDOW_WIDTH),
 	height(SCREEN_WINDOW_WIDTH),
 	x(0), y(0), velX(1), velY(0), dirX(-1), dirY(1), numOfScrolls(0)
@@ -57,10 +57,12 @@ void Terrain::drawBackground(int score, int highscore, int lives, int loops) {
 		al_draw_bitmap(this->bgImage, this->x + this->width, this->y, 0);
 	}
 
-	al_draw_bitmap(scoreImage, 40, 12, false);
-	al_draw_text(font2, bright_green, 220, 10, ALLEGRO_ALIGN_CENTER, to_string(score).c_str());
-	al_draw_bitmap(highScoreImage, 420, 12, false);
-	al_draw_text(font1, bright_green, 700, 10, ALLEGRO_ALIGN_CENTER, to_string(highscore).c_str());
+	//al_draw_bitmap(scoreImage, 40, 12, false);
+	al_draw_text(font2, bright_green, 100, 10, ALLEGRO_ALIGN_CENTER, to_string(score).c_str());
+	//al_draw_bitmap(highScoreImage, 420, 12, false);
+	al_draw_text(font1, bright_green, 1200, 10, ALLEGRO_ALIGN_CENTER, to_string(highscore).c_str());
+
+
 
 	//int livesImgWidth = al_get_bitmap_width(remainingLivesImage);
 	int i;

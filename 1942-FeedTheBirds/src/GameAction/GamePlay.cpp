@@ -153,7 +153,7 @@ void GamePlay::initGameEngine() {
 	flashAnimator = new FlashingAnimator();
 	AnimatorHolder::animRegister(flashAnimator); 
 	
-	startButton = new Button(160,
+	startButton = new Button(100,
 							 420, 
 							(AnimationFilm *) 
 								AnimationFilmHolder::getSingleton()->
@@ -177,7 +177,7 @@ void GamePlay::initGameEngine() {
 								flashAnimation->clone(1), 
 								flashAnimator->clone());
 
-	replayButton = new Button(400,
+	replayButton = new Button(420,
 								300,
 								(AnimationFilm *)
 								AnimationFilmHolder::getSingleton()->
@@ -185,7 +185,7 @@ void GamePlay::initGameEngine() {
 								flashAnimation->clone(2),
 								flashAnimator->clone());
 
-	winButton = new Button(400,
+	winButton = new Button(420,
 							200,
 							(AnimationFilm *)
 							AnimationFilmHolder::getSingleton()->
@@ -193,7 +193,7 @@ void GamePlay::initGameEngine() {
 							flashAnimation->clone(3),
 							flashAnimator->clone());
 
-	resumeButton = new Button(400,
+	resumeButton = new Button(420,
 							300,
 							(AnimationFilm *)
 							AnimationFilmHolder::getSingleton()->
