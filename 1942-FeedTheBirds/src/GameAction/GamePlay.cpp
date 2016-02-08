@@ -591,6 +591,7 @@ void GamePlay::gameOver(unsigned long now) {
 		currentGame->gameRunning = false;
 		if(powerUp)
 			powerUp->~PowerUp();
+		AudioHolder::changeToSound("gameover");
 	}
 }
 
@@ -602,6 +603,7 @@ void GamePlay::gameFinished() {
 		//winButton->setVisibility(true);
 		currentGame->gameRunning = false;
 		if (powerUp) powerUp->~PowerUp();
+		AudioHolder::changeToSound("victory");
 	}
 }
 
@@ -678,7 +680,7 @@ void GamePlay::displayPauseGame(unsigned long now) {
 
 void GamePlay::startNewGame() {
 	gameState = GAME_STATE_MAINGAME;
-	AudioHolder::stop();
+	AudioHolder::changeToSound("game");
 	
 	currentGame = new GameLogic(takeOffAnimation,
 								takeOffAnimator,

@@ -11,6 +11,7 @@ using namespace std;
 class AudioHolder {
 private:
 	static std::vector<ALLEGRO_SAMPLE *>samples;
+	static ALLEGRO_SAMPLE_ID* music_id;
 	static ALLEGRO_SAMPLE_ID *sample_id;
 
 public:
