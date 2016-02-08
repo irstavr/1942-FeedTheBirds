@@ -353,6 +353,7 @@ void GamePlay::inputManagement(ALLEGRO_EVENT alEvent) {
 				break;
 			case ALLEGRO_KEY_ENTER:
 				if (gameState == GAME_STATE_GAMEOVER) {
+					AudioHolder::changeToSound("intro");
 					InputManager::onKeyEnter(gameState, display, startButton, gameOverButton, winButton);
 					cleanGamePlay();
 					hasWon = false;

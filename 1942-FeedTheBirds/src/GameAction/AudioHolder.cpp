@@ -15,7 +15,7 @@ AudioHolder::~AudioHolder(void) {
 bool AudioHolder::initialize(void) {
 	music_id = new ALLEGRO_SAMPLE_ID();
 	sample_id = new ALLEGRO_SAMPLE_ID();
-	samples.push_back(al_load_sample("1942-FeedTheBirds\\data\\Audio\\IntroTheme.ogg"));
+	samples.push_back(al_load_sample("1942-FeedTheBirds\\data\\Audio\\Intro.ogg"));
 	samples.push_back(al_load_sample("1942-FeedTheBirds\\data\\Audio\\mine.ogg"));
 	samples.push_back(al_load_sample("1942-FeedTheBirds\\data\\Audio\\fart.ogg"));
 	samples.push_back(al_load_sample("1942-FeedTheBirds\\data\\Audio\\splat.ogg"));
