@@ -1,4 +1,4 @@
-# 1942 - Feed The Birds
+# 1942 - Stop Wars (Feed The Birds)
 
 New version of 1942 CapCom Allegro Game
 Developed in Allegro5, C++ by xnick, elenisgit , irstavr.
