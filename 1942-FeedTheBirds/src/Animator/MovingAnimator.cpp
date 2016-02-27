@@ -22,11 +22,9 @@ void MovingAnimator::progress(unsigned long currTime) {
 	assert(anim);
 
 	while (currTime > lastTime && currTime - lastTime >= anim->getDelay()) {
-		//sprite->move(anim->getDx(), anim->getDy());
 		if (!anim->getContinuous()|| sprite->x > SCREEN_WINDOW_WIDTH+150) {
 			state = ANIMATOR_FINISHED;
 			notifyProgressed();
-			//sprite->~Sprite();
 			return;
 		}
 		else {

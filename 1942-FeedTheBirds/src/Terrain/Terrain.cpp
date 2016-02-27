@@ -28,26 +28,14 @@ Terrain::Terrain() :
 }
 
 Terrain::~Terrain() {
-	/*delete bgImage;
-	delete remainingLivesImage;
-	delete remainingLoopsImage;
-	delete scoreImage;
-	delete highScoreImage;
-	delete font1;
-	delete font2;*/
 }
 
 float Terrain::getTerrainX() {
-	return /*(numOfScrolls*SCREEN_WINDOW_WIDTH */-(this->x);
-	//(/3;
+	return this->x;
 }
 
 void Terrain::updateBackground() {
 	this->x += this->velX * this->dirX;
-	/*if (this->x + TERRAIN_IMAGE_WIDTH <= 0) {
-		numOfScrolls++;
-		this->x = 0;
-	}*/
 }
 
 void Terrain::drawBackground(int score, int highscore, int lives, int loops) {
@@ -57,14 +45,9 @@ void Terrain::drawBackground(int score, int highscore, int lives, int loops) {
 		al_draw_bitmap(this->bgImage, this->x + this->width, this->y, 0);
 	}
 
-	//al_draw_bitmap(scoreImage, 40, 12, false);
 	al_draw_text(font2, bright_green, 100, 10, ALLEGRO_ALIGN_CENTER, to_string(score).c_str());
-	//al_draw_bitmap(highScoreImage, 420, 12, false);
 	al_draw_text(font1, bright_green, 1200, 10, ALLEGRO_ALIGN_CENTER, to_string(highscore).c_str());
 
-
-
-	//int livesImgWidth = al_get_bitmap_width(remainingLivesImage);
 	int i;
 	for (i = 0; i < lives; i++) {
 		al_draw_bitmap(remainingLivesImage, 20 + (i * 81), 610, 0);

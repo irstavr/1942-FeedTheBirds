@@ -1,6 +1,5 @@
 /*
 * 1942 - STOP WARS! version
-* Created for HY454 course at CSD UoC, Winter Semester 2015
 * 
 * main.cpp
 *
@@ -9,12 +8,6 @@
 *      Author: Papadaki Eleni	
 *      Author: Stavrakantonaki Irini
 */
-
-// for our use only 
-//// to find memory leaks using the CRT library
-//#define _CRTDBG_MAP_ALLOC
-//#include <windows.h>
-//#include "Stackwalker.h"
 
 #include <stdlib.h>
 #include <crtdbg.h>
@@ -25,11 +18,7 @@
 
 void main()
 {
-	//just for us to use the memory leaks tester
-	//InitAllocCheck();
-
-	// block that makes sure that the deconstructors are called
-	// before the 
+	// block that makes sure that the deconstructors are called before 
 	{
 		cerr << "Game Started\n";
 		GamePlay *game = GamePlay::instance();
@@ -38,7 +27,4 @@ void main()
 		}
 		delete game;
 	}
-
-	//_CrtDumpMemoryLeaks();
-	//DeInitAllocCheck();
 }

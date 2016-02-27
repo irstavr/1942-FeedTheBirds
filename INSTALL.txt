@@ -1,8 +1,9 @@
+## Prerequisites
 Need to have:
-allegro-5.0.10
-Microsoft Visual Studio 2015 (free version)
+    allegro-5.0.10
+    Microsoft Visual Studio 2015 (free version)
 
-Installing Allegro 5:
+## Install Allegro 5:
 
 1. Download 
 Download the latest version of Allegro 5 from Allegro.cc's download page (http://www.allegro.cc/files/).

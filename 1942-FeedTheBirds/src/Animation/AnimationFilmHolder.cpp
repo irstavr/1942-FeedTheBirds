@@ -87,7 +87,6 @@ vector<Rect> AnimationFilmHolder::read_bboxes(const char* path, int framesNo) {
 
 const AnimationFilm *AnimationFilmHolder::getFilm(const std::string &id) const {
 	FilmMap::const_iterator i = filmMap.find(id);
-	//assert(i != filmMap.end());
 	return i->second;
 }
 
